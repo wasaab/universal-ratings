@@ -1,0 +1,29 @@
+{
+  "name": "universal-ratings",
+  "version": "0.1.0",
+  "description": "UI for viewing TV show and movie ratings",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wasaab/universal-ratings.git"
+  },
+  "author": "Kent",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wasaab/universal-ratings/issues"
+  },
+  "homepage": "https://github.com/wasaab/universal-ratings#readme",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@material-ui/core": "^4.12.2",
+    "@material-ui/icons": "^4.11.2",
+    "@material-ui/lab": "^4.0.0-alpha.60",
+    "next": "^11.0.0",
+    "react": "17.0.2",
+    "react-dom": "17.0.2"
+  }
+}
