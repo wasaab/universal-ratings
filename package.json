@@ -2,7 +2,6 @@
   "name": "universal-ratings",
   "version": "0.1.0",
   "description": "UI for viewing TV show and movie ratings",
-  "private": true,
   "repository": {
     "type": "git",
     "url": "git+https://github.com/wasaab/universal-ratings.git"
@@ -25,5 +24,9 @@
     "next": "^11.0.0",
     "react": "17.0.2",
     "react-dom": "17.0.2"
+  },
+  "devDependencies": {
+    "eslint": "^7.31.0",
+    "eslint-config-next": "^11.0.1"
   }
 }
