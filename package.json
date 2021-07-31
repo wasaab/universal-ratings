@@ -1,8 +1,7 @@
 {
   "name": "universal-ratings",
-  "version": "0.1.0",
-  "description": "UI for viewing TV show and movie ratings",
-  "private": true,
+  "version": "0.2.0",
+  "description": "Movie and TV Show ratings site",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/wasaab/universal-ratings.git"
@@ -22,8 +21,16 @@
     "@material-ui/core": "^4.12.2",
     "@material-ui/icons": "^4.11.2",
     "@material-ui/lab": "^4.0.0-alpha.60",
+    "autosuggest-highlight": "^3.1.1",
+    "axios": "^0.21.1",
+    "lodash.debounce": "^4.0.8",
+    "lru-cache": "^6.0.0",
     "next": "^11.0.0",
     "react": "17.0.2",
     "react-dom": "17.0.2"
+  },
+  "devDependencies": {
+    "eslint": "^7.31.0",
+    "eslint-config-next": "^11.0.1"
   }
 }

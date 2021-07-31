@@ -35,7 +35,15 @@ const MovieCard = ({ title, rating, img }) => {
     <Card className={classes.root}>
       <CardActionArea>
         <div className={classes.media}>
-            {img && <Image src={img} layout="fill" objectFit="cover" objectPosition="top" />}
+            {img && (
+              <Image
+                src={img}
+                alt={title}
+                layout="fill"
+                objectFit="cover"
+                objectPosition="top"
+              />
+            )}
         </div>
         <CardContent className={classes.content}>
             <Typography variant="h6" component="h6">
