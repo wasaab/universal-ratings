@@ -29,6 +29,7 @@ import {
 } from '@material-ui/icons/'
 import MovieCard from './MovieCard';
 import ratings from '../resources/ratings.json'
+import TitleSearchBar from './TitleSearchBar';
 
 const drawerWidth = 240;
 
@@ -92,6 +93,10 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     padding: theme.spacing(3),
   },
+  searchBar: {
+    position: 'absolute',
+    right: 24
+  }
 }));
 
 const SideMenuItem = ({ title, LeftIcon, onClick }) => (
@@ -142,7 +147,7 @@ const SideMenuToolbar = () => {
           <Typography variant="h6" noWrap>
             Universal Ratings
           </Typography>
-          
+          <TitleSearchBar className={classes.searchBar} />
         </Toolbar>
       </AppBar>
       <Drawer
@@ -180,7 +185,7 @@ const SideMenuToolbar = () => {
       <main className={classes.content}>
         <div className={classes.toolbar} />
         <Grid container spacing={3}  wrap="wrap">
-          {ratings.filter(({ img }) => img).map(({ title, rating, img }, i) => (
+          {ratings.slice(0, 10).filter(({ img }) => img).map(({ title, rating, img }, i) => (
             <Grid key={i} item xs>
               <MovieCard title={title} rating={rating} img={img} />
             </Grid>

@@ -19,9 +19,7 @@ body {
 }
 
 header {
-    background: #7F00FF;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #E100FF, #7F00FF);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #E100FF, #7F00FF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to right, #E100FF, #7F00FF);
 }
 
 .MuiPaper-root.MuiPaper-rounded,
@@ -29,4 +27,21 @@ header {
     background-color: rgba(255,255,255,0.06);
     border: 1px solid rgba(255,255,255,0.1);
     backdrop-filter: blur(10px);
+}
+
+*::-webkit-scrollbar {
+    width: 12px;
+}
+*::-webkit-scrollbar-track {
+    background-color: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+}
+*::-webkit-scrollbar-thumb {
+    background-color: rgba(127, 0, 255, 0.8);
+    border-radius: 4px;
+}
+
+.MuiInputLabel-marginDense:not(.MuiInputLabel-shrink) {
+    transform: translate(0, 20px) scale(1);
 }
