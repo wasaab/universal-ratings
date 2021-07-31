@@ -1,7 +1,7 @@
 {
   "name": "universal-ratings",
-  "version": "0.1.0",
-  "description": "UI for viewing TV show and movie ratings",
+  "version": "0.2.0",
+  "description": "Movie and TV Show ratings site",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/wasaab/universal-ratings.git"
