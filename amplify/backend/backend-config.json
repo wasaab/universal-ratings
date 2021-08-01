@@ -1,0 +1,10 @@
+{
+  "auth": {
+    "universalratings5a980c73": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false
+    }
+  }
+}
