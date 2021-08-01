@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { AmplifySignOut } from '@aws-amplify/ui-react'
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import {
@@ -148,6 +149,7 @@ const SideMenuToolbar = () => {
             Universal Ratings
           </Typography>
           <TitleSearchBar className={classes.searchBar} />
+          {/* <AmplifySignOut className={classes.signOutButton} /> */}
         </Toolbar>
       </AppBar>
       <Drawer
