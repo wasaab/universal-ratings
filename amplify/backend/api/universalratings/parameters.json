@@ -1,5 +1,7 @@
 {
   "AppSyncApiName": "universalratings",
   "DynamoDBBillingMode": "PAY_PER_REQUEST",
-  "DynamoDBEnableServerSideEncryption": false
+  "DynamoDBEnableServerSideEncryption": false,
+  "AlgoliaAppIdPost": "APPID",
+  "AlgoliaApiKeyPost": "APIKEY"
 }
