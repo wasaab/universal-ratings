@@ -31,6 +31,10 @@ const useStyles = makeStyles({
 const MovieCard = ({ title, rating, img }) => {
   const classes = useStyles();
 
+  const rateShow = (userRating) => {
+    console.log(`${title} rated ${userRating} stars`);
+  };
+
   return (
     <Card className={classes.root}>
       <CardActionArea>
@@ -72,7 +76,7 @@ const MovieCard = ({ title, rating, img }) => {
         </CardContent>
       </CardActionArea>
       <CardActions className={classes.actions}>
-        <StarButtons rating={rating} maxRating={5} />
+        <StarButtons rating={rating} maxRating={5} onClick={rateShow} />
       </CardActions>
     </Card>
   );
