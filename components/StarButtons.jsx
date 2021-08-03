@@ -37,9 +37,9 @@ const StarButtons = ({ rating, maxRating }) => {
     }
 
     return (
-        <Box display="flex" flexDirection="row">
+        <Box display="flex" flexDirection="row" onMouseLeave={() => setRatingVal(rating)}>
             {buildStars().map((Star, i) => (
-                <IconButton key={i} size="small">
+                <IconButton key={i} size="small" onMouseEnter={() => setRatingVal(i + 1)}>
                     <Star className={Star === StarOutlineIcon ? classes.outlinedStar : classes.star} />
                 </IconButton>
             ))}
