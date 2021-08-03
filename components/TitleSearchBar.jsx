@@ -1,6 +1,7 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import debounce from 'lodash.debounce';
 import LruCache from 'lru-cache';
+import { connectAutoComplete, Highlight } from 'react-instantsearch-dom';
 import parse from 'autosuggest-highlight/parse';
 import match from 'autosuggest-highlight/match';
 import {
@@ -17,8 +18,6 @@ import {
     Tv as TvIcon
 } from '@material-ui/icons';
 import Autocomplete from '@material-ui/lab/Autocomplete';
-import omdb from '../src/OmdbApiClient.js';
-import axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
     popper: {
@@ -99,28 +98,12 @@ function maybeUpdateCache(title, shows) {
     cache.set(title, shows);
 }
 
-const TitleSearchBar = ({ className }) => {
+const TitleSearch = ({ className, hits = [], currentRefinement, refine }) => {
     const classes = useStyles();
     const [isOpen, setIsOpen] = useState(false);
-    const [options, setOptions] = useState([]);
+    const [options, setOptions] = useState(hits);
     const [isLoading, setIsLoading] = useState(false);
-
-    const fetchOptions = async (title) => {
-        try {
-            const { data: shows } = await axios.get(`/api/search?title=${title}`);
-
-            setOptions(shows);
-            maybeUpdateCache(title, shows);
-        } catch (err) {
-            console.error('Unable to find matching show: ', err);
-            setOptions([]);
-            maybeUpdateCache(title, []);
-        }
-
-        setIsLoading(false);
-    };
-
-    const fetchOptionsDelayed = useCallback(debounce(fetchOptions, 500), []);
+    const fetchOptionsDelayed = useCallback(debounce(refine, 500), []);
 
     const updateOptions = (value) => {
         const cachedOptions = cache.get(value);
@@ -136,7 +119,7 @@ const TitleSearchBar = ({ className }) => {
     const handleInputChange = async (event, value) => {
         if (value?.length > 1) {
             updateOptions(value);
-        } else {
+        } else if (options.length !== 0) {
             setOptions([]);
         }
     };
@@ -149,14 +132,13 @@ const TitleSearchBar = ({ className }) => {
         return (
             <div className={classes.option}>
                 <TypeIcon size="small" className={classes.optionIcon} />
-
-                <div className={classes.title} title={option.title}>
-                    {parts.map(({ highlight, text }, i) => (
-                        <span key={i} style={{ fontWeight: highlight ? 700 : 400 }}>
-                            {text}
-                        </span>
-                    ))}
-                </div>
+                <Highlight
+                    className={classes.title}
+                    title={option.title}
+                    hit={option}
+                    attribute="title"
+                    tagName="b"
+                />
                 <span className={classes.optionYear}>
                     {option.year}
                 </span>
@@ -191,6 +173,11 @@ const TitleSearchBar = ({ className }) => {
             }}
         />
     );
+
+    useEffect(() => {
+        setIsLoading(false);
+        maybeUpdateCache(currentRefinement, hits);
+    }, [hits]);
     
     return (
         <Autocomplete
@@ -200,18 +187,21 @@ const TitleSearchBar = ({ className }) => {
             onInputChange={handleInputChange}
             getOptionSelected={(option, value) => option.title === value.title}
             getOptionLabel={({ title }) => title}
-            options={options}
+            options={hits}
+            filterOptions={(options) => options}
             loading={isLoading}
             renderInput={renderSmallInput}
             renderOption={renderOption}
             classes={{ popper: classes.popper }}
             className={className}
-            loadingText="Searching IMDB..."
+            loadingText="Searching..."
             noOptionsText="No results"
             openOnFocus={false}
             clearOnBlur
         />
     );
 }
+
+const TitleSearchBar = connectAutoComplete(TitleSearch);
 
 export default TitleSearchBar;
