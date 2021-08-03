@@ -194,7 +194,7 @@ const TitleSearch = ({ className, hits = [], currentRefinement, refine }) => {
             renderOption={renderOption}
             classes={{ popper: classes.popper }}
             className={className}
-            loadingText="Searching IMDB..."
+            loadingText="Searching..."
             noOptionsText="No results"
             openOnFocus={false}
             clearOnBlur
