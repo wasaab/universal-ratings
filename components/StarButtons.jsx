@@ -13,7 +13,7 @@ const useStyles = makeStyles({
     }
 });
 
-const StarButtons = ({ rating, maxRating }) => {
+const StarButtons = ({ rating, maxRating, onClick }) => {
     const classes = useStyles();
     const [ratingVal, setRatingVal] = useState(rating);
 
@@ -39,7 +39,12 @@ const StarButtons = ({ rating, maxRating }) => {
     return (
         <Box display="flex" flexDirection="row" onMouseLeave={() => setRatingVal(rating)}>
             {buildStars().map((Star, i) => (
-                <IconButton key={i} size="small" onMouseEnter={() => setRatingVal(i + 1)}>
+                <IconButton
+                    key={i}
+                    size="small"
+                    onMouseEnter={() => setRatingVal(i + 1)}
+                    onClick={() => onClick(i + 1)}
+                >
                     <Star className={Star === StarOutlineIcon ? classes.outlinedStar : classes.star} />
                 </IconButton>
             ))}
