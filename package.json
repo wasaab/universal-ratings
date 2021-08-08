@@ -25,6 +25,7 @@
     "autosuggest-highlight": "^3.1.1",
     "aws-amplify": "^4.2.2",
     "axios": "^0.21.1",
+    "clsx": "^1.1.1",
     "graphql-algolia-transformer": "^1.1.0",
     "lodash.debounce": "^4.0.8",
     "lru-cache": "^6.0.0",
@@ -34,6 +35,7 @@
     "react-instantsearch-dom": "^6.12.0"
   },
   "devDependencies": {
+    "@svgr/webpack": "^5.5.0",
     "algoliasearch": "^4.10.3",
     "eslint": "^7.31.0",
     "eslint-config-next": "^11.0.1"
