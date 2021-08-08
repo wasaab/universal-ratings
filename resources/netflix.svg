@@ -1,0 +1,7 @@
+<svg x="0px" y="0px" viewBox="102 0 313 512">
+  <g>
+    <rect x="304" style="fill: '#D32F2F';" width="96" height="512"/>
+    <rect x="112" style="fill: '#D32F2F';" width="96" height="512"/>
+  </g>
+  <polygon style="fill: '#F44336';" points="400,512 304,512 112,0 208,0 "/>
+</svg>
