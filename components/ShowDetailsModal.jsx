@@ -98,7 +98,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const ShowDetails = ({ show, onClose }) => {
+const ShowDetailsModal = ({ show, onClose }) => {
   const classes = useStyles();
 
   return (
@@ -121,7 +121,7 @@ const ShowDetails = ({ show, onClose }) => {
 
             <Grid item container xs={12} spacing={2}>
               <Grid item xs style={{ paddingRight: 24 }}>
-                <StarButtons rating={show.rating} maxRating={5} />
+                <StarButtons avgRating={show.rating} maxRating={5} />
               </Grid>
               <Grid item xs style={{ paddingRight: 0 }}>
                 <AvatarGroup max={4} className={classes.avatarGroup}>
@@ -164,4 +164,4 @@ const ShowDetails = ({ show, onClose }) => {
   );
 };
 
-export default ShowDetails;
+export default ShowDetailsModal;
