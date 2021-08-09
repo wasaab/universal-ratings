@@ -1,17 +1,14 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import {
-    Card,
-    CardActionArea,
-    CardActions,
-    CardContent,
-    Typography,
-    SvgIcon
+  Card,
+  CardActionArea,
+  CardActions,
+  CardContent,
+  Typography,
 } from '@material-ui/core';
 import StarButtons from './StarButtons';
 import Image from 'next/image';
-import NetflixIcon from '../resources/netflix.svg';
-import HuluIcon from '../resources/hulu.svg';
 
 const useStyles = makeStyles({
   root: {
@@ -26,15 +23,20 @@ const useStyles = makeStyles({
     justifyContent: 'center'
   },
   content: {
-    paddingBottom: '4px'
+    height: 84,
+    paddingBottom: 4,
+    display: '-webkit-box',
+    overflow: 'hidden',
+    '-webkit-line-clamp': 2,
+    '-webkit-box-orient': 'vertical'
   }
 });
 
-const ShowCard = ({ title, rating, userRating, img, onClick }) => {
+const ShowCard = ({ title, avgRating, userRating, img, onClick }) => {
   const classes = useStyles();
 
-  const rateShow = (updatedUserRating) => {
-    console.log(`${title} rated ${updatedUserRating} stars`);
+  const rateShow = (rating) => {
+    console.log(`${title} rated ${rating} stars`);
   };
 
   return (
@@ -50,14 +52,18 @@ const ShowCard = ({ title, rating, userRating, img, onClick }) => {
           />
         </div>
         <CardContent className={classes.content}>
-            <Typography variant="h6" component="h6">
-                {title}
-            </Typography>
-            {title.length > 10 ? <NetflixIcon height="19" /> : <HuluIcon height="13" />}
+          <Typography variant="h6" component="h6">
+            {title}
+          </Typography>
         </CardContent>
       </CardActionArea>
       <CardActions className={classes.actions}>
-        <StarButtons avgRating={rating} userRating={userRating} maxRating={5} onClick={rateShow} />
+        <StarButtons
+          avgRating={avgRating}
+          userRating={userRating}
+          maxRating={5}
+          onClick={rateShow}
+        />
       </CardActions>
     </Card>
   );
