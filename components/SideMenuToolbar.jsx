@@ -1,86 +1,73 @@
 import React, { useState } from 'react';
-import { AmplifySignOut } from '@aws-amplify/ui-react'
 import clsx from 'clsx';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import {
-    AppBar,
-    Drawer,
-    Toolbar,
-    List,
-    CssBaseline,
-    Typography,
-    Divider,
-    IconButton,
-    ListItem,
-    ListItemIcon,
-    ListItemText,
-    Grid,
+  AppBar,
+  Drawer,
+  Toolbar,
+  List,
+  Typography,
+  Divider,
+  IconButton,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  Grid,
 } from '@material-ui/core';
 import {
   Menu as MenuIcon,
   ChevronLeft as ChevronLeftIcon,
-  ChevronRight as ChevronRightIcon,
   Movie as MovieIcon,
   Tv as TvIcon,
   NewReleases as NewReleasesIcon,
   Star as StarIcon,
   Favorite as FavoriteIcon,
   WatchLater as WatchLaterIcon,
-  Visibility as VisibilityIcon
+  Visibility as VisibilityIcon,
+  Home as HomeIcon
 } from '@material-ui/icons/'
-import MovieCard from './MovieCard';
+import ShowCard from './ShowCard';
 import ratings from '../resources/ratings.json'
 import TitleSearchBar from './TitleSearchBar';
+import ShowDetailsModal from './ShowDetailsModal';
 
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: 'flex',
+    display: 'flex'
   },
-  appBar: {
+  appBar: ({ open }) => ({
     zIndex: theme.zIndex.drawer + 1,
+    marginLeft: open ? drawerWidth : 0,
+    width: open ? `calc(100% - ${drawerWidth}px)` : '100%',
     transition: theme.transitions.create(['width', 'margin'], {
       easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-  },
-  appBarShift: {
-    marginLeft: drawerWidth,
-    width: `calc(100% - ${drawerWidth}px)`,
-    transition: theme.transitions.create(['width', 'margin'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  },
+      duration: theme.transitions.duration.enteringScreen
+    })
+  }),
   menuButton: {
-    marginRight: 36,
-  },
-  hide: {
-    display: 'none',
+    marginRight: 36
   },
   drawer: {
     width: drawerWidth,
     flexShrink: 0,
-    whiteSpace: 'nowrap',
+    whiteSpace: 'nowrap'
   },
   drawerOpen: {
     width: drawerWidth,
     transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
+      duration: theme.transitions.duration.enteringScreen
+    })
   },
   drawerClose: {
     transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
+      duration: theme.transitions.duration.leavingScreen
     }),
     overflowX: 'hidden',
-    width: theme.spacing(7) + 1,
-    [theme.breakpoints.up('sm')]: {
-      width: theme.spacing(9) + 1,
-    },
+    width: theme.spacing(7)
   },
   toolbar: {
     display: 'flex',
@@ -88,11 +75,11 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'flex-end',
     padding: theme.spacing(0, 1),
     // necessary for content to be below app bar
-    ...theme.mixins.toolbar,
+    ...theme.mixins.toolbar
   },
   content: {
     flexGrow: 1,
-    padding: theme.spacing(3),
+    padding: theme.spacing(3)
   },
   searchBar: {
     position: 'absolute',
@@ -101,18 +88,19 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const SideMenuItem = ({ title, LeftIcon, onClick }) => (
-  <ListItem button key={title}>
+  <ListItem button key={title} onClick={onClick}>
     <ListItemIcon>
       <LeftIcon />
     </ListItemIcon>
+
     <ListItemText primary={title} />
   </ListItem>
 );
 
 const SideMenuToolbar = () => {
-  const classes = useStyles();
-  const theme = useTheme();
   const [open, setOpen] = useState(false);
+  const [selectedShow, setSelectedShow] = useState();
+  const classes = useStyles({ open });
 
   const handleDrawerOpen = () => {
     console.log('opened');
@@ -124,75 +112,86 @@ const SideMenuToolbar = () => {
     setOpen(false);
   };
 
-  return (
-    <div className={classes.root}>
-      <CssBaseline />
-      <AppBar
-        position="fixed"
-        className={clsx(classes.appBar, {
-          [classes.appBarShift]: open,
-        })}
-      >
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-            className={clsx(classes.menuButton, {
-              [classes.hide]: open,
-            })}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" noWrap>
-            Universal Ratings
-          </Typography>
-          <TitleSearchBar className={classes.searchBar} />
-          {/* <AmplifySignOut className={classes.signOutButton} /> */}
-        </Toolbar>
-      </AppBar>
+  const renderDrawer = () => {
+    const drawerStateClass = open ? classes.drawerOpen : classes.drawerClose;
+
+    return (
       <Drawer
         variant="permanent"
-        className={clsx(classes.drawer, {
-          [classes.drawerOpen]: open,
-          [classes.drawerClose]: !open,
-        })}
-        classes={{
-          paper: clsx({
-            [classes.drawerOpen]: open,
-            [classes.drawerClose]: !open,
-          }),
-        }}
+        className={clsx(classes.drawer, drawerStateClass)}
+        classes={{ paper: drawerStateClass }}
       >
         <div className={classes.toolbar}>
           <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+            <ChevronLeftIcon />
           </IconButton>
         </div>
+
         <Divider />
+
         <List>
+          <SideMenuItem title="Home" LeftIcon={HomeIcon} />
           <SideMenuItem title="Movies" LeftIcon={MovieIcon} />
           <SideMenuItem title="TV Shows" LeftIcon={TvIcon} />
           <SideMenuItem title="Recently Released" LeftIcon={NewReleasesIcon} />
           <SideMenuItem title="Recently Rated" LeftIcon={StarIcon} />
         </List>
+
         <Divider />
+
         <List>
           <SideMenuItem title="Favorites" LeftIcon={FavoriteIcon} />
           <SideMenuItem title="Watchlist" LeftIcon={WatchLaterIcon} />
           <SideMenuItem title="Watched" LeftIcon={VisibilityIcon} />
         </List>
       </Drawer>
-      <main className={classes.content}>
-        <div className={classes.toolbar} />
-        <Grid container spacing={3}  wrap="wrap">
-          {ratings.slice(0, 10).filter(({ img }) => img).map(({ title, rating, img }, i) => (
-            <Grid key={i} item xs>
-              <MovieCard title={title} rating={rating} img={img} />
-            </Grid>
-          ))}
+    );
+  }
+
+  const renderShowCardGrid = () => (
+    <Grid container spacing={3}  wrap="wrap">
+      {ratings.slice(0, 100).filter(({ img }) => img).map((show, i) => (
+        <Grid key={i} item xs>
+          <ShowCard
+            title={show.title}
+            avgRating={show.rating}
+            userRating={4}
+            img={show.img}
+            onClick={() => setSelectedShow(show)}
+          />
         </Grid>
+      ))}
+    </Grid>
+  );
+
+  return (
+    <div className={classes.root}>
+      <AppBar position="fixed" className={classes.appBar}>
+        <Toolbar>
+          {!open && (
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              edge="start"
+              className={classes.menuButton}
+              onClick={handleDrawerOpen}
+            >
+              <MenuIcon />
+            </IconButton>
+          )}
+          <Typography variant="h6" noWrap>
+            Universal Ratings
+          </Typography>
+          <TitleSearchBar className={classes.searchBar} onSubmit={setSelectedShow} />
+        </Toolbar>
+      </AppBar>
+
+      {renderDrawer()}
+
+      <main className={classes.content}>
+        <span className={classes.toolbar} />
+        {selectedShow && <ShowDetailsModal show={selectedShow} onClose={() => setSelectedShow(null)} />}
+        {renderShowCardGrid()}
       </main>
     </div>
   );
