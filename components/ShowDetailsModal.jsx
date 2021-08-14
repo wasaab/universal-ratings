@@ -1,6 +1,7 @@
 import {
   Avatar,
   Badge,
+  Button,
   Dialog,
   DialogContent,
   DialogContentText,
@@ -17,6 +18,8 @@ import HuluIcon from '../resources/hulu.svg';
 import NetflixIcon from '../resources/netflix.svg';
 import ImdbIcon from '../resources/imdb.svg';
 import RottenTomatoesIcon from '../resources/rt.svg';
+import { useState } from 'react';
+import clsx from 'clsx';
 
 // -------------------- User Review Mocks --------------------
 const mockReviews = [
@@ -62,7 +65,7 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: 3,
   },
   badge: {
-    border: '2px solid transparent',
+    border: '2px solid transparent'
   },
   avatarGroup: {
     '& > .MuiAvatar-root': {
@@ -95,21 +98,63 @@ const useStyles = makeStyles((theme) => ({
   streamingSites: {
     display: 'flex',
     justifyContent: 'space-evenly'
+  },
+  rateButton: {
+    border: '1px solid rgb(255, 180, 0)',
+    color: '#ffb400',
+    '&:hover': {
+      backgroundColor: 'rgba(255, 180, 0, 0.08)'
+    }
+  },
+  ratingStars: {
+    position: 'relative',
+    border: '1px solid transparent',
+    transition: 'all 0.1s ease-in',
+    '&:after': {
+      opacity: 0,
+      content: '"* RATING REQUIRED"',
+      color: theme.palette.error.main,
+      position: 'absolute',
+      top: 33,
+      fontSize: 11,
+      fontWeight: 'bold',
+      transition: 'opacity 0.1s ease-in'
+    }
+  },
+  ratingRequiredTip: {
+    border: `1px solid ${theme.palette.error.main}`,
+    borderRadius: 4,
+    backgroundColor: 'rgba(0, 0, 0, 0.2)',
+    '&:after': {
+      opacity: 1,
+    }
+  },
+  showDetailsContainer: {
+    justifyContent: 'space-between',
+    display: 'flex'
   }
 }));
 
 const ShowDetailsModal = ({ show, onClose }) => {
   const classes = useStyles();
+  const [userRating, setUserRating] = useState(show.rating);
+  const [isTooltipOpen, setIsTooltipOpen] = useState(false);
+
+  const toggleTooltip = () => {
+    if (show.rating || userRating) { return; }
+
+    setIsTooltipOpen(!isTooltipOpen);
+  };
 
   return (
     <Dialog open={show != null} onClose={onClose} className={classes.root}>
       <DialogContent className={classes.content}>
-        <Grid container spacing={2}>
+        <Grid container spacing={2} direction="row">
           <Grid item xs={5}>
             <Image src={show.img} alt={show.title} width={233.33} height={350} />
           </Grid>
 
-          <Grid item xs={7} direction="column">
+          <Grid item xs={7} direction="column" className={classes.showDetailsContainer}>
             <Grid item xs>
               <Typography variant="subtitle2" className={classes.year}>
                 {show.year}
@@ -119,20 +164,41 @@ const ShowDetailsModal = ({ show, onClose }) => {
               </Typography>
             </Grid>
 
-            <Grid item container xs={12} spacing={2}>
-              <Grid item xs style={{ paddingRight: 24 }}>
-                <StarButtons avgRating={show.rating} maxRating={5} />
+            <Grid item container xs={12} spacing={2} direction="row">
+              <Grid item xs style={{ paddingRight: 22 }}>
+                <StarButtons
+                  className={clsx(classes.ratingStars, { [classes.ratingRequiredTip]: isTooltipOpen })}
+                  avgRating={show.rating ?? userRating}
+                  userRating={userRating}
+                  maxRating={5}
+                  onClick={setUserRating}
+                />
               </Grid>
               <Grid item xs style={{ paddingRight: 0 }}>
-                <AvatarGroup max={4} className={classes.avatarGroup}>
-                  {mockReviews.map(({ name, rating }, i) => (
-                    <Badge key={i} color="secondary" badgeContent={rating} className={classes.badge}>
-                      <Avatar className={classes.avatar} style={{ backgroundColor: getRandColor() }}>
-                        {name[0].toUpperCase()}
-                      </Avatar>
-                    </Badge>
-                  ))}
-                </AvatarGroup>
+                {show.rating ? (
+                  <AvatarGroup max={4} className={classes.avatarGroup}>
+                    {mockReviews.map(({ name, rating }, i) => (
+                      <Badge key={i} color="secondary" badgeContent={rating} className={classes.badge}>
+                        <Avatar className={classes.avatar} style={{ backgroundColor: getRandColor() }}>
+                          {name[0].toUpperCase()}
+                        </Avatar>
+                      </Badge>
+                    ))}
+                  </AvatarGroup>
+                ) : (
+                  <span onMouseEnter={toggleTooltip} onMouseLeave={toggleTooltip}>
+                    <Button
+                      className={classes.rateButton}
+                      variant="outlined"
+                      disabled={!userRating}
+                      onClick={() => {
+                        // Todo: call /create api endpoint and close modal. maybe show a success toast.
+                      }}
+                    >
+                      Rate
+                    </Button>
+                  </span>
+                )}
               </Grid>
             </Grid>
 
@@ -141,12 +207,19 @@ const ShowDetailsModal = ({ show, onClose }) => {
               rhoncus nisi commodo, facilisis erat. Pellentesque a velit nisl. Nunc rhoncus augue at ex...
             </DialogContentText>
 
-            <Grid item container xs={9} spacing={1}>
-              <LabelledIcon Icon={ImdbIcon} label={7.4} />
-              <LabelledIcon Icon={RottenTomatoesIcon} label={67} />
+            <Grid item container xs={9} spacing={1} direction="row">
+              {show.imdbRating && <LabelledIcon Icon={ImdbIcon} label={show.imdbRating} />}
+              {show.rtRating && <LabelledIcon Icon={RottenTomatoesIcon} label={show.rtRating ?? 78} />}
             </Grid>
 
-            <Grid item container xs={11} spacing={3} className={classes.streamingSitesContainer}>
+            <Grid
+              item
+              container
+              xs={11}
+              spacing={3}
+              className={classes.streamingSitesContainer}
+              direction="row"
+            >
               <Grid item xs>
                 <Typography variant="overline" className={classes.streamingSitesLabel}>
                   Available on

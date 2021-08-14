@@ -32,7 +32,7 @@ const useStyles = makeStyles({
   }
 });
 
-const ShowCard = ({ title, avgRating, userRating, img, onClick }) => {
+const ShowCard = ({ title, img, avgRating, userRating, onClick }) => {
   const classes = useStyles();
 
   const rateShow = (rating) => {
