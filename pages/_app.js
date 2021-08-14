@@ -1,7 +1,5 @@
 import { useEffect } from 'react';
 import { CssBaseline, ThemeProvider } from '@material-ui/core';
-import algoliasearch from 'algoliasearch/lite';
-import { InstantSearch } from 'react-instantsearch-dom';
 import { AmplifyAuthContainer, AmplifyAuthenticator } from '@aws-amplify/ui-react'
 import amplify from 'aws-amplify';
 import amplifyConfig from '../src/aws-exports';
@@ -15,11 +13,9 @@ import '../styles/global.css';
  */
 function removeJss() {
     const jssStyles = document.querySelector('#jss-server-side');
-    
+
     jssStyles?.parentElement?.removeChild(jssStyles);
 }
-
-const searchClient = algoliasearch('QVUO52LVSK', 'ae8c0c082adf1cd9dace13ea68322713');
 
 amplify.configure(amplifyConfig);
 
@@ -29,12 +25,10 @@ const App = () => {
     return (
         <AmplifyAuthContainer>
             <AmplifyAuthenticator>
-                <InstantSearch indexName="shows" searchClient={searchClient}>
-                    <ThemeProvider theme={theme}>
-                        <CssBaseline />
-                        <SideMenuToolbar />
-                    </ThemeProvider>
-                </InstantSearch>
+                <ThemeProvider theme={theme}>
+                    <CssBaseline />
+                    <SideMenuToolbar />
+                </ThemeProvider>
             </AmplifyAuthenticator>
         </AmplifyAuthContainer>
     );

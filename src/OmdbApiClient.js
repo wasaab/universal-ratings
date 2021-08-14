@@ -7,14 +7,14 @@ class ShowType {
 
 class Show {
     constructor({ imdbID, Title, Type, Poster, Year }) {
-        this.imdbId = imdbID;
+        this.id = imdbID;
         this.title = Title;
         this.type = Type === 'series' ? 'tv' : Type,
-        this.img = Poster;
+        this.img = Poster === 'N/A' ? null : Poster;
         this.year = Year.replace(/–.*/, '');
     }
 }
-      
+
 class OmdbApiClient {
     constructor(apiKey) {
         this.baseUrl = `http://www.omdbapi.com/?apikey=${apiKey}`;
@@ -31,13 +31,14 @@ class OmdbApiClient {
 
         if (!shows) { return []; }
 
+        // Todo: Remove findIndex portion after OMDB closes their issue regarding duplicates: https://github.com/Omertron/api-omdb/issues/16
         return shows.map((show) => new Show(show))
-            .filter(({ type }) => type !== 'game');
+            .filter((show, i, self) => show.type !== 'game' && self.findIndex(({ id }) => id === show.id) === i);
     }
-    
+
     /**
      * Queries omdb for all matches of provided title.
-     * 
+     *
      * @param {string} title the title to find matches for
      * @param {ShowType} type the show type to find matches for
      * @returns {Promise<Show[]>} matching shows

@@ -1,7 +1,7 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
 import debounce from 'lodash.debounce';
 import LruCache from 'lru-cache';
-import { connectAutoComplete, Highlight } from 'react-instantsearch-dom';
+import axios from 'axios';
 import parse from 'autosuggest-highlight/parse';
 import match from 'autosuggest-highlight/match';
 import {
@@ -18,6 +18,10 @@ import {
     Tv as TvIcon
 } from '@material-ui/icons';
 import Autocomplete from '@material-ui/lab/Autocomplete';
+import algoliasearch from 'algoliasearch';
+
+const client = algoliasearch('QVUO52LVSK', 'ae8c0c082adf1cd9dace13ea68322713');
+const algolia = client.initIndex('shows');
 
 const useStyles = makeStyles((theme) => ({
     popper: {
@@ -34,6 +38,11 @@ const useStyles = makeStyles((theme) => ({
             paddingLeft: 10,
             paddingRight: 10
         }
+    },
+    groupLabel: {
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+        lineHeight: '35px',
+        backdropFilter: 'blur(10px)'
     },
     title: {
         whiteSpace: 'nowrap',
@@ -68,9 +77,9 @@ const useStyles = makeStyles((theme) => ({
         fontSize: '0.9rem',
         width: '100%',
         [theme.breakpoints.up('sm')]: {
-            width: '18ch',
+            width: '20ch',
             '&:focus': {
-                width: '25ch'
+                width: '30ch'
             }
         }
     },
@@ -93,17 +102,46 @@ const cache = new LruCache({
 });
 
 function maybeUpdateCache(title, shows) {
-    if (cache.has(title)) { return; }
-    
+    if (!title || cache.has(title)) { return; }
+
     cache.set(title, shows);
 }
 
-const TitleSearch = ({ className, hits = [], currentRefinement, refine }) => {
+async function fetchRatedAndUnratedShows(title) {
+    const [ratedShowsResp, unratedShowsResp] = await Promise.all([
+        algolia.search(title),
+        axios.get(`/api/search?title=${title}`)
+    ]);
+    const uniqueUnratedShows = unratedShowsResp.data.filter(({ id }) => {
+        return -1 === ratedShowsResp.hits.findIndex((ratedShow) => ratedShow.id === id);
+    });
+
+    return ratedShowsResp.hits.concat(uniqueUnratedShows);
+}
+
+const TitleSearchBar = ({ className, onSubmit }) => {
     const classes = useStyles();
     const [isOpen, setIsOpen] = useState(false);
-    const [options, setOptions] = useState(hits);
+    const [options, setOptions] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
-    const fetchOptionsDelayed = useCallback(debounce(refine, 500), []);
+
+    const fetchOptions = async (title) => {
+        try {
+            const shows = await fetchRatedAndUnratedShows(title);
+
+            console.log('shows: ', shows);
+            setOptions(shows);
+            maybeUpdateCache(title, shows);
+        } catch (err) {
+            console.error('Unable to find matching show: ', err);
+            setOptions([]);
+            maybeUpdateCache(title, []);
+        }
+
+        setIsLoading(false);
+    };
+
+    const fetchOptionsDelayed = useCallback(debounce(fetchOptions, 500), []);
 
     const updateOptions = (value) => {
         const cachedOptions = cache.get(value);
@@ -124,21 +162,47 @@ const TitleSearch = ({ className, hits = [], currentRefinement, refine }) => {
         }
     };
 
-    const renderOption = (option, { inputValue }) => {
+    const handleSelection = (event, value, reason) => {
+        if (reason !== 'select-option') { return; }
+
+        onSubmit(value);
+    };
+
+    const buildTitleWithSubstringMatchHighlights = (option, inputValue) => {
         const matches = match(option.title, inputValue);
         const parts = parse(option.title, matches);
+
+        return (
+            <div className={classes.title} title={option.title}>
+                {parts.map(({ highlight, text }, i) => (
+                    <span key={i} style={{ fontWeight: highlight ? 700 : 400 }}>
+                        {text}
+                    </span>
+                ))}
+            </div>
+        );
+    };
+
+    // title returned from alogia has been configured to include <b> tags around matches
+    const buildTitleWithAlgoliaFuzzyHighlights = (titleHtml) => (
+        <div className={classes.title} dangerouslySetInnerHTML={{ __html: titleHtml }} />
+    );
+
+    const renderHighlightedTitle = (option, inputValue) => {
+        if (!option.rating) {
+            return buildTitleWithSubstringMatchHighlights(option, inputValue);
+        }
+
+        return buildTitleWithAlgoliaFuzzyHighlights(option._highlightResult.title.value)
+    };
+
+    const renderOption = (option, { inputValue }) => {
         const TypeIcon = typeToIcon[option.type];
 
         return (
             <div className={classes.option}>
                 <TypeIcon size="small" className={classes.optionIcon} />
-                <Highlight
-                    className={classes.title}
-                    title={option.title}
-                    hit={option}
-                    attribute="title"
-                    tagName="b"
-                />
+                {renderHighlightedTitle(option, inputValue)}
                 <span className={classes.optionYear}>
                     {option.year}
                 </span>
@@ -146,7 +210,21 @@ const TitleSearch = ({ className, hits = [], currentRefinement, refine }) => {
         );
     };
 
-    const renderSmallInput = (params) => (
+    const renderEndAdornment = () => (
+        <InputAdornment position="end" className={classes.searchButton}>
+            {isLoading && <CircularProgress size={20} className={classes.loadingIcon} />}
+            <IconButton
+                size="small"
+                aria-label="Search for title"
+                onClick={() => console.log('search clicked')}
+                disabled={options.length === 0}
+            >
+                <SearchIcon className={classes.searchIcon} />
+            </IconButton>
+        </InputAdornment>
+    );
+
+    const renderInput = (params) => (
         <TextField
             {...params}
             label="Title"
@@ -157,42 +235,27 @@ const TitleSearch = ({ className, hits = [], currentRefinement, refine }) => {
             }}
             InputProps={{
                 ...params.InputProps,
-                endAdornment: (
-                    <InputAdornment position="end" className={classes.searchButton}>
-                        {isLoading && <CircularProgress size={20} className={classes.loadingIcon} />}
-                        <IconButton
-                            size="small"
-                            aria-label="Search for title"
-                            onClick={() => console.log('search clicked')}
-                            disabled={options.length === 0}
-                        >
-                            <SearchIcon className={classes.searchIcon} />
-                        </IconButton>
-                    </InputAdornment>
-                ),
+                endAdornment: renderEndAdornment()
             }}
         />
     );
 
-    useEffect(() => {
-        setIsLoading(false);
-        maybeUpdateCache(currentRefinement, hits);
-    }, [hits]);
-    
     return (
         <Autocomplete
             open={isOpen}
             onOpen={({ target }) => setIsOpen(target.value.length > 1)}
             onClose={() => setIsOpen(false)}
             onInputChange={handleInputChange}
-            getOptionSelected={(option, value) => option.title === value.title}
+            onChange={handleSelection}
+            getOptionSelected={(option, value) => option.imdbId === value.imdbId}
             getOptionLabel={({ title }) => title}
-            options={hits}
+            options={options}
             filterOptions={(options) => options}
+            groupBy={({ rating }) => !rating ? 'Unrated' : 'Rated'}
             loading={isLoading}
-            renderInput={renderSmallInput}
+            renderInput={renderInput}
             renderOption={renderOption}
-            classes={{ popper: classes.popper }}
+            classes={{ popper: classes.popper, groupLabel: classes.groupLabel }}
             className={className}
             loadingText="Searching..."
             noOptionsText="No results"
@@ -201,7 +264,5 @@ const TitleSearch = ({ className, hits = [], currentRefinement, refine }) => {
         />
     );
 }
-
-const TitleSearchBar = connectAutoComplete(TitleSearch);
 
 export default TitleSearchBar;
