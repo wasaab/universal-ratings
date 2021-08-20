@@ -46,9 +46,9 @@ export const createReview = /* GraphQL */ `
     $condition: ModelReviewConditionInput
   ) {
     createReview(input: $input, condition: $condition) {
-      id
-      rating
       showId
+      userId
+      rating
       user {
         id
         name
@@ -66,9 +66,9 @@ export const updateReview = /* GraphQL */ `
     $condition: ModelReviewConditionInput
   ) {
     updateReview(input: $input, condition: $condition) {
-      id
-      rating
       showId
+      userId
+      rating
       user {
         id
         name
@@ -86,9 +86,9 @@ export const deleteReview = /* GraphQL */ `
     $condition: ModelReviewConditionInput
   ) {
     deleteReview(input: $input, condition: $condition) {
-      id
-      rating
       showId
+      userId
+      rating
       user {
         id
         name
@@ -109,14 +109,17 @@ export const createShow = /* GraphQL */ `
       id
       title
       type
+      rating
       img
       year
-      rating
+      description
+      imdbRating
+      rtRating
       reviews {
         items {
-          id
-          rating
           showId
+          userId
+          rating
           createdAt
           updatedAt
         }
@@ -136,14 +139,17 @@ export const updateShow = /* GraphQL */ `
       id
       title
       type
+      rating
       img
       year
-      rating
+      description
+      imdbRating
+      rtRating
       reviews {
         items {
-          id
-          rating
           showId
+          userId
+          rating
           createdAt
           updatedAt
         }
@@ -163,14 +169,17 @@ export const deleteShow = /* GraphQL */ `
       id
       title
       type
+      rating
       img
       year
-      rating
+      description
+      imdbRating
+      rtRating
       reviews {
         items {
-          id
-          rating
           showId
+          userId
+          rating
           createdAt
           updatedAt
         }

@@ -34,9 +34,9 @@ export const onDeleteUser = /* GraphQL */ `
 export const onCreateReview = /* GraphQL */ `
   subscription OnCreateReview {
     onCreateReview {
-      id
-      rating
       showId
+      userId
+      rating
       user {
         id
         name
@@ -51,9 +51,9 @@ export const onCreateReview = /* GraphQL */ `
 export const onUpdateReview = /* GraphQL */ `
   subscription OnUpdateReview {
     onUpdateReview {
-      id
-      rating
       showId
+      userId
+      rating
       user {
         id
         name
@@ -68,9 +68,9 @@ export const onUpdateReview = /* GraphQL */ `
 export const onDeleteReview = /* GraphQL */ `
   subscription OnDeleteReview {
     onDeleteReview {
-      id
-      rating
       showId
+      userId
+      rating
       user {
         id
         name
@@ -88,14 +88,17 @@ export const onCreateShow = /* GraphQL */ `
       id
       title
       type
+      rating
       img
       year
-      rating
+      description
+      imdbRating
+      rtRating
       reviews {
         items {
-          id
-          rating
           showId
+          userId
+          rating
           createdAt
           updatedAt
         }
@@ -112,14 +115,17 @@ export const onUpdateShow = /* GraphQL */ `
       id
       title
       type
+      rating
       img
       year
-      rating
+      description
+      imdbRating
+      rtRating
       reviews {
         items {
-          id
-          rating
           showId
+          userId
+          rating
           createdAt
           updatedAt
         }
@@ -136,14 +142,17 @@ export const onDeleteShow = /* GraphQL */ `
       id
       title
       type
+      rating
       img
       year
-      rating
+      description
+      imdbRating
+      rtRating
       reviews {
         items {
-          id
-          rating
           showId
+          userId
+          rating
           createdAt
           updatedAt
         }

@@ -32,20 +32,16 @@ const useStyles = makeStyles({
   }
 });
 
-const ShowCard = ({ title, img, avgRating, userRating, onClick }) => {
+const ShowCard = ({ show, userRating, onRatingChange, onClick }) => {
   const classes = useStyles();
-
-  const rateShow = (rating) => {
-    console.log(`${title} rated ${rating} stars`);
-  };
 
   return (
     <Card className={classes.root}>
       <CardActionArea onClick={onClick}>
         <div className={classes.media}>
           <Image
-            src={img}
-            alt={title}
+            src={show.img}
+            alt={show.title}
             layout="fill"
             objectFit="cover"
             objectPosition="top"
@@ -53,16 +49,16 @@ const ShowCard = ({ title, img, avgRating, userRating, onClick }) => {
         </div>
         <CardContent className={classes.content}>
           <Typography variant="h6" component="h6">
-            {title}
+            {show.title}
           </Typography>
         </CardContent>
       </CardActionArea>
       <CardActions className={classes.actions}>
         <StarButtons
-          avgRating={avgRating}
+          avgRating={show.rating}
           userRating={userRating}
           maxRating={5}
-          onClick={rateShow}
+          onClick={(rating) => onRatingChange({ showId: show.id, rating })}
         />
       </CardActions>
     </Card>
