@@ -29,11 +29,11 @@ export const listUsers = /* GraphQL */ `
   }
 `;
 export const getReview = /* GraphQL */ `
-  query GetReview($id: ID!) {
-    getReview(id: $id) {
-      id
-      rating
+  query GetReview($showId: ID!, $userId: ID!) {
+    getReview(showId: $showId, userId: $userId) {
       showId
+      userId
+      rating
       user {
         id
         name
@@ -47,15 +47,25 @@ export const getReview = /* GraphQL */ `
 `;
 export const listReviews = /* GraphQL */ `
   query ListReviews(
+    $showId: ID
+    $userId: ModelIDKeyConditionInput
     $filter: ModelReviewFilterInput
     $limit: Int
     $nextToken: String
+    $sortDirection: ModelSortDirection
   ) {
-    listReviews(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    listReviews(
+      showId: $showId
+      userId: $userId
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      sortDirection: $sortDirection
+    ) {
       items {
-        id
-        rating
         showId
+        userId
+        rating
         user {
           id
           name
@@ -75,14 +85,17 @@ export const getShow = /* GraphQL */ `
       id
       title
       type
+      rating
       img
       year
-      rating
+      description
+      imdbRating
+      rtRating
       reviews {
         items {
-          id
-          rating
           showId
+          userId
+          rating
           createdAt
           updatedAt
         }
@@ -104,9 +117,12 @@ export const listShows = /* GraphQL */ `
         id
         title
         type
+        rating
         img
         year
-        rating
+        description
+        imdbRating
+        rtRating
         reviews {
           nextToken
         }
@@ -135,9 +151,9 @@ export const byShow = /* GraphQL */ `
       nextToken: $nextToken
     ) {
       items {
-        id
-        rating
         showId
+        userId
+        rating
         user {
           id
           name
@@ -172,9 +188,12 @@ export const showsByTitle = /* GraphQL */ `
         id
         title
         type
+        rating
         img
         year
-        rating
+        description
+        imdbRating
+        rtRating
         reviews {
           nextToken
         }
@@ -206,10 +225,55 @@ export const showsByType = /* GraphQL */ `
         id
         title
         type
+        rating
         img
         year
-        rating
+        description
+        imdbRating
+        rtRating
         reviews {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const showsByDate = /* GraphQL */ `
+  query ShowsByDate(
+    $type: ShowType
+    $createdAt: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelShowFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    showsByDate(
+      type: $type
+      createdAt: $createdAt
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        title
+        type
+        rating
+        img
+        year
+        description
+        imdbRating
+        rtRating
+        reviews {
+          items {
+            showId
+            userId
+            rating
+          }
           nextToken
         }
         createdAt

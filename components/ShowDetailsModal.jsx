@@ -1,3 +1,5 @@
+import { useState } from 'react';
+import clsx from 'clsx';
 import {
   Avatar,
   Badge,
@@ -12,39 +14,16 @@ import {
 import { AvatarGroup } from '@material-ui/lab';
 import * as matColors from '@material-ui/core/colors';
 import Image from 'next/image';
+import API, { graphqlOperation } from '@aws-amplify/api';
+import { createShow, createReview, updateReview} from '../src/graphql/mutations.js';
 import StarButtons from './StarButtons';
 import LabelledIcon from './LabelledIcon';
 import HuluIcon from '../resources/hulu.svg';
 import NetflixIcon from '../resources/netflix.svg';
 import ImdbIcon from '../resources/imdb.svg';
 import RottenTomatoesIcon from '../resources/rt.svg';
-import { useState } from 'react';
-import clsx from 'clsx';
 
-// -------------------- User Review Mocks --------------------
-const mockReviews = [
-  {
-    name: 'Tony',
-    rating: 4
-  },
-  {
-    name: 'Brian',
-    rating: 4
-  },
-  {
-    name: 'Dan',
-    rating: 3
-  },
-  {
-    name: 'Olivia',
-    rating: 2
-  },
-  {
-    name: 'Kent',
-    rating: 1
-  }
-];
-
+// -------------------- User Review Color Mocking --------------------
 const colors = Object.values(matColors)
   .slice(1)
   .map(( color ) => color['300']);
@@ -53,7 +32,10 @@ function getRandColor() {
   return colors[Math.floor(Math.random() * colors.length)];
 }
 
-// -----------------------------------------------------------
+function getRandColors(count = 0) {
+  return [...new Array(count)].map(getRandColor);
+}
+// -------------------------------------------------------------------
 
 const avatarSize = 33;
 const useStyles = makeStyles((theme) => ({
@@ -135,15 +117,56 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const ShowDetailsModal = ({ show, onClose }) => {
+const ShowDetailsModal = ({ show, userId, userRating, onRatingChange, onShowAdded, onClose }) => {
   const classes = useStyles();
-  const [userRating, setUserRating] = useState(show.rating);
+  const [currUserRating, setCurrUserRating] = useState(userRating);
   const [isTooltipOpen, setIsTooltipOpen] = useState(false);
+  const [avatarColors] = useState(getRandColors(3));
 
   const toggleTooltip = () => {
-    if (show.rating || userRating) { return; }
+    if (show.rating || currUserRating) { return; }
 
     setIsTooltipOpen(!isTooltipOpen);
+  };
+
+  const createShowReview = async (updatedUserRating = currUserRating) => {
+    const review = {
+      showId: show.id,
+      userId,
+      rating: updatedUserRating
+    };
+    const operation = userRating ? updateReview : createReview;
+
+    try {
+      await API.graphql(graphqlOperation(operation, { input: review }));
+
+      return review;
+    } catch (err) {
+      console.error('Failed to rate show: ', err);
+    }
+  };
+
+  const createRatedShow = async () => {
+    const ratedShow = { ...show, rating: currUserRating };
+
+    try {
+      await createShowReview();
+      const createShowResp = await API.graphql(graphqlOperation(createShow, { input: ratedShow }));
+
+      onShowAdded(createShowResp.data.createShow);
+    } catch (err) {
+      console.error('GraphQL create show failed. ', err);
+    }
+  };
+
+  const rateShow = async (updatedUserRating) => {
+    setCurrUserRating(updatedUserRating);
+
+    if (show.rating) {
+      const review = await createShowReview(updatedUserRating);
+
+      onRatingChange(review);
+    }
   };
 
   return (
@@ -168,19 +191,19 @@ const ShowDetailsModal = ({ show, onClose }) => {
               <Grid item xs style={{ paddingRight: 22 }}>
                 <StarButtons
                   className={clsx(classes.ratingStars, { [classes.ratingRequiredTip]: isTooltipOpen })}
-                  avgRating={show.rating ?? userRating}
-                  userRating={userRating}
+                  avgRating={show.rating ?? currUserRating}
+                  userRating={currUserRating}
                   maxRating={5}
-                  onClick={setUserRating}
+                  onClick={rateShow}
                 />
               </Grid>
               <Grid item xs style={{ paddingRight: 0 }}>
                 {show.rating ? (
                   <AvatarGroup max={4} className={classes.avatarGroup}>
-                    {mockReviews.map(({ name, rating }, i) => (
+                    {show.reviews.items.sort((a, b) => b.rating - a.rating).map(({ userId, rating }, i) => (
                       <Badge key={i} color="secondary" badgeContent={rating} className={classes.badge}>
-                        <Avatar className={classes.avatar} style={{ backgroundColor: getRandColor() }}>
-                          {name[0].toUpperCase()}
+                        <Avatar className={classes.avatar} style={{ backgroundColor: avatarColors[i] }}>
+                          {userId[0].toUpperCase()}
                         </Avatar>
                       </Badge>
                     ))}
@@ -190,10 +213,8 @@ const ShowDetailsModal = ({ show, onClose }) => {
                     <Button
                       className={classes.rateButton}
                       variant="outlined"
-                      disabled={!userRating}
-                      onClick={() => {
-                        // Todo: call /create api endpoint and close modal. maybe show a success toast.
-                      }}
+                      disabled={!currUserRating}
+                      onClick={createRatedShow}
                     >
                       Rate
                     </Button>
@@ -209,7 +230,7 @@ const ShowDetailsModal = ({ show, onClose }) => {
 
             <Grid item container xs={9} spacing={1} direction="row">
               {show.imdbRating && <LabelledIcon Icon={ImdbIcon} label={show.imdbRating} />}
-              {show.rtRating && <LabelledIcon Icon={RottenTomatoesIcon} label={show.rtRating ?? 78} />}
+              {show.rtRating && <LabelledIcon Icon={RottenTomatoesIcon} label={show.rtRating} />}
             </Grid>
 
             <Grid

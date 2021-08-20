@@ -11,7 +11,7 @@ class Show {
         this.title = Title;
         this.type = Type === 'series' ? 'tv' : Type,
         this.img = Poster === 'N/A' ? null : Poster;
-        this.year = Year.replace(/–.*/, '');
+        this.year = Number(Year.replace(/–.*/, ''));
     }
 }
 

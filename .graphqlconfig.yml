@@ -1,6 +1,6 @@
 projects:
   universalratings:
-    schemaPath: src/graphql/schema.json
+    schemaPath: amplify/backend/api/universalratings/build/schema.graphql
     includes:
       - src/graphql/**/*.js
     excludes:
