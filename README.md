@@ -35,12 +35,18 @@
 + Client and server side caching of search results
 + AWS Cognito user auth
 
+## Installation
+
+```sh
+yarn install
+```
+
 ## Usage
 
 + To serve the app at http://localhost:3000, run one of the following commands in the project's root directory.
 + Both commands will mock the GraphQL API and DynamoDB before serving the app.
 
-### Development
+### Starting the Development Server
 
 ```bash
 yarn dev
@@ -48,7 +54,7 @@ yarn dev
 
 + Uses HMR to update the served version on code changes.
 
-### Production
+### Starting the Production Server
 
 ```bash
 yarn prod
