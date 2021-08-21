@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef} from 'react';
 import { Auth } from 'aws-amplify';
 import API, { graphqlOperation } from '@aws-amplify/api';
-import { showsByDate } from '../src/graphql/queries';
+import { showsByDate } from '../src/graphql/custom-queries';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import {

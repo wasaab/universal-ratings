@@ -16,7 +16,7 @@
     "dev": "run-p mock serve-dev",
     "serve-dev": "next dev",
     "prod": "run-p mock serve-prod",
-    "serve-prod": "sleep 30 && run-s build start",
+    "serve-prod": "wait-on http://localhost:20002 && run-s build start",
     "mock": "amplify mock api",
     "lint": "next lint",
     "build": "next build",
@@ -44,6 +44,7 @@
     "@svgr/webpack": "^5.5.0",
     "eslint": "^7.31.0",
     "eslint-config-next": "^11.0.1",
-    "npm-run-all": "^4.1.5"
+    "npm-run-all": "^4.1.5",
+    "wait-on": "^6.0.0"
   }
 }

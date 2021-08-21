@@ -269,11 +269,6 @@ export const showsByDate = /* GraphQL */ `
         imdbRating
         rtRating
         reviews {
-          items {
-            showId
-            userId
-            rating
-          }
           nextToken
         }
         createdAt
