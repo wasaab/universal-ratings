@@ -1,0 +1,36 @@
+type User @model {
+  id: ID!
+  name: String!
+}
+
+type Review @model
+  @key(fields: ["showId", "userId"])
+  @key(name: "byShow", fields: ["showId", "rating"], queryField: "byShow") {
+  showId: ID!
+  userId: ID!
+  rating: Int!
+  user: User @connection(fields: ["userId"])
+}
+
+enum ShowType {
+  tv
+  movie
+}
+
+type Show @model
+  @algolia(fields: { include: ["title"] })
+  @key(name: "showsByTitle", fields: ["title", "year"], queryField: "showsByTitle")
+  @key(name: "showsByType", fields: ["type", "year"], queryField: "showsByType")
+  @key(name: "showsByDate", fields: ["type", "createdAt"], queryField: "showsByDate") {
+  id: ID!
+  title: String!
+  type: ShowType!
+  rating: Float!
+  img: String
+  year: Int
+  description: String
+  imdbRating: Float
+  rtRating: Int
+  reviews: [Review] @connection(fields: ["id"])
+  createdAt: AWSDateTime
+}

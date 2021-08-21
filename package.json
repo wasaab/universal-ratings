@@ -1,7 +1,7 @@
 {
   "name": "universal-ratings",
-  "version": "0.2.0",
-  "description": "Movie and TV Show ratings site",
+  "version": "1.0.0",
+  "description": "A site for rating TV shows and movies",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/wasaab/universal-ratings.git"
@@ -13,24 +13,38 @@
   },
   "homepage": "https://github.com/wasaab/universal-ratings#readme",
   "scripts": {
-    "dev": "next dev",
+    "dev": "run-p mock serve-dev",
+    "serve-dev": "next dev",
+    "prod": "run-p mock serve-prod",
+    "serve-prod": "wait-on http://localhost:20002 && run-s build start",
+    "mock": "amplify mock api",
+    "lint": "next lint",
     "build": "next build",
     "start": "next start"
   },
   "dependencies": {
+    "@aws-amplify/ui-react": "^1.2.8",
     "@material-ui/core": "^4.12.2",
     "@material-ui/icons": "^4.11.2",
     "@material-ui/lab": "^4.0.0-alpha.60",
+    "algoliasearch": "^4.10.3",
     "autosuggest-highlight": "^3.1.1",
+    "aws-amplify": "^4.2.2",
     "axios": "^0.21.1",
+    "clsx": "^1.1.1",
+    "graphql-algolia-transformer": "^1.1.0",
     "lodash.debounce": "^4.0.8",
     "lru-cache": "^6.0.0",
-    "next": "^11.0.0",
+    "next": "^11.1.0",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "sharp": "^0.29.0"
   },
   "devDependencies": {
+    "@svgr/webpack": "^5.5.0",
     "eslint": "^7.31.0",
-    "eslint-config-next": "^11.0.1"
+    "eslint-config-next": "^11.0.1",
+    "npm-run-all": "^4.1.5",
+    "wait-on": "^6.0.0"
   }
 }
