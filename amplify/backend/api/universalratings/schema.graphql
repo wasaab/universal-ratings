@@ -18,7 +18,6 @@ enum ShowType {
 }
 
 type Show @model
-  @algolia(fields: { include: ["title"] })
   @key(name: "showsByTitle", fields: ["title", "year"], queryField: "showsByTitle")
   @key(name: "showsByType", fields: ["type", "year"], queryField: "showsByType")
   @key(name: "showsByDate", fields: ["type", "createdAt"], queryField: "showsByDate") {
