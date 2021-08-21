@@ -139,36 +139,16 @@ const SideMenuToolbar = () => {
     }
   };
 
-  useEffect(() => {
-    if (!isEndOfPageVisisble || !nextToken) { return; }
-
-    fetchShows();
-  }, [isEndOfPageVisisble]);
-
   const storeUserId = async () => {
     try {
       const user = await Auth.currentAuthenticatedUser();
 
-      setUserId(user.attributes.sub);
+      setUserId('Kent');
+      // setUserId(user.attributes.sub);
     } catch (err) {
       console.error('Failed to get authed user: ', err);
     }
   }
-
-  useEffect(async () => {
-   fetchShows();
-   storeUserId();
-  }, []);
-
-  const handleDrawerOpen = () => {
-    console.log('opened');
-    setOpen(true);
-  };
-
-  const handleDrawerClose = () => {
-    console.log('closed');
-    setOpen(false);
-  };
 
   const renderDrawer = () => {
     const drawerStateClass = open ? classes.drawerOpen : classes.drawerClose;
@@ -180,7 +160,7 @@ const SideMenuToolbar = () => {
         classes={{ paper: drawerStateClass }}
       >
         <div className={classes.toolbar}>
-          <IconButton onClick={handleDrawerClose}>
+          <IconButton onClick={() => setOpen(false)}>
             <ChevronLeftIcon />
           </IconButton>
         </div>
@@ -275,6 +255,17 @@ const SideMenuToolbar = () => {
     </Grid>
   );
 
+  useEffect(async () => {
+    fetchShows();
+    storeUserId();
+  }, []);
+
+  useEffect(() => {
+    if (!isEndOfPageVisisble || !nextToken) { return; }
+
+    fetchShows();
+  }, [isEndOfPageVisisble]);
+
   return (
     <div className={classes.root}>
       <AppBar position="fixed" className={classes.appBar}>
@@ -285,7 +276,7 @@ const SideMenuToolbar = () => {
               aria-label="open drawer"
               edge="start"
               className={classes.menuButton}
-              onClick={handleDrawerOpen}
+              onClick={() => setOpen(true)}
             >
               <MenuIcon />
             </IconButton>
