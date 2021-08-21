@@ -58,6 +58,7 @@ const useStyles = makeStyles((theme) => ({
     whiteSpace: 'nowrap'
   },
   drawerOpen: {
+    overflowX: 'hidden',
     width: drawerWidth,
     transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.sharp,

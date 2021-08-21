@@ -15,7 +15,7 @@ import { AvatarGroup } from '@material-ui/lab';
 import * as matColors from '@material-ui/core/colors';
 import Image from 'next/image';
 import API, { graphqlOperation } from '@aws-amplify/api';
-import { createShow, createReview, updateReview} from '../src/graphql/mutations.js';
+import { createShow, createReview, updateReview } from '../src/graphql/mutations.js';
 import StarButtons from './StarButtons';
 import LabelledIcon from './LabelledIcon';
 import HuluIcon from '../resources/hulu.svg';
@@ -174,7 +174,13 @@ const ShowDetailsModal = ({ show, userId, userRating, onRatingChange, onShowAdde
       <DialogContent className={classes.content}>
         <Grid container spacing={2} direction="row">
           <Grid item xs={5}>
-            <Image src={show.img} alt={show.title} width={233.33} height={350} />
+            <Image
+              src={show.img}
+              alt={show.title}
+              width={233.33}
+              height={350}
+              unoptimized
+            />
           </Grid>
 
           <Grid item xs={7} direction="column" className={classes.showDetailsContainer}>
