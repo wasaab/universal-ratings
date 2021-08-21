@@ -45,6 +45,7 @@ const ShowCard = ({ show, userRating, onRatingChange, onClick }) => {
             layout="fill"
             objectFit="cover"
             objectPosition="top"
+            unoptimized
           />
         </div>
         <CardContent className={classes.content}>
