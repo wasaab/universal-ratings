@@ -28,8 +28,10 @@ export const showsByDate = /* GraphQL */ `
         reviews {
           items {
             showId
-            userId
             rating
+            user {
+              name
+            }
           }
           nextToken
         }
