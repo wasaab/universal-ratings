@@ -6,6 +6,7 @@ import amplifyConfig from '../src/aws-exports';
 import SideMenuToolbar from '../components/SideMenuToolbar';
 import theme from '../src/theme';
 import '../styles/global.css';
+import { AuthState } from '@aws-amplify/ui-components';
 
 /**
  * Remove the server-side injected CSS, as it will be injected client-side.
@@ -22,8 +23,8 @@ amplify.configure(amplifyConfig);
 const App = () => {
   const [user, setUser] = useState();
 
-  const storeUser = async (nextAuthState, authedUser) => {
-    if (user || !authedUser) { return; }
+  const storeUser = async (authState, authedUser) => {
+    if (user || !authedUser || authState !== AuthState.SignedIn) { return; }
 
     setUser({
       id: authedUser.attributes.sub,

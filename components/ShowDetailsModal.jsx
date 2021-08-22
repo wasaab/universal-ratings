@@ -139,8 +139,6 @@ const ShowDetailsModal = ({ show, user, userRating, onRatingChange, onShowAdded,
 
     try {
       await API.graphql(graphqlOperation(operation, { input: review }));
-
-      return review;
     } catch (err) {
       console.error('Failed to rate show: ', err);
     }
@@ -163,9 +161,13 @@ const ShowDetailsModal = ({ show, user, userRating, onRatingChange, onShowAdded,
     setCurrUserRating(updatedUserRating);
 
     if (show.rating) {
-      const review = await createShowReview(updatedUserRating);
-
-      onRatingChange(review);
+      createShowReview(updatedUserRating);
+      onRatingChange({
+        rating: updatedUserRating,
+        user: {
+          name: user.name
+        }
+      });
     }
   };
 
