@@ -1,5 +1,4 @@
-import React, { useEffect, useState, useRef} from 'react';
-import { Auth } from 'aws-amplify';
+import React, { useEffect, useState, useRef } from 'react';
 import API, { graphqlOperation } from '@aws-amplify/api';
 import { showsByDate } from '../src/graphql/custom-queries';
 import clsx from 'clsx';
@@ -15,7 +14,7 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
-  Grid,
+  Grid
 } from '@material-ui/core';
 import {
   Menu as MenuIcon,
@@ -32,6 +31,7 @@ import {
 import ShowCard from './ShowCard';
 import TitleSearchBar from './TitleSearchBar';
 import ShowDetailsModal from './ShowDetailsModal';
+import UserMenu from './UserMenu';
 import useOnScreen from './useOnScreen';
 
 const drawerWidth = 240;
@@ -87,8 +87,12 @@ const useStyles = makeStyles((theme) => ({
   },
   searchBar: {
     position: 'absolute',
-    right: 24
-  }
+    right: 100
+  },
+  userMenu: {
+    position: 'absolute',
+    right: 10
+  },
 }));
 
 function determineAvgRating(reviews) {
@@ -105,12 +109,11 @@ const SideMenuItem = ({ title, LeftIcon, onClick }) => (
   </ListItem>
 );
 
-const SideMenuToolbar = () => {
+const SideMenuToolbar = ({ user }) => {
   const [open, setOpen] = useState(false);
   const [selectedShow, setSelectedShow] = useState();
   const [selectedShowIdx, setSelectedShowIdx] = useState();
   const [shows, setShows] = useState([]);
-  const [userId, setUserId] = useState();
   const [nextToken, setNextToken] = useState();
   const endOfPageRef = useRef();
   const isEndOfPageVisisble = useOnScreen(endOfPageRef);
@@ -135,21 +138,10 @@ const SideMenuToolbar = () => {
       console.log('filteredShows: ', filteredShows);
       setShows([...shows, ...filteredShows]);
       setNextToken(data.showsByDate.nextToken);
-    } catch(err) {
+    } catch (err) {
       console.error('Failed to list shows: ', err);
     }
   };
-
-  const storeUserId = async () => {
-    try {
-      const user = await Auth.currentAuthenticatedUser();
-
-      setUserId('Kent');
-      // setUserId(user.attributes.sub);
-    } catch (err) {
-      console.error('Failed to get authed user: ', err);
-    }
-  }
 
   const renderDrawer = () => {
     const drawerStateClass = open ? classes.drawerOpen : classes.drawerClose;
@@ -188,7 +180,7 @@ const SideMenuToolbar = () => {
   }
 
   const updateReviews = (reviews, review) => {
-    const oldReview = reviews.find((review) => review.userId === userId);
+    const oldReview = reviews.find((review) => review.user.name === user.name);
 
     if (oldReview) {
       oldReview.rating = review.rating;
@@ -239,16 +231,16 @@ const SideMenuToolbar = () => {
     setSelectedShowIdx(showIdx);
   };
 
-  const findUserReview = (reviews) => reviews?.find((review) => review.userId === userId);
+  const findUserReview = (reviews) => reviews?.find((review) => review.user.name === user.name);
 
   const renderShowCardGrid = () => (
-    <Grid container spacing={3}  wrap="wrap">
+    <Grid container spacing={3} wrap="wrap">
       {shows.map((show, i) => (
         <Grid key={i} item xs>
           <ShowCard
             show={show}
             userRating={findUserReview(show.reviews?.items)?.rating}
-            onRatingChange={(review) => updateRating({ ...review, userId }, i)} // Todo: This needs to call graphql endpoint otherwise change isn't persisted
+            onRatingChange={(review) => updateRating({ ...review, userId: user.id }, i)} // Todo: This needs to call graphql endpoint otherwise change isn't persisted
             onClick={() => selectShow(show, i)}
           />
         </Grid>
@@ -258,7 +250,6 @@ const SideMenuToolbar = () => {
 
   useEffect(async () => {
     fetchShows();
-    storeUserId();
   }, []);
 
   useEffect(() => {
@@ -282,10 +273,14 @@ const SideMenuToolbar = () => {
               <MenuIcon />
             </IconButton>
           )}
+
           <Typography variant="h6" noWrap>
             Universal Ratings
           </Typography>
+
           <TitleSearchBar className={classes.searchBar} onSubmit={setSelectedShow} />
+
+          <UserMenu className={classes.userMenu} />
         </Toolbar>
       </AppBar>
 
@@ -296,7 +291,7 @@ const SideMenuToolbar = () => {
         {selectedShow && (
           <ShowDetailsModal
             show={selectedShow}
-            userId={userId}
+            user={user}
             userRating={findUserReview(selectedShow.reviews?.items)?.rating}
             onRatingChange={updateRating}
             onShowAdded={addShow}

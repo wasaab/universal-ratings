@@ -117,7 +117,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const ShowDetailsModal = ({ show, userId, userRating, onRatingChange, onShowAdded, onClose }) => {
+const ShowDetailsModal = ({ show, user, userRating, onRatingChange, onShowAdded, onClose }) => {
   const classes = useStyles();
   const [currUserRating, setCurrUserRating] = useState(userRating);
   const [isTooltipOpen, setIsTooltipOpen] = useState(false);
@@ -132,7 +132,7 @@ const ShowDetailsModal = ({ show, userId, userRating, onRatingChange, onShowAdde
   const createShowReview = async (updatedUserRating = currUserRating) => {
     const review = {
       showId: show.id,
-      userId,
+      userId: user.id,
       rating: updatedUserRating
     };
     const operation = userRating ? updateReview : createReview;
@@ -206,10 +206,10 @@ const ShowDetailsModal = ({ show, userId, userRating, onRatingChange, onShowAdde
               <Grid item xs style={{ paddingRight: 0 }}>
                 {show.rating ? (
                   <AvatarGroup max={4} className={classes.avatarGroup}>
-                    {show.reviews.items.sort((a, b) => b.rating - a.rating).map(({ userId, rating }, i) => (
+                    {show.reviews.items.sort((a, b) => b.rating - a.rating).map(({ user: { name }, rating }, i) => (
                       <Badge key={i} color="secondary" badgeContent={rating} className={classes.badge}>
                         <Avatar className={classes.avatar} style={{ backgroundColor: avatarColors[i] }}>
-                          {userId[0].toUpperCase()}
+                          {name[0].toUpperCase()}
                         </Avatar>
                       </Badge>
                     ))}
