@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import API, { graphqlOperation } from '@aws-amplify/api';
+import { createReview, updateReview } from '../src/graphql/mutations.js';
 import { showsByDate } from '../src/graphql/custom-queries';
 import { makeStyles } from '@material-ui/core/styles';
 import { Grid } from '@material-ui/core';
@@ -15,17 +16,17 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex'
   },
-  toolbar: {
+  content: {
+    flexGrow: 1,
+    padding: theme.spacing(3)
+  },
+  toolbarSpacer: {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'flex-end',
     padding: theme.spacing(0, 1),
     // necessary for content to be below app bar
     ...theme.mixins.toolbar
-  },
-  content: {
-    flexGrow: 1,
-    padding: theme.spacing(3)
   }
 }));
 
@@ -35,7 +36,7 @@ function determineAvgRating(reviews) {
 
 const MainView = ({ user }) => {
   const classes = useStyles();
-  const [open, setOpen] = useState(false);
+  const [drawerOpen, setDrawerOpen] = useState(false);
   const [selectedShow, setSelectedShow] = useState();
   const [selectedShowIdx, setSelectedShowIdx] = useState();
   const [shows, setShows] = useState([]);
@@ -77,18 +78,24 @@ const MainView = ({ user }) => {
     }
   };
 
-  const updateRating = (review, showIdx = selectedShowIdx) => {
-    if (isNaN(showIdx)) {
-      // Todo: This is here for when user got into modal via search and rated an existing show. implement real logic.
-      showIdx = shows.findIndex(({ id }) => id === selectedShow.id);
+  const createShowReview = async (show, rating, isInitialRating) => {
+    const review = {
+      showId: show.id,
+      userId: user.id,
+      rating
+    };
+    const operation = isInitialRating ? createReview : updateReview;
 
-      if (showIdx === -1) { return; }
-
-      setSelectedShowIdx(showIdx);
+    try {
+      await API.graphql(graphqlOperation(operation, { input: review }));
+    } catch (err) {
+      console.error('Failed to rate show: ', err);
     }
+  };
 
-    const updatedShows = [...shows];
-    const show = updatedShows[showIdx];
+  const updateReviewsAndAvgRating = (show, review) => {
+    if (!show.reviews) { return; }
+
     const reviews = show.reviews.items;
 
     updateReviews(reviews, review);
@@ -96,11 +103,34 @@ const MainView = ({ user }) => {
     const avgRating = determineAvgRating(reviews);
 
     show.rating = avgRating;
+  };
+
+  // Todo: Refactor. logic currently covers all cases, but readability could be improved.
+  const handleRatingChange = async (show, updatedUserRating, isUnrated, showIdx = selectedShowIdx) => {
+    await createShowReview(show, updatedUserRating, isUnrated);
+
+    const review = { user, rating: updatedUserRating }
+
+    if (showIdx == null) {
+      showIdx = shows.findIndex(({ id }) => id === selectedShow.id);
+
+      if (showIdx === -1) {
+        updateReviewsAndAvgRating(show, review)
+        return;
+      }
+
+      setSelectedShowIdx(showIdx);
+    }
+
+    const updatedShows = [...shows];
+    const updatedShow = updatedShows[showIdx];
+
+    updateReviewsAndAvgRating(updatedShow, review);
     setShows(updatedShows);
 
     if (!selectedShow) { return; }
 
-    setSelectedShow(show);
+    setSelectedShow(updatedShow);
   };
 
   const addShow = (show) => {
@@ -135,21 +165,20 @@ const MainView = ({ user }) => {
     <div className={classes.root}>
       <Toolbar
         drawerWidth={drawerWidth}
-        drawerOpen={open}
-        onDrawerOpen={() => setOpen(true)}
+        drawerOpen={drawerOpen}
+        onDrawerOpen={() => setDrawerOpen(true)}
         onSearchSubmit={setSelectedShow}
       />
 
-      <Drawer width={drawerWidth} open={open} onClose={() => setOpen(false)} />
+      <Drawer width={drawerWidth} open={drawerOpen} onClose={() => setDrawerOpen(false)} />
 
       <main className={classes.content}>
-        <span className={classes.toolbar} />
+        <span className={classes.toolbarSpacer} />
         {selectedShow && (
           <ShowDetailsModal
             show={selectedShow}
-            user={user}
             userRating={findUserReview(selectedShow.reviews?.items)?.rating}
-            onRatingChange={updateRating}
+            onRatingChange={handleRatingChange}
             onShowAdded={addShow}
             onClose={unselectShow}
           />
@@ -161,7 +190,7 @@ const MainView = ({ user }) => {
               <ShowCard
                 show={show}
                 userRating={findUserReview(show.reviews?.items)?.rating}
-                onRatingChange={(review) => updateRating({ ...review, userId: user.id }, i)} // Todo: This needs to call graphql endpoint otherwise change isn't persisted
+                onRatingChange={(rating) => handleRatingChange(show, rating, false, i)}
                 onClick={() => selectShow(show, i)}
               />
             </Grid>
