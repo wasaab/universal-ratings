@@ -43,6 +43,34 @@ export const showsByDate = /* GraphQL */ `
   }
 `;
 
+export const getShow = /* GraphQL */ `
+  query GetShow($id: ID!) {
+    getShow(id: $id) {
+      id
+      title
+      type
+      rating
+      img
+      year
+      description
+      imdbRating
+      rtRating
+      reviews {
+        items {
+          showId
+          rating
+          user {
+            name
+          }
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+
 export const createShow = /* GraphQL */ `
   mutation CreateShow(
     $input: CreateShowInput!

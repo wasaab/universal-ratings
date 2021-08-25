@@ -21,7 +21,7 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import algoliasearch from 'algoliasearch';
 
 const client = algoliasearch('QVUO52LVSK', 'ae8c0c082adf1cd9dace13ea68322713');
-const algolia = client.initIndex('shows');
+const algolia = client.initIndex('show');
 
 const useStyles = makeStyles((theme) => ({
     popper: {
@@ -118,7 +118,7 @@ async function fetchRatedAndUnratedShows(title) {
         axios.get(`/api/search?title=${title}`)
     ]);
     const uniqueUnratedShows = unratedShowsResp.data.filter(({ id }) => {
-        return -1 === ratedShowsResp.hits.findIndex((ratedShow) => ratedShow.id === id);
+        return -1 === ratedShowsResp.hits.findIndex(({ objectID }) => objectID === id);
     });
 
     return ratedShowsResp.hits.concat(uniqueUnratedShows);
@@ -194,7 +194,7 @@ const TitleSearchBar = ({ className, onSubmit }) => {
     );
 
     const renderHighlightedTitle = (option, inputValue) => {
-        if (!option.rating) {
+        if (option.id) {
             return buildTitleWithSubstringMatchHighlights(option, inputValue);
         }
 
@@ -252,11 +252,11 @@ const TitleSearchBar = ({ className, onSubmit }) => {
             onClose={() => setIsOpen(false)}
             onInputChange={handleInputChange}
             onChange={handleSelection}
-            getOptionSelected={(option, value) => option.imdbId === value.imdbId}
+            getOptionSelected={(option, value) => option.id === value.id || option.objectID === value.objectID}
             getOptionLabel={({ title }) => title}
             options={options}
             filterOptions={(options) => options}
-            groupBy={({ rating }) => !rating ? 'Unrated' : 'Rated'}
+            groupBy={({ id }) => id ? 'Unrated' : 'Rated'}
             loading={isLoading}
             renderInput={renderInput}
             renderOption={renderOption}
