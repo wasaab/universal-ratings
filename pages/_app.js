@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import { CssBaseline, ThemeProvider } from '@material-ui/core';
 import { AmplifyAuthContainer, AmplifyAuthenticator } from '@aws-amplify/ui-react'
+import { AuthState } from '@aws-amplify/ui-components';
 import amplify from 'aws-amplify';
 import amplifyConfig from '../src/aws-exports';
-import SideMenuToolbar from '../components/SideMenuToolbar';
+import MainView from '../components/MainView';
 import theme from '../src/theme';
 import '../styles/global.css';
-import { AuthState } from '@aws-amplify/ui-components';
 
 /**
  * Remove the server-side injected CSS, as it will be injected client-side.
@@ -39,7 +39,7 @@ const App = () => {
       <AmplifyAuthenticator handleAuthStateChange={storeUser}>
         <ThemeProvider theme={theme}>
           <CssBaseline />
-          {user && <SideMenuToolbar user={user} />}
+          {user && <MainView user={user} />}
         </ThemeProvider>
       </AmplifyAuthenticator>
     </AmplifyAuthContainer>

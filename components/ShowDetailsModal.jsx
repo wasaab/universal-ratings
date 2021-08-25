@@ -15,7 +15,7 @@ import { AvatarGroup } from '@material-ui/lab';
 import * as matColors from '@material-ui/core/colors';
 import Image from 'next/image';
 import API, { graphqlOperation } from '@aws-amplify/api';
-import { createShow, createReview, updateReview } from '../src/graphql/mutations.js';
+import { createShow } from '../src/graphql/custom-queries.js';
 import StarButtons from './StarButtons';
 import LabelledIcon from './LabelledIcon';
 import HuluIcon from '../resources/hulu.svg';
@@ -117,7 +117,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const ShowDetailsModal = ({ show, user, userRating, onRatingChange, onShowAdded, onClose }) => {
+const ShowDetailsModal = ({ show, userRating, onRatingChange, onShowAdded, onClose }) => {
   const classes = useStyles();
   const [currUserRating, setCurrUserRating] = useState(userRating);
   const [isTooltipOpen, setIsTooltipOpen] = useState(false);
@@ -129,26 +129,12 @@ const ShowDetailsModal = ({ show, user, userRating, onRatingChange, onShowAdded,
     setIsTooltipOpen(!isTooltipOpen);
   };
 
-  const createShowReview = async (updatedUserRating = currUserRating) => {
-    const review = {
-      showId: show.id,
-      userId: user.id,
-      rating: updatedUserRating
-    };
-    const operation = userRating ? updateReview : createReview;
-
-    try {
-      await API.graphql(graphqlOperation(operation, { input: review }));
-    } catch (err) {
-      console.error('Failed to rate show: ', err);
-    }
-  };
-
   const createRatedShow = async () => {
     const ratedShow = { ...show, rating: currUserRating };
 
+    await onRatingChange(ratedShow, currUserRating, true);
+
     try {
-      await createShowReview();
       const createShowResp = await API.graphql(graphqlOperation(createShow, { input: ratedShow }));
 
       onShowAdded(createShowResp.data.createShow);
@@ -161,13 +147,7 @@ const ShowDetailsModal = ({ show, user, userRating, onRatingChange, onShowAdded,
     setCurrUserRating(updatedUserRating);
 
     if (show.rating) {
-      createShowReview(updatedUserRating);
-      onRatingChange({
-        rating: updatedUserRating,
-        user: {
-          name: user.name
-        }
-      });
+      onRatingChange(show, updatedUserRating, !userRating);
     }
   };
 

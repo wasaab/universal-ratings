@@ -59,7 +59,7 @@ const ShowCard = ({ show, userRating, onRatingChange, onClick }) => {
           avgRating={show.rating}
           userRating={userRating}
           maxRating={5}
-          onClick={(rating) => onRatingChange({ showId: show.id, rating })}
+          onClick={onRatingChange}
         />
       </CardActions>
     </Card>
