@@ -118,7 +118,7 @@ async function fetchRatedAndUnratedShows(title) {
         axios.get(`/api/search?title=${title}`)
     ]);
     const uniqueUnratedShows = unratedShowsResp.data.filter(({ id }) => {
-        return -1 === ratedShowsResp.hits.findIndex((ratedShow) => ratedShow.id === id);
+        return -1 === ratedShowsResp.hits.findIndex(({ objectID }) => objectID === id);
     });
 
     return ratedShowsResp.hits.concat(uniqueUnratedShows);
@@ -252,7 +252,7 @@ const TitleSearchBar = ({ className, onSubmit }) => {
             onClose={() => setIsOpen(false)}
             onInputChange={handleInputChange}
             onChange={handleSelection}
-            getOptionSelected={(option, value) => option.imdbId === value.imdbId}
+            getOptionSelected={(option, value) => option.id === value.id || option.objectID === value.objectID}
             getOptionLabel={({ title }) => title}
             options={options}
             filterOptions={(options) => options}
