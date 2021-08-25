@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import API, { graphqlOperation } from '@aws-amplify/api';
 import { createReview, updateReview } from '../src/graphql/mutations.js';
-import { showsByDate } from '../src/graphql/custom-queries';
+import { getShow, showsByDate } from '../src/graphql/custom-queries';
 import { makeStyles } from '@material-ui/core/styles';
 import { Grid } from '@material-ui/core';
 import ShowCard from './ShowCard';
@@ -133,6 +133,20 @@ const MainView = ({ user }) => {
     setSelectedShow(updatedShow);
   };
 
+  const handleSearch = async (show) => {
+    if (show.id) { // unrated
+      setSelectedShow(show);
+    } else { // rated
+      try {
+        const { data } = await API.graphql(graphqlOperation(getShow, { id: show.objectID }));
+
+        setSelectedShow(data.getShow);
+      } catch (err) {
+        console.error(`Failed to get show "${show.objectID}": `, err);
+      }
+    }
+  };
+
   const addShow = (show) => {
     setSelectedShowIdx(shows.length);
     setSelectedShow(show);
@@ -167,7 +181,7 @@ const MainView = ({ user }) => {
         drawerWidth={drawerWidth}
         drawerOpen={drawerOpen}
         onDrawerOpen={() => setDrawerOpen(true)}
-        onSearchSubmit={setSelectedShow}
+        onSearchSubmit={handleSearch}
       />
 
       <Drawer width={drawerWidth} open={drawerOpen} onClose={() => setDrawerOpen(false)} />

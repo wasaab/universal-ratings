@@ -21,7 +21,7 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import algoliasearch from 'algoliasearch';
 
 const client = algoliasearch('QVUO52LVSK', 'ae8c0c082adf1cd9dace13ea68322713');
-const algolia = client.initIndex('shows');
+const algolia = client.initIndex('show');
 
 const useStyles = makeStyles((theme) => ({
     popper: {
@@ -194,7 +194,7 @@ const TitleSearchBar = ({ className, onSubmit }) => {
     );
 
     const renderHighlightedTitle = (option, inputValue) => {
-        if (!option.rating) {
+        if (option.id) {
             return buildTitleWithSubstringMatchHighlights(option, inputValue);
         }
 
@@ -256,7 +256,7 @@ const TitleSearchBar = ({ className, onSubmit }) => {
             getOptionLabel={({ title }) => title}
             options={options}
             filterOptions={(options) => options}
-            groupBy={({ rating }) => !rating ? 'Unrated' : 'Rated'}
+            groupBy={({ id }) => id ? 'Unrated' : 'Rated'}
             loading={isLoading}
             renderInput={renderInput}
             renderOption={renderOption}
