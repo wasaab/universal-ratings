@@ -4,6 +4,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.0] - 2021-08-24
+### Added
+- algolia index updated on db changes via transformer
+- rating changes handled
+
+### Changed
+- alogolia only stores fields needed for autosuggest results
+- get show by id via graphql/db for extended details
+- SideMenuToolbar --> MainView
+- Drawer and Toolbar components extracted from MainView
+
 ## [1.1.0] - 2021-08-22
 ### Added
 - user added to db on cognito confirmation hook
