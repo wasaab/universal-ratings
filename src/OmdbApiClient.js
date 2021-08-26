@@ -6,14 +6,22 @@ class ShowType {
 }
 
 class Show {
-    constructor({ imdbID, Title, Type, Poster, Year, Plot }) {
+    constructor({ imdbID, Title, Type, Poster, Year, Plot, imdbRating, Ratings }) {
         this.id = imdbID;
         this.title = Title;
         this.type = Type === 'series' ? 'tv' : Type,
         this.img = Poster === 'N/A' ? null : Poster;
         this.year = Number(Year.replace(/–.*/, ''));
         this.description = Plot === 'N/A' ? null : Plot;
+        this.imdbRating = imdbRating;
+        this.rtRating = Ratings?.find(({ Source }) => Source === 'Rotten Tomatoes')
+            ?.Value?.slice(0, -1);
     }
+}
+
+// Todo: Remove after OMDB closes their issue regarding duplicates: https://github.com/Omertron/api-omdb/issues/16
+function isUnique(shows, currShow, currShowIdx) {
+    return shows.findIndex(({ id }) => id === currShow.id) === currShowIdx;
 }
 
 class OmdbApiClient {
@@ -32,9 +40,8 @@ class OmdbApiClient {
 
         if (!shows) { return []; }
 
-        // Todo: Remove findIndex portion after OMDB closes their issue regarding duplicates: https://github.com/Omertron/api-omdb/issues/16
         return shows.map((show) => new Show(show))
-            .filter((show, i, self) => show.type !== 'game' && self.findIndex(({ id }) => id === show.id) === i);
+            .filter((show, i, self) => show.type !== 'game' && isUnique(self, show, i));
     }
 
     /**

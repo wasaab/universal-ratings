@@ -114,6 +114,13 @@ const useStyles = makeStyles((theme) => ({
   showDetailsContainer: {
     justifyContent: 'space-between',
     display: 'flex'
+  },
+  thirdPartyRatingsContainer: {
+    [theme.breakpoints.up(565)]: {
+      '& :nth-child(2)': {
+        justifyContent: 'flex-end'
+      }
+    }
   }
 }));
 
@@ -220,9 +227,16 @@ const ShowDetailsModal = ({ show, userRating, onRatingChange, onShowAdded, onClo
               </DialogContentText>
             )}
 
-            <Grid item container xs={9} spacing={1} direction="row">
-              {show.imdbRating && <LabelledIcon Icon={ImdbIcon} label={show.imdbRating} />}
-              {show.rtRating && <LabelledIcon Icon={RottenTomatoesIcon} label={show.rtRating} />}
+            <Grid
+              item
+              container
+              xs={9}
+              spacing={1}
+              className={classes.thirdPartyRatingsContainer}
+              direction="row"
+            >
+              {show.imdbRating && <LabelledIcon Icon={ImdbIcon} label={`${show.imdbRating}/10`} />}
+              {show.rtRating && <LabelledIcon Icon={RottenTomatoesIcon} label={`${show.rtRating}%`} />}
             </Grid>
 
             <Grid
