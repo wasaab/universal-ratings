@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
+import axios from 'axios';
 import API, { graphqlOperation } from '@aws-amplify/api';
 import { createReview, updateReview } from '../src/graphql/mutations.js';
 import { getShow, showsByDate } from '../src/graphql/custom-queries';
@@ -133,17 +134,31 @@ const MainView = ({ user }) => {
     setSelectedShow(updatedShow);
   };
 
-  const handleSearch = async (show) => {
-    if (show.id) { // unrated
-      setSelectedShow(show);
-    } else { // rated
-      try {
-        const { data } = await API.graphql(graphqlOperation(getShow, { id: show.objectID }));
+  const selectRatedShow = async (show) => {
+    try {
+      const { data } = await API.graphql(graphqlOperation(getShow, { id: show.objectID }));
 
-        setSelectedShow(data.getShow);
-      } catch (err) {
-        console.error(`Failed to get show "${show.objectID}": `, err);
-      }
+      setSelectedShow(data.getShow);
+    } catch (err) {
+      console.error(`Failed to get rated show "${show.objectID}": `, err);
+    }
+  };
+
+  const selectUnratedShow = async (show) => {
+    try {
+      const { data } = await axios.get(`/api/search?id=${show.id}`);
+
+      setSelectedShow(data);
+    } catch (err) {
+      console.error(`Failed to get unrated show "${show.id}": `, err);
+    }
+  };
+
+  const handleSearch = async (show) => {
+    if (show.id) {
+      await selectUnratedShow(show);
+    } else {
+      await selectRatedShow(show);
     }
   };
 

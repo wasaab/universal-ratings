@@ -156,13 +156,16 @@ const ShowDetailsModal = ({ show, userRating, onRatingChange, onShowAdded, onClo
       <DialogContent className={classes.content}>
         <Grid container spacing={2} direction="row">
           <Grid item xs={5}>
-            <Image
-              src={show.img}
-              alt={show.title}
-              width={233.33}
-              height={350}
-              unoptimized
-            />
+            {/* Todo: Placeholder image when none found or change styling to work with no image */}
+            {show.img && (
+              <Image
+                src={show.img}
+                alt={show.title}
+                width={233.33}
+                height={350}
+                unoptimized
+              />
+            )}
           </Grid>
 
           <Grid item xs={7} direction="column" className={classes.showDetailsContainer}>
@@ -211,10 +214,11 @@ const ShowDetailsModal = ({ show, userRating, onRatingChange, onShowAdded, onClo
               </Grid>
             </Grid>
 
-            <DialogContentText className={classes.showDesc}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quis nunc accumsan,
-              rhoncus nisi commodo, facilisis erat. Pellentesque a velit nisl. Nunc rhoncus augue at ex...
-            </DialogContentText>
+            {show.description && (
+              <DialogContentText className={classes.showDesc}>
+                {show.description}
+              </DialogContentText>
+            )}
 
             <Grid item container xs={9} spacing={1} direction="row">
               {show.imdbRating && <LabelledIcon Icon={ImdbIcon} label={show.imdbRating} />}

@@ -6,12 +6,13 @@ class ShowType {
 }
 
 class Show {
-    constructor({ imdbID, Title, Type, Poster, Year }) {
+    constructor({ imdbID, Title, Type, Poster, Year, Plot }) {
         this.id = imdbID;
         this.title = Title;
         this.type = Type === 'series' ? 'tv' : Type,
         this.img = Poster === 'N/A' ? null : Poster;
         this.year = Number(Year.replace(/–.*/, ''));
+        this.description = Plot === 'N/A' ? null : Plot;
     }
 }
 
