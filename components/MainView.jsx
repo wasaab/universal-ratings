@@ -10,6 +10,7 @@ import ShowDetailsModal from './ShowDetailsModal';
 import useOnScreen from './useOnScreen';
 import Toolbar from './Toolbar';
 import Drawer from './Drawer';
+import View from '../src/model/View';
 
 const drawerWidth = 240;
 
@@ -42,20 +43,20 @@ const MainView = ({ user }) => {
   const [selectedShowIdx, setSelectedShowIdx] = useState();
   const [shows, setShows] = useState([]);
   const [nextToken, setNextToken] = useState();
-  const [view, setView] = useState('home');
+  const [view, setView] = useState(View.HOME);
   const endOfPageRef = useRef();
   const isEndOfPageVisisble = useOnScreen(endOfPageRef);
 
-  const fetchShows = async (type) => {
+  const fetchShows = async (targetView = view) => {
     try {
       const queryParams = {
+        ...targetView.query,
         limit: 100,
         sortDirection: 'DESC',
-        [type ? 'type' : 'source']: type ?? 'UR',
         nextToken
       };
 
-      const queryName = type ? 'showsByType' : 'showsByDate';
+      const queryName = targetView.query.type ? 'showsByType' : 'showsByDate';
       const { data } = await API.graphql(graphqlOperation(graphqlQuery[queryName], queryParams));
       const sortedShows = data[queryName].items;
 
@@ -64,11 +65,13 @@ const MainView = ({ user }) => {
         show.rating = determineAvgRating(show.reviews.items);
       });
       console.log('sortedShows: ', sortedShows);
-      if (type === view || !type && view === 'home') {
+
+      if (targetView === view) {
         setShows([...shows, ...sortedShows]);
       } else {
         setShows(sortedShows);
       }
+
       setNextToken(data[queryName].nextToken);
     } catch (err) {
       console.error('Failed to list shows: ', err);
@@ -76,14 +79,7 @@ const MainView = ({ user }) => {
   };
 
   const handleDrawerSelection = (selectedView) => {
-    if (selectedView === 'Home') {
-      fetchShows();
-    } else if (selectedView === 'Movies') {
-      fetchShows('movie');
-    } else {
-      fetchShows('tv');
-    }
-
+    fetchShows(selectedView);
     setView(selectedView);
   };
 

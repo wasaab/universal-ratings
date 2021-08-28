@@ -21,6 +21,7 @@ import {
   Visibility as VisibilityIcon,
   Home as HomeIcon
 } from '@material-ui/icons/';
+import View from '../src/model/View';
 
 const useStyles = makeStyles((theme) => ({
   drawer: ({ width }) => ({
@@ -57,20 +58,20 @@ const useStyles = makeStyles((theme) => ({
 const Drawer = ({ open, width, onClose, onSelect }) => {
   const classes = useStyles({ width })
   const drawerStateClass = open ? classes.drawerOpen : classes.drawerClose;
-  const [selected, setSelected] = useState('Home');
+  const [selectedView, setSelectedView] = useState(View.HOME);
 
   const handleSelection = (title) => {
     onSelect(title);
-    setSelected(title);
+    setSelectedView(title);
   };
 
-  const DrawerMenuItem = ({ title, LeftIcon }) => (
-    <ListItem button key={title} onClick={() => handleSelection(title)} disabled={title === selected}>
+  const DrawerMenuItem = ({ view, LeftIcon }) => (
+    <ListItem button key={view.label} onClick={() => handleSelection(view)} disabled={view === selectedView}>
       <ListItemIcon>
         <LeftIcon />
       </ListItemIcon>
 
-      <ListItemText primary={title} />
+      <ListItemText primary={view.label} />
     </ListItem>
   );
 
@@ -89,19 +90,19 @@ const Drawer = ({ open, width, onClose, onSelect }) => {
       <Divider />
 
       <List>
-        <DrawerMenuItem title="Home" LeftIcon={HomeIcon} onClick={onSelect} />
-        <DrawerMenuItem title="Movies" LeftIcon={MovieIcon} onClick={onSelect} />
-        <DrawerMenuItem title="TV Shows" LeftIcon={TvIcon} onClick={onSelect} />
-        <DrawerMenuItem title="Recently Released" LeftIcon={NewReleasesIcon} />
-        <DrawerMenuItem title="Recently Rated" LeftIcon={StarIcon} />
+        <DrawerMenuItem view={View.HOME} LeftIcon={HomeIcon} onClick={onSelect} />
+        <DrawerMenuItem view={View.MOVIES} LeftIcon={MovieIcon} onClick={onSelect} />
+        <DrawerMenuItem view={View.TV} LeftIcon={TvIcon} onClick={onSelect} />
+        <DrawerMenuItem view={View.RECENTLY_RELEASED} LeftIcon={NewReleasesIcon} />
+        <DrawerMenuItem view={View.RECENTLY_RATED} LeftIcon={StarIcon} />
       </List>
 
       <Divider />
 
       <List>
-        <DrawerMenuItem title="Favorites" LeftIcon={FavoriteIcon} />
-        <DrawerMenuItem title="Watchlist" LeftIcon={WatchLaterIcon} />
-        <DrawerMenuItem title="Watched" LeftIcon={VisibilityIcon} />
+        <DrawerMenuItem view={View.FAVORITES} LeftIcon={FavoriteIcon} />
+        <DrawerMenuItem view={View.WATCHLIST} LeftIcon={WatchLaterIcon} />
+        <DrawerMenuItem view={View.WATCHED} LeftIcon={VisibilityIcon} />
       </List>
     </MaterialDrawer>
   );
