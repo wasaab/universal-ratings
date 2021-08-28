@@ -3,14 +3,22 @@ import clsx from 'clsx';
 import {
   Avatar,
   Badge,
+  Box,
   Button,
   Dialog,
   DialogContent,
   DialogContentText,
   Grid,
+  IconButton,
   makeStyles,
   Typography
 } from '@material-ui/core';
+import {
+  Favorite as FavoriteIcon,
+  FavoriteBorder as FavoriteOutlineIcon,
+  WatchLater as WatchLaterIcon,
+  WatchLaterOutlined as WatchLaterOutlineIcon,
+} from '@material-ui/icons/';
 import { AvatarGroup } from '@material-ui/lab';
 import * as matColors from '@material-ui/core/colors';
 import Image from 'next/image';
@@ -21,7 +29,8 @@ import LabelledIcon from './LabelledIcon';
 import HuluIcon from '../resources/hulu.svg';
 import NetflixIcon from '../resources/netflix.svg';
 import ImdbIcon from '../resources/imdb.svg';
-import RottenTomatoesIcon from '../resources/rt.svg';
+import RtFreshIcon from '../resources/rt.svg';
+import RtRottenIcon from '../resources/rt-rotten.svg';
 
 // -------------------- User Review Color Mocking --------------------
 const colors = Object.values(matColors)
@@ -75,9 +84,10 @@ const useStyles = makeStyles((theme) => ({
     marginTop: 0
   },
   streamingSitesLabel: {
-    fontSize: '0.9rem'
+    fontSize: '0.9rem',
+    whiteSpace: 'nowrap'
   },
-  streamingSites: {
+  evenlySpaced: {
     display: 'flex',
     justifyContent: 'space-evenly'
   },
@@ -121,6 +131,9 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: 'flex-end'
       }
     }
+  },
+  selected: {
+    fill: '#df00ff'
   }
 }));
 
@@ -166,7 +179,7 @@ const ShowDetailsModal = ({ show, userRating, onRatingChange, onShowAdded, onClo
     <Dialog open={show != null} onClose={onClose} className={classes.root}>
       <DialogContent className={classes.content}>
         <Grid container spacing={2} direction="row">
-          <Grid item xs={5}>
+          <Grid item container xs={5} direction="column" justifyContent="space-between">
             {/* Todo: Placeholder image when none found or change styling to work with no image */}
             {show.img && (
               <Image
@@ -177,6 +190,14 @@ const ShowDetailsModal = ({ show, userRating, onRatingChange, onShowAdded, onClo
                 unoptimized
               />
             )}
+            <Box item xs className={classes.evenlySpaced} pt="10px">
+              <IconButton>
+                {false ? <FavoriteIcon /> : <FavoriteOutlineIcon />}
+              </IconButton>
+              <IconButton>
+                {false ? <WatchLaterIcon /> : <WatchLaterOutlineIcon />}
+              </IconButton>
+            </Box>
           </Grid>
 
           <Grid item xs={7} direction="column" className={classes.showDetailsContainer}>
@@ -240,7 +261,7 @@ const ShowDetailsModal = ({ show, userRating, onRatingChange, onShowAdded, onClo
               direction="row"
             >
               {show.imdbRating && <LabelledIcon Icon={ImdbIcon} label={`${show.imdbRating}/10`} />}
-              {show.rtRating && <LabelledIcon Icon={RottenTomatoesIcon} label={`${show.rtRating}%`} />}
+              {show.rtRating && <LabelledIcon Icon={show.rtRating >= 60 ? RtFreshIcon : RtRottenIcon} label={`${show.rtRating}%`} />}
             </Grid>
 
             <Grid
@@ -256,7 +277,7 @@ const ShowDetailsModal = ({ show, userRating, onRatingChange, onShowAdded, onClo
                   Available on
                 </Typography>
               </Grid>
-              <Grid item xs className={classes.streamingSites}>
+              <Grid item xs className={classes.evenlySpaced}>
                 <HuluIcon height="17" />
                 <NetflixIcon height="17" />
               </Grid>
