@@ -131,9 +131,6 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: 'flex-end'
       }
     }
-  },
-  selected: {
-    fill: '#df00ff'
   }
 }));
 
