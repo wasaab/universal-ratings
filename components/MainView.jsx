@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import API, { graphqlOperation } from '@aws-amplify/api';
 import { createReview, updateReview } from '../src/graphql/mutations.js';
-import { getShow, showsByDate } from '../src/graphql/custom-queries';
+import * as graphqlQuery from '../src/graphql/custom-queries';
 import { makeStyles } from '@material-ui/core/styles';
 import { Grid } from '@material-ui/core';
 import ShowCard from './ShowCard';
@@ -10,6 +10,7 @@ import ShowDetailsModal from './ShowDetailsModal';
 import useOnScreen from './useOnScreen';
 import Toolbar from './Toolbar';
 import Drawer from './Drawer';
+import View from '../src/model/View';
 
 const drawerWidth = 240;
 
@@ -42,31 +43,44 @@ const MainView = ({ user }) => {
   const [selectedShowIdx, setSelectedShowIdx] = useState();
   const [shows, setShows] = useState([]);
   const [nextToken, setNextToken] = useState();
+  const [view, setView] = useState(View.HOME);
   const endOfPageRef = useRef();
   const isEndOfPageVisisble = useOnScreen(endOfPageRef);
 
-  const fetchShows = async () => {
+  const fetchShows = async (targetView = view) => {
     try {
       const queryParams = {
+        ...targetView.query,
         limit: 100,
         sortDirection: 'DESC',
-        source: 'UR',
         nextToken
       };
 
-      const { data } = await API.graphql(graphqlOperation(showsByDate, queryParams));
-      const sortedShows = data.showsByDate.items;
+      const queryName = targetView.query.type ? 'showsByType' : 'showsByDate';
+      const { data } = await API.graphql(graphqlOperation(graphqlQuery[queryName], queryParams));
+      const sortedShows = data[queryName].items;
 
       // Todo: add logic for updating show's avg rating in db when reviews are updated, rather than calculating client-side.
       sortedShows.forEach((show) => {
         show.rating = determineAvgRating(show.reviews.items);
       });
       console.log('sortedShows: ', sortedShows);
-      setShows([...shows, ...sortedShows]);
-      setNextToken(data.showsByDate.nextToken);
+
+      if (targetView === view) {
+        setShows([...shows, ...sortedShows]);
+      } else {
+        setShows(sortedShows);
+      }
+
+      setNextToken(data[queryName].nextToken);
     } catch (err) {
       console.error('Failed to list shows: ', err);
     }
+  };
+
+  const handleDrawerSelection = (selectedView) => {
+    fetchShows(selectedView);
+    setView(selectedView);
   };
 
   const updateReviews = (reviews, review) => {
@@ -136,7 +150,7 @@ const MainView = ({ user }) => {
 
   const selectRatedShow = async (show) => {
     try {
-      const { data } = await API.graphql(graphqlOperation(getShow, { id: show.objectID }));
+      const { data } = await API.graphql(graphqlOperation(graphqlQuery.getShow, { id: show.objectID }));
 
       setSelectedShow(data.getShow);
     } catch (err) {
@@ -199,7 +213,12 @@ const MainView = ({ user }) => {
         onSearchSubmit={handleSearch}
       />
 
-      <Drawer width={drawerWidth} open={drawerOpen} onClose={() => setDrawerOpen(false)} />
+      <Drawer
+        width={drawerWidth}
+        open={drawerOpen}
+        onClose={() => setDrawerOpen(false)}
+        onSelect={handleDrawerSelection}
+      />
 
       <main className={classes.content}>
         <span className={classes.toolbarSpacer} />
