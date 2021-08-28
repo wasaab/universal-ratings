@@ -39,14 +39,16 @@ const ShowCard = ({ show, userRating, onRatingChange, onClick }) => {
     <Card className={classes.root}>
       <CardActionArea onClick={onClick}>
         <div className={classes.media}>
-          <Image
-            src={show.img}
-            alt={show.title}
-            layout="fill"
-            objectFit="cover"
-            objectPosition="top"
-            unoptimized
-          />
+          {show.img && (
+            <Image
+              src={show.img}
+              alt={show.title}
+              layout="fill"
+              objectFit="cover"
+              objectPosition="top"
+              unoptimized
+            />
+          )}
         </div>
         <CardContent className={classes.content}>
           <Typography variant="h6" component="h6">

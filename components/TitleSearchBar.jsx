@@ -253,7 +253,7 @@ const TitleSearchBar = ({ className, onSubmit }) => {
             onInputChange={handleInputChange}
             onChange={handleSelection}
             getOptionSelected={(option, value) => option.id === value.id || option.objectID === value.objectID}
-            getOptionLabel={({ title }) => title}
+            getOptionLabel={() => ''} // clears & focuses input on selection
             options={options}
             filterOptions={(options) => options}
             groupBy={({ id }) => id ? 'Unrated' : 'Rated'}

@@ -50,19 +50,19 @@ const MainView = ({ user }) => {
       const queryParams = {
         limit: 100,
         sortDirection: 'DESC',
-        type: 'tv',
+        source: 'UR',
         nextToken
       };
 
       const { data } = await API.graphql(graphqlOperation(showsByDate, queryParams));
-      const filteredShows = data.showsByDate.items.filter(({ img }) => img); // Todo: Temp until shows w/o images are handled or img is made a required field
+      const sortedShows = data.showsByDate.items;
 
       // Todo: add logic for updating show's avg rating in db when reviews are updated, rather than calculating client-side.
-      filteredShows.forEach((show) => {
+      sortedShows.forEach((show) => {
         show.rating = determineAvgRating(show.reviews.items);
       });
-      console.log('filteredShows: ', filteredShows);
-      setShows([...shows, ...filteredShows]);
+      console.log('sortedShows: ', sortedShows);
+      setShows([...shows, ...sortedShows]);
       setNextToken(data.showsByDate.nextToken);
     } catch (err) {
       console.error('Failed to list shows: ', err);
@@ -165,7 +165,7 @@ const MainView = ({ user }) => {
   const addShow = (show) => {
     setSelectedShowIdx(shows.length);
     setSelectedShow(show);
-    setShows([...shows, show]);
+    setShows([show, ...shows]);
   };
 
   const unselectShow = () => {

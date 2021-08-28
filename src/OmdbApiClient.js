@@ -1,21 +1,30 @@
 import axios from 'axios';
 
-class ShowType {
+class OmdbShowType {
     static TV = 'series';
     static MOVIE = 'movie';
+}
+
+function parseOptional(optionalVal) {
+    return optionalVal === 'N/A' ? null : optionalVal;
+}
+
+function findRtRating(ratings) {
+    const rtRating = ratings?.find(({ Source }) => Source === 'Rotten Tomatoes');
+
+    return rtRating ? Number(rtRating.Value.slice(0, -1)) : null;
 }
 
 class Show {
     constructor({ imdbID, Title, Type, Poster, Year, Plot, imdbRating, Ratings }) {
         this.id = imdbID;
         this.title = Title;
-        this.type = Type === 'series' ? 'tv' : Type,
-        this.img = Poster === 'N/A' ? null : Poster;
+        this.type = Type.replace(OmdbShowType.TV, 'tv'),
+        this.img = parseOptional(Poster);
         this.year = Number(Year.replace(/–.*/, ''));
-        this.description = Plot === 'N/A' ? null : Plot;
-        this.imdbRating = imdbRating;
-        this.rtRating = Ratings?.find(({ Source }) => Source === 'Rotten Tomatoes')
-            ?.Value?.slice(0, -1);
+        this.description = parseOptional(Plot);
+        this.imdbRating = imdbRating === 'N/A' ? null : Number(imdbRating)
+        this.rtRating = findRtRating(Ratings);
     }
 }
 
@@ -48,7 +57,7 @@ class OmdbApiClient {
      * Queries omdb for all matches of provided title.
      *
      * @param {string} title the title to find matches for
-     * @param {ShowType} type the show type to find matches for
+     * @param {OmdbShowType} type the show type to find matches for
      * @returns {Promise<Show[]>} matching shows
      */
     async queryAllByTitle(title, type = '') {
