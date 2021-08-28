@@ -19,9 +19,8 @@ enum ShowType {
 
 type Show @model
   @algolia(fields: { include: ["title", "type", "year"] })
-  @key(name: "showsByTitle", fields: ["title", "year"], queryField: "showsByTitle")
-  @key(name: "showsByType", fields: ["type", "year"], queryField: "showsByType")
-  @key(name: "showsByDate", fields: ["type", "createdAt"], queryField: "showsByDate") {
+  @key(name: "showsByDate", fields: ["source", "createdAt"], queryField: "showsByDate")
+  @key(name: "showsByType", fields: ["type", "createdAt"], queryField: "showsByType") {
   id: ID!
   title: String!
   type: ShowType!
@@ -33,4 +32,5 @@ type Show @model
   rtRating: Int
   reviews: [Review] @connection(fields: ["id"])
   createdAt: AWSDateTime
+  source: String!
 }

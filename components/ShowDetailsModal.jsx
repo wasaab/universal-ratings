@@ -15,7 +15,7 @@ import { AvatarGroup } from '@material-ui/lab';
 import * as matColors from '@material-ui/core/colors';
 import Image from 'next/image';
 import API, { graphqlOperation } from '@aws-amplify/api';
-import { createShow } from '../src/graphql/custom-queries.js';
+import { createShow } from '../src/graphql/custom-mutations';
 import StarButtons from './StarButtons';
 import LabelledIcon from './LabelledIcon';
 import HuluIcon from '../resources/hulu.svg';
@@ -137,7 +137,11 @@ const ShowDetailsModal = ({ show, userRating, onRatingChange, onShowAdded, onClo
   };
 
   const createRatedShow = async () => {
-    const ratedShow = { ...show, rating: currUserRating };
+    const ratedShow = {
+      ...show,
+      rating: currUserRating,
+      source: 'UR'
+    };
 
     await onRatingChange(ratedShow, currUserRating, true);
 

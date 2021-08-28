@@ -102,6 +102,7 @@ export const getShow = /* GraphQL */ `
         nextToken
       }
       createdAt
+      source
       updatedAt
     }
   }
@@ -127,6 +128,7 @@ export const listShows = /* GraphQL */ `
           nextToken
         }
         createdAt
+        source
         updatedAt
       }
       nextToken
@@ -167,18 +169,18 @@ export const byShow = /* GraphQL */ `
     }
   }
 `;
-export const showsByTitle = /* GraphQL */ `
-  query ShowsByTitle(
-    $title: String
-    $year: ModelIntKeyConditionInput
+export const showsByDate = /* GraphQL */ `
+  query ShowsByDate(
+    $source: String
+    $createdAt: ModelStringKeyConditionInput
     $sortDirection: ModelSortDirection
     $filter: ModelShowFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    showsByTitle(
-      title: $title
-      year: $year
+    showsByDate(
+      source: $source
+      createdAt: $createdAt
       sortDirection: $sortDirection
       filter: $filter
       limit: $limit
@@ -198,6 +200,7 @@ export const showsByTitle = /* GraphQL */ `
           nextToken
         }
         createdAt
+        source
         updatedAt
       }
       nextToken
@@ -207,50 +210,13 @@ export const showsByTitle = /* GraphQL */ `
 export const showsByType = /* GraphQL */ `
   query ShowsByType(
     $type: ShowType
-    $year: ModelIntKeyConditionInput
-    $sortDirection: ModelSortDirection
-    $filter: ModelShowFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    showsByType(
-      type: $type
-      year: $year
-      sortDirection: $sortDirection
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        id
-        title
-        type
-        rating
-        img
-        year
-        description
-        imdbRating
-        rtRating
-        reviews {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-  }
-`;
-export const showsByDate = /* GraphQL */ `
-  query ShowsByDate(
-    $type: ShowType
     $createdAt: ModelStringKeyConditionInput
     $sortDirection: ModelSortDirection
     $filter: ModelShowFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    showsByDate(
+    showsByType(
       type: $type
       createdAt: $createdAt
       sortDirection: $sortDirection
@@ -272,6 +238,7 @@ export const showsByDate = /* GraphQL */ `
           nextToken
         }
         createdAt
+        source
         updatedAt
       }
       nextToken

@@ -126,6 +126,7 @@ export const createShow = /* GraphQL */ `
         nextToken
       }
       createdAt
+      source
       updatedAt
     }
   }
@@ -156,6 +157,7 @@ export const updateShow = /* GraphQL */ `
         nextToken
       }
       createdAt
+      source
       updatedAt
     }
   }
@@ -186,6 +188,7 @@ export const deleteShow = /* GraphQL */ `
         nextToken
       }
       createdAt
+      source
       updatedAt
     }
   }
