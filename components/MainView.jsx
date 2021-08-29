@@ -7,7 +7,7 @@ import {
   deleteWatchlistItem,
   updateReview
 } from '../src/graphql/mutations.js';
-import * as graphqlQuery from '../src/graphql/custom-queries';
+import * as gqlQuery from '../src/graphql/custom-queries';
 import { makeStyles } from '@material-ui/core/styles';
 import { Grid } from '@material-ui/core';
 import ShowCard from './ShowCard';
@@ -49,33 +49,46 @@ const MainView = ({ user }) => {
   const [shows, setShows] = useState([]);
   const [nextToken, setNextToken] = useState();
   const [view, setView] = useState(View.HOME);
-  const [watchlist, setWatchlist] = useState(user.watchlist.items);
+  const [watchlist, setWatchlist] = useState(user.watchlist.items.map(({ show }) => show));
   const endOfPageRef = useRef();
   const isEndOfPageVisisble = useOnScreen(endOfPageRef);
 
+  const buildQueryParams = (targetView) => {
+    const queryParams = {
+      ...targetView.query.params,
+      limit: 100,
+      sortDirection: 'DESC',
+      nextToken
+    };
+
+    if (targetView.query.name === View.FAVORITES.query.name) {
+      queryParams.userId = user.id;
+    }
+
+    return queryParams;
+  }
+
   const fetchShows = async (targetView = view) => {
     try {
-      const queryParams = {
-        ...targetView.query,
-        limit: 100,
-        sortDirection: 'DESC',
-        nextToken
-      };
+      const queryName = targetView.query.name;
+      const { data } = await API.graphql(graphqlOperation(gqlQuery[queryName], buildQueryParams(targetView)));
+      let updatedShows = data[queryName].items;
 
-      const queryName = targetView.query.type ? 'showsByType' : 'showsByDate';
-      const { data } = await API.graphql(graphqlOperation(graphqlQuery[queryName], queryParams));
-      const sortedShows = data[queryName].items;
+      if (targetView.query.name === View.FAVORITES.query.name) {
+        updatedShows = updatedShows.map(({ show }) => show);
+      } else {
+        // Todo: add logic for updating show's avg rating in db when reviews are updated, rather than calculating client-side.
+        updatedShows.forEach((show) => {
+          show.rating = determineAvgRating(show.reviews.items);
+        });
+      }
 
-      // Todo: add logic for updating show's avg rating in db when reviews are updated, rather than calculating client-side.
-      sortedShows.forEach((show) => {
-        show.rating = determineAvgRating(show.reviews.items);
-      });
-      console.log('sortedShows: ', sortedShows);
+      console.log('shows: ', updatedShows);
 
       if (targetView === view) {
-        setShows([...shows, ...sortedShows]);
+        setShows([...shows, ...updatedShows]);
       } else {
-        setShows(sortedShows);
+        setShows(updatedShows);
       }
 
       setNextToken(data[queryName].nextToken);
@@ -85,7 +98,12 @@ const MainView = ({ user }) => {
   };
 
   const handleDrawerSelection = (selectedView) => {
-    fetchShows(selectedView);
+    if (selectedView === View.WATCHLIST) {
+      setShows(watchlist);
+    } else {
+      fetchShows(selectedView);
+    }
+
     setView(selectedView);
   };
 
@@ -96,6 +114,17 @@ const MainView = ({ user }) => {
     findUserReview(targetShow.reviews.items).isFavorite = updatedVal;
     setShows(updatedShows);
     setSelectedShow(targetShow);
+  };
+
+  const removeFromWatchlist = () => {
+    const updatedWatchlist = watchlist.filter(({ id }) => id !== selectedShow.id);
+
+    setWatchlist(updatedWatchlist);
+
+    if (view !== View.WATCHLIST) { return; }
+
+    setShows(updatedWatchlist);
+    unselectShow();
   };
 
   const handleWatchlistChange = async (isRemoval) => {
@@ -113,11 +142,11 @@ const MainView = ({ user }) => {
     }
 
     if (isRemoval) {
-      setWatchlist(watchlist.filter(({ showId }) => showId !== selectedShow.id));
+      removeFromWatchlist();
     } else {
-      setWatchlist([...watchlist, { showId: selectedShow.id, show: selectedShow }]);
+      setWatchlist([...watchlist, selectedShow]);
     }
-};
+  };
 
   const updateReviews = (reviews, review) => {
     const oldReview = reviews.find((review) => review.user.name === user.name);
@@ -186,7 +215,7 @@ const MainView = ({ user }) => {
 
   const selectRatedShow = async (show) => {
     try {
-      const { data } = await API.graphql(graphqlOperation(graphqlQuery.getShow, { id: show.objectID }));
+      const { data } = await API.graphql(graphqlOperation(gqlQuery.getShow, { id: show.objectID }));
 
       setSelectedShow(data.getShow);
     } catch (err) {
@@ -261,7 +290,7 @@ const MainView = ({ user }) => {
             show={selectedShow}
             userId={user.id}
             userReview={findUserReview(selectedShow.reviews?.items)}
-            isInWatchlist={watchlist.findIndex(({ showId }) => showId === selectedShow.id) !== -1}
+            isInWatchlist={watchlist.findIndex(({ id }) => id === selectedShow.id) !== -1}
             onRatingChange={handleRatingChange}
             onShowAdded={addShow}
             onFavoriteChange={handleFavoriteChange}

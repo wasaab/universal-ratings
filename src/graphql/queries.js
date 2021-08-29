@@ -12,7 +12,7 @@ export const getWatchlistItem = /* GraphQL */ `
         type
         rating
         img
-        year
+        releaseDate
         description
         imdbRating
         rtRating
@@ -54,7 +54,7 @@ export const listWatchlistItems = /* GraphQL */ `
           type
           rating
           img
-          year
+          releaseDate
           description
           imdbRating
           rtRating
@@ -132,8 +132,25 @@ export const getReview = /* GraphQL */ `
         createdAt
         updatedAt
       }
-      createdAt
+      show {
+        id
+        title
+        type
+        rating
+        img
+        releaseDate
+        description
+        imdbRating
+        rtRating
+        reviews {
+          nextToken
+        }
+        createdAt
+        source
+        updatedAt
+      }
       updatedAt
+      createdAt
     }
   }
 `;
@@ -165,8 +182,22 @@ export const listReviews = /* GraphQL */ `
           createdAt
           updatedAt
         }
-        createdAt
+        show {
+          id
+          title
+          type
+          rating
+          img
+          releaseDate
+          description
+          imdbRating
+          rtRating
+          createdAt
+          source
+          updatedAt
+        }
         updatedAt
+        createdAt
       }
       nextToken
     }
@@ -180,7 +211,7 @@ export const getShow = /* GraphQL */ `
       type
       rating
       img
-      year
+      releaseDate
       description
       imdbRating
       rtRating
@@ -190,8 +221,8 @@ export const getShow = /* GraphQL */ `
           userId
           rating
           isFavorite
-          createdAt
           updatedAt
+          createdAt
         }
         nextToken
       }
@@ -222,7 +253,7 @@ export const listShows = /* GraphQL */ `
         type
         rating
         img
-        year
+        releaseDate
         description
         imdbRating
         rtRating
@@ -237,18 +268,18 @@ export const listShows = /* GraphQL */ `
     }
   }
 `;
-export const byShow = /* GraphQL */ `
-  query ByShow(
-    $showId: ID
-    $rating: ModelIntKeyConditionInput
+export const reviewsByUser = /* GraphQL */ `
+  query ReviewsByUser(
+    $userId: ID
+    $updatedAt: ModelStringKeyConditionInput
     $sortDirection: ModelSortDirection
     $filter: ModelReviewFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    byShow(
-      showId: $showId
-      rating: $rating
+    reviewsByUser(
+      userId: $userId
+      updatedAt: $updatedAt
       sortDirection: $sortDirection
       filter: $filter
       limit: $limit
@@ -265,15 +296,29 @@ export const byShow = /* GraphQL */ `
           createdAt
           updatedAt
         }
-        createdAt
+        show {
+          id
+          title
+          type
+          rating
+          img
+          releaseDate
+          description
+          imdbRating
+          rtRating
+          createdAt
+          source
+          updatedAt
+        }
         updatedAt
+        createdAt
       }
       nextToken
     }
   }
 `;
-export const showsByDate = /* GraphQL */ `
-  query ShowsByDate(
+export const recentlyRated = /* GraphQL */ `
+  query RecentlyRated(
     $source: String
     $createdAt: ModelStringKeyConditionInput
     $sortDirection: ModelSortDirection
@@ -281,7 +326,7 @@ export const showsByDate = /* GraphQL */ `
     $limit: Int
     $nextToken: String
   ) {
-    showsByDate(
+    recentlyRated(
       source: $source
       createdAt: $createdAt
       sortDirection: $sortDirection
@@ -295,7 +340,7 @@ export const showsByDate = /* GraphQL */ `
         type
         rating
         img
-        year
+        releaseDate
         description
         imdbRating
         rtRating
@@ -333,7 +378,7 @@ export const showsByType = /* GraphQL */ `
         type
         rating
         img
-        year
+        releaseDate
         description
         imdbRating
         rtRating

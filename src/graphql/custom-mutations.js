@@ -9,7 +9,7 @@ export const createShow = /* GraphQL */ `
       type
       rating
       img
-      year
+      releaseDate
       description
       imdbRating
       rtRating

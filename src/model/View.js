@@ -1,15 +1,30 @@
-export default class View {
-  static HOME = new View('Home', { source: 'UR' });
-  static TV = new View('TV Shows', { type: 'tv' });
-  static MOVIES = new View('Movies', { type: 'movie' });
-  static RECENTLY_RELEASED = new View('Recently Released');
-  static RECENTLY_RATED = new View('Recently Rated');
-  static FAVORITES = new View('Favorites');
-  static WATCHLIST = new View('Watchlist');
-  static WATCHED = new View('Watched');
+const recentlyRatedArgs = ['recentlyRated', { source: 'UR' }];
+const oneMonthAgo = new Date();
 
-  constructor(label, query) {
+oneMonthAgo.setMonth(oneMonthAgo.getMonth() - 2);
+
+export default class View {
+  static HOME = new View('Home', ...recentlyRatedArgs);
+  static TV = new View('TV Shows', 'showsByType', { type: 'tv' });
+  static MOVIES = new View('Movies', 'showsByType', { type: 'movie' });
+  static FAVORITES = new View('Favorites', 'reviewsByUser', { filter: { isFavorite: { eq: true } } });
+  static WATCHLIST = new View('Watchlist');
+  static WATCHED = new View('Watched', 'reviewsByUser');
+  static RECENTLY_RATED = new View('Recently Rated', ...recentlyRatedArgs);
+  static RECENTLY_RELEASED = new View(
+    'Recently Released',
+    recentlyRatedArgs[0],
+    {
+      ...recentlyRatedArgs[1],
+      filter: { releaseDate: { gt: oneMonthAgo.toISOString() } }
+    }
+  );
+
+  constructor(label, queryName, queryParams = {}) {
     this.label = label;
-    this.query = query;
+    this.query = {
+      name: queryName,
+      params: queryParams
+    };
   }
 }

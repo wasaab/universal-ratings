@@ -1,5 +1,5 @@
-export const showsByDate = /* GraphQL */ `
-  query ShowsByDate(
+export const recentlyRated = /* GraphQL */ `
+  query RecentlyRated(
     $source: String
     $createdAt: ModelStringKeyConditionInput
     $sortDirection: ModelSortDirection
@@ -7,7 +7,7 @@ export const showsByDate = /* GraphQL */ `
     $limit: Int
     $nextToken: String
   ) {
-    showsByDate(
+    recentlyRated(
       source: $source
       createdAt: $createdAt
       sortDirection: $sortDirection
@@ -21,7 +21,7 @@ export const showsByDate = /* GraphQL */ `
         type
         rating
         img
-        year
+        releaseDate
         description
         imdbRating
         rtRating
@@ -68,7 +68,7 @@ export const showsByType = /* GraphQL */ `
         type
         rating
         img
-        year
+        releaseDate
         description
         imdbRating
         rtRating
@@ -100,7 +100,7 @@ export const getShow = /* GraphQL */ `
       type
       rating
       img
-      year
+      releaseDate
       description
       imdbRating
       rtRating
@@ -117,6 +117,88 @@ export const getShow = /* GraphQL */ `
       }
       createdAt
       updatedAt
+    }
+  }
+`;
+
+export const reviewsByUser = /* GraphQL */ `
+  query ReviewsByUser(
+    $userId: ID
+    $updatedAt: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelReviewFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    reviewsByUser(
+      userId: $userId
+      updatedAt: $updatedAt
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        show {
+          id
+          title
+          type
+          rating
+          img
+          releaseDate
+          description
+          imdbRating
+          rtRating
+          reviews {
+            items {
+              showId
+              rating
+              isFavorite
+              user {
+                name
+              }
+            }
+            nextToken
+          }
+        }
+      }
+      nextToken
+    }
+  }
+`;
+
+export const getUser = /* GraphQL */ `
+  query GetUser($id: ID!) {
+    getUser(id: $id) {
+      id
+      name
+      watchlist {
+        items {
+          show {
+            id
+            title
+            type
+            rating
+            img
+            releaseDate
+            description
+            imdbRating
+            rtRating
+            reviews {
+              items {
+                showId
+                rating
+                isFavorite
+                user {
+                  name
+                }
+              }
+              nextToken
+            }
+          }
+        }
+        nextToken
+      }
     }
   }
 `;

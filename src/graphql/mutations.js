@@ -15,7 +15,7 @@ export const createWatchlistItem = /* GraphQL */ `
         type
         rating
         img
-        year
+        releaseDate
         description
         imdbRating
         rtRating
@@ -45,7 +45,7 @@ export const updateWatchlistItem = /* GraphQL */ `
         type
         rating
         img
-        year
+        releaseDate
         description
         imdbRating
         rtRating
@@ -75,7 +75,7 @@ export const deleteWatchlistItem = /* GraphQL */ `
         type
         rating
         img
-        year
+        releaseDate
         description
         imdbRating
         rtRating
@@ -176,8 +176,25 @@ export const createReview = /* GraphQL */ `
         createdAt
         updatedAt
       }
-      createdAt
+      show {
+        id
+        title
+        type
+        rating
+        img
+        releaseDate
+        description
+        imdbRating
+        rtRating
+        reviews {
+          nextToken
+        }
+        createdAt
+        source
+        updatedAt
+      }
       updatedAt
+      createdAt
     }
   }
 `;
@@ -200,8 +217,25 @@ export const updateReview = /* GraphQL */ `
         createdAt
         updatedAt
       }
-      createdAt
+      show {
+        id
+        title
+        type
+        rating
+        img
+        releaseDate
+        description
+        imdbRating
+        rtRating
+        reviews {
+          nextToken
+        }
+        createdAt
+        source
+        updatedAt
+      }
       updatedAt
+      createdAt
     }
   }
 `;
@@ -224,8 +258,25 @@ export const deleteReview = /* GraphQL */ `
         createdAt
         updatedAt
       }
-      createdAt
+      show {
+        id
+        title
+        type
+        rating
+        img
+        releaseDate
+        description
+        imdbRating
+        rtRating
+        reviews {
+          nextToken
+        }
+        createdAt
+        source
+        updatedAt
+      }
       updatedAt
+      createdAt
     }
   }
 `;
@@ -240,7 +291,7 @@ export const createShow = /* GraphQL */ `
       type
       rating
       img
-      year
+      releaseDate
       description
       imdbRating
       rtRating
@@ -250,8 +301,8 @@ export const createShow = /* GraphQL */ `
           userId
           rating
           isFavorite
-          createdAt
           updatedAt
+          createdAt
         }
         nextToken
       }
@@ -272,7 +323,7 @@ export const updateShow = /* GraphQL */ `
       type
       rating
       img
-      year
+      releaseDate
       description
       imdbRating
       rtRating
@@ -282,8 +333,8 @@ export const updateShow = /* GraphQL */ `
           userId
           rating
           isFavorite
-          createdAt
           updatedAt
+          createdAt
         }
         nextToken
       }
@@ -304,7 +355,7 @@ export const deleteShow = /* GraphQL */ `
       type
       rating
       img
-      year
+      releaseDate
       description
       imdbRating
       rtRating
@@ -314,8 +365,8 @@ export const deleteShow = /* GraphQL */ `
           userId
           rating
           isFavorite
-          createdAt
           updatedAt
+          createdAt
         }
         nextToken
       }
