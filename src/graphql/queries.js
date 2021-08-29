@@ -1,11 +1,88 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const getWatchlistItem = /* GraphQL */ `
+  query GetWatchlistItem($userId: ID!, $showId: ID!) {
+    getWatchlistItem(userId: $userId, showId: $showId) {
+      userId
+      showId
+      show {
+        id
+        title
+        type
+        rating
+        img
+        releaseDate
+        description
+        imdbRating
+        rtRating
+        reviews {
+          nextToken
+        }
+        createdAt
+        source
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listWatchlistItems = /* GraphQL */ `
+  query ListWatchlistItems(
+    $userId: ID
+    $showId: ModelIDKeyConditionInput
+    $filter: ModelWatchlistItemFilterInput
+    $limit: Int
+    $nextToken: String
+    $sortDirection: ModelSortDirection
+  ) {
+    listWatchlistItems(
+      userId: $userId
+      showId: $showId
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      sortDirection: $sortDirection
+    ) {
+      items {
+        userId
+        showId
+        show {
+          id
+          title
+          type
+          rating
+          img
+          releaseDate
+          description
+          imdbRating
+          rtRating
+          createdAt
+          source
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
 export const getUser = /* GraphQL */ `
   query GetUser($id: ID!) {
     getUser(id: $id) {
       id
       name
+      watchlist {
+        items {
+          userId
+          showId
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       createdAt
       updatedAt
     }
@@ -13,14 +90,25 @@ export const getUser = /* GraphQL */ `
 `;
 export const listUsers = /* GraphQL */ `
   query ListUsers(
+    $id: ID
     $filter: ModelUserFilterInput
     $limit: Int
     $nextToken: String
+    $sortDirection: ModelSortDirection
   ) {
-    listUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    listUsers(
+      id: $id
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      sortDirection: $sortDirection
+    ) {
       items {
         id
         name
+        watchlist {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -34,14 +122,35 @@ export const getReview = /* GraphQL */ `
       showId
       userId
       rating
+      isFavorite
       user {
         id
         name
+        watchlist {
+          nextToken
+        }
         createdAt
         updatedAt
       }
-      createdAt
+      show {
+        id
+        title
+        type
+        rating
+        img
+        releaseDate
+        description
+        imdbRating
+        rtRating
+        reviews {
+          nextToken
+        }
+        createdAt
+        source
+        updatedAt
+      }
       updatedAt
+      createdAt
     }
   }
 `;
@@ -66,14 +175,29 @@ export const listReviews = /* GraphQL */ `
         showId
         userId
         rating
+        isFavorite
         user {
           id
           name
           createdAt
           updatedAt
         }
-        createdAt
+        show {
+          id
+          title
+          type
+          rating
+          img
+          releaseDate
+          description
+          imdbRating
+          rtRating
+          createdAt
+          source
+          updatedAt
+        }
         updatedAt
+        createdAt
       }
       nextToken
     }
@@ -87,7 +211,7 @@ export const getShow = /* GraphQL */ `
       type
       rating
       img
-      year
+      releaseDate
       description
       imdbRating
       rtRating
@@ -96,30 +220,40 @@ export const getShow = /* GraphQL */ `
           showId
           userId
           rating
-          createdAt
+          isFavorite
           updatedAt
+          createdAt
         }
         nextToken
       }
       createdAt
+      source
       updatedAt
     }
   }
 `;
 export const listShows = /* GraphQL */ `
   query ListShows(
+    $id: ID
     $filter: ModelShowFilterInput
     $limit: Int
     $nextToken: String
+    $sortDirection: ModelSortDirection
   ) {
-    listShows(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    listShows(
+      id: $id
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      sortDirection: $sortDirection
+    ) {
       items {
         id
         title
         type
         rating
         img
-        year
+        releaseDate
         description
         imdbRating
         rtRating
@@ -127,24 +261,25 @@ export const listShows = /* GraphQL */ `
           nextToken
         }
         createdAt
+        source
         updatedAt
       }
       nextToken
     }
   }
 `;
-export const byShow = /* GraphQL */ `
-  query ByShow(
-    $showId: ID
-    $rating: ModelIntKeyConditionInput
+export const reviewsByUser = /* GraphQL */ `
+  query ReviewsByUser(
+    $userId: ID
+    $updatedAt: ModelStringKeyConditionInput
     $sortDirection: ModelSortDirection
     $filter: ModelReviewFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    byShow(
-      showId: $showId
-      rating: $rating
+    reviewsByUser(
+      userId: $userId
+      updatedAt: $updatedAt
       sortDirection: $sortDirection
       filter: $filter
       limit: $limit
@@ -154,31 +289,46 @@ export const byShow = /* GraphQL */ `
         showId
         userId
         rating
+        isFavorite
         user {
           id
           name
           createdAt
           updatedAt
         }
-        createdAt
+        show {
+          id
+          title
+          type
+          rating
+          img
+          releaseDate
+          description
+          imdbRating
+          rtRating
+          createdAt
+          source
+          updatedAt
+        }
         updatedAt
+        createdAt
       }
       nextToken
     }
   }
 `;
-export const showsByTitle = /* GraphQL */ `
-  query ShowsByTitle(
-    $title: String
-    $year: ModelIntKeyConditionInput
+export const recentlyRated = /* GraphQL */ `
+  query RecentlyRated(
+    $source: String
+    $createdAt: ModelStringKeyConditionInput
     $sortDirection: ModelSortDirection
     $filter: ModelShowFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    showsByTitle(
-      title: $title
-      year: $year
+    recentlyRated(
+      source: $source
+      createdAt: $createdAt
       sortDirection: $sortDirection
       filter: $filter
       limit: $limit
@@ -190,7 +340,7 @@ export const showsByTitle = /* GraphQL */ `
         type
         rating
         img
-        year
+        releaseDate
         description
         imdbRating
         rtRating
@@ -198,6 +348,7 @@ export const showsByTitle = /* GraphQL */ `
           nextToken
         }
         createdAt
+        source
         updatedAt
       }
       nextToken
@@ -207,50 +358,13 @@ export const showsByTitle = /* GraphQL */ `
 export const showsByType = /* GraphQL */ `
   query ShowsByType(
     $type: ShowType
-    $year: ModelIntKeyConditionInput
-    $sortDirection: ModelSortDirection
-    $filter: ModelShowFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    showsByType(
-      type: $type
-      year: $year
-      sortDirection: $sortDirection
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        id
-        title
-        type
-        rating
-        img
-        year
-        description
-        imdbRating
-        rtRating
-        reviews {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-  }
-`;
-export const showsByDate = /* GraphQL */ `
-  query ShowsByDate(
-    $type: ShowType
     $createdAt: ModelStringKeyConditionInput
     $sortDirection: ModelSortDirection
     $filter: ModelShowFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    showsByDate(
+    showsByType(
       type: $type
       createdAt: $createdAt
       sortDirection: $sortDirection
@@ -264,7 +378,7 @@ export const showsByDate = /* GraphQL */ `
         type
         rating
         img
-        year
+        releaseDate
         description
         imdbRating
         rtRating
@@ -272,6 +386,7 @@ export const showsByDate = /* GraphQL */ `
           nextToken
         }
         createdAt
+        source
         updatedAt
       }
       nextToken

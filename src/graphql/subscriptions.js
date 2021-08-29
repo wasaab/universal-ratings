@@ -1,11 +1,101 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const onCreateWatchlistItem = /* GraphQL */ `
+  subscription OnCreateWatchlistItem {
+    onCreateWatchlistItem {
+      userId
+      showId
+      show {
+        id
+        title
+        type
+        rating
+        img
+        releaseDate
+        description
+        imdbRating
+        rtRating
+        reviews {
+          nextToken
+        }
+        createdAt
+        source
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateWatchlistItem = /* GraphQL */ `
+  subscription OnUpdateWatchlistItem {
+    onUpdateWatchlistItem {
+      userId
+      showId
+      show {
+        id
+        title
+        type
+        rating
+        img
+        releaseDate
+        description
+        imdbRating
+        rtRating
+        reviews {
+          nextToken
+        }
+        createdAt
+        source
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteWatchlistItem = /* GraphQL */ `
+  subscription OnDeleteWatchlistItem {
+    onDeleteWatchlistItem {
+      userId
+      showId
+      show {
+        id
+        title
+        type
+        rating
+        img
+        releaseDate
+        description
+        imdbRating
+        rtRating
+        reviews {
+          nextToken
+        }
+        createdAt
+        source
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
 export const onCreateUser = /* GraphQL */ `
   subscription OnCreateUser {
     onCreateUser {
       id
       name
+      watchlist {
+        items {
+          userId
+          showId
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       createdAt
       updatedAt
     }
@@ -16,6 +106,15 @@ export const onUpdateUser = /* GraphQL */ `
     onUpdateUser {
       id
       name
+      watchlist {
+        items {
+          userId
+          showId
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       createdAt
       updatedAt
     }
@@ -26,6 +125,15 @@ export const onDeleteUser = /* GraphQL */ `
     onDeleteUser {
       id
       name
+      watchlist {
+        items {
+          userId
+          showId
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       createdAt
       updatedAt
     }
@@ -37,14 +145,35 @@ export const onCreateReview = /* GraphQL */ `
       showId
       userId
       rating
+      isFavorite
       user {
         id
         name
+        watchlist {
+          nextToken
+        }
         createdAt
         updatedAt
       }
-      createdAt
+      show {
+        id
+        title
+        type
+        rating
+        img
+        releaseDate
+        description
+        imdbRating
+        rtRating
+        reviews {
+          nextToken
+        }
+        createdAt
+        source
+        updatedAt
+      }
       updatedAt
+      createdAt
     }
   }
 `;
@@ -54,14 +183,35 @@ export const onUpdateReview = /* GraphQL */ `
       showId
       userId
       rating
+      isFavorite
       user {
         id
         name
+        watchlist {
+          nextToken
+        }
         createdAt
         updatedAt
       }
-      createdAt
+      show {
+        id
+        title
+        type
+        rating
+        img
+        releaseDate
+        description
+        imdbRating
+        rtRating
+        reviews {
+          nextToken
+        }
+        createdAt
+        source
+        updatedAt
+      }
       updatedAt
+      createdAt
     }
   }
 `;
@@ -71,14 +221,35 @@ export const onDeleteReview = /* GraphQL */ `
       showId
       userId
       rating
+      isFavorite
       user {
         id
         name
+        watchlist {
+          nextToken
+        }
         createdAt
         updatedAt
       }
-      createdAt
+      show {
+        id
+        title
+        type
+        rating
+        img
+        releaseDate
+        description
+        imdbRating
+        rtRating
+        reviews {
+          nextToken
+        }
+        createdAt
+        source
+        updatedAt
+      }
       updatedAt
+      createdAt
     }
   }
 `;
@@ -90,7 +261,7 @@ export const onCreateShow = /* GraphQL */ `
       type
       rating
       img
-      year
+      releaseDate
       description
       imdbRating
       rtRating
@@ -99,12 +270,14 @@ export const onCreateShow = /* GraphQL */ `
           showId
           userId
           rating
-          createdAt
+          isFavorite
           updatedAt
+          createdAt
         }
         nextToken
       }
       createdAt
+      source
       updatedAt
     }
   }
@@ -117,7 +290,7 @@ export const onUpdateShow = /* GraphQL */ `
       type
       rating
       img
-      year
+      releaseDate
       description
       imdbRating
       rtRating
@@ -126,12 +299,14 @@ export const onUpdateShow = /* GraphQL */ `
           showId
           userId
           rating
-          createdAt
+          isFavorite
           updatedAt
+          createdAt
         }
         nextToken
       }
       createdAt
+      source
       updatedAt
     }
   }
@@ -144,7 +319,7 @@ export const onDeleteShow = /* GraphQL */ `
       type
       rating
       img
-      year
+      releaseDate
       description
       imdbRating
       rtRating
@@ -153,12 +328,14 @@ export const onDeleteShow = /* GraphQL */ `
           showId
           userId
           rating
-          createdAt
+          isFavorite
           updatedAt
+          createdAt
         }
         nextToken
       }
       createdAt
+      source
       updatedAt
     }
   }

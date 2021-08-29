@@ -1,5 +1,52 @@
-export const showsByDate = /* GraphQL */ `
-  query ShowsByDate(
+export const recentlyRated = /* GraphQL */ `
+  query RecentlyRated(
+    $source: String
+    $createdAt: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelShowFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    recentlyRated(
+      source: $source
+      createdAt: $createdAt
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        title
+        type
+        rating
+        img
+        releaseDate
+        description
+        imdbRating
+        rtRating
+        reviews {
+          items {
+            showId
+            rating
+            isFavorite
+            user {
+              name
+            }
+          }
+          nextToken
+        }
+        source
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+
+export const showsByType = /* GraphQL */ `
+  query ShowsByType(
     $type: ShowType
     $createdAt: ModelStringKeyConditionInput
     $sortDirection: ModelSortDirection
@@ -7,7 +54,7 @@ export const showsByDate = /* GraphQL */ `
     $limit: Int
     $nextToken: String
   ) {
-    showsByDate(
+    showsByType(
       type: $type
       createdAt: $createdAt
       sortDirection: $sortDirection
@@ -21,7 +68,7 @@ export const showsByDate = /* GraphQL */ `
         type
         rating
         img
-        year
+        releaseDate
         description
         imdbRating
         rtRating
@@ -29,6 +76,7 @@ export const showsByDate = /* GraphQL */ `
           items {
             showId
             rating
+            isFavorite
             user {
               name
             }
@@ -36,6 +84,7 @@ export const showsByDate = /* GraphQL */ `
           nextToken
         }
         createdAt
+        source
         updatedAt
       }
       nextToken
@@ -51,7 +100,7 @@ export const getShow = /* GraphQL */ `
       type
       rating
       img
-      year
+      releaseDate
       description
       imdbRating
       rtRating
@@ -59,6 +108,7 @@ export const getShow = /* GraphQL */ `
         items {
           showId
           rating
+          isFavorite
           user {
             name
           }
@@ -71,33 +121,84 @@ export const getShow = /* GraphQL */ `
   }
 `;
 
-export const createShow = /* GraphQL */ `
-  mutation CreateShow(
-    $input: CreateShowInput!
-    $condition: ModelShowConditionInput
+export const reviewsByUser = /* GraphQL */ `
+  query ReviewsByUser(
+    $userId: ID
+    $updatedAt: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelReviewFilterInput
+    $limit: Int
+    $nextToken: String
   ) {
-    createShow(input: $input, condition: $condition) {
-      id
-      title
-      type
-      rating
-      img
-      year
-      description
-      imdbRating
-      rtRating
-      reviews {
-        items {
-          showId
+    reviewsByUser(
+      userId: $userId
+      updatedAt: $updatedAt
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        show {
+          id
+          title
+          type
           rating
-          user {
-            name
+          img
+          releaseDate
+          description
+          imdbRating
+          rtRating
+          reviews {
+            items {
+              showId
+              rating
+              isFavorite
+              user {
+                name
+              }
+            }
+            nextToken
+          }
+        }
+      }
+      nextToken
+    }
+  }
+`;
+
+export const getUser = /* GraphQL */ `
+  query GetUser($id: ID!) {
+    getUser(id: $id) {
+      id
+      name
+      watchlist {
+        items {
+          show {
+            id
+            title
+            type
+            rating
+            img
+            releaseDate
+            description
+            imdbRating
+            rtRating
+            reviews {
+              items {
+                showId
+                rating
+                isFavorite
+                user {
+                  name
+                }
+              }
+              nextToken
+            }
           }
         }
         nextToken
       }
-      createdAt
-      updatedAt
     }
   }
 `;

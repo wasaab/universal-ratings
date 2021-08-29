@@ -1,15 +1,27 @@
-type User @model {
+type WatchlistItem @model
+  @key(fields: ["userId", "showId"]) {
+  userId: ID!
+  showId: ID!
+  show: Show @connection(fields: ["showId"])
+}
+
+type User @model
+  @key(fields: ["id"]) {
   id: ID!
   name: String!
+  watchlist: [WatchlistItem] @connection(fields: ["id"])
 }
 
 type Review @model
   @key(fields: ["showId", "userId"])
-  @key(name: "byShow", fields: ["showId", "rating"], queryField: "byShow") {
+  @key(name: "reviewsByUser", fields: ["userId", "updatedAt"], queryField: "reviewsByUser") {
   showId: ID!
   userId: ID!
   rating: Int!
+  isFavorite: Boolean
   user: User @connection(fields: ["userId"])
+  show: Show @connection(fields: ["showId"])
+  updatedAt: AWSDateTime
 }
 
 enum ShowType {
@@ -18,19 +30,20 @@ enum ShowType {
 }
 
 type Show @model
-  @algolia(fields: { include: ["title", "type", "year"] })
-  @key(name: "showsByTitle", fields: ["title", "year"], queryField: "showsByTitle")
-  @key(name: "showsByType", fields: ["type", "year"], queryField: "showsByType")
-  @key(name: "showsByDate", fields: ["type", "createdAt"], queryField: "showsByDate") {
+  @algolia(fields: { include: ["title", "type", "releaseDate"] })
+  @key(fields: ["id"])
+  @key(name: "recentlyRated", fields: ["source", "createdAt"], queryField: "recentlyRated")
+  @key(name: "showsByType", fields: ["type", "createdAt"], queryField: "showsByType") {
   id: ID!
   title: String!
   type: ShowType!
   rating: Float!
   img: String
-  year: Int
+  releaseDate: AWSDateTime
   description: String
   imdbRating: Float
   rtRating: Int
   reviews: [Review] @connection(fields: ["id"])
   createdAt: AWSDateTime
+  source: String!
 }

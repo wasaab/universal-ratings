@@ -3,25 +3,35 @@ import clsx from 'clsx';
 import {
   Avatar,
   Badge,
+  Box,
   Button,
   Dialog,
   DialogContent,
   DialogContentText,
   Grid,
+  IconButton,
   makeStyles,
   Typography
 } from '@material-ui/core';
+import {
+  Favorite as FavoriteIcon,
+  FavoriteBorder as FavoriteOutlineIcon,
+  WatchLater as WatchLaterIcon,
+  WatchLaterOutlined as WatchLaterOutlineIcon,
+} from '@material-ui/icons/';
 import { AvatarGroup } from '@material-ui/lab';
 import * as matColors from '@material-ui/core/colors';
 import Image from 'next/image';
 import API, { graphqlOperation } from '@aws-amplify/api';
-import { createShow } from '../src/graphql/custom-queries.js';
+import { updateReview } from '../src/graphql/mutations';
+import { createShow } from '../src/graphql/custom-mutations';
 import StarButtons from './StarButtons';
 import LabelledIcon from './LabelledIcon';
 import HuluIcon from '../resources/hulu.svg';
 import NetflixIcon from '../resources/netflix.svg';
 import ImdbIcon from '../resources/imdb.svg';
-import RottenTomatoesIcon from '../resources/rt.svg';
+import RtFreshIcon from '../resources/rt.svg';
+import RtRottenIcon from '../resources/rt-rotten.svg';
 
 // -------------------- User Review Color Mocking --------------------
 const colors = Object.values(matColors)
@@ -75,9 +85,10 @@ const useStyles = makeStyles((theme) => ({
     marginTop: 0
   },
   streamingSitesLabel: {
-    fontSize: '0.9rem'
+    fontSize: '0.9rem',
+    whiteSpace: 'nowrap'
   },
-  streamingSites: {
+  evenlySpaced: {
     display: 'flex',
     justifyContent: 'space-evenly'
   },
@@ -114,12 +125,19 @@ const useStyles = makeStyles((theme) => ({
   showDetailsContainer: {
     justifyContent: 'space-between',
     display: 'flex'
+  },
+  thirdPartyRatingsContainer: {
+    [theme.breakpoints.up(565)]: {
+      '& :nth-child(2)': {
+        justifyContent: 'flex-end'
+      }
+    }
   }
 }));
 
-const ShowDetailsModal = ({ show, userRating, onRatingChange, onShowAdded, onClose }) => {
+const ShowDetailsModal = ({ show, userId, userReview, onRatingChange, onShowAdded, onFavoriteChange, onWatchlistChange, isInWatchlist, onClose }) => {
   const classes = useStyles();
-  const [currUserRating, setCurrUserRating] = useState(userRating);
+  const [currUserRating, setCurrUserRating] = useState(userReview?.rating);
   const [isTooltipOpen, setIsTooltipOpen] = useState(false);
   const [avatarColors] = useState(getRandColors(3));
 
@@ -130,7 +148,11 @@ const ShowDetailsModal = ({ show, userRating, onRatingChange, onShowAdded, onClo
   };
 
   const createRatedShow = async () => {
-    const ratedShow = { ...show, rating: currUserRating };
+    const ratedShow = {
+      ...show,
+      rating: currUserRating,
+      source: 'UR'
+    };
 
     await onRatingChange(ratedShow, currUserRating, true);
 
@@ -147,7 +169,22 @@ const ShowDetailsModal = ({ show, userRating, onRatingChange, onShowAdded, onClo
     setCurrUserRating(updatedUserRating);
 
     if (show.rating) {
-      onRatingChange(show, updatedUserRating, !userRating);
+      onRatingChange(show, updatedUserRating, !userReview?.rating);
+    }
+  };
+
+  const toggleFavorite = async () => {
+    try {
+      const updatedReview = {
+        showId: show.id,
+        userId,
+        isFavorite: !userReview.isFavorite
+      };
+
+      await API.graphql(graphqlOperation(updateReview, { input: updatedReview }));
+      onFavoriteChange(updatedReview.isFavorite);
+    } catch (err) {
+      console.error('GraphQL toggle favorite failed. ', err);
     }
   };
 
@@ -155,20 +192,31 @@ const ShowDetailsModal = ({ show, userRating, onRatingChange, onShowAdded, onClo
     <Dialog open={show != null} onClose={onClose} className={classes.root}>
       <DialogContent className={classes.content}>
         <Grid container spacing={2} direction="row">
-          <Grid item xs={5}>
-            <Image
-              src={show.img}
-              alt={show.title}
-              width={233.33}
-              height={350}
-              unoptimized
-            />
+          <Grid item container xs={5} direction="column" justifyContent="space-between">
+            {/* Todo: Placeholder image when none found or change styling to work with no image */}
+            {show.img && (
+              <Image
+                src={show.img}
+                alt={show.title}
+                width={233.33}
+                height={350}
+                unoptimized
+              />
+            )}
+            <Box className={classes.evenlySpaced} pt="10px">
+              <IconButton disabled={!userReview} onClick={toggleFavorite}>
+                {userReview?.isFavorite ? <FavoriteIcon /> : <FavoriteOutlineIcon />}
+              </IconButton>
+              <IconButton disabled={!show.rating} onClick={() => onWatchlistChange(isInWatchlist)}>
+                {isInWatchlist ? <WatchLaterIcon /> : <WatchLaterOutlineIcon />}
+              </IconButton>
+            </Box>
           </Grid>
 
           <Grid item xs={7} direction="column" className={classes.showDetailsContainer}>
             <Grid item xs>
               <Typography variant="subtitle2" className={classes.year}>
-                {show.year}
+                {show.releaseDate.slice(0, 4)}
               </Typography>
               <Typography variant="h4" gutterBottom>
                 {show.title}
@@ -211,14 +259,22 @@ const ShowDetailsModal = ({ show, userRating, onRatingChange, onShowAdded, onClo
               </Grid>
             </Grid>
 
-            <DialogContentText className={classes.showDesc}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quis nunc accumsan,
-              rhoncus nisi commodo, facilisis erat. Pellentesque a velit nisl. Nunc rhoncus augue at ex...
-            </DialogContentText>
+            {show.description && (
+              <DialogContentText className={classes.showDesc}>
+                {show.description}
+              </DialogContentText>
+            )}
 
-            <Grid item container xs={9} spacing={1} direction="row">
-              {show.imdbRating && <LabelledIcon Icon={ImdbIcon} label={show.imdbRating} />}
-              {show.rtRating && <LabelledIcon Icon={RottenTomatoesIcon} label={show.rtRating} />}
+            <Grid
+              item
+              container
+              xs={9}
+              spacing={1}
+              className={classes.thirdPartyRatingsContainer}
+              direction="row"
+            >
+              {show.imdbRating && <LabelledIcon Icon={ImdbIcon} label={`${show.imdbRating}/10`} />}
+              {show.rtRating && <LabelledIcon Icon={show.rtRating >= 60 ? RtFreshIcon : RtRottenIcon} label={`${show.rtRating}%`} />}
             </Grid>
 
             <Grid
@@ -234,7 +290,7 @@ const ShowDetailsModal = ({ show, userRating, onRatingChange, onShowAdded, onClo
                   Available on
                 </Typography>
               </Grid>
-              <Grid item xs className={classes.streamingSites}>
+              <Grid item xs className={classes.evenlySpaced}>
                 <HuluIcon height="17" />
                 <NetflixIcon height="17" />
               </Grid>

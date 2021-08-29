@@ -1,7 +1,13 @@
 import React, { useEffect, useState, useRef } from 'react';
+import axios from 'axios';
 import API, { graphqlOperation } from '@aws-amplify/api';
-import { createReview, updateReview } from '../src/graphql/mutations.js';
-import { getShow, showsByDate } from '../src/graphql/custom-queries';
+import {
+  createReview,
+  createWatchlistItem,
+  deleteWatchlistItem,
+  updateReview
+} from '../src/graphql/mutations.js';
+import * as gqlQuery from '../src/graphql/custom-queries';
 import { makeStyles } from '@material-ui/core/styles';
 import { Grid } from '@material-ui/core';
 import ShowCard from './ShowCard';
@@ -9,6 +15,7 @@ import ShowDetailsModal from './ShowDetailsModal';
 import useOnScreen from './useOnScreen';
 import Toolbar from './Toolbar';
 import Drawer from './Drawer';
+import View from '../src/model/View';
 
 const drawerWidth = 240;
 
@@ -41,30 +48,103 @@ const MainView = ({ user }) => {
   const [selectedShowIdx, setSelectedShowIdx] = useState();
   const [shows, setShows] = useState([]);
   const [nextToken, setNextToken] = useState();
+  const [view, setView] = useState(View.HOME);
+  const [watchlist, setWatchlist] = useState(user.watchlist.items.map(({ show }) => show));
   const endOfPageRef = useRef();
   const isEndOfPageVisisble = useOnScreen(endOfPageRef);
 
-  const fetchShows = async () => {
+  const buildQueryParams = (targetView) => {
+    const queryParams = {
+      ...targetView.query.params,
+      limit: 100,
+      sortDirection: 'DESC',
+      nextToken
+    };
+
+    if (targetView.query.name === View.FAVORITES.query.name) {
+      queryParams.userId = user.id;
+    }
+
+    return queryParams;
+  }
+
+  const fetchShows = async (targetView = view) => {
     try {
-      const queryParams = {
-        limit: 100,
-        sortDirection: 'DESC',
-        type: 'tv',
-        nextToken
-      };
+      const queryName = targetView.query.name;
+      const { data } = await API.graphql(graphqlOperation(gqlQuery[queryName], buildQueryParams(targetView)));
+      let updatedShows = data[queryName].items;
 
-      const { data } = await API.graphql(graphqlOperation(showsByDate, queryParams));
-      const filteredShows = data.showsByDate.items.filter(({ img }) => img); // Todo: Temp until shows w/o images are handled or img is made a required field
+      if (targetView.query.name === View.FAVORITES.query.name) {
+        updatedShows = updatedShows.map(({ show }) => show);
+      } else {
+        // Todo: add logic for updating show's avg rating in db when reviews are updated, rather than calculating client-side.
+        updatedShows.forEach((show) => {
+          show.rating = determineAvgRating(show.reviews.items);
+        });
+      }
 
-      // Todo: add logic for updating show's avg rating in db when reviews are updated, rather than calculating client-side.
-      filteredShows.forEach((show) => {
-        show.rating = determineAvgRating(show.reviews.items);
-      });
-      console.log('filteredShows: ', filteredShows);
-      setShows([...shows, ...filteredShows]);
-      setNextToken(data.showsByDate.nextToken);
+      console.log('shows: ', updatedShows);
+
+      if (targetView === view) {
+        setShows([...shows, ...updatedShows]);
+      } else {
+        setShows(updatedShows);
+      }
+
+      setNextToken(data[queryName].nextToken);
     } catch (err) {
       console.error('Failed to list shows: ', err);
+    }
+  };
+
+  const handleDrawerSelection = (selectedView) => {
+    if (selectedView === View.WATCHLIST) {
+      setShows(watchlist);
+    } else {
+      fetchShows(selectedView);
+    }
+
+    setView(selectedView);
+  };
+
+  const handleFavoriteChange = (updatedVal) => {
+    const updatedShows = [...shows];
+    const targetShow = updatedShows[selectedShowIdx];
+
+    findUserReview(targetShow.reviews.items).isFavorite = updatedVal;
+    setShows(updatedShows);
+    setSelectedShow(targetShow);
+  };
+
+  const removeFromWatchlist = () => {
+    const updatedWatchlist = watchlist.filter(({ id }) => id !== selectedShow.id);
+
+    setWatchlist(updatedWatchlist);
+
+    if (view !== View.WATCHLIST) { return; }
+
+    setShows(updatedWatchlist);
+    unselectShow();
+  };
+
+  const handleWatchlistChange = async (isRemoval) => {
+    const watchlistItem = {
+      userId: user.id,
+      showId: selectedShow.id
+    };
+    const operation = isRemoval ? deleteWatchlistItem : createWatchlistItem;
+
+    try {
+      await API.graphql(graphqlOperation(operation, { input: watchlistItem }));
+    } catch (err) {
+      console.error('GraphQL toggle watchlist failed. ', err);
+      return;
+    }
+
+    if (isRemoval) {
+      removeFromWatchlist();
+    } else {
+      setWatchlist([...watchlist, selectedShow]);
     }
   };
 
@@ -133,24 +213,38 @@ const MainView = ({ user }) => {
     setSelectedShow(updatedShow);
   };
 
-  const handleSearch = async (show) => {
-    if (show.id) { // unrated
-      setSelectedShow(show);
-    } else { // rated
-      try {
-        const { data } = await API.graphql(graphqlOperation(getShow, { id: show.objectID }));
+  const selectRatedShow = async (show) => {
+    try {
+      const { data } = await API.graphql(graphqlOperation(gqlQuery.getShow, { id: show.objectID }));
 
-        setSelectedShow(data.getShow);
-      } catch (err) {
-        console.error(`Failed to get show "${show.objectID}": `, err);
-      }
+      setSelectedShow(data.getShow);
+    } catch (err) {
+      console.error(`Failed to get rated show "${show.objectID}": `, err);
+    }
+  };
+
+  const selectUnratedShow = async (show) => {
+    try {
+      const { data } = await axios.get(`/api/search?id=${show.id}`);
+
+      setSelectedShow(data);
+    } catch (err) {
+      console.error(`Failed to get unrated show "${show.id}": `, err);
+    }
+  };
+
+  const handleSearch = async (show) => {
+    if (show.id) {
+      await selectUnratedShow(show);
+    } else {
+      await selectRatedShow(show);
     }
   };
 
   const addShow = (show) => {
-    setSelectedShowIdx(shows.length);
+    setSelectedShowIdx(0);
     setSelectedShow(show);
-    setShows([...shows, show]);
+    setShows([show, ...shows]);
   };
 
   const unselectShow = () => {
@@ -165,9 +259,7 @@ const MainView = ({ user }) => {
 
   const findUserReview = (reviews) => reviews?.find((review) => review.user.name === user.name);
 
-  useEffect(async () => {
-    fetchShows();
-  }, []);
+  useEffect(fetchShows, []);
 
   useEffect(() => {
     if (!isEndOfPageVisisble || !nextToken) { return; }
@@ -184,16 +276,25 @@ const MainView = ({ user }) => {
         onSearchSubmit={handleSearch}
       />
 
-      <Drawer width={drawerWidth} open={drawerOpen} onClose={() => setDrawerOpen(false)} />
+      <Drawer
+        width={drawerWidth}
+        open={drawerOpen}
+        onClose={() => setDrawerOpen(false)}
+        onSelect={handleDrawerSelection}
+      />
 
       <main className={classes.content}>
         <span className={classes.toolbarSpacer} />
         {selectedShow && (
           <ShowDetailsModal
             show={selectedShow}
-            userRating={findUserReview(selectedShow.reviews?.items)?.rating}
+            userId={user.id}
+            userReview={findUserReview(selectedShow.reviews?.items)}
+            isInWatchlist={watchlist.findIndex(({ id }) => id === selectedShow.id) !== -1}
             onRatingChange={handleRatingChange}
             onShowAdded={addShow}
+            onFavoriteChange={handleFavoriteChange}
+            onWatchlistChange={handleWatchlistChange}
             onClose={unselectShow}
           />
         )}

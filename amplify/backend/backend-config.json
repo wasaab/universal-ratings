@@ -46,7 +46,14 @@
               "description": "dev"
             }
           },
-          "additionalAuthenticationProviders": []
+          "additionalAuthenticationProviders": [
+            {
+              "authenticationType": "AMAZON_COGNITO_USER_POOLS",
+              "userPoolConfig": {
+                "userPoolId": "authuniversalratings5a980c73"
+              }
+            }
+          ]
         }
       }
     }
