@@ -134,9 +134,9 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const ShowDetailsModal = ({ show, userRating, onRatingChange, onShowAdded, onClose }) => {
+const ShowDetailsModal = ({ show, userReview, onRatingChange, onShowAdded, onClose }) => {
   const classes = useStyles();
-  const [currUserRating, setCurrUserRating] = useState(userRating);
+  const [currUserRating, setCurrUserRating] = useState(userReview?.rating);
   const [isTooltipOpen, setIsTooltipOpen] = useState(false);
   const [avatarColors] = useState(getRandColors(3));
 
@@ -168,7 +168,7 @@ const ShowDetailsModal = ({ show, userRating, onRatingChange, onShowAdded, onClo
     setCurrUserRating(updatedUserRating);
 
     if (show.rating) {
-      onRatingChange(show, updatedUserRating, !userRating);
+      onRatingChange(show, updatedUserRating, !userReview?.rating);
     }
   };
 
@@ -187,9 +187,9 @@ const ShowDetailsModal = ({ show, userRating, onRatingChange, onShowAdded, onClo
                 unoptimized
               />
             )}
-            <Box item xs className={classes.evenlySpaced} pt="10px">
+            <Box className={classes.evenlySpaced} pt="10px">
               <IconButton>
-                {false ? <FavoriteIcon /> : <FavoriteOutlineIcon />}
+                {userReview?.isFavorite ? <FavoriteIcon /> : <FavoriteOutlineIcon />}
               </IconButton>
               <IconButton>
                 {false ? <WatchLaterIcon /> : <WatchLaterOutlineIcon />}

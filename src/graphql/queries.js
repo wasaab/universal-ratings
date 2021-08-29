@@ -1,11 +1,88 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const getWatchlistItem = /* GraphQL */ `
+  query GetWatchlistItem($userId: ID!, $showId: ID!) {
+    getWatchlistItem(userId: $userId, showId: $showId) {
+      userId
+      showId
+      show {
+        id
+        title
+        type
+        rating
+        img
+        year
+        description
+        imdbRating
+        rtRating
+        reviews {
+          nextToken
+        }
+        createdAt
+        source
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listWatchlistItems = /* GraphQL */ `
+  query ListWatchlistItems(
+    $userId: ID
+    $showId: ModelIDKeyConditionInput
+    $filter: ModelWatchlistItemFilterInput
+    $limit: Int
+    $nextToken: String
+    $sortDirection: ModelSortDirection
+  ) {
+    listWatchlistItems(
+      userId: $userId
+      showId: $showId
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      sortDirection: $sortDirection
+    ) {
+      items {
+        userId
+        showId
+        show {
+          id
+          title
+          type
+          rating
+          img
+          year
+          description
+          imdbRating
+          rtRating
+          createdAt
+          source
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
 export const getUser = /* GraphQL */ `
   query GetUser($id: ID!) {
     getUser(id: $id) {
       id
       name
+      watchlist {
+        items {
+          userId
+          showId
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       createdAt
       updatedAt
     }
@@ -13,14 +90,25 @@ export const getUser = /* GraphQL */ `
 `;
 export const listUsers = /* GraphQL */ `
   query ListUsers(
+    $id: ID
     $filter: ModelUserFilterInput
     $limit: Int
     $nextToken: String
+    $sortDirection: ModelSortDirection
   ) {
-    listUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    listUsers(
+      id: $id
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      sortDirection: $sortDirection
+    ) {
       items {
         id
         name
+        watchlist {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -34,9 +122,13 @@ export const getReview = /* GraphQL */ `
       showId
       userId
       rating
+      isFavorite
       user {
         id
         name
+        watchlist {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -66,6 +158,7 @@ export const listReviews = /* GraphQL */ `
         showId
         userId
         rating
+        isFavorite
         user {
           id
           name
@@ -96,6 +189,7 @@ export const getShow = /* GraphQL */ `
           showId
           userId
           rating
+          isFavorite
           createdAt
           updatedAt
         }
@@ -109,11 +203,19 @@ export const getShow = /* GraphQL */ `
 `;
 export const listShows = /* GraphQL */ `
   query ListShows(
+    $id: ID
     $filter: ModelShowFilterInput
     $limit: Int
     $nextToken: String
+    $sortDirection: ModelSortDirection
   ) {
-    listShows(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    listShows(
+      id: $id
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      sortDirection: $sortDirection
+    ) {
       items {
         id
         title
@@ -156,6 +258,7 @@ export const byShow = /* GraphQL */ `
         showId
         userId
         rating
+        isFavorite
         user {
           id
           name

@@ -29,6 +29,7 @@ export const showsByDate = /* GraphQL */ `
           items {
             showId
             rating
+            isFavorite
             user {
               name
             }
@@ -75,6 +76,7 @@ export const showsByType = /* GraphQL */ `
           items {
             showId
             rating
+            isFavorite
             user {
               name
             }
@@ -106,6 +108,7 @@ export const getShow = /* GraphQL */ `
         items {
           showId
           rating
+          isFavorite
           user {
             name
           }

@@ -225,7 +225,7 @@ const MainView = ({ user }) => {
         {selectedShow && (
           <ShowDetailsModal
             show={selectedShow}
-            userRating={findUserReview(selectedShow.reviews?.items)?.rating}
+            userReview={findUserReview(selectedShow.reviews?.items)}
             onRatingChange={handleRatingChange}
             onShowAdded={addShow}
             onClose={unselectShow}

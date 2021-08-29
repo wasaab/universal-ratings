@@ -1,6 +1,96 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const createWatchlistItem = /* GraphQL */ `
+  mutation CreateWatchlistItem(
+    $input: CreateWatchlistItemInput!
+    $condition: ModelWatchlistItemConditionInput
+  ) {
+    createWatchlistItem(input: $input, condition: $condition) {
+      userId
+      showId
+      show {
+        id
+        title
+        type
+        rating
+        img
+        year
+        description
+        imdbRating
+        rtRating
+        reviews {
+          nextToken
+        }
+        createdAt
+        source
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateWatchlistItem = /* GraphQL */ `
+  mutation UpdateWatchlistItem(
+    $input: UpdateWatchlistItemInput!
+    $condition: ModelWatchlistItemConditionInput
+  ) {
+    updateWatchlistItem(input: $input, condition: $condition) {
+      userId
+      showId
+      show {
+        id
+        title
+        type
+        rating
+        img
+        year
+        description
+        imdbRating
+        rtRating
+        reviews {
+          nextToken
+        }
+        createdAt
+        source
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteWatchlistItem = /* GraphQL */ `
+  mutation DeleteWatchlistItem(
+    $input: DeleteWatchlistItemInput!
+    $condition: ModelWatchlistItemConditionInput
+  ) {
+    deleteWatchlistItem(input: $input, condition: $condition) {
+      userId
+      showId
+      show {
+        id
+        title
+        type
+        rating
+        img
+        year
+        description
+        imdbRating
+        rtRating
+        reviews {
+          nextToken
+        }
+        createdAt
+        source
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
 export const createUser = /* GraphQL */ `
   mutation CreateUser(
     $input: CreateUserInput!
@@ -9,6 +99,15 @@ export const createUser = /* GraphQL */ `
     createUser(input: $input, condition: $condition) {
       id
       name
+      watchlist {
+        items {
+          userId
+          showId
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       createdAt
       updatedAt
     }
@@ -22,6 +121,15 @@ export const updateUser = /* GraphQL */ `
     updateUser(input: $input, condition: $condition) {
       id
       name
+      watchlist {
+        items {
+          userId
+          showId
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       createdAt
       updatedAt
     }
@@ -35,6 +143,15 @@ export const deleteUser = /* GraphQL */ `
     deleteUser(input: $input, condition: $condition) {
       id
       name
+      watchlist {
+        items {
+          userId
+          showId
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       createdAt
       updatedAt
     }
@@ -49,9 +166,13 @@ export const createReview = /* GraphQL */ `
       showId
       userId
       rating
+      isFavorite
       user {
         id
         name
+        watchlist {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -69,9 +190,13 @@ export const updateReview = /* GraphQL */ `
       showId
       userId
       rating
+      isFavorite
       user {
         id
         name
+        watchlist {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -89,9 +214,13 @@ export const deleteReview = /* GraphQL */ `
       showId
       userId
       rating
+      isFavorite
       user {
         id
         name
+        watchlist {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -120,6 +249,7 @@ export const createShow = /* GraphQL */ `
           showId
           userId
           rating
+          isFavorite
           createdAt
           updatedAt
         }
@@ -151,6 +281,7 @@ export const updateShow = /* GraphQL */ `
           showId
           userId
           rating
+          isFavorite
           createdAt
           updatedAt
         }
@@ -182,6 +313,7 @@ export const deleteShow = /* GraphQL */ `
           showId
           userId
           rating
+          isFavorite
           createdAt
           updatedAt
         }
