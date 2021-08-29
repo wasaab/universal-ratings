@@ -1,7 +1,12 @@
 import React, { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import API, { graphqlOperation } from '@aws-amplify/api';
-import { createReview, updateReview } from '../src/graphql/mutations.js';
+import {
+  createReview,
+  createWatchlistItem,
+  deleteWatchlistItem,
+  updateReview
+} from '../src/graphql/mutations.js';
 import * as graphqlQuery from '../src/graphql/custom-queries';
 import { makeStyles } from '@material-ui/core/styles';
 import { Grid } from '@material-ui/core';
@@ -44,6 +49,7 @@ const MainView = ({ user }) => {
   const [shows, setShows] = useState([]);
   const [nextToken, setNextToken] = useState();
   const [view, setView] = useState(View.HOME);
+  const [watchlist, setWatchlist] = useState(user.watchlist.items);
   const endOfPageRef = useRef();
   const isEndOfPageVisisble = useOnScreen(endOfPageRef);
 
@@ -82,6 +88,36 @@ const MainView = ({ user }) => {
     fetchShows(selectedView);
     setView(selectedView);
   };
+
+  const handleFavoriteChange = (updatedVal) => {
+    const updatedShows = [...shows];
+    const targetShow = updatedShows[selectedShowIdx];
+
+    findUserReview(targetShow.reviews.items).isFavorite = updatedVal;
+    setShows(updatedShows);
+    setSelectedShow(targetShow);
+  };
+
+  const handleWatchlistChange = async (isRemoval) => {
+    const watchlistItem = {
+      userId: user.id,
+      showId: selectedShow.id
+    };
+    const operation = isRemoval ? deleteWatchlistItem : createWatchlistItem;
+
+    try {
+      await API.graphql(graphqlOperation(operation, { input: watchlistItem }));
+    } catch (err) {
+      console.error('GraphQL toggle watchlist failed. ', err);
+      return;
+    }
+
+    if (isRemoval) {
+      setWatchlist(watchlist.filter(({ showId }) => showId !== selectedShow.id));
+    } else {
+      setWatchlist([...watchlist, { showId: selectedShow.id, show: selectedShow }]);
+    }
+};
 
   const updateReviews = (reviews, review) => {
     const oldReview = reviews.find((review) => review.user.name === user.name);
@@ -177,7 +213,7 @@ const MainView = ({ user }) => {
   };
 
   const addShow = (show) => {
-    setSelectedShowIdx(shows.length);
+    setSelectedShowIdx(0);
     setSelectedShow(show);
     setShows([show, ...shows]);
   };
@@ -194,9 +230,7 @@ const MainView = ({ user }) => {
 
   const findUserReview = (reviews) => reviews?.find((review) => review.user.name === user.name);
 
-  useEffect(async () => {
-    fetchShows();
-  }, []);
+  useEffect(fetchShows, []);
 
   useEffect(() => {
     if (!isEndOfPageVisisble || !nextToken) { return; }
@@ -225,9 +259,13 @@ const MainView = ({ user }) => {
         {selectedShow && (
           <ShowDetailsModal
             show={selectedShow}
+            userId={user.id}
             userReview={findUserReview(selectedShow.reviews?.items)}
+            isInWatchlist={watchlist.findIndex(({ showId }) => showId === selectedShow.id) !== -1}
             onRatingChange={handleRatingChange}
             onShowAdded={addShow}
+            onFavoriteChange={handleFavoriteChange}
+            onWatchlistChange={handleWatchlistChange}
             onClose={unselectShow}
           />
         )}
