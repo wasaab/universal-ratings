@@ -2,6 +2,12 @@
   "AppSyncApiName": "universalratings",
   "DynamoDBBillingMode": "PAY_PER_REQUEST",
   "DynamoDBEnableServerSideEncryption": false,
+  "AuthCognitoUserPoolId": {
+    "Fn::GetAtt": [
+      "authuniversalratings5a980c73",
+      "Outputs.UserPoolId"
+    ]
+  },
   "AlgoliaAppIdShow": "APPID",
   "AlgoliaApiKeyShow": "APIKEY"
 }
