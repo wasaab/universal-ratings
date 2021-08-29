@@ -16,12 +16,12 @@ function findRtRating(ratings) {
 }
 
 class Show {
-    constructor({ imdbID, Title, Type, Poster, Year, Plot, imdbRating, Ratings }) {
+    constructor({ imdbID, Title, Type, Poster, Year, Released, Plot, imdbRating, Ratings }) {
         this.id = imdbID;
         this.title = Title;
         this.type = Type.replace(OmdbShowType.TV, 'tv'),
         this.img = parseOptional(Poster);
-        this.year = Number(Year.replace(/–.*/, ''));
+        this.releaseDate = new Date(Released ?? Year.replace(/–.*/, '')).toISOString();
         this.description = parseOptional(Plot);
         this.imdbRating = imdbRating === 'N/A' ? null : Number(imdbRating)
         this.rtRating = findRtRating(Ratings);

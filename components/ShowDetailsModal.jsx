@@ -216,7 +216,7 @@ const ShowDetailsModal = ({ show, userId, userReview, onRatingChange, onShowAdde
           <Grid item xs={7} direction="column" className={classes.showDetailsContainer}>
             <Grid item xs>
               <Typography variant="subtitle2" className={classes.year}>
-                {show.year}
+                {show.releaseDate.slice(0, 4)}
               </Typography>
               <Typography variant="h4" gutterBottom>
                 {show.title}

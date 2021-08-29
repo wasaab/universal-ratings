@@ -90,9 +90,9 @@ const Drawer = ({ open, width, onClose, onSelect }) => {
       <Divider />
 
       <List>
-        <DrawerMenuItem view={View.HOME} LeftIcon={HomeIcon} onClick={onSelect} />
-        <DrawerMenuItem view={View.MOVIES} LeftIcon={MovieIcon} onClick={onSelect} />
-        <DrawerMenuItem view={View.TV} LeftIcon={TvIcon} onClick={onSelect} />
+        <DrawerMenuItem view={View.HOME} LeftIcon={HomeIcon} />
+        <DrawerMenuItem view={View.MOVIES} LeftIcon={MovieIcon} />
+        <DrawerMenuItem view={View.TV} LeftIcon={TvIcon} />
         <DrawerMenuItem view={View.RECENTLY_RELEASED} LeftIcon={NewReleasesIcon} />
         <DrawerMenuItem view={View.RECENTLY_RATED} LeftIcon={StarIcon} />
       </List>

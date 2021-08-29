@@ -14,12 +14,14 @@ type User @model
 
 type Review @model
   @key(fields: ["showId", "userId"])
-  @key(name: "byShow", fields: ["showId", "rating"], queryField: "byShow") {
+  @key(name: "reviewsByUser", fields: ["userId", "updatedAt"], queryField: "reviewsByUser") {
   showId: ID!
   userId: ID!
   rating: Int!
   isFavorite: Boolean
   user: User @connection(fields: ["userId"])
+  show: Show @connection(fields: ["showId"])
+  updatedAt: AWSDateTime
 }
 
 enum ShowType {
@@ -28,16 +30,16 @@ enum ShowType {
 }
 
 type Show @model
-  @algolia(fields: { include: ["title", "type", "year"] })
+  @algolia(fields: { include: ["title", "type", "releaseDate"] })
   @key(fields: ["id"])
-  @key(name: "showsByDate", fields: ["source", "createdAt"], queryField: "showsByDate")
+  @key(name: "recentlyRated", fields: ["source", "createdAt"], queryField: "recentlyRated")
   @key(name: "showsByType", fields: ["type", "createdAt"], queryField: "showsByType") {
   id: ID!
   title: String!
   type: ShowType!
   rating: Float!
   img: String
-  year: Int
+  releaseDate: AWSDateTime
   description: String
   imdbRating: Float
   rtRating: Int

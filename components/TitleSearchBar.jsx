@@ -134,7 +134,7 @@ const TitleSearchBar = ({ className, onSubmit }) => {
         try {
             const shows = await fetchRatedAndUnratedShows(title);
 
-            console.log('shows: ', shows);
+            console.log('show options: ', shows);
             setOptions(shows);
             maybeUpdateCache(title, shows);
         } catch (err) {
@@ -209,7 +209,7 @@ const TitleSearchBar = ({ className, onSubmit }) => {
                 <TypeIcon size="small" className={classes.optionIcon} />
                 {renderHighlightedTitle(option, inputValue)}
                 <span className={classes.optionYear}>
-                    {option.year}
+                    {option.releaseDate.slice(0, 4)}
                 </span>
             </div>
         );

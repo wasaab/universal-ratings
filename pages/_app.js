@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { CssBaseline, ThemeProvider } from '@material-ui/core';
 import API, { graphqlOperation } from '@aws-amplify/api';
-import { getUser } from '../src/graphql/queries.js';
+import { getUser } from '../src/graphql/custom-queries.js';
 import { AmplifyAuthContainer, AmplifyAuthenticator } from '@aws-amplify/ui-react'
 import { AuthState } from '@aws-amplify/ui-components';
 import amplify from 'aws-amplify';
