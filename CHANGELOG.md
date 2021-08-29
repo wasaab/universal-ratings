@@ -4,6 +4,41 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.3.0] - 2021-08-29
+### Added
+- graphql cognito user pool auth
+- show descriptions from omdb api
+- views
+  - Movies
+  - TV Shows
+  - Recently Released
+  - Recently Rated
+  - Favorites
+  - Watchlist
+  - Watched
+- add to watchlist / favorites modal buttons
+- watchlist to User model
+- WatchListItem model
+- imdb and rt ratings from omdb api in modal
+- rotten vs fresh icon shown dynamically for RT rating
+- search bar clears and focuses input on selection
+- missing images handled
+- search by id added to omdb api client
+
+### Changed
+- year replaced with releaseDate in Show model for sort precision
+- showsByDate --> recentlyReleased
+- Review model updated to enable user based queries (favs and watched)
+- primary key of Show model now explcitly id instead of implicitly
+- shows added to start of grid rather than end
+
+### Removed
+- unused graphql schema keys
+- filtering of shows w/o images
+
+### Fixed
+* optional values handled in OMDB API client
+
 ## [1.2.0] - 2021-08-24
 ### Added
 - algolia index updated on db changes via transformer
@@ -56,7 +91,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - readme tech stack and features
 
 ### Changed
-- **BREAKING**: graphql schema refactored to support rating and sort operations
+-
+**BREAKING**: graphql schema refactored to support rating and sort operations
 - rating star buttons styling
 - MovieCard renamed to ShowCard
 - readme usage docs
