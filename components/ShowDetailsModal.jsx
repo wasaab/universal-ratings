@@ -23,6 +23,7 @@ import { AvatarGroup } from '@material-ui/lab';
 import * as matColors from '@material-ui/core/colors';
 import Image from 'next/image';
 import API, { graphqlOperation } from '@aws-amplify/api';
+import { updateReview } from '../src/graphql/mutations';
 import { createShow } from '../src/graphql/custom-mutations';
 import StarButtons from './StarButtons';
 import LabelledIcon from './LabelledIcon';
@@ -134,9 +135,9 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const ShowDetailsModal = ({ show, userRating, onRatingChange, onShowAdded, onClose }) => {
+const ShowDetailsModal = ({ show, userId, userReview, onRatingChange, onShowAdded, onFavoriteChange, onWatchlistChange, isInWatchlist, onClose }) => {
   const classes = useStyles();
-  const [currUserRating, setCurrUserRating] = useState(userRating);
+  const [currUserRating, setCurrUserRating] = useState(userReview?.rating);
   const [isTooltipOpen, setIsTooltipOpen] = useState(false);
   const [avatarColors] = useState(getRandColors(3));
 
@@ -168,7 +169,22 @@ const ShowDetailsModal = ({ show, userRating, onRatingChange, onShowAdded, onClo
     setCurrUserRating(updatedUserRating);
 
     if (show.rating) {
-      onRatingChange(show, updatedUserRating, !userRating);
+      onRatingChange(show, updatedUserRating, !userReview?.rating);
+    }
+  };
+
+  const toggleFavorite = async () => {
+    try {
+      const updatedReview = {
+        showId: show.id,
+        userId,
+        isFavorite: !userReview.isFavorite
+      };
+
+      await API.graphql(graphqlOperation(updateReview, { input: updatedReview }));
+      onFavoriteChange(updatedReview.isFavorite);
+    } catch (err) {
+      console.error('GraphQL toggle favorite failed. ', err);
     }
   };
 
@@ -187,12 +203,12 @@ const ShowDetailsModal = ({ show, userRating, onRatingChange, onShowAdded, onClo
                 unoptimized
               />
             )}
-            <Box item xs className={classes.evenlySpaced} pt="10px">
-              <IconButton>
-                {false ? <FavoriteIcon /> : <FavoriteOutlineIcon />}
+            <Box className={classes.evenlySpaced} pt="10px">
+              <IconButton disabled={!userReview} onClick={toggleFavorite}>
+                {userReview?.isFavorite ? <FavoriteIcon /> : <FavoriteOutlineIcon />}
               </IconButton>
-              <IconButton>
-                {false ? <WatchLaterIcon /> : <WatchLaterOutlineIcon />}
+              <IconButton disabled={!show.rating} onClick={() => onWatchlistChange(isInWatchlist)}>
+                {isInWatchlist ? <WatchLaterIcon /> : <WatchLaterOutlineIcon />}
               </IconButton>
             </Box>
           </Grid>

@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import { CssBaseline, ThemeProvider } from '@material-ui/core';
+import API, { graphqlOperation } from '@aws-amplify/api';
+import { getUser } from '../src/graphql/queries.js';
 import { AmplifyAuthContainer, AmplifyAuthenticator } from '@aws-amplify/ui-react'
 import { AuthState } from '@aws-amplify/ui-components';
 import amplify from 'aws-amplify';
@@ -20,16 +22,21 @@ function removeJss() {
 
 amplify.configure(amplifyConfig);
 
+const fetchUser = async (id) => {
+  const { data } = await API.graphql(graphqlOperation(getUser, { id }));
+
+  return data.getUser;
+};
+
 const App = () => {
   const [user, setUser] = useState();
 
   const storeUser = async (authState, authedUser) => {
     if (user || !authedUser || authState !== AuthState.SignedIn) { return; }
 
-    setUser({
-      id: authedUser.attributes.sub,
-      name: authedUser.username
-    });
+    const userInfo = await fetchUser(authedUser.attributes.sub);
+
+    setUser(userInfo);
   };
 
   useEffect(removeJss, []);
