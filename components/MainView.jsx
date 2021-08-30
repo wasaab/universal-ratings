@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, useMemo } from 'react';
 import axios from 'axios';
 import API, { graphqlOperation } from '@aws-amplify/api';
 import {
@@ -37,19 +37,26 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-function determineAvgRating(reviews) {
-  return reviews.reduce((sum, { rating }) => sum + rating, 0) / reviews.length;
+const updateOnShowAddedViews = [View.HOME, View.WATCHED, View.RECENTLY_RATED];
+
+// Todo: add logic for updating show's avg rating in db when reviews are updated, rather than calculating client-side.
+function updateAvgRating(show) {
+  const reviews = show.reviews.items;
+
+  show.rating = reviews.reduce((sum, { rating }) => sum + rating, 0) / reviews.length;
 }
 
 const MainView = ({ user }) => {
   const classes = useStyles();
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [selectedShow, setSelectedShow] = useState();
-  const [selectedShowIdx, setSelectedShowIdx] = useState();
+  const [selectedShowIdx, setSelectedShowIdx] = useState(null);
   const [shows, setShows] = useState([]);
   const [nextToken, setNextToken] = useState();
   const [view, setView] = useState(View.HOME);
   const [watchlist, setWatchlist] = useState(user.watchlist.items.map(({ show }) => show));
+  const findWatchlistIdx = (showId = selectedShow?.id) => watchlist.findIndex(({ id }) => id === showId);
+  const watchlistIdx = useMemo(findWatchlistIdx, [selectedShow, watchlist]);
   const endOfPageRef = useRef();
   const isEndOfPageVisisble = useOnScreen(endOfPageRef);
 
@@ -74,13 +81,14 @@ const MainView = ({ user }) => {
       const { data } = await API.graphql(graphqlOperation(gqlQuery[queryName], buildQueryParams(targetView)));
       let updatedShows = data[queryName].items;
 
-      if (targetView.query.name === View.FAVORITES.query.name) {
-        updatedShows = updatedShows.map(({ show }) => show);
-      } else {
-        // Todo: add logic for updating show's avg rating in db when reviews are updated, rather than calculating client-side.
-        updatedShows.forEach((show) => {
-          show.rating = determineAvgRating(show.reviews.items);
+      if (View.FAVORITES.query.name === queryName) {
+        updatedShows = updatedShows.map(({ show }) => {
+          updateAvgRating(show);
+
+          return show;
         });
+      } else {
+        updatedShows.forEach(updateAvgRating);
       }
 
       console.log('shows: ', updatedShows);
@@ -107,13 +115,40 @@ const MainView = ({ user }) => {
     setView(selectedView);
   };
 
+  // Todo: Refactor updating of favorites, watchlist, and shows as it is not very streamlined.
   const handleFavoriteChange = (updatedVal) => {
-    const updatedShows = [...shows];
-    const targetShow = updatedShows[selectedShowIdx];
+    if (selectedShowIdx !== null) {
+      const updatedShows = [...shows];
 
-    findUserReview(targetShow.reviews.items).isFavorite = updatedVal;
-    setShows(updatedShows);
-    setSelectedShow(targetShow);
+      if (view === View.FAVORITES && !updatedVal) {
+        updatedShows.splice(selectedShowIdx, 1);
+        setShows(updatedShows);
+        unselectShow();
+
+        const updatedShow = { ...selectedShow };
+
+        findUserReview(updatedShow.reviews.items).isFavorite = updatedVal;
+        updateWatchlist(updatedShow);
+      } else {
+        const targetShow = updatedShows[selectedShowIdx];
+
+        findUserReview(targetShow.reviews.items).isFavorite = updatedVal;
+        setShows(updatedShows);
+        setSelectedShow(targetShow);
+        updateWatchlist(targetShow);
+      }
+    } else {
+      if (view === View.FAVORITES) {
+        setShows([selectedShow, ...shows]);
+        setSelectedShowIdx(0);
+      }
+
+      const updatedShow = { ...selectedShow };
+
+      findUserReview(updatedShow.reviews.items).isFavorite = updatedVal;
+      setSelectedShow(updatedShow);
+      updateWatchlist(updatedShow);
+    }
   };
 
   const removeFromWatchlist = () => {
@@ -125,6 +160,16 @@ const MainView = ({ user }) => {
 
     setShows(updatedWatchlist);
     unselectShow();
+  };
+
+  const addToWatchlist = () => {
+    const updatedWatchlist = [selectedShow, ...watchlist];
+
+    setWatchlist(updatedWatchlist);
+
+    if (view === View.WATCHLIST) {
+      setShows(updatedWatchlist);
+    }
   };
 
   const handleWatchlistChange = async (isRemoval) => {
@@ -144,7 +189,7 @@ const MainView = ({ user }) => {
     if (isRemoval) {
       removeFromWatchlist();
     } else {
-      setWatchlist([...watchlist, selectedShow]);
+      addToWatchlist();
     }
   };
 
@@ -179,15 +224,35 @@ const MainView = ({ user }) => {
     const reviews = show.reviews.items;
 
     updateReviews(reviews, review);
-
-    const avgRating = determineAvgRating(reviews);
-
-    show.rating = avgRating;
+    updateAvgRating(show);
   };
 
-  // Todo: Refactor. logic currently covers all cases, but readability could be improved.
+  const updateWatchlist = (updatedShow, showIdx) => {
+    const watchlistShowIdx = selectedShow ? watchlistIdx : findWatchlistIdx(shows[showIdx].id);
+
+    if (watchlistShowIdx === -1) { return; }
+
+    const updatedWatchlist = [...watchlist];
+
+    updatedWatchlist[watchlistShowIdx] = updatedShow;
+    setWatchlist(updatedWatchlist);
+  };
+
+  const updateShows = (review, showIdx) => {
+    const updatedShows = [...shows];
+    const updatedShow = updatedShows[showIdx];
+
+    updateReviewsAndAvgRating(updatedShow, review);
+    updateWatchlist(updatedShow, showIdx);
+    setShows(updatedShows);
+
+    if (!selectedShow) { return; }
+
+    setSelectedShow(updatedShow);
+  };
+
   const handleRatingChange = async (show, updatedUserRating, isUnrated, showIdx = selectedShowIdx) => {
-    await createShowReview(show, updatedUserRating, isUnrated);
+    createShowReview(show, updatedUserRating, isUnrated);
 
     const review = { user, rating: updatedUserRating }
 
@@ -202,15 +267,7 @@ const MainView = ({ user }) => {
       setSelectedShowIdx(showIdx);
     }
 
-    const updatedShows = [...shows];
-    const updatedShow = updatedShows[showIdx];
-
-    updateReviewsAndAvgRating(updatedShow, review);
-    setShows(updatedShows);
-
-    if (!selectedShow) { return; }
-
-    setSelectedShow(updatedShow);
+    updateShows(review, showIdx);
   };
 
   const selectRatedShow = async (show) => {
@@ -242,9 +299,12 @@ const MainView = ({ user }) => {
   };
 
   const addShow = (show) => {
-    setSelectedShowIdx(0);
     setSelectedShow(show);
-    setShows([show, ...shows]);
+
+    if (updateOnShowAddedViews.includes(view) || view === View[show.type.toUpperCase()]) {
+      setSelectedShowIdx(0);
+      setShows([show, ...shows]);
+    }
   };
 
   const unselectShow = () => {
@@ -290,7 +350,7 @@ const MainView = ({ user }) => {
             show={selectedShow}
             userId={user.id}
             userReview={findUserReview(selectedShow.reviews?.items)}
-            isInWatchlist={watchlist.findIndex(({ id }) => id === selectedShow.id) !== -1}
+            isInWatchlist={watchlistIdx !== -1}
             onRatingChange={handleRatingChange}
             onShowAdded={addShow}
             onFavoriteChange={handleFavoriteChange}
