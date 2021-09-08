@@ -16,6 +16,7 @@ import useOnScreen from './useOnScreen';
 import Toolbar from './Toolbar';
 import Drawer from './Drawer';
 import View from '../src/model/View';
+import clsx from 'clsx';
 
 const drawerWidth = 240;
 
@@ -34,6 +35,10 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(0, 1),
     // necessary for content to be below app bar
     ...theme.mixins.toolbar
+  },
+  reducedGrow: {
+    flexGrow: 0.2,
+    flexBasis: 'unset'
   }
 }));
 
@@ -91,8 +96,6 @@ const MainView = ({ user }) => {
         updatedShows.forEach(updateAvgRating);
       }
 
-      console.log('shows: ', updatedShows);
-
       if (targetView === view) {
         setShows([...shows, ...updatedShows]);
       } else {
@@ -101,7 +104,7 @@ const MainView = ({ user }) => {
 
       setNextToken(data[queryName].nextToken);
     } catch (err) {
-      console.error('Failed to list shows: ', err);
+      console.error(`Failed to list shows for view "${targetView.label}": `, err);
     }
   };
 
@@ -115,39 +118,27 @@ const MainView = ({ user }) => {
     setView(selectedView);
   };
 
-  // Todo: Refactor updating of favorites, watchlist, and shows as it is not very streamlined.
   const handleFavoriteChange = (updatedVal) => {
-    if (selectedShowIdx !== null) {
-      const updatedShows = [...shows];
+    const isShowInGrid = selectedShowIdx !== null;
+    const updatedShows = isShowInGrid ? [...shows] : [selectedShow, ...shows];
+    const updatedShow = updatedShows[selectedShowIdx ?? 0];
 
-      if (view === View.FAVORITES && !updatedVal) {
-        updatedShows.splice(selectedShowIdx, 1);
-        setShows(updatedShows);
-        unselectShow();
+    findUserReview(updatedShow.reviews.items).isFavorite = updatedVal;
+    updateWatchlist(updatedShow);
 
-        const updatedShow = { ...selectedShow };
+    if (view === View.FAVORITES && !isShowInGrid) {
+      setSelectedShowIdx(0);
+    }
 
-        findUserReview(updatedShow.reviews.items).isFavorite = updatedVal;
-        updateWatchlist(updatedShow);
-      } else {
-        const targetShow = updatedShows[selectedShowIdx];
-
-        findUserReview(targetShow.reviews.items).isFavorite = updatedVal;
-        setShows(updatedShows);
-        setSelectedShow(targetShow);
-        updateWatchlist(targetShow);
-      }
+    if (view === View.FAVORITES && !updatedVal) {
+      updatedShows.splice(selectedShowIdx, 1);
+      unselectShow();
     } else {
-      if (view === View.FAVORITES) {
-        setShows([selectedShow, ...shows]);
-        setSelectedShowIdx(0);
-      }
-
-      const updatedShow = { ...selectedShow };
-
-      findUserReview(updatedShow.reviews.items).isFavorite = updatedVal;
       setSelectedShow(updatedShow);
-      updateWatchlist(updatedShow);
+    }
+
+    if (isShowInGrid || view === View.FAVORITES) {
+      setShows(updatedShows);
     }
   };
 
@@ -167,9 +158,9 @@ const MainView = ({ user }) => {
 
     setWatchlist(updatedWatchlist);
 
-    if (view === View.WATCHLIST) {
-      setShows(updatedWatchlist);
-    }
+    if (view !== View.WATCHLIST) { return; }
+
+    setShows(updatedWatchlist);
   };
 
   const handleWatchlistChange = async (isRemoval) => {
@@ -361,7 +352,7 @@ const MainView = ({ user }) => {
 
         <Grid container spacing={3} wrap="wrap">
           {shows.map((show, i) => (
-            <Grid key={i} item xs>
+            <Grid key={i} item xs className={clsx({ [classes.reducedGrow]: shows.length === 2 })}>
               <ShowCard
                 show={show}
                 userRating={findUserReview(show.reviews?.items)?.rating}

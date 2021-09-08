@@ -1,7 +1,7 @@
 const recentlyRatedArgs = ['recentlyRated', { source: 'UR' }];
-const oneMonthAgo = new Date();
+const newReleaseThreshold = new Date();
 
-oneMonthAgo.setMonth(oneMonthAgo.getMonth() - 2);
+newReleaseThreshold.setMonth(newReleaseThreshold.getMonth() - 2);
 
 export default class View {
   static HOME = new View('Home', ...recentlyRatedArgs);
@@ -16,7 +16,7 @@ export default class View {
     recentlyRatedArgs[0],
     {
       ...recentlyRatedArgs[1],
-      filter: { releaseDate: { gt: oneMonthAgo.toISOString() } }
+      filter: { releaseDate: { gt: newReleaseThreshold.toISOString() } }
     }
   );
 
