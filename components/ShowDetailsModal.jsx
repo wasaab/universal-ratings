@@ -122,10 +122,6 @@ const useStyles = makeStyles((theme) => ({
       opacity: 1,
     }
   },
-  showDetailsContainer: {
-    justifyContent: 'space-between',
-    display: 'flex'
-  },
   thirdPartyRatingsContainer: {
     [theme.breakpoints.up(565)]: {
       '& :nth-child(2)': {
@@ -189,7 +185,7 @@ const ShowDetailsModal = ({ show, userId, userReview, onRatingChange, onShowAdde
   };
 
   return (
-    <Dialog open={show != null} onClose={onClose} className={classes.root}>
+    <Dialog open={show != null} onClose={onClose} className={classes.root} aria-label={show.title}>
       <DialogContent className={classes.content}>
         <Grid container spacing={2} direction="row">
           <Grid item container xs={5} direction="column" justifyContent="space-between">
@@ -213,7 +209,7 @@ const ShowDetailsModal = ({ show, userId, userReview, onRatingChange, onShowAdde
             </Box>
           </Grid>
 
-          <Grid item xs={7} direction="column" className={classes.showDetailsContainer}>
+          <Grid item container xs={7} direction="column" justifyContent="space-between" wrap="nowrap">
             <Grid item xs>
               <Typography variant="subtitle2" className={classes.year}>
                 {show.releaseDate.slice(0, 4)}
