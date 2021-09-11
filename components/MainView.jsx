@@ -70,7 +70,7 @@ const MainView = ({ user }) => {
       ...targetView.query.params,
       limit: 100,
       sortDirection: 'DESC',
-      nextToken
+      nextToken: targetView === view ? nextToken : null
     };
 
     if (targetView.query.name === View.FAVORITES.query.name) {
