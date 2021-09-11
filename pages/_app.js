@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import Head from 'next/head';
 import { CssBaseline, ThemeProvider } from '@material-ui/core';
 import API, { graphqlOperation } from '@aws-amplify/api';
 import { getUser } from '../src/graphql/custom-queries.js';
@@ -42,14 +43,24 @@ const App = () => {
   useEffect(removeJss, []);
 
   return (
-    <AmplifyAuthContainer>
-      <AmplifyAuthenticator handleAuthStateChange={storeUser}>
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
-          {user && <MainView user={user} />}
-        </ThemeProvider>
-      </AmplifyAuthenticator>
-    </AmplifyAuthContainer>
+    <>
+      <Head>
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+        <link rel="manifest" href="/site.webmanifest" />
+        <meta name="theme-color" content="#ffffff" />
+      </Head>
+
+      <AmplifyAuthContainer>
+        <AmplifyAuthenticator handleAuthStateChange={storeUser}>
+          <ThemeProvider theme={theme}>
+            <CssBaseline />
+            {user && <MainView user={user} />}
+          </ThemeProvider>
+        </AmplifyAuthenticator>
+      </AmplifyAuthContainer>
+    </>
   );
 };
 

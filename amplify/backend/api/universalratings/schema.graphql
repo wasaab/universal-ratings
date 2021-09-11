@@ -1,4 +1,9 @@
 type WatchlistItem @model
+  @auth(rules: [{
+    allow: owner,
+    ownerField: "userId",
+    identityClaim: "sub"
+  }])
   @key(fields: ["userId", "showId"]) {
   userId: ID!
   showId: ID!
@@ -6,6 +11,12 @@ type WatchlistItem @model
 }
 
 type User @model
+  @auth(rules: [{
+    allow: owner,
+    ownerField: "id",
+    identityClaim: "sub",
+    operations: [update, delete]
+  }])
   @key(fields: ["id"]) {
   id: ID!
   name: String!
@@ -13,6 +24,12 @@ type User @model
 }
 
 type Review @model
+  @auth(rules: [{
+    allow: owner,
+    ownerField: "userId",
+    identityClaim: "sub",
+    operations: [create, delete, update]
+  }])
   @key(fields: ["showId", "userId"])
   @key(name: "reviewsByUser", fields: ["userId", "updatedAt"], queryField: "reviewsByUser") {
   showId: ID!
@@ -30,6 +47,10 @@ enum ShowType {
 }
 
 type Show @model
+  @auth(rules: [
+    { allow: groups, groups: ["Admin"], operations: [update] },
+    { allow: owner, identityClaim: "sub", operations: [create, delete] }
+  ])
   @algolia(fields: { include: ["title", "type", "releaseDate"] })
   @key(fields: ["id"])
   @key(name: "recentlyRated", fields: ["source", "createdAt"], queryField: "recentlyRated")

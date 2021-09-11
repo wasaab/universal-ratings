@@ -25,6 +25,7 @@ export const createWatchlistItem = /* GraphQL */ `
         createdAt
         source
         updatedAt
+        owner
       }
       createdAt
       updatedAt
@@ -55,6 +56,7 @@ export const updateWatchlistItem = /* GraphQL */ `
         createdAt
         source
         updatedAt
+        owner
       }
       createdAt
       updatedAt
@@ -85,6 +87,7 @@ export const deleteWatchlistItem = /* GraphQL */ `
         createdAt
         source
         updatedAt
+        owner
       }
       createdAt
       updatedAt
@@ -192,6 +195,7 @@ export const createReview = /* GraphQL */ `
         createdAt
         source
         updatedAt
+        owner
       }
       updatedAt
       createdAt
@@ -233,6 +237,7 @@ export const updateReview = /* GraphQL */ `
         createdAt
         source
         updatedAt
+        owner
       }
       updatedAt
       createdAt
@@ -274,6 +279,7 @@ export const deleteReview = /* GraphQL */ `
         createdAt
         source
         updatedAt
+        owner
       }
       updatedAt
       createdAt
@@ -309,6 +315,7 @@ export const createShow = /* GraphQL */ `
       createdAt
       source
       updatedAt
+      owner
     }
   }
 `;
@@ -341,6 +348,7 @@ export const updateShow = /* GraphQL */ `
       createdAt
       source
       updatedAt
+      owner
     }
   }
 `;
@@ -373,6 +381,7 @@ export const deleteShow = /* GraphQL */ `
       createdAt
       source
       updatedAt
+      owner
     }
   }
 `;

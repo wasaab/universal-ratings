@@ -12,7 +12,7 @@
     ],
     "smsAuthenticationMessage": "Your authentication code is {####}",
     "smsVerificationMessage": "Your verification code is {####}",
-    "emailVerificationSubject": "Your verification code",
+    "emailVerificationSubject": "Universal Ratings Verification Code",
     "emailVerificationMessage": "Your verification code is {####}",
     "defaultPasswordPolicy": false,
     "passwordPolicyMinLength": 8,
@@ -66,7 +66,6 @@
             ]
         }
     ],
-    "thirdPartyAuth": false,
     "userPoolGroups": true,
     "adminQueries": false,
     "triggers": "{\n  \"PostConfirmation\": [\n    \"custom\"\n  ]\n}",
@@ -77,5 +76,6 @@
     "authTriggerConnections": "[\n  {\n    \"triggerType\": \"PostConfirmation\",\n    \"lambdaFunctionName\": \"universalratings5a980c73PostConfirmation\"\n  }\n]",
     "breakCircularDependency": true,
     "permissions": [],
-    "authProviders": []
+    "authProviders": [],
+    "thirdPartyAuth": false
 }

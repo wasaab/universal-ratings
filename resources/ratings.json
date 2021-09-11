@@ -3,11 +3,9 @@
         "title": "Altered Carbon",
         "rating": 4,
         "type": "tv",
-        "year": 2018,
         "id": "tt2261227",
         "img": "https://m.media-amazon.com/images/M/MV5BNjIxMWMzMzctYmZkYy00OTkzLWFlMWUtMjc3ZDFmYzQ3YmVkXkEyXkFqcGdeQXVyNjU2ODM5MjU@._V1_SX300.jpg",
         "imdbRating": 8,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -17,17 +15,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "Set in a future where consciousness is digitized and stored, a prisoner returns to life in a new body and must solve a mind-bending murder to win his freedom.",
+        "releaseDate": "2018-02-02T05:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "Ballers",
         "rating": 4,
         "type": "tv",
-        "year": 2015,
         "id": "tt2891574",
         "img": "https://m.media-amazon.com/images/M/MV5BYzM5NDRkNzItN2FkZC00ZjQyLTlmYzctYmNiNTA4YzIxYTg2XkEyXkFqcGdeQXVyMzQ2MDI5NjU@._V1_SX300.jpg",
         "imdbRating": 7.6,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -37,17 +36,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "A series centered around a group of football players and their families, friends and handlers.",
+        "releaseDate": "2015-06-21T04:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "Better Call Saul",
         "rating": 4,
         "type": "tv",
-        "year": 2015,
         "id": "tt3032476",
         "img": "https://m.media-amazon.com/images/M/MV5BMGE4YzY4NGEtOWYyYS00ZDk2LWExMmMtZDIyODhiMmNlMGE0XkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_SX300.jpg",
         "imdbRating": 8.8,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -57,17 +57,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "The trials and tribulations of criminal lawyer Jimmy McGill in the time before he established his strip-mall law office in Albuquerque, New Mexico.",
+        "releaseDate": "2015-02-08T05:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "Cleverman",
         "rating": 4,
         "type": "tv",
-        "year": 2016,
         "id": "tt4649420",
         "img": "https://m.media-amazon.com/images/M/MV5BNmZhOTQxNzktMDQwOS00NjM0LTljODYtNTExMjk2NDc5NjM1XkEyXkFqcGdeQXVyMzU3MTc5OTE@._V1_SX300.jpg",
         "imdbRating": 6.4,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -77,17 +78,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "In the very near future, creatures from ancient mythology must live among humans and battle for survival in a world that wants to silence, exploit and destroy them.",
+        "releaseDate": "2016-06-01T04:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "Continuum",
         "rating": 4,
         "type": "tv",
-        "year": 2012,
         "id": "tt1954347",
         "img": "https://m.media-amazon.com/images/M/MV5BMTUzNTU1NzQ2Ml5BMl5BanBnXkFtZTcwMDUzNjk4Nw@@._V1_SX300.jpg",
         "imdbRating": 7.6,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -97,17 +99,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "A detective from the year 2077 finds herself trapped in present-day Vancouver and searching for ruthless criminals from the future.",
+        "releaseDate": "2013-01-14T05:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "Dark Matter",
         "rating": 4,
         "type": "tv",
-        "year": 2015,
         "id": "tt4159076",
         "img": "https://m.media-amazon.com/images/M/MV5BYjI5OGMxNzYtZmZiYS00NDI1LWI4NWMtOTZmNjY1MjMzZjExXkEyXkFqcGdeQXVyNTgxMjE3OTQ@._V1_SX300.jpg",
         "imdbRating": 7.5,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -117,17 +120,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "In the dystopian 27th century, six people wake up on a deserted spaceship with no memory of who they are or what they're doing there. They reluctantly team up and set off to find answers with the help of a female android.",
+        "releaseDate": "2015-06-12T04:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "Game of Thrones",
         "rating": 4,
         "type": "tv",
-        "year": 2011,
         "id": "tt0944947",
         "img": "https://m.media-amazon.com/images/M/MV5BYTRiNDQwYzAtMzVlZS00NTI5LWJjYjUtMzkwNTUzMWMxZTllXkEyXkFqcGdeQXVyNDIzMzcwNjc@._V1_SX300.jpg",
-        "imdbRating": 9.3,
-        "time": 1531606415950,
+        "imdbRating": 9.2,
         "reviews": {
             "items": [
                 {
@@ -137,17 +141,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "Nine noble families fight for control over the lands of Westeros, while an ancient enemy returns after being dormant for millennia.",
+        "releaseDate": "2011-04-17T04:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "Killjoys",
         "rating": 4,
         "type": "tv",
-        "year": 2015,
         "id": "tt3952222",
         "img": "https://m.media-amazon.com/images/M/MV5BZmEwN2I0NjktNDBmNS00MTgzLWI1ODgtZGY5NzM5ZDMyNjdmXkEyXkFqcGdeQXVyMzY0MTE3NzU@._V1_SX300.jpg",
         "imdbRating": 7.2,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -157,17 +162,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "In the Quad, a planetary system on the brink of a bloody interplanetary class war, a fun loving trio of bounty hunters attempt to remain impartial as they chase deadly warrants.",
+        "releaseDate": "2015-06-19T04:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "Master of None",
         "rating": 4,
         "type": "tv",
-        "year": 2015,
         "id": "tt4635276",
         "img": "https://m.media-amazon.com/images/M/MV5BYTJlYWJiZTItZGM5NC00MTJjLWFlNTMtMTkxOGFiZTMwNDNlXkEyXkFqcGdeQXVyODk4OTc3MTY@._V1_SX300.jpg",
         "imdbRating": 8.3,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -177,17 +183,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "The personal and professional life of Dev, a 30-year-old actor in New York.",
+        "releaseDate": "2015-11-06T05:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "Mr. Robot",
         "rating": 4,
         "type": "tv",
-        "year": 2015,
         "id": "tt4158110",
         "img": "https://m.media-amazon.com/images/M/MV5BMzgxMmQxZjQtNDdmMC00MjRlLTk1MDEtZDcwNTdmOTg0YzA2XkEyXkFqcGdeQXVyMzQ2MDI5NjU@._V1_SX300.jpg",
         "imdbRating": 8.5,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -197,17 +204,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "Elliot, a brilliant but highly unstable young cyber-security engineer and vigilante hacker, becomes a key figure in a complex game of global dominance when he and his shadowy allies try to take down the corrupt corporation he works f",
+        "releaseDate": "2015-06-24T04:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "Narcos",
         "rating": 4,
         "type": "tv",
-        "year": 2015,
         "id": "tt2707408",
         "img": "https://m.media-amazon.com/images/M/MV5BNmFjODU3YzgtMGUwNC00ZGI3LWFkZjQtMjkxZDc3NmQ1MzcyXkEyXkFqcGdeQXVyNjUwNzk3NDc@._V1_SX300.jpg",
         "imdbRating": 8.8,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -217,17 +225,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "A chronicled look at the criminal exploits of Colombian drug lord Pablo Escobar, as well as the many other drug kingpins who plagued the country through the years.",
+        "releaseDate": "2015-08-28T04:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "Orphan Black",
         "rating": 4,
         "type": "tv",
-        "year": 2013,
         "id": "tt2234222",
         "img": "https://m.media-amazon.com/images/M/MV5BZjM1ZTVlMGYtNjVkZS00OGMzLWFjMmYtYTE3NjJhZDRlODY3XkEyXkFqcGdeQXVyNzA5NjUyNjM@._V1_SX300.jpg",
         "imdbRating": 8.3,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -237,17 +246,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "A streetwise hustler is pulled into a compelling conspiracy after witnessing the suicide of a girl who looks just like her.",
+        "releaseDate": "2013-03-30T04:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "Sherlock",
         "rating": 4,
         "type": "tv",
-        "year": 2010,
         "id": "tt1475582",
         "img": "https://m.media-amazon.com/images/M/MV5BMWY3NTljMjEtYzRiMi00NWM2LTkzNjItZTVmZjE0MTdjMjJhL2ltYWdlL2ltYWdlXkEyXkFqcGdeQXVyNTQ4NTc5OTU@._V1_SX300.jpg",
         "imdbRating": 9.1,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -257,17 +267,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "A modern update finds the famous sleuth and his doctor partner solving crime in 21st century London.",
+        "releaseDate": "2010-10-24T04:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "Silicon Valley",
         "rating": 4,
         "type": "tv",
-        "year": 2014,
         "id": "tt2575988",
         "img": "https://m.media-amazon.com/images/M/MV5BM2Q5YjNjZWMtYThmYy00N2ZjLWE2NDctNmZjMmZjYWE2NjEwXkEyXkFqcGdeQXVyMTAzMDM4MjM0._V1_SX300.jpg",
         "imdbRating": 8.5,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -277,17 +288,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "Follows the struggle of Richard Hendricks, a Silicon Valley engineer trying to build his own company called Pied Piper.",
+        "releaseDate": "2014-04-06T04:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "Stranger Things",
         "rating": 4,
         "type": "tv",
-        "year": 2016,
         "id": "tt4574334",
         "img": "https://m.media-amazon.com/images/M/MV5BN2ZmYjg1YmItNWQ4OC00YWM0LWE0ZDktYThjOTZiZjhhN2Q2XkEyXkFqcGdeQXVyNjgxNTQ3Mjk@._V1_SX300.jpg",
         "imdbRating": 8.7,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -309,17 +321,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "When a young boy disappears, his mother, a police chief and his friends must confront terrifying supernatural forces in order to get him back.",
+        "releaseDate": "2016-07-15T04:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "Supernatural",
         "rating": 4,
         "type": "tv",
-        "year": 2005,
         "id": "tt0460681",
         "img": "https://m.media-amazon.com/images/M/MV5BNzRmZWJhNjUtY2ZkYy00N2MyLWJmNTktOTAwY2VkODVmOGY3XkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_SX300.jpg",
         "imdbRating": 8.4,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -329,17 +342,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "Two brothers follow their father's footsteps as hunters, fighting evil supernatural beings of many kinds, including monsters, demons and gods that roam the earth.",
+        "releaseDate": "2005-09-13T04:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "The Blacklist",
         "rating": 4,
         "type": "tv",
-        "year": 2013,
         "id": "tt2741602",
         "img": "https://m.media-amazon.com/images/M/MV5BZDA1MzE3M2EtNTE4Ni00OGE4LWE1NjctYzFhMzA2NDgxMDIxXkEyXkFqcGdeQXVyODUxOTU0OTg@._V1_SX300.jpg",
         "imdbRating": 8,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -349,17 +363,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "A new FBI profiler, Elizabeth Keen, has her entire life uprooted when a mysterious criminal, Raymond Reddington, who has eluded capture for decades, turns himself in and insists on speaking only to her.",
+        "releaseDate": "2013-09-23T04:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "The Expanse",
         "rating": 4,
         "type": "tv",
-        "year": 2015,
         "id": "tt3230854",
         "img": "https://m.media-amazon.com/images/M/MV5BMjM4ZTVkODctNGZhNC00NWY5LWJkMjEtYmI1ZDg2Yjg2NDQzXkEyXkFqcGdeQXVyNjcyNjcyMzQ@._V1_SX300.jpg",
         "imdbRating": 8.5,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -375,33 +390,18 @@
                     }
                 }
             ]
-        }
-    },
-    {
-        "title": "The Flash (2014)",
-        "rating": 4,
-        "type": "tv",
-        "time": 1531606415950,
-        "reviews": {
-            "items": [
-                {
-                    "rating": 4,
-                    "user": {
-                        "name": "Kent"
-                    }
-                }
-            ]
-        }
+        },
+        "description": "In the 24th century, a disparate band of antiheroes unravel a vast conspiracy that threatens the Solar System's fragile state of cold war.",
+        "releaseDate": "2015-11-23T05:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "The League",
         "rating": 4,
         "type": "tv",
-        "year": 2009,
         "id": "tt1480684",
         "img": "https://m.media-amazon.com/images/M/MV5BMjAxMDg2NTc4OV5BMl5BanBnXkFtZTgwNTI2NTIzNjE@._V1_SX300.jpg",
         "imdbRating": 8.2,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -411,17 +411,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "An ensemble comedy that follows a group of old friends in a fantasy football league who care deeply about one another -- so deeply that they use every opportunity to make each other's lives miserable.",
+        "releaseDate": "2009-10-29T04:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "Workaholics",
         "rating": 4,
         "type": "tv",
-        "year": 2011,
         "id": "tt1610527",
         "img": "https://m.media-amazon.com/images/M/MV5BMTkxNzQ0MDMyMF5BMl5BanBnXkFtZTgwNTYzMjQ2NzE@._V1_SX300.jpg",
         "imdbRating": 8.1,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -431,17 +432,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "A single-camera comedy featuring three friends who work together as telemarketers from 9 to 5, and live together from 5 to 9.",
+        "releaseDate": "2011-04-06T04:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "Black Lightning",
         "rating": 3,
         "type": "tv",
-        "year": 2017,
         "id": "tt6045840",
         "img": "https://m.media-amazon.com/images/M/MV5BZTU0MGU1MDAtZTI5MS00YjAzLWE3MDAtNWUzMjFlYTdiMzIzXkEyXkFqcGdeQXVyMTEyMjM2NDc2._V1_SX300.jpg",
         "imdbRating": 6.1,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -451,17 +453,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "A crusading school principal gets back into action as the original African-American electrical superhero.",
+        "releaseDate": "2018-01-16T05:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "Brooklyn Nine-Nine",
         "rating": 3,
         "type": "tv",
-        "year": 2013,
         "id": "tt2467372",
         "img": "https://m.media-amazon.com/images/M/MV5BNzVkYWY4NzYtMWFlZi00YzkwLThhZDItZjcxYTU4ZTMzMDZmXkEyXkFqcGdeQXVyODUxOTU0OTg@._V1_SX300.jpg",
         "imdbRating": 8.4,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -471,17 +474,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "Comedy series following the exploits of Det. Jake Peralta and his diverse, lovable colleagues as they police the NYPD's 99th Precinct.",
+        "releaseDate": "2013-09-17T04:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "Gotham",
         "rating": 3,
         "type": "tv",
-        "year": 2014,
         "id": "tt3749900",
         "img": "https://m.media-amazon.com/images/M/MV5BMTU5NjQ2MTU4NV5BMl5BanBnXkFtZTgwOTYyNTAwNzM@._V1_SX300.jpg",
         "imdbRating": 7.8,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -491,17 +495,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "The story behind Detective James Gordon's rise to prominence in Gotham City in the years before Batman's arrival.",
+        "releaseDate": "2014-09-22T04:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "Grimm",
         "rating": 3,
         "type": "tv",
-        "year": 2011,
         "id": "tt1830617",
         "img": "https://m.media-amazon.com/images/M/MV5BMTkyODg2MzQwMV5BMl5BanBnXkFtZTgwNTA2MjE1MDI@._V1_SX300.jpg",
         "imdbRating": 7.8,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -511,17 +516,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "Season 5 promo",
+        "releaseDate": "2011-10-28T04:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "Halt and Catch Fire",
         "rating": 3,
         "type": "tv",
-        "year": 2014,
         "id": "tt2543312",
         "img": "https://m.media-amazon.com/images/M/MV5BMTczNjAyMDg1Nl5BMl5BanBnXkFtZTgwMDQyNTA2OTE@._V1_SX300.jpg",
         "imdbRating": 8.4,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -531,17 +537,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "Follows some players in the 80s technological revolution that lead to information society.",
+        "releaseDate": "2014-06-01T04:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "Lost in Space",
         "rating": 3,
         "type": "tv",
-        "year": 2018,
         "id": "tt5232792",
         "img": "https://m.media-amazon.com/images/M/MV5BYzZkOTY4MDgtODI5Mi00ZjA4LWJkODgtYzBiOGE3MWNhZWFmXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_SX300.jpg",
         "imdbRating": 7.3,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -551,17 +558,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "After crash-landing on an alien planet, the Robinson family fight against all odds to survive and escape, but they're surrounded by hidden dangers.",
+        "releaseDate": "2018-04-13T04:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "Marco Polo",
         "rating": 3,
         "type": "tv",
-        "year": 2014,
         "id": "tt2189461",
         "img": "https://m.media-amazon.com/images/M/MV5BMTcwMDU5NzMzOV5BMl5BanBnXkFtZTgwNzk5NTE0MzE@._V1_SX300.jpg",
         "imdbRating": 8,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -571,17 +579,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "In a world replete with greed, betrayal, sexual intrigue and rivalry, \"Marco Polo\" is based on the famed explorer's adventures in Kublai Khan's court in 13th century Mongolia.",
+        "releaseDate": "2014-12-12T05:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "Strike Back",
         "rating": 3,
         "type": "tv",
-        "year": 2010,
         "id": "tt1492179",
         "img": "https://m.media-amazon.com/images/M/MV5BMjgyNDk4ZTYtM2EzNC00MmU3LTg2MmQtYjdlMjA4ZmEwNzU5XkEyXkFqcGdeQXVyMzU5Njg5MDI@._V1_SX300.jpg",
         "imdbRating": 8.2,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -591,17 +600,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "Follows the actions of Section 20, a secretive unit of British military intelligence. A team of special operations personnel conduct several high risk missions across the globe.",
+        "releaseDate": "2011-08-11T04:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "Suits",
         "rating": 3,
         "type": "tv",
-        "year": 2011,
         "id": "tt1632701",
         "img": "https://m.media-amazon.com/images/M/MV5BNmVmMmM5ZmItZDg0OC00NTFiLWIxNzctZjNmYTY5OTU3ZWU3XkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg",
         "imdbRating": 8.4,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -611,17 +621,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "On the run from a drug deal gone bad, brilliant college dropout Mike Ross finds himself working with Harvey Specter, one of New York City's best lawyers.",
+        "releaseDate": "2011-06-23T04:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "The 100",
         "rating": 3,
         "type": "tv",
-        "year": 2014,
         "id": "tt2661044",
         "img": "https://m.media-amazon.com/images/M/MV5BNjRiYTIzZmUtMTFkNS00ZTM0LWE4ODAtMDliMGE4NzM5ZjVlXkEyXkFqcGdeQXVyNDQ0MTYzMDA@._V1_SX300.jpg",
         "imdbRating": 7.6,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -631,17 +642,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "Set ninety-seven years after a nuclear war has destroyed civilization, when a spaceship housing humanity's lone survivors sends one hundred juvenile delinquents back to Earth, in hopes of possibly re-populating the planet.",
+        "releaseDate": "2014-03-19T04:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "The Leftovers",
         "rating": 3,
         "type": "tv",
-        "year": 2014,
         "id": "tt2699128",
         "img": "https://m.media-amazon.com/images/M/MV5BNTE3MDc1MjY4NV5BMl5BanBnXkFtZTgwMDg4MjQ4MTE@._V1_SX300.jpg",
         "imdbRating": 8.3,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -651,17 +663,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "Three years after the disappearance of two percent of the global population, a group of people in a small New York community try to continue their lives while coping with the tragedy of the unexplained nature of the event.",
+        "releaseDate": "2014-06-29T04:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "The Magicians",
         "rating": 3,
         "type": "tv",
-        "year": 2015,
         "id": "tt4254242",
         "img": "https://m.media-amazon.com/images/M/MV5BYTU3ZWRmNDktMDQ0My00OGQzLTkzMzktOTVjZjUzMzVmNjNmXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_SX300.jpg",
         "imdbRating": 7.6,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -671,17 +684,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "After being recruited to a secretive academy, a group of students discover that the magic they read about as children is very real-and more dangerous than they ever imagined.",
+        "releaseDate": "2015-12-16T05:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "The Man in the High Castle",
         "rating": 3,
         "type": "tv",
-        "year": 2015,
         "id": "tt1740299",
         "img": "https://m.media-amazon.com/images/M/MV5BZWEwNzQ4NzUtMWRmYS00NDdiLTg5NDItODA5M2M4YTM0ZTE2XkEyXkFqcGdeQXVyMTAzNjU2NjM1._V1_SX300.jpg",
         "imdbRating": 8,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -691,17 +705,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "In a dystopian America dominated by Nazi Germany and Imperial Japan, a young woman discovers a mysterious film that may hold the key to toppling the totalitarian regimes.",
+        "releaseDate": "2015-01-15T05:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "The OA",
         "rating": 3,
         "type": "tv",
-        "year": 2016,
         "id": "tt4635282",
         "img": "https://m.media-amazon.com/images/M/MV5BMTY5OTkwNDkzOF5BMl5BanBnXkFtZTgwMDEyNzI1NzM@._V1_SX300.jpg",
         "imdbRating": 7.8,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -711,17 +726,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "Having gone missing seven years ago, the previously blind Prairie returns home, now in her twenties with her sight restored. While many believe she is a miracle, others worry that she could be dangerous.",
+        "releaseDate": "2016-12-16T05:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "The Strain",
         "rating": 3,
         "type": "tv",
-        "year": 2014,
         "id": "tt2654620",
         "img": "https://m.media-amazon.com/images/M/MV5BNjQxNzVlNjQtMTg3YS00MzBmLThkNzAtMzMyNDUyMTVlNzg0XkEyXkFqcGdeQXVyOTQxNzM2MjY@._V1_SX300.jpg",
         "imdbRating": 7.3,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -731,17 +747,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "A mysterious viral outbreak with hallmarks of an ancient and evil strain of vampirism ravages the city of New York.",
+        "releaseDate": "2014-07-13T04:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "Travelers",
         "rating": 3,
         "type": "tv",
-        "year": 2016,
         "id": "tt5651844",
         "img": "https://m.media-amazon.com/images/M/MV5BMjUzOTQwOTg1MF5BMl5BanBnXkFtZTgwNzE4NzQ3NjM@._V1_SX300.jpg",
         "imdbRating": 8.1,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -751,17 +768,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "Hundreds of years from now, surviving humans discover how to send consciousness back through time, into people of the 21st century, while attempting to change the path of humanity.",
+        "releaseDate": "2016-12-23T05:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "Arrow",
         "rating": 2,
         "type": "tv",
-        "year": 2012,
         "id": "tt2193021",
         "img": "https://m.media-amazon.com/images/M/MV5BMTI0NTMwMDgtYTMzZC00YmJhLTg4NzMtMTc1NjI4MWY4NmQ4XkEyXkFqcGdeQXVyNTY3MTYzOTA@._V1_SX300.jpg",
         "imdbRating": 7.5,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -771,17 +789,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "Spoiled billionaire playboy Oliver Queen is missing and presumed dead when his yacht is lost at sea. He returns five years later a changed man, determined to clean up the city as a hooded vigilante armed with a bow.",
+        "releaseDate": "2012-10-10T04:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "Broad City",
         "rating": 2,
         "type": "tv",
-        "year": 2014,
         "id": "tt2578560",
         "img": "https://m.media-amazon.com/images/M/MV5BNTVjMGFhMmUtMTMwMS00OTE0LTlkODgtMzU0ZDZhY2U1NTliXkEyXkFqcGdeQXVyNjU2ODM5MjU@._V1_SX300.jpg",
         "imdbRating": 8.4,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -791,17 +810,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "Broad City follows two women throughout their daily lives in New York City, making the smallest and mundane events hysterical and disturbing to watch all at the same time.",
+        "releaseDate": "2014-01-22T05:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "DC's Legends of Tomorrow",
         "rating": 2,
         "type": "tv",
-        "year": 2016,
         "id": "tt4532368",
         "img": "https://m.media-amazon.com/images/M/MV5BNDUxM2YwODYtYTNlMy00NzZjLWE0MzktYWNhY2MxNWJlMmRlXkEyXkFqcGdeQXVyMTEyMjM2NDc2._V1_SX300.jpg",
         "imdbRating": 6.8,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -811,113 +831,18 @@
                     }
                 }
             ]
-        }
-    },
-    {
-        "title": "Marvel's Agent Carter",
-        "rating": 2,
-        "type": "tv",
-        "time": 1531606415950,
-        "reviews": {
-            "items": [
-                {
-                    "rating": 2,
-                    "user": {
-                        "name": "Kent"
-                    }
-                }
-            ]
-        }
-    },
-    {
-        "title": "Marvel's Iron Fist",
-        "rating": 2,
-        "type": "tv",
-        "time": 1531606415950,
-        "reviews": {
-            "items": [
-                {
-                    "rating": 2,
-                    "user": {
-                        "name": "Kent"
-                    }
-                }
-            ]
-        }
-    },
-    {
-        "title": "Marvel's Luke Cage",
-        "rating": 2,
-        "type": "tv",
-        "time": 1531606415950,
-        "reviews": {
-            "items": [
-                {
-                    "rating": 2,
-                    "user": {
-                        "name": "Kent"
-                    }
-                }
-            ]
-        }
-    },
-    {
-        "title": "Marvel's Runaways",
-        "rating": 2,
-        "type": "tv",
-        "time": 1531606415950,
-        "reviews": {
-            "items": [
-                {
-                    "rating": 2,
-                    "user": {
-                        "name": "Kent"
-                    }
-                }
-            ]
-        }
-    },
-    {
-        "title": "Marvel's The Defenders",
-        "rating": 2,
-        "type": "tv",
-        "time": 1531606415950,
-        "reviews": {
-            "items": [
-                {
-                    "rating": 2,
-                    "user": {
-                        "name": "Kent"
-                    }
-                }
-            ]
-        }
-    },
-    {
-        "title": "Powers (US)",
-        "rating": 2,
-        "type": "tv",
-        "time": 1531606415950,
-        "reviews": {
-            "items": [
-                {
-                    "rating": 2,
-                    "user": {
-                        "name": "Kent"
-                    }
-                }
-            ]
-        }
+        },
+        "description": "Time-travelling rogue Rip Hunter has to recruit a rag-tag team of heroes and villains to help prevent an apocalypse that could impact not only Earth, but all of time.",
+        "releaseDate": "2016-01-21T05:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "Quantico",
         "rating": 2,
         "type": "tv",
-        "year": 2015,
         "id": "tt4428122",
         "img": "https://m.media-amazon.com/images/M/MV5BMTkxNTg3MTc0Ml5BMl5BanBnXkFtZTgwMzYxNDIyNTM@._V1_SX300.jpg",
         "imdbRating": 6.7,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -927,33 +852,18 @@
                     }
                 }
             ]
-        }
-    },
-    {
-        "title": "Stan Lee's Lucky Man",
-        "rating": 2,
-        "type": "tv",
-        "time": 1531606415950,
-        "reviews": {
-            "items": [
-                {
-                    "rating": 2,
-                    "user": {
-                        "name": "Kent"
-                    }
-                }
-            ]
-        }
+        },
+        "description": "A look at the lives of young FBI recruits training at the Quantico base in Virginia when one of them is suspected of being a sleeper terrorist.",
+        "releaseDate": "2015-09-27T04:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "Supergirl",
         "rating": 2,
         "type": "tv",
-        "year": 2015,
         "id": "tt4016454",
         "img": "https://m.media-amazon.com/images/M/MV5BODQ3MmFkZjQtZDVlYi00NTA3LWE2YTMtZmM5NzNkZGE5ZTdjXkEyXkFqcGdeQXVyMTA1OTAyOTI@._V1_SX300.jpg",
         "imdbRating": 6.2,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -963,17 +873,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "The adventures of Superman's cousin in her own superhero career.",
+        "releaseDate": "2015-10-26T04:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "The Originals",
         "rating": 2,
         "type": "tv",
-        "year": 2013,
         "id": "tt2632424",
         "img": "https://m.media-amazon.com/images/M/MV5BNDllZjc2NjEtOGMwZS00ZmNkLTg2NDgtZjJkYjg0YjMxM2FmXkEyXkFqcGdeQXVyNzA5NjUyNjM@._V1_SX300.jpg",
         "imdbRating": 8.2,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -983,17 +894,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "A family of power-hungry thousand-year-old vampires look to take back the city that they built and dominate all those who have done them wrong.",
+        "releaseDate": "2013-10-03T04:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "Van Helsing",
         "rating": 2,
         "type": "tv",
-        "year": 2016,
         "id": "tt5197820",
         "img": "https://m.media-amazon.com/images/M/MV5BZDlhNTRmYjItYTYwNi00ODgwLTkwODUtZjIwOTgxMWY3ZmViXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg",
         "imdbRating": 6.2,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -1003,17 +915,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "Vanessa Helsing, distant relative of famous vampire hunter Abraham Van Helsing, is resurrected only to find that vampires have taken over the world.",
+        "releaseDate": "2016-09-23T04:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "Wynonna Earp",
         "rating": 2,
         "type": "tv",
-        "year": 2016,
         "id": "tt4878326",
         "img": "https://m.media-amazon.com/images/M/MV5BNDM1MGJhY2MtNjBhNC00Yzc0LWE5ZGUtNzY3MmNjOWE4YTM2XkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg",
         "imdbRating": 7.5,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -1023,17 +936,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "Following Wyatt Earp's great great-granddaughter as she battles demons and other creatures. With her unique abilities and a posse of dysfunctional allies, she's the only thing that can bring the paranormal to justice.",
+        "releaseDate": "2016-04-01T04:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "The Shannara Chronicles",
         "rating": 2,
         "type": "tv",
-        "year": 2016,
         "id": "tt1051220",
         "img": "https://m.media-amazon.com/images/M/MV5BOWRmYWJmMzktZTk3MC00NWI3LWJlMWItOWU1MTI3ODUxNDYwXkEyXkFqcGdeQXVyNzgzMzE2MTk@._V1_SX300.jpg",
         "imdbRating": 7.2,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -1043,17 +957,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "Series of adventures, war, and evil that occur throughout the history of the Four Lands.",
+        "releaseDate": "2016-01-05T05:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "The Blacklist: Redemption",
         "rating": 1,
         "type": "tv",
-        "year": 2017,
         "id": "tt5592230",
         "img": "https://m.media-amazon.com/images/M/MV5BODI2MjI4MzQ1OV5BMl5BanBnXkFtZTgwOTk2MDAyMTI@._V1_SX300.jpg",
         "imdbRating": 7.1,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -1063,17 +978,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "Covert operative Tom Keen joins forces with Susan \"Scottie\" Hargrave, the brilliant and cunning chief of a covert mercenary organization that solves problems that are too dangerous for the government.",
+        "releaseDate": "2017-02-23T05:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "Sense8",
         "rating": 1,
         "type": "tv",
-        "year": 2015,
         "id": "tt2431438",
         "img": "https://m.media-amazon.com/images/M/MV5BMjA4MTEyMzcwMl5BMl5BanBnXkFtZTgwMTIwODczNTM@._V1_SX300.jpg",
         "imdbRating": 8.3,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -1083,17 +999,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "A group of people around the world are suddenly linked mentally, and must find a way to survive being hunted by those who see them as a threat to the world's order.",
+        "releaseDate": "2015-06-05T04:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "Shadowhunters",
         "rating": 1,
         "type": "tv",
-        "year": 2016,
         "id": "tt4145054",
         "img": "https://m.media-amazon.com/images/M/MV5BNTU1N2ViZDctYzQwOS00ZDYyLThkMDItNmEwYTIyZTI4NGFhXkEyXkFqcGdeQXVyNTM1NDMwNDM@._V1_SX300.jpg",
         "imdbRating": 6.6,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -1103,33 +1020,18 @@
                     }
                 }
             ]
-        }
-    },
-    {
-        "title": "Marvel's Inhumans",
-        "rating": 1,
-        "type": "tv",
-        "time": 1531606415950,
-        "reviews": {
-            "items": [
-                {
-                    "rating": 1,
-                    "user": {
-                        "name": "Kent"
-                    }
-                }
-            ]
-        }
+        },
+        "description": "After her mother disappears, Clary must venture into the dark world of demon hunting, and embrace her new role among the Shadowhunters.",
+        "releaseDate": "2016-01-12T05:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "Future Man",
         "rating": 1,
         "type": "tv",
-        "year": 2017,
         "id": "tt4975856",
         "img": "https://m.media-amazon.com/images/M/MV5BMWQ5MjE3NjMtOGZhOS00YmUxLWFhOTUtYjQ5YjUxOTZkNjBjXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_SX300.jpg",
         "imdbRating": 7.7,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -1139,17 +1041,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "Josh Futturman, a janitor by day and a gamer by night, is recruited by mysterious visitors to travel through time to prevent the extinction of humanity.",
+        "releaseDate": "2017-11-14T05:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "Heroes Reborn",
         "rating": 1,
         "type": "tv",
-        "year": 2015,
         "id": "tt3556944",
         "img": "https://m.media-amazon.com/images/M/MV5BNDg2NTI5OTYzOV5BMl5BanBnXkFtZTgwMzI0MzA1NjE@._V1_SX300.jpg",
         "imdbRating": 6.7,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -1159,17 +1062,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "A year ago, a terrorist attack in Odessa, Texas, left the city decimated. Blamed for the tragic event, those with extraordinary abilities are in hiding or on the run from those with nefarious motives.",
+        "releaseDate": "2015-09-24T04:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "Limitless",
         "rating": 2.3333333333333335,
         "type": "tv",
-        "year": 2015,
         "id": "tt4422836",
         "img": "https://m.media-amazon.com/images/M/MV5BMTA4ODE4NjA5ODleQTJeQWpwZ15BbWU4MDUxMTQ0NTYx._V1_SX300.jpg",
         "imdbRating": 7.7,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -1191,17 +1095,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "An average twenty-eight-year-old man who gains the ability to use the full extent of his brain's capabilities is hired by the F.B.I. as a consultant.",
+        "releaseDate": "2015-09-22T04:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "The Walking Dead",
         "rating": 1,
         "type": "tv",
-        "year": 2010,
         "id": "tt1520211",
         "img": "https://m.media-amazon.com/images/M/MV5BMTc5ZmM0OTQtNDY4MS00ZjMyLTgwYzgtOGY0Y2VlMWFmNDU0XkEyXkFqcGdeQXVyNDIzMzcwNjc@._V1_SX300.jpg",
         "imdbRating": 8.2,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -1211,17 +1116,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "Sheriff Deputy Rick Grimes wakes up from a coma to learn the world is in ruins and must lead a group of survivors to stay alive.",
+        "releaseDate": "2010-10-31T04:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "Godless",
         "rating": 4,
         "type": "tv",
-        "year": 2017,
         "id": "tt5516154",
         "img": "https://m.media-amazon.com/images/M/MV5BMTY0NzkxNDcxNF5BMl5BanBnXkFtZTgwOTI5ODM5MzI@._V1_SX300.jpg",
         "imdbRating": 8.3,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -1237,17 +1143,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "In the 1880s American West, murderous outlaw gang leader Frank Griffin hunts for ex-protege Roy Goode. Frank's chase leads him to La Belle, New Mexico--a town inhabited, after a mining disaster, almost entirely by women.",
+        "releaseDate": "2017-11-22T05:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "Mindhunter",
         "rating": 4,
         "type": "tv",
-        "year": 2017,
         "id": "tt5290382",
         "img": "https://m.media-amazon.com/images/M/MV5BNWNmYzQ1ZWUtYTQ3ZS00Y2UwLTlkMDctZThlOTJkMGJiNzBiXkEyXkFqcGdeQXVyNjg2NjQwMDQ@._V1_SX300.jpg",
         "imdbRating": 8.6,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -1269,17 +1176,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "Set in the late 1970s, two FBI agents are tasked with interviewing serial killers to solve open cases.",
+        "releaseDate": "2017-10-13T04:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "Into the Badlands",
         "rating": 4,
         "type": "tv",
-        "year": 2015,
         "id": "tt3865236",
         "img": "https://m.media-amazon.com/images/M/MV5BNGUzMmNkMWMtNTI4OC00ZGY1LThlZmUtMDI5YjYyZDE2MzE2XkEyXkFqcGdeQXVyMzY0MTE3NzU@._V1_SX300.jpg",
         "imdbRating": 8,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -1289,17 +1197,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "Don't miss the final episodes of \"Into the Badlands,\" premiering Sunday, March 24, 2019.",
+        "releaseDate": "2015-11-15T05:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "It's Always Sunny in Philadelphia",
         "rating": 4,
         "type": "tv",
-        "year": 2005,
         "id": "tt0472954",
         "img": "https://m.media-amazon.com/images/M/MV5BOTExNGZkMWMtMmIwZC00YjA3LTgwM2ItZjQ2YmZkMzQ1YWZkXkEyXkFqcGdeQXVyMzQ2MDI5NjU@._V1_SX300.jpg",
         "imdbRating": 8.8,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -1309,17 +1218,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "Five friends with big egos and small brains are the proprietors of an Irish pub in Philadelphia.",
+        "releaseDate": "2005-08-04T04:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "Daredevil",
         "rating": 4,
         "type": "tv",
-        "year": 2015,
         "id": "tt3322312",
         "img": "https://m.media-amazon.com/images/M/MV5BODcwOTg2MDE3NF5BMl5BanBnXkFtZTgwNTUyNTY1NjM@._V1_SX300.jpg",
         "imdbRating": 8.6,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -1329,17 +1239,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "A blind lawyer by day, vigilante by night. Matt Murdock fights the crime of New York as Daredevil.",
+        "releaseDate": "2015-04-10T04:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "The Punisher",
         "rating": 4,
         "type": "tv",
-        "year": 2017,
         "id": "tt5675620",
         "img": "https://m.media-amazon.com/images/M/MV5BMTExODIwOTUxNzFeQTJeQWpwZ15BbWU4MDE5MDA0MTcz._V1_SX300.jpg",
         "imdbRating": 8.5,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -1349,17 +1260,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "After the murder of his family, Marine veteran Frank Castle becomes the vigilante known as \"The Punisher,\" with only one goal in mind: to avenge them.",
+        "releaseDate": "2017-11-17T05:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "Archer",
         "rating": 4,
         "type": "tv",
-        "year": 2009,
         "id": "tt1486217",
         "img": "https://m.media-amazon.com/images/M/MV5BMTg3NTMwMzY2OF5BMl5BanBnXkFtZTgwMDcxMjQ0NDE@._V1_SX300.jpg",
         "imdbRating": 8.6,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -1369,17 +1281,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "Covert black ops and espionage take a back seat to zany personalities and relationships between secret agents and drones.",
+        "releaseDate": "2009-09-17T04:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "Westworld",
         "rating": 4,
         "type": "tv",
-        "year": 2016,
         "id": "tt0475784",
         "img": "https://m.media-amazon.com/images/M/MV5BMTRmYzNmOTctZjMwOS00ODZlLWJiZGQtNDg5NDY5NjE3MTczXkEyXkFqcGdeQXVyMDM2NDM2MQ@@._V1_SX300.jpg",
         "imdbRating": 8.6,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -1389,17 +1302,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "Set at the intersection of the near future and the reimagined past, explore a world in which every human appetite can be indulged without consequence.",
+        "releaseDate": "2016-10-02T04:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "Agents of S.H.I.E.L.D.",
         "rating": 3,
         "type": "tv",
-        "year": 2013,
         "id": "tt2364582",
         "img": "https://m.media-amazon.com/images/M/MV5BMTkwODYyMjgzOV5BMl5BanBnXkFtZTgwODAzMTE5MjE@._V1_SX300.jpg",
         "imdbRating": 7.5,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -1409,17 +1323,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "The missions of the Strategic Homeland Intervention, Enforcement and Logistics Division.",
+        "releaseDate": "2013-09-24T04:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "Cowboy Bebop",
         "rating": 4,
         "type": "tv",
-        "year": 1998,
         "id": "tt0213338",
         "img": "https://m.media-amazon.com/images/M/MV5BNGNlNjBkODEtZThlOC00YzUxLWI0MjMtMjk3YzJmMDFlNWZlXkEyXkFqcGdeQXVyNjI0MDg2NzE@._V1_SX300.jpg",
         "imdbRating": 8.9,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -1435,17 +1350,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "The futuristic misadventures and tragedies of an easygoing bounty hunter and his partners.",
+        "releaseDate": "2001-09-02T04:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "Attack on Titan",
         "rating": 4,
         "type": "tv",
-        "year": 2013,
         "id": "tt2560140",
         "img": "https://m.media-amazon.com/images/M/MV5BMTY5ODk1NzUyMl5BMl5BanBnXkFtZTgwMjUyNzEyMTE@._V1_SX300.jpg",
         "imdbRating": 9,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -1455,17 +1371,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "After his hometown is destroyed and his mother is killed, young Eren Jaeger vows to cleanse the earth of the giant humanoid Titans that have brought humanity to the brink of extinction.",
+        "releaseDate": "2013-09-28T04:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "Evil Genius",
         "rating": 4,
         "type": "tv",
-        "year": 2017,
         "id": "tt7552556",
         "img": "https://m.media-amazon.com/images/M/MV5BYjhmNjUzOTUtNmQwMC00ZGRlLWI3ZGItODFhMzQ2MTRhODcwXkEyXkFqcGdeQXVyNjA4MDcyNDc@._V1_SX300.jpg",
         "imdbRating": 7.8,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -1481,17 +1398,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "For centuries, brilliant minds have changed and shaped the world. But when genius is used for evil, the results are some of the most twisted, inventive, and outrageous crimes in history.",
+        "releaseDate": "2017-08-01T04:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "Fear the Walking Dead",
         "rating": 1,
         "type": "tv",
-        "year": 2015,
         "id": "tt3743822",
         "img": "https://m.media-amazon.com/images/M/MV5BNDZkYTRjMWQtZThiOS00MjJlLWFkNDktNzNhODNhOWNlNjdjXkEyXkFqcGdeQXVyMTEyMjM2NDc2._V1_SX300.jpg",
         "imdbRating": 6.9,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -1501,17 +1419,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "A Walking Dead spinoff set in Los Angeles, California. Follows two families who must band together to survive the undead apocalypse.",
+        "releaseDate": "2015-08-23T04:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "Maniac",
         "rating": 3.33,
         "type": "tv",
-        "year": 2018,
         "id": "tt5580146",
         "img": "https://m.media-amazon.com/images/M/MV5BMDMwOTgyNzYtNWI2Zi00MDcwLWEyNmUtMGQ5YzA3ZTljMTA2XkEyXkFqcGdeQXVyNjU2ODM5MjU@._V1_SX300.jpg",
         "imdbRating": 7.8,
-        "time": 1537977116468,
         "reviews": {
             "items": [
                 {
@@ -1533,17 +1452,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "\"Maniac\" hits Netflix on Sept. 21, 2018. Plot: Two strangers (Jonah Hill and Emma Stone) are drawn to a mysterious pharmaceutical trial that will, they're assured, with no complications or side-effects whatsoever, solve all of their problems, permanently. Things do not go as planned.",
+        "releaseDate": "2018-09-21T04:00:00.000Z",
+        "createdAt": "2018-09-26T15:51:56.468Z"
     },
     {
         "title": "Q: Into the Storm",
         "rating": 3,
         "type": "tv",
-        "year": 2021,
         "id": "tt14215442",
         "img": "https://m.media-amazon.com/images/M/MV5BNTZlMDQ0NGEtYWVjMS00ZGZmLTljM2YtNWI3ZjA3YjYwZWE1XkEyXkFqcGdeQXVyNjEwNTM2Mzc@._V1_SX300.jpg",
         "imdbRating": 7.6,
-        "time": 1617757313059,
         "reviews": {
             "items": [
                 {
@@ -1559,17 +1479,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "",
+        "releaseDate": "2021-03-21T04:00:00.000Z",
+        "createdAt": "2021-04-07T01:01:53.059Z"
     },
     {
         "title": "Shadow and Bone",
         "rating": 3,
         "type": "tv",
-        "year": 2021,
         "id": "tt2403776",
         "img": "https://m.media-amazon.com/images/M/MV5BNTNhY2JlMmItMGMzZi00ZTM2LTlmNTItZDBkMGVhNGJhYWRhXkEyXkFqcGdeQXVyMTEyMjM2NDc2._V1_SX300.jpg",
         "imdbRating": 7.7,
-        "time": 1620942362292,
         "reviews": {
             "items": [
                 {
@@ -1585,17 +1506,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "Dark forces conspire against orphan mapmaker Alina Starkov when she unleashes an extraordinary power that could change the fate of her war-torn world.",
+        "releaseDate": "2021-04-23T04:00:00.000Z",
+        "createdAt": "2021-05-13T21:46:02.292Z"
     },
     {
         "title": "The Good Place",
         "rating": 3,
         "type": "tv",
-        "year": 2016,
         "id": "tt4955642",
         "img": "https://m.media-amazon.com/images/M/MV5BYmMxNjM0NmItNGU1Mi00OGMwLTkzMzctZmE3YjU1ZDE4NmFjXkEyXkFqcGdeQXVyODUxOTU0OTg@._V1_SX300.jpg",
         "imdbRating": 8.2,
-        "time": 1595210986363,
         "reviews": {
             "items": [
                 {
@@ -1611,17 +1533,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "Four people and their otherworldly frienemy struggle in the afterlife to define what it means to be good.",
+        "releaseDate": "2016-09-19T04:00:00.000Z",
+        "createdAt": "2020-07-20T02:09:46.363Z"
     },
     {
         "title": "Sweet Tooth",
         "rating": 3,
         "type": "tv",
-        "year": 2021,
         "id": "tt12809988",
         "img": "https://m.media-amazon.com/images/M/MV5BOTk4ZDRhYzEtZWExNy00MjIyLTgyYmMtN2Y2MzA4YzZhZTZmXkEyXkFqcGdeQXVyODk4OTc3MTY@._V1_SX300.jpg",
-        "imdbRating": 8,
-        "time": 1623588238300,
+        "imdbRating": 7.9,
         "reviews": {
             "items": [
                 {
@@ -1637,17 +1560,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "A boy who is half human and half deer survives in a post-apocalyptic world with other hybrids.",
+        "releaseDate": "2021-06-04T04:00:00.000Z",
+        "createdAt": "2021-06-13T12:43:58.300Z"
     },
     {
         "title": "Loki",
         "rating": 4,
         "type": "tv",
-        "year": 2021,
         "id": "tt9140554",
         "img": "https://m.media-amazon.com/images/M/MV5BNTkwOTE1ZDYtODQ3Yy00YTYwLTg0YWQtYmVkNmFjNGZlYmRiXkEyXkFqcGdeQXVyNTc4MjczMTM@._V1_SX300.jpg",
         "imdbRating": 8.4,
-        "time": 1626311784107,
         "reviews": {
             "items": [
                 {
@@ -1669,17 +1593,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "The mercurial villain Loki resumes his role as the God of Mischief in a new series that takes place after the events of “Avengers: Endgame.”",
+        "releaseDate": "2021-06-09T04:00:00.000Z",
+        "createdAt": "2021-07-15T01:16:24.107Z"
     },
     {
         "title": "Atlanta",
         "rating": 3,
         "type": "tv",
-        "year": 2016,
         "id": "tt4288182",
         "img": "https://m.media-amazon.com/images/M/MV5BOTNiYmVjNjktZDhhNy00NGQ0LTg0YzYtYWVlMTVjMTQyMDU5XkEyXkFqcGdeQXVyMzY0MTE3NzU@._V1_SX300.jpg",
         "imdbRating": 8.6,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -1695,17 +1620,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "Based in Atlanta, Earn and his cousin Alfred try to make their way in the world through the rap scene. Along the way they come face to face with social and economic issues touching on race, relationships, poverty, status, and parenth",
+        "releaseDate": "2016-09-06T04:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "Wild Wild Country",
         "rating": 3,
         "type": "tv",
-        "year": 2018,
         "id": "tt7768848",
         "img": "https://m.media-amazon.com/images/M/MV5BNmYzY2I2MGQtYWRkMi00YzMzLWFhMjktZDJlOWE2ZmExYzY2XkEyXkFqcGdeQXVyNTAyODkwOQ@@._V1_SX300.jpg",
         "imdbRating": 8.1,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -1715,17 +1641,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "When Osho, the world's most controversial guru, builds an Utopian city deep in the Oregon country, conflict with the locals escalates into a national scandal.",
+        "releaseDate": "2018-03-16T04:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "Valor",
         "rating": 3,
         "type": "tv",
-        "year": 2017,
         "id": "tt6503244",
         "img": "https://m.media-amazon.com/images/M/MV5BMjMyODA5NzU2NV5BMl5BanBnXkFtZTgwNDQ2MzkzMzI@._V1_SX300.jpg",
         "imdbRating": 6,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -1735,17 +1662,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "An elite unit of U.S. Army helicopter pilots called the Shadow Raiders are sent on a top secret mission to Somalia, a mission that goes terribly awry",
+        "releaseDate": "2017-10-09T04:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "The Colony",
         "rating": 3,
         "type": "tv",
-        "year": 2009,
         "id": "tt1470018",
         "img": "https://m.media-amazon.com/images/M/MV5BMTMyNDIwMDIzM15BMl5BanBnXkFtZTcwNzkxNTI3Mg@@._V1_SX300.jpg",
         "imdbRating": 7.8,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -1755,17 +1683,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "A group of strangers gathered for three months to test out the concept of rebuilding civilization.",
+        "releaseDate": "2009-07-21T04:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "The Almighty Johnsons",
         "rating": 3,
         "type": "tv",
-        "year": 2011,
         "id": "tt1752076",
         "img": "https://m.media-amazon.com/images/M/MV5BNjBmOWFjMDgtNzQ5Ny00OWE1LWE5MzEtYTg3NWQ3ZmYxMGE5XkEyXkFqcGdeQXVyMTAwMzM3NDI3._V1_SX300.jpg",
         "imdbRating": 8.2,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -1775,49 +1704,18 @@
                     }
                 }
             ]
-        }
-    },
-    {
-        "title": "Manhunt: Unabomber",
-        "rating": 3,
-        "type": "tv",
-        "time": 1531606415950,
-        "reviews": {
-            "items": [
-                {
-                    "rating": 3,
-                    "user": {
-                        "name": "Alec"
-                    }
-                }
-            ]
-        }
-    },
-    {
-        "title": "Shooter: Season 1",
-        "rating": 3,
-        "type": "tv",
-        "time": 1531606415950,
-        "reviews": {
-            "items": [
-                {
-                    "rating": 3,
-                    "user": {
-                        "name": "Alec"
-                    }
-                }
-            ]
-        }
+        },
+        "description": "Four brothers living in New Zealand are modern reincarnations of Norse gods.",
+        "releaseDate": "2014-07-11T04:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "The Vampire Diaries",
         "rating": 3,
         "type": "tv",
-        "year": 2009,
         "id": "tt1405406",
         "img": "https://m.media-amazon.com/images/M/MV5BMDk3YzgxNDQtNTEzOS00NDMyLWFlYmYtYTZlMDk1NDkxNmMyXkEyXkFqcGdeQXVyNzA5NjUyNjM@._V1_SX300.jpg",
         "imdbRating": 7.7,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -1827,33 +1725,18 @@
                     }
                 }
             ]
-        }
-    },
-    {
-        "title": "The 3%",
-        "rating": 3,
-        "type": "tv",
-        "time": 1531606415950,
-        "reviews": {
-            "items": [
-                {
-                    "rating": 3,
-                    "user": {
-                        "name": "Collin"
-                    }
-                }
-            ]
-        }
+        },
+        "description": "The lives, loves, dangers and disasters in the town, Mystic Falls, Virginia. Creatures of unspeakable horror lurk beneath this town as a teenage girl is suddenly torn between two vampire brothers.",
+        "releaseDate": "2009-09-10T04:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "Troy: Fall of a City",
         "rating": 3,
         "type": "tv",
-        "year": 2018,
         "id": "tt5103758",
         "img": "https://m.media-amazon.com/images/M/MV5BZmQ1YWY0ZmQtZTNmNi00NDE5LWE2MDktMjc5NjM4N2IxNTI4XkEyXkFqcGdeQXVyODQyNDI4ODg@._V1_SX300.jpg",
         "imdbRating": 3.8,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -1863,33 +1746,18 @@
                     }
                 }
             ]
-        }
-    },
-    {
-        "title": "Money Heist",
-        "rating": 1,
-        "type": "tv",
-        "time": 1531606415950,
-        "reviews": {
-            "items": [
-                {
-                    "rating": 1,
-                    "user": {
-                        "name": "Kent"
-                    }
-                }
-            ]
-        }
+        },
+        "description": "",
+        "releaseDate": "2018-02-16T05:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "Legion",
         "rating": 2,
         "type": "tv",
-        "year": 2017,
         "id": "tt5114356",
         "img": "https://m.media-amazon.com/images/M/MV5BNmYxMjM5MzMtNTczZC00MGM3LTk2MTQtZmNmMTg4ZDI4ZTkxXkEyXkFqcGdeQXVyMzQ2MDI5NjU@._V1_SX300.jpg",
         "imdbRating": 8.2,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -1899,17 +1767,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "David Haller is a troubled young man diagnosed as schizophrenic, but after a strange encounter, he discovers special powers that will change his life forever.",
+        "releaseDate": "2017-02-08T05:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "Succession",
         "rating": 3,
         "type": "tv",
-        "year": 2018,
         "id": "tt7660850",
         "img": "https://m.media-amazon.com/images/M/MV5BZDMyY2I0ZjEtMzc4Yi00MTQxLWI1MWYtOWJjNjIwMTMyYWFjXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_SX300.jpg",
         "imdbRating": 8.6,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -1919,17 +1788,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "The Roy family is known for controlling the biggest media and entertainment company in the world. However, their world changes when their father steps down from the company.",
+        "releaseDate": "2018-06-03T04:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "Hunter x Hunter",
         "rating": 4,
         "type": "tv",
-        "year": 2011,
         "id": "tt2098220",
         "img": "https://m.media-amazon.com/images/M/MV5BZjNmZDhkN2QtNDYyZC00YzJmLTg0ODUtN2FjNjhhMzE3ZmUxXkEyXkFqcGdeQXVyNjc2NjA5MTU@._V1_SX300.jpg",
         "imdbRating": 9,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -1939,33 +1809,18 @@
                     }
                 }
             ]
-        }
-    },
-    {
-        "title": "Ouran Host Club",
-        "rating": 4,
-        "type": "tv",
-        "time": 1531606415950,
-        "reviews": {
-            "items": [
-                {
-                    "rating": 4,
-                    "user": {
-                        "name": "Kent"
-                    }
-                }
-            ]
-        }
+        },
+        "description": "Gon Freecss aspires to become a Hunter, an exceptional being capable of greatness. With his friends and his potential, he seeks for his father who left him when he was younger.",
+        "releaseDate": "2016-04-17T04:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "Violet Evergarden",
         "rating": 4,
         "type": "tv",
-        "year": 2018,
         "id": "tt7078180",
         "img": "https://m.media-amazon.com/images/M/MV5BZmUzMThjOTItZGY4ZS00ODcwLTliNTMtYjVkM2JmY2QxNmRhXkEyXkFqcGdeQXVyMzgxODM4NjM@._V1_SX300.jpg",
         "imdbRating": 8.5,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -1975,49 +1830,18 @@
                     }
                 }
             ]
-        }
-    },
-    {
-        "title": "My Hero Academy",
-        "rating": 3,
-        "type": "tv",
-        "time": 1531606415950,
-        "reviews": {
-            "items": [
-                {
-                    "rating": 3,
-                    "user": {
-                        "name": "Kent"
-                    }
-                }
-            ]
-        }
-    },
-    {
-        "title": "Pokémon Sun And Moon",
-        "rating": 1,
-        "type": "tv",
-        "time": 1531606415950,
-        "reviews": {
-            "items": [
-                {
-                    "rating": 1,
-                    "user": {
-                        "name": "Kent"
-                    }
-                }
-            ]
-        }
+        },
+        "description": "In the aftermath of a great war, Violet Evergarden, a young female ex-soldier, gets a job at a writers' agency and goes on assignments to create letters that can connect people.",
+        "releaseDate": "2018-01-10T05:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "Cloak & Dagger",
         "rating": 2,
         "type": "tv",
-        "year": 2018,
         "id": "tt5614844",
         "img": "https://m.media-amazon.com/images/M/MV5BNTU4NzU2OTc5NF5BMl5BanBnXkFtZTgwMDg3MzA0NzM@._V1_SX300.jpg",
         "imdbRating": 6.7,
-        "time": 1534690021278,
         "reviews": {
             "items": [
                 {
@@ -2027,17 +1851,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "Two teenagers from very different backgrounds find themselves burdened and awakened to newly acquired superpowers while growing closer together every day.",
+        "releaseDate": "2018-06-07T04:00:00.000Z",
+        "createdAt": "2018-08-19T14:47:01.278Z"
     },
     {
         "title": "Impulse",
         "rating": 1,
         "type": "tv",
-        "year": 2018,
         "id": "tt6160506",
         "img": "https://m.media-amazon.com/images/M/MV5BYWZiYTkzOGMtNDg1Mi00YzFhLTgwNDMtNjE3M2FlNzVmYzIxXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_SX300.jpg",
         "imdbRating": 7.4,
-        "time": 1595212860325,
         "reviews": {
             "items": [
                 {
@@ -2047,17 +1872,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "In the upcoming second season of \"Impulse,\" Henrietta Coles' life changes when a traumatic event gives her a dangerous ability beyond her understanding and control.",
+        "releaseDate": "2018-06-06T04:00:00.000Z",
+        "createdAt": "2020-07-20T02:41:00.325Z"
     },
     {
         "title": "Disenchantment",
         "rating": 2,
         "type": "tv",
-        "year": 2018,
         "id": "tt5363918",
         "img": "https://m.media-amazon.com/images/M/MV5BMzlkYzk0YzItM2I0ZC00NmE5LTljMGYtNTY2ZTVhMzA5OWJjXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_SX300.jpg",
         "imdbRating": 7.2,
-        "time": 1537928429392,
         "reviews": {
             "items": [
                 {
@@ -2067,17 +1893,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "Princess Tiabeanie, 'Bean', is annoyed at her imminent arranged marriage to Prince Merkimer. Then she meets Luci, a demon, and Elfo, an elf, and things get rather exciting, and dangerous.",
+        "releaseDate": "2018-08-17T04:00:00.000Z",
+        "createdAt": "2018-09-26T02:20:29.392Z"
     },
     {
         "title": "The Sinner",
         "rating": 3,
         "type": "tv",
-        "year": 2017,
         "id": "tt6048596",
         "img": "https://m.media-amazon.com/images/M/MV5BODIwYmE0MGQtYmNhMS00ZjM4LWJkMzAtNjg5YzI4MzZjMjg3XkEyXkFqcGdeQXVyNjU2ODM5MjU@._V1_SX300.jpg",
         "imdbRating": 7.9,
-        "time": 1537928452861,
         "reviews": {
             "items": [
                 {
@@ -2087,17 +1914,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "Anthology series that examines how and why ordinary people commit brutal crimes.",
+        "releaseDate": "2017-08-02T04:00:00.000Z",
+        "createdAt": "2018-09-26T02:20:52.861Z"
     },
     {
         "title": "Castlevania",
         "rating": 4,
         "type": "tv",
-        "year": 2017,
         "id": "tt6517102",
         "img": "https://m.media-amazon.com/images/M/MV5BYWUwN2UwYTktMDk4OC00YTg0LThmNTItNWE3ZjQxOTIxZTg3XkEyXkFqcGdeQXVyNTE1NjY5Mg@@._V1_SX300.jpg",
         "imdbRating": 8.3,
-        "time": 1541115643087,
         "reviews": {
             "items": [
                 {
@@ -2107,17 +1935,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "A vampire hunter fights to save a besieged city from an army of otherworldly creatures controlled by Dracula.",
+        "releaseDate": "2017-07-07T04:00:00.000Z",
+        "createdAt": "2018-11-01T23:40:43.087Z"
     },
     {
         "title": "Titans",
         "rating": 3,
         "type": "tv",
-        "year": 2018,
         "id": "tt1043813",
         "img": "https://m.media-amazon.com/images/M/MV5BMjA2ZTIxYjktMWUwMi00MDU5LTlmMDYtMTI4ODc1MDY4YzNjXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_SX300.jpg",
         "imdbRating": 7.7,
-        "time": 1595213000727,
         "reviews": {
             "items": [
                 {
@@ -2127,17 +1956,19 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "A team of young superheroes combat evil and other perils.",
+        "releaseDate": "2018-10-12T04:00:00.000Z",
+        "createdAt": "2020-07-20T02:43:20.727Z",
+        "rtRating": 50
     },
     {
         "title": "BoJack Horseman",
         "rating": 4,
         "type": "tv",
-        "year": 2014,
         "id": "tt3398228",
         "img": "https://m.media-amazon.com/images/M/MV5BYWQwMDNkM2MtODU4OS00OTY3LTgwOTItNjE2Yzc0MzRkMDllXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_SX300.jpg",
         "imdbRating": 8.7,
-        "time": 1537928329356,
         "reviews": {
             "items": [
                 {
@@ -2147,17 +1978,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "BoJack Horseman was the star of the hit television show \"Horsin' Around\" in the '80s and '90s, but now he's washed up, living in Hollywood, complaining about everything, and wearing colorful sweaters.",
+        "releaseDate": "2014-08-22T04:00:00.000Z",
+        "createdAt": "2018-09-26T02:18:49.356Z"
     },
     {
         "title": "Carnival Row",
         "rating": 3,
         "type": "tv",
-        "year": 2019,
         "id": "tt0489974",
         "img": "https://m.media-amazon.com/images/M/MV5BMzIwM2FkMmEtNjQyZC00YThmLTg3ZjQtZGIyMWE3NjQwYTU4XkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_SX300.jpg",
-        "imdbRating": 7.9,
-        "time": 1568161371335,
+        "imdbRating": 7.8,
         "reviews": {
             "items": [
                 {
@@ -2167,17 +1999,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "A human detective and a fairy rekindle a dangerous affair in a Victorian fantasy world, where the city's uneasy peace collapses when a string of murders reveals an unimaginable monster.",
+        "releaseDate": "2019-08-30T04:00:00.000Z",
+        "createdAt": "2019-09-11T00:22:51.335Z"
     },
     {
         "title": "Lucifer",
         "rating": 3,
         "type": "tv",
-        "year": 2016,
         "id": "tt4052886",
         "img": "https://m.media-amazon.com/images/M/MV5BNzY1YjIxOGMtOTAyZC00YTcyLWFhMzQtZTJkYTljYzU0MGRlXkEyXkFqcGdeQXVyMTAwMzM3NDI3._V1_SX300.jpg",
         "imdbRating": 8.1,
-        "time": 1568161542253,
         "reviews": {
             "items": [
                 {
@@ -2187,33 +2020,18 @@
                     }
                 }
             ]
-        }
-    },
-    {
-        "title": "The Duece",
-        "rating": 3,
-        "type": "tv",
-        "time": 1595212402935,
-        "reviews": {
-            "items": [
-                {
-                    "rating": 3,
-                    "user": {
-                        "name": "Kent"
-                    }
-                }
-            ]
-        }
+        },
+        "description": "Lucifer Morningstar has decided he's had enough of being the dutiful servant in Hell and decides to spend some time on Earth to better understand humanity. He settles in Los Angeles - the City of Angels.",
+        "releaseDate": "2016-01-25T05:00:00.000Z",
+        "createdAt": "2019-09-11T00:25:42.253Z"
     },
     {
         "title": "Another Life",
         "rating": 2,
         "type": "tv",
-        "year": 2019,
         "id": "tt8369840",
         "img": "https://m.media-amazon.com/images/M/MV5BMTNjOWNhYTQtNWEzOS00M2Q4LWEyOWMtZjU3ZjhhMTBmMWZjXkEyXkFqcGdeQXVyMjYwNDA2MDE@._V1_SX300.jpg",
         "imdbRating": 5,
-        "time": 1568559968621,
         "reviews": {
             "items": [
                 {
@@ -2223,17 +2041,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "Astronaut Niko Breckenridge and her young crew face unimaginable danger as they go on a high-risk mission to explore the genesis of an alien artifact.",
+        "releaseDate": "2019-07-25T04:00:00.000Z",
+        "createdAt": "2019-09-15T15:06:08.621Z"
     },
     {
         "title": "Preacher",
         "rating": 3,
         "type": "tv",
-        "year": 2016,
         "id": "tt5016504",
         "img": "https://m.media-amazon.com/images/M/MV5BNzIyMDY4NmUtMGRhZS00ZjE4LWI5YWYtYTYxMzcwZWNlZWRkXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_SX300.jpg",
         "imdbRating": 8,
-        "time": 1595212964339,
         "reviews": {
             "items": [
                 {
@@ -2243,17 +2062,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "After a supernatural event at his church, a preacher enlists the help of a vampire and his ex to find God.",
+        "releaseDate": "2016-05-22T04:00:00.000Z",
+        "createdAt": "2020-07-20T02:42:44.339Z"
     },
     {
         "title": "The Mandalorian",
         "rating": 4,
         "type": "tv",
-        "year": 2019,
         "id": "tt8111088",
         "img": "https://m.media-amazon.com/images/M/MV5BZDhlMzY0ZGItZTcyNS00ZTAxLWIyMmYtZGQ2ODg5OWZiYmJkXkEyXkFqcGdeQXVyODkzNTgxMDg@._V1_SX300.jpg",
         "imdbRating": 8.8,
-        "time": 1595212990036,
         "reviews": {
             "items": [
                 {
@@ -2263,17 +2083,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "The travels of a lone bounty hunter in the outer reaches of the galaxy, far from the authority of the New Republic.",
+        "releaseDate": "2019-11-12T05:00:00.000Z",
+        "createdAt": "2020-07-20T02:43:10.036Z"
     },
     {
         "title": "His Dark Materials",
         "rating": 4,
         "type": "tv",
-        "year": 2019,
         "id": "tt5607976",
         "img": "https://m.media-amazon.com/images/M/MV5BYmI0M2YwZGItZGYxOC00NTc5LTljY2EtYjBjMTE0MDkxNTMwXkEyXkFqcGdeQXVyMDM2NDM2MQ@@._V1_SX300.jpg",
         "imdbRating": 7.9,
-        "time": 1595212351152,
         "reviews": {
             "items": [
                 {
@@ -2283,17 +2104,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "A young girl is destined to liberate her world from the grip of the Magisterium which represses people's ties to magic and their animal spirits known as daemons.",
+        "releaseDate": "2019-11-04T05:00:00.000Z",
+        "createdAt": "2020-07-20T02:32:31.152Z"
     },
     {
         "title": "Watchmen",
         "rating": 4,
         "type": "tv",
-        "year": 2019,
         "id": "tt7049682",
         "img": "https://m.media-amazon.com/images/M/MV5BYjhhZDE3NjgtMjkzNC00NzI3LWJhOTItMWQ5ZjljODA5NWNkXkEyXkFqcGdeQXVyMzQ2MDI5NjU@._V1_SX300.jpg",
         "imdbRating": 8.2,
-        "time": 1573778869297,
         "reviews": {
             "items": [
                 {
@@ -2303,17 +2125,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "Set in an alternate history where masked vigilantes are treated as outlaws, Watchmen embraces the nostalgia of the original groundbreaking graphic novel of the same name, while attempting to break new ground of its own.",
+        "releaseDate": "2019-10-20T04:00:00.000Z",
+        "createdAt": "2019-11-15T00:47:49.297Z"
     },
     {
         "title": "Messiah",
         "rating": 2,
         "type": "tv",
-        "year": 2020,
         "id": "tt7671598",
         "img": "https://m.media-amazon.com/images/M/MV5BN2E2NzRmZmYtZmJlOC00NmJmLWE2NzktOGZlYzdjNTM0ZmI4XkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_SX300.jpg",
         "imdbRating": 7.6,
-        "time": 1595211362274,
         "reviews": {
             "items": [
                 {
@@ -2323,17 +2146,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "When a CIA officer investigates a man, and his followers, attracting international attention through acts of public disruption, she embarks on a global high-stakes mission to uncover whether he is a divine entity, or a deceptive con ",
+        "releaseDate": "2020-01-01T05:00:00.000Z",
+        "createdAt": "2020-07-20T02:16:02.274Z"
     },
     {
         "title": "Dracula",
         "rating": 3,
         "type": "tv",
-        "year": 2020,
         "id": "tt9139220",
         "img": "https://m.media-amazon.com/images/M/MV5BNTBmNzM4ZGMtMTE3OC00Mjc4LWE3OGEtYzA3ZmQ1MGJkNjMyXkEyXkFqcGdeQXVyNDk3ODk4OQ@@._V1_SX300.jpg",
         "imdbRating": 6.8,
-        "time": 1595211345868,
         "reviews": {
             "items": [
                 {
@@ -2343,17 +2167,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "In 1897 Transylvania, the blood-drinking Count draws his plans against Victorian London.",
+        "releaseDate": "2020-01-04T05:00:00.000Z",
+        "createdAt": "2020-07-20T02:15:45.868Z"
     },
     {
         "title": "The Last Kingdom",
         "rating": 4,
         "type": "tv",
-        "year": 2015,
         "id": "tt4179452",
         "img": "https://m.media-amazon.com/images/M/MV5BMjE1MzYzNjk3OF5BMl5BanBnXkFtZTgwMzk0MzYwNzE@._V1_SX300.jpg",
         "imdbRating": 8.4,
-        "time": 1595210825385,
         "reviews": {
             "items": [
                 {
@@ -2363,17 +2188,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "As Alfred the Great defends his kingdom from Norse invaders, Uhtred - born a Saxon but raised by Vikings - seeks to claim his ancestral birthright.",
+        "releaseDate": "2015-10-10T04:00:00.000Z",
+        "createdAt": "2020-07-20T02:07:05.385Z"
     },
     {
         "title": "Cursed",
         "rating": 3,
         "type": "tv",
-        "year": 2020,
         "id": "tt8210856",
         "img": "https://m.media-amazon.com/images/M/MV5BYjA2M2YxMjQtOTIwOS00ODIyLThmYWEtM2Y1NGFkNjI1YmNkXkEyXkFqcGdeQXVyMDM2NDM2MQ@@._V1_SX300.jpg",
         "imdbRating": 5.9,
-        "time": 1595210837778,
         "reviews": {
             "items": [
                 {
@@ -2383,17 +2209,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "A teenage sorceress named Nimue encounters a young Arthur on her quest to find a powerful and ancient sword.",
+        "releaseDate": "2020-07-17T04:00:00.000Z",
+        "createdAt": "2020-07-20T02:07:17.778Z"
     },
     {
         "title": "Warrior Nun",
         "rating": 3,
         "type": "tv",
-        "year": 2020,
         "id": "tt9059350",
         "img": "https://m.media-amazon.com/images/M/MV5BMDg4NTQ2ZDgtMzI5Zi00Mzc1LTk0ZWQtZTI5ODhkNWY5NzdlXkEyXkFqcGdeQXVyNjEwNTM2Mzc@._V1_SX300.jpg",
         "imdbRating": 6.9,
-        "time": 1595210975883,
         "reviews": {
             "items": [
                 {
@@ -2403,17 +2230,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "After waking up in a morgue, an orphaned teen discovers she now possesses superpowers as the chosen Halo Bearer for a secret sect of demon-hunting nuns.",
+        "releaseDate": "2020-07-02T04:00:00.000Z",
+        "createdAt": "2020-07-20T02:09:35.883Z"
     },
     {
         "title": "The Order",
         "rating": 2,
         "type": "tv",
-        "year": 2019,
         "id": "tt8295472",
         "img": "https://m.media-amazon.com/images/M/MV5BODIyNGNmMzAtODYwZC00NWRmLTkzMmItODJjNjE2Njk1ZTM0XkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_SX300.jpg",
         "imdbRating": 6.8,
-        "time": 1595211102201,
         "reviews": {
             "items": [
                 {
@@ -2423,17 +2251,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "Out to avenge his mother's death, a college student pledges to a secret order and lands in a war between werewolves and practitioners of dark magic.",
+        "releaseDate": "2019-03-07T05:00:00.000Z",
+        "createdAt": "2020-07-20T02:11:42.201Z"
     },
     {
         "title": "Space Force",
         "rating": 2,
         "type": "tv",
-        "year": 2020,
         "id": "tt9612516",
         "img": "https://m.media-amazon.com/images/M/MV5BNWYwMzE2MGItOTYwYy00YmQyLWE0NGQtZWViMTU4ZTk4ZjQxXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_SX300.jpg",
         "imdbRating": 6.7,
-        "time": 1595211134401,
         "reviews": {
             "items": [
                 {
@@ -2443,17 +2272,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "The people tasked with creating a sixth branch of the armed services: The Space Force.",
+        "releaseDate": "2020-05-29T04:00:00.000Z",
+        "createdAt": "2020-07-20T02:12:14.401Z"
     },
     {
         "title": "After Life",
         "rating": 2,
         "type": "tv",
-        "year": 2019,
         "id": "tt8398600",
         "img": "https://m.media-amazon.com/images/M/MV5BZjdjOWIxMDgtYTgwNS00MjE4LTliZWYtZGI1NDhhZmIyYjM1XkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_SX300.jpg",
         "imdbRating": 8.4,
-        "time": 1595211168662,
         "reviews": {
             "items": [
                 {
@@ -2463,17 +2293,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "After Tony's wife dies unexpectedly, his nice-guy persona is altered into an impulsive, devil-may-care attitude; taking his old world by storm.",
+        "releaseDate": "2019-03-08T05:00:00.000Z",
+        "createdAt": "2020-07-20T02:12:48.662Z"
     },
     {
         "title": "Mad Men",
         "rating": 4,
         "type": "tv",
-        "year": 2007,
         "id": "tt0804503",
         "img": "https://m.media-amazon.com/images/M/MV5BNTgxNDZlODQtNDcwOC00NWQ5LTljNWMtMDhjY2U5YTUzMTc4XkEyXkFqcGdeQXVyMDA4NzMyOA@@._V1_SX300.jpg",
         "imdbRating": 8.6,
-        "time": 1595211230868,
         "reviews": {
             "items": [
                 {
@@ -2483,17 +2314,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "A drama about one of New York's most prestigious ad agencies at the beginning of the 1960s, focusing on one of the firm's most mysterious but extremely talented ad executives, Donald Draper.",
+        "releaseDate": "2007-07-19T04:00:00.000Z",
+        "createdAt": "2020-07-20T02:13:50.868Z"
     },
     {
         "title": "October Faction",
         "rating": 2,
         "type": "tv",
-        "year": 2020,
         "id": "tt8826128",
         "img": "https://m.media-amazon.com/images/M/MV5BZGIxYWViM2QtODQyZS00Nzk1LWE0OWYtN2I4YTM3ZWJhMjgyXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_SX300.jpg",
         "imdbRating": 6.2,
-        "time": 1595211263150,
         "reviews": {
             "items": [
                 {
@@ -2503,17 +2335,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "October Faction",
+        "releaseDate": "2020-01-23T05:00:00.000Z",
+        "createdAt": "2020-07-20T02:14:23.150Z"
     },
     {
         "title": "The Witcher",
         "rating": 4,
         "type": "tv",
-        "year": 2019,
         "id": "tt5180504",
         "img": "https://m.media-amazon.com/images/M/MV5BOGE4MmVjMDgtMzIzYy00NjEwLWJlODMtMDI1MGY2ZDlhMzE2XkEyXkFqcGdeQXVyMzY0MTE3NzU@._V1_SX300.jpg",
         "imdbRating": 8.2,
-        "time": 1595211398311,
         "reviews": {
             "items": [
                 {
@@ -2523,17 +2356,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "Geralt of Rivia, a solitary monster hunter, struggles to find his place in a world where people often prove more wicked than beasts.",
+        "releaseDate": "2019-12-20T05:00:00.000Z",
+        "createdAt": "2020-07-20T02:16:38.311Z"
     },
     {
         "title": "Devs",
         "rating": 4,
         "type": "tv",
-        "year": 2020,
         "id": "tt8134186",
         "img": "https://m.media-amazon.com/images/M/MV5BODY3ODVjYjUtNTBiMy00ZjlkLTg5MTItNDU5NmVlM2U0YzhmXkEyXkFqcGdeQXVyMzY0MTE3NzU@._V1_SX300.jpg",
         "imdbRating": 7.7,
-        "time": 1595211892864,
         "reviews": {
             "items": [
                 {
@@ -2543,17 +2377,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "A computer engineer investigates the secretive development division in her company, which she believes is behind the disappearance of her boyfriend.",
+        "releaseDate": "2020-03-05T05:00:00.000Z",
+        "createdAt": "2020-07-20T02:24:52.864Z"
     },
     {
         "title": "Motherland: Fort Salem",
         "rating": 2,
         "type": "tv",
-        "year": 2020,
         "id": "tt9900092",
         "img": "https://m.media-amazon.com/images/M/MV5BZTBmYTYzZGUtOThlZC00YzVmLWFmMWItZTEwYWRlOGVlNDViXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_SX300.jpg",
         "imdbRating": 7.2,
-        "time": 1595211908250,
         "reviews": {
             "items": [
                 {
@@ -2563,17 +2398,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "A trio of witches is trained to become powerful weapons for the American military.",
+        "releaseDate": "2020-03-18T04:00:00.000Z",
+        "createdAt": "2020-07-20T02:25:08.250Z"
     },
     {
         "title": "Castle Rock",
         "rating": 4,
         "type": "tv",
-        "year": 2018,
         "id": "tt6548228",
         "img": "https://m.media-amazon.com/images/M/MV5BYWQ0ZmE0ZjEtZDZjOC00ODQ4LTk1MGQtNTk3ZDdlY2RiODg1XkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_SX300.jpg",
         "imdbRating": 7.6,
-        "time": 1595211933235,
         "reviews": {
             "items": [
                 {
@@ -2583,17 +2419,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "Based on the stories of Stephen King, the series intertwines characters and themes from the fictional town of Castle Rock.",
+        "releaseDate": "2018-07-25T04:00:00.000Z",
+        "createdAt": "2020-07-20T02:25:33.235Z"
     },
     {
         "title": "Better Off Ted",
         "rating": 4,
         "type": "tv",
-        "year": 2009,
         "id": "tt1235547",
         "img": "https://m.media-amazon.com/images/M/MV5BMTI3NDgzMTU2Nl5BMl5BanBnXkFtZTcwOTUzMzA1Mg@@._V1_SX300.jpg",
         "imdbRating": 8.2,
-        "time": 1595211946141,
         "reviews": {
             "items": [
                 {
@@ -2603,17 +2440,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "",
+        "releaseDate": "2009-03-18T04:00:00.000Z",
+        "createdAt": "2020-07-20T02:25:46.141Z"
     },
     {
         "title": "Avenue 5",
         "rating": 3,
         "type": "tv",
-        "year": 2020,
         "id": "tt10234362",
         "img": "https://m.media-amazon.com/images/M/MV5BZmQwZWRkNzUtZTE3NC00ZTQ3LTk0OTUtYzg1NTg4YzlkOWE3XkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_SX300.jpg",
         "imdbRating": 6.5,
-        "time": 1595212265601,
         "reviews": {
             "items": [
                 {
@@ -2623,17 +2461,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "The troubled crew of Avenue 5, a space cruise ship filled with spoiled, rich, snotty space tourists, must try and keep everyone calm after their ship gets thrown off course into space and ends up needing three years to return to Eart",
+        "releaseDate": "2020-01-19T05:00:00.000Z",
+        "createdAt": "2020-07-20T02:31:05.601Z"
     },
     {
         "title": "The Outsider",
         "rating": 4,
         "type": "tv",
-        "year": 2020,
         "id": "tt8550800",
         "img": "https://m.media-amazon.com/images/M/MV5BNzgxOTc4ODctNDNhZC00M2UzLTgyYzgtM2Q2OTk3NmQ5NTljXkEyXkFqcGdeQXVyMzQ2MDI5NjU@._V1_SX300.jpg",
         "imdbRating": 7.7,
-        "time": 1595212285168,
         "reviews": {
             "items": [
                 {
@@ -2643,17 +2482,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "Investigators are confounded over an unspeakable crime that's been committed.",
+        "releaseDate": "2020-01-12T05:00:00.000Z",
+        "createdAt": "2020-07-20T02:31:25.168Z"
     },
     {
         "title": "Barry",
         "rating": 4,
         "type": "tv",
-        "year": 2018,
         "id": "tt5348176",
         "img": "https://m.media-amazon.com/images/M/MV5BMmY1NTk5N2QtYWQyOS00NjhiLWFhZmYtYWZmZGFlMjEzY2E2XkEyXkFqcGdeQXVyMzQ2MDI5NjU@._V1_SX300.jpg",
         "imdbRating": 8.3,
-        "time": 1595212299937,
         "reviews": {
             "items": [
                 {
@@ -2663,17 +2503,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "A hit man from the Midwest moves to Los Angeles and gets caught up in the city's theatre arts scene.",
+        "releaseDate": "2018-03-25T04:00:00.000Z",
+        "createdAt": "2020-07-20T02:31:39.937Z"
     },
     {
         "title": "Upload",
         "rating": 3,
         "type": "tv",
-        "year": 2020,
         "id": "tt7826376",
         "img": "https://m.media-amazon.com/images/M/MV5BZWEyM2U5ZTItMTFiYy00NjZlLWFjYzItNzBiMjkxNDRhNTUyXkEyXkFqcGdeQXVyODk4OTc3MTY@._V1_SX300.jpg",
         "imdbRating": 8,
-        "time": 1595212558656,
         "reviews": {
             "items": [
                 {
@@ -2683,17 +2524,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "A man is able to choose his own afterlife after his untimely death, by having his consciousness uploaded into a virtual world. As he gets used to his new life and befriends his angel (real world handler), questions about his death ar",
+        "releaseDate": "2020-05-01T04:00:00.000Z",
+        "createdAt": "2020-07-20T02:35:58.656Z"
     },
     {
         "title": "Good Omens",
         "rating": 4,
         "type": "tv",
-        "year": 2019,
         "id": "tt1869454",
         "img": "https://m.media-amazon.com/images/M/MV5BOWMzM2E2MDYtNGEyNC00MWIwLWI4MGQtODI1MmQyNzk4YWFhXkEyXkFqcGdeQXVyNTI4MzE4MDU@._V1_SX300.jpg",
         "imdbRating": 8.1,
-        "time": 1595212584288,
         "reviews": {
             "items": [
                 {
@@ -2703,65 +2545,18 @@
                     }
                 }
             ]
-        }
-    },
-    {
-        "title": "Hanna (Amazon)",
-        "rating": 4,
-        "type": "tv",
-        "time": 1595212644075,
-        "reviews": {
-            "items": [
-                {
-                    "rating": 4,
-                    "user": {
-                        "name": "Kent"
-                    }
-                }
-            ]
-        }
-    },
-    {
-        "title": "The Boys (Amazon)",
-        "rating": 4,
-        "type": "tv",
-        "time": 1595212687914,
-        "reviews": {
-            "items": [
-                {
-                    "rating": 4,
-                    "user": {
-                        "name": "Kent"
-                    }
-                }
-            ]
-        }
-    },
-    {
-        "title": "Tom Clancy's Jack Ryan",
-        "rating": 3,
-        "type": "tv",
-        "time": 1595212748609,
-        "reviews": {
-            "items": [
-                {
-                    "rating": 3,
-                    "user": {
-                        "name": "Kent"
-                    }
-                }
-            ]
-        }
+        },
+        "description": "With Armageddon just days away, the armies of Heaven and Hell are amassing and The Four Horsemen are ready to ride. Aziraphale, an angel, and Crowley, a demon, agree to join forces to find the missing Anti-Christ and to stop the war that will end everything. Based on the best-selling novel by Terry Pratchett and Neil Gaiman, Good Omens follows an unlikely duo and their quest to save the world. New series premiere May 31, 2019.",
+        "releaseDate": "2019-05-31T04:00:00.000Z",
+        "createdAt": "2020-07-20T02:36:24.288Z"
     },
     {
         "title": "Counterpart",
         "rating": 4,
         "type": "tv",
-        "year": 2017,
         "id": "tt4643084",
         "img": "https://m.media-amazon.com/images/M/MV5BODg5NDU5NjM1NV5BMl5BanBnXkFtZTgwOTE0NjY1NjM@._V1_SX300.jpg",
         "imdbRating": 8.1,
-        "time": 1595212814597,
         "reviews": {
             "items": [
                 {
@@ -2771,17 +2566,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "A hapless UN employee discovers that the agency he works for is hiding a gateway to a parallel dimension that's in a cold war with our own, and where his other self is a top spy. The war slowly heats up thanks to spies from both side",
+        "releaseDate": "2017-12-10T05:00:00.000Z",
+        "createdAt": "2020-07-20T02:40:14.597Z"
     },
     {
         "title": "Dispatches from Elsewhere",
         "rating": 2,
         "type": "tv",
-        "year": 2020,
         "id": "tt8965666",
         "img": "https://m.media-amazon.com/images/M/MV5BZmI0YjA5MGItODEwMy00Y2MxLTgwOGUtZDRkYzk3MDVmMzIzXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_SX300.jpg",
         "imdbRating": 6.8,
-        "time": 1595212842943,
         "reviews": {
             "items": [
                 {
@@ -2791,17 +2587,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "Feeling as though there's something missing in their lives, four ordinary people stumble across a puzzle hiding just beyond the veil of everyday life, and their eyes are opened to a world of possibility and magic.",
+        "releaseDate": "2020-02-01T05:00:00.000Z",
+        "createdAt": "2020-07-20T02:40:42.943Z"
     },
     {
         "title": "Krypton",
         "rating": 2,
         "type": "tv",
-        "year": 2018,
         "id": "tt4276624",
         "img": "https://m.media-amazon.com/images/M/MV5BMmY4MTZjNTEtYTliNy00ODA0LTlhN2MtZDM0ZDRlMDcyYTQ2XkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_SX300.jpg",
         "imdbRating": 6.9,
-        "time": 1595212886281,
         "reviews": {
             "items": [
                 {
@@ -2811,17 +2608,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "The untold story of Superman's grandfather as he fights for justice on his home planet.",
+        "releaseDate": "2018-03-21T04:00:00.000Z",
+        "createdAt": "2020-07-20T02:41:26.281Z"
     },
     {
         "title": "Legacies",
         "rating": 1,
         "type": "tv",
-        "year": 2018,
         "id": "tt8103070",
         "img": "https://m.media-amazon.com/images/M/MV5BZmMwNDczMDUtNDU0Mi00MjIyLWI1NTktNzM4Yzc1MTNmZDIxXkEyXkFqcGdeQXVyOTQ0NTEzMzk@._V1_SX300.jpg",
         "imdbRating": 7.4,
-        "time": 1595212901026,
         "reviews": {
             "items": [
                 {
@@ -2831,17 +2629,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "Hope Mikaelson, a tribrid daughter of a Vampire/Werewolf hybrid, makes her way in the world.",
+        "releaseDate": "2018-10-25T04:00:00.000Z",
+        "createdAt": "2020-07-20T02:41:41.026Z"
     },
     {
         "title": "Mythic Quest: Raven's Banquet",
         "rating": 4,
         "type": "tv",
-        "year": 2020,
         "id": "tt8879940",
         "img": "https://m.media-amazon.com/images/M/MV5BMzBhOTZlMjEtMzAyZS00MzI2LTk4YjItNGIzNzQ3ZGY1ZWQ0XkEyXkFqcGdeQXVyMDM2NDM2MQ@@._V1_SX300.jpg",
         "imdbRating": 7.7,
-        "time": 1595212953429,
         "reviews": {
             "items": [
                 {
@@ -2851,17 +2650,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "The owner of a successful video game design company and his troubled staff struggle to keep their hit game 'Mythic Quest' on top.",
+        "releaseDate": "2020-02-07T05:00:00.000Z",
+        "createdAt": "2020-07-20T02:42:33.429Z"
     },
     {
         "title": "The Last Dance",
         "rating": 4,
         "type": "tv",
-        "year": 2020,
         "id": "tt8420184",
         "img": "https://m.media-amazon.com/images/M/MV5BY2U1ZTU4OWItNGU2MC00MTg1LTk4NzUtYTk3ODhjYjI0MzlmXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_SX300.jpg",
         "imdbRating": 9.1,
-        "time": 1597623707452,
         "reviews": {
             "items": [
                 {
@@ -2871,17 +2671,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "Charting the rise of the 1990's Chicago Bulls, led by Michael Jordan, one of the most notable dynasties in sports history.",
+        "releaseDate": "2020-04-19T04:00:00.000Z",
+        "createdAt": "2020-08-17T00:21:47.452Z"
     },
     {
         "title": "The Queen's Gambit",
         "rating": 3,
         "type": "tv",
-        "year": 2020,
         "id": "tt10048342",
         "img": "https://m.media-amazon.com/images/M/MV5BM2EwMmRhMmUtMzBmMS00ZDQ3LTg4OGEtNjlkODk3ZTMxMmJlXkEyXkFqcGdeQXVyMjM5ODk1NDU@._V1_SX300.jpg",
         "imdbRating": 8.6,
-        "time": 1604963547415,
         "reviews": {
             "items": [
                 {
@@ -2891,17 +2692,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "Orphaned at the tender age of nine, prodigious introvert Beth Harmon discovers and masters the game of chess in 1960s USA. But child stardom comes at a price.",
+        "releaseDate": "2020-10-23T04:00:00.000Z",
+        "createdAt": "2020-11-09T23:12:27.415Z"
     },
     {
         "title": "Blood of Zeus",
         "rating": 3,
         "type": "tv",
-        "year": 2020,
         "id": "tt10009170",
         "img": "https://m.media-amazon.com/images/M/MV5BODFjOGM0ZjktOGIyYi00ZTAxLWE5NzAtYjFiZGU5NDZmZTNjXkEyXkFqcGdeQXVyMjUyNzQ0NjU@._V1_SX300.jpg",
-        "imdbRating": 7.6,
-        "time": 1604963557987,
+        "imdbRating": 7.5,
         "reviews": {
             "items": [
                 {
@@ -2911,17 +2713,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "A commoner living in ancient Greece, Heron discovers his true heritage as a son of Zeus, and his purpose: to save the world from a demonic army.",
+        "releaseDate": "2020-10-27T04:00:00.000Z",
+        "createdAt": "2020-11-09T23:12:37.987Z"
     },
     {
         "title": "Breaking Bad",
         "rating": 4,
         "type": "tv",
-        "year": 2008,
         "id": "tt0903747",
         "img": "https://m.media-amazon.com/images/M/MV5BMjhiMzgxZTctNDc1Ni00OTIxLTlhMTYtZTA3ZWFkODRkNmE2XkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SX300.jpg",
         "imdbRating": 9.4,
-        "time": 1607044456349,
         "reviews": {
             "items": [
                 {
@@ -2931,33 +2734,19 @@
                     }
                 }
             ]
-        }
-    },
-    {
-        "title": "Next (2020)",
-        "rating": 2,
-        "type": "tv",
-        "time": 1612377653626,
-        "reviews": {
-            "items": [
-                {
-                    "rating": 2,
-                    "user": {
-                        "name": "Kent"
-                    }
-                }
-            ]
-        }
+        },
+        "description": "A high school chemistry teacher diagnosed with inoperable lung cancer turns to manufacturing and selling methamphetamine in order to secure his family's future.",
+        "releaseDate": "2008-01-20T05:00:00.000Z",
+        "createdAt": "2020-12-04T01:14:16.349Z",
+        "rtRating": 96
     },
     {
         "title": "Fate: The Winx Saga",
         "rating": 2,
         "type": "tv",
-        "year": 2021,
         "id": "tt8179402",
         "img": "https://m.media-amazon.com/images/M/MV5BMzEyYzBhODYtZjZlOC00MTM4LWIxMjQtMTRhZjA5ODM4ZWI2XkEyXkFqcGdeQXVyODQwODA1MjY@._V1_SX300.jpg",
         "imdbRating": 6.9,
-        "time": 1612377396363,
         "reviews": {
             "items": [
                 {
@@ -2967,17 +2756,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "A live-action adaptation of Nickelodeon's Winx Club (2004). It follows Bloom as she adjusts to life in the Otherworld, where she must learn to control her dangerous magical powers.",
+        "releaseDate": "2021-01-22T05:00:00.000Z",
+        "createdAt": "2021-02-03T18:36:36.363Z"
     },
     {
         "title": "American Gods",
         "rating": 4,
         "type": "tv",
-        "year": 2017,
         "id": "tt1898069",
         "img": "https://m.media-amazon.com/images/M/MV5BYmJlOTRkYzktMDIxYy00MjFlLTlkOWYtZjVkNmY5MWMyNzU1XkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_SX300.jpg",
         "imdbRating": 7.7,
-        "time": 1612377831806,
         "reviews": {
             "items": [
                 {
@@ -2987,33 +2777,18 @@
                     }
                 }
             ]
-        }
-    },
-    {
-        "title": "Pacific Rim: The Black",
-        "rating": 3,
-        "type": "tv",
-        "time": 1615746555979,
-        "reviews": {
-            "items": [
-                {
-                    "rating": 3,
-                    "user": {
-                        "name": "Kent"
-                    }
-                }
-            ]
-        }
+        },
+        "description": "A recently released ex-convict named Shadow meets a mysterious man who calls himself \"Wednesday\" and who knows more than he first seems to about Shadow's life and past.",
+        "releaseDate": "2017-04-30T04:00:00.000Z",
+        "createdAt": "2021-02-03T18:43:51.806Z"
     },
     {
         "title": "WandaVision",
         "rating": 3,
         "type": "tv",
-        "year": 2021,
         "id": "tt9140560",
         "img": "https://m.media-amazon.com/images/M/MV5BZGEwYmMwZmMtMTQ3MS00YWNhLWEwMmQtZTU5YTIwZmJjZGQ0XkEyXkFqcGdeQXVyMTI5MzA5MjA1._V1_SX300.jpg",
-        "imdbRating": 8.1,
-        "time": 1615746609355,
+        "imdbRating": 8,
         "reviews": {
             "items": [
                 {
@@ -3023,17 +2798,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "Blends the style of classic sitcoms with the MCU, in which Wanda Maximoff and Vision - two super-powered beings living their ideal suburban lives - begin to suspect that everything is not as it seems.",
+        "releaseDate": "2021-01-15T05:00:00.000Z",
+        "createdAt": "2021-03-14T18:30:09.355Z"
     },
     {
         "title": "The Lost Pirate Kingdom",
         "rating": 3,
         "type": "tv",
-        "year": 2021,
         "id": "tt14057360",
         "img": "https://m.media-amazon.com/images/M/MV5BYTYyNjNlMzktOTBhNy00NjQ3LTk5NGYtYzFmNzM0OTgxOWRjXkEyXkFqcGdeQXVyNjEwNTM2Mzc@._V1_SX300.jpg",
         "imdbRating": 6.6,
-        "time": 1616200018449,
         "reviews": {
             "items": [
                 {
@@ -3043,17 +2819,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "The Lost Pirate Kingdom",
+        "releaseDate": "2021-03-15T04:00:00.000Z",
+        "createdAt": "2021-03-20T00:26:58.449Z"
     },
     {
         "title": "Dota: Dragon's Blood",
         "rating": 4,
         "type": "tv",
-        "year": 2021,
         "id": "tt14069590",
         "img": "https://m.media-amazon.com/images/M/MV5BNjVjYmQ4N2QtNzc1Yi00MzI0LTlmNWMtZTU2MjcxYzIwYmY4XkEyXkFqcGdeQXVyMTEzMTI1Mjk3._V1_SX300.jpg",
-        "imdbRating": 8.1,
-        "time": 1616811505939,
+        "imdbRating": 8,
         "reviews": {
             "items": [
                 {
@@ -3063,17 +2840,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "After encounters with a dragon and a princess on her own mission, a Dragon Knight becomes embroiled in events larger than he could have ever imagined.",
+        "releaseDate": "2021-03-25T04:00:00.000Z",
+        "createdAt": "2021-03-27T02:18:25.939Z"
     },
     {
         "title": "Invincible",
         "rating": 4,
         "type": "tv",
-        "year": 2021,
         "id": "tt6741278",
         "img": "https://m.media-amazon.com/images/M/MV5BMmE1ODVhMGYtODYyYS00Mjc4LWIzN2EtYWZkZDg1MTUyNDkxXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_SX300.jpg",
-        "imdbRating": 8.8,
-        "time": 1619272503219,
+        "imdbRating": 8.7,
         "reviews": {
             "items": [
                 {
@@ -3083,17 +2861,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "An adult animated series based on the Skybound/Image comic about a teenager whose father is the most powerful superhero on the planet.",
+        "releaseDate": "2021-03-26T04:00:00.000Z",
+        "createdAt": "2021-04-24T13:55:03.219Z"
     },
     {
         "title": "The Falcon and the Winter Soldier",
         "rating": 4,
         "type": "tv",
-        "year": 2021,
         "id": "tt9208876",
         "img": "https://m.media-amazon.com/images/M/MV5BODNiODVmYjItM2MyMC00ZWQyLTgyMGYtNzJjMmVmZTY2OTJjXkEyXkFqcGdeQXVyNzk3NDUzNTc@._V1_SX300.jpg",
         "imdbRating": 7.5,
-        "time": 1619363391458,
         "reviews": {
             "items": [
                 {
@@ -3103,17 +2882,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "Following the events of 'Avengers: Endgame,' Sam Wilson/Falcon and Bucky Barnes/Winter Soldier team up in a global adventure that tests their abilities -- and their patience.",
+        "releaseDate": "2021-03-19T04:00:00.000Z",
+        "createdAt": "2021-04-25T15:09:51.458Z"
     },
     {
         "title": "For All Mankind",
         "rating": 4,
         "type": "tv",
-        "year": 2019,
         "id": "tt7772588",
         "img": "https://m.media-amazon.com/images/M/MV5BZjcwZmZmZDgtMjU1YS00N2Y4LWFjMTUtYTFlM2QzODNkMWFjXkEyXkFqcGdeQXVyMDM2NDM2MQ@@._V1_SX300.jpg",
         "imdbRating": 7.8,
-        "time": 1619388978245,
         "reviews": {
             "items": [
                 {
@@ -3123,17 +2903,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "In an alternative version of 1969, the Soviet Union beats the United States to the Moon, and the space race continues on for decades with still grander challenges and goals.",
+        "releaseDate": "2019-11-01T04:00:00.000Z",
+        "createdAt": "2021-04-25T22:16:18.245Z"
     },
     {
         "title": "The Wire",
         "rating": 4,
         "type": "tv",
-        "year": 2002,
         "id": "tt0306414",
         "img": "https://m.media-amazon.com/images/M/MV5BNTllYzFhMjAtZjExNS00MjM4LWE5YmMtOGFiZGRlOTU5YzJiXkEyXkFqcGdeQXVyNDIzMzcwNjc@._V1_SX300.jpg",
         "imdbRating": 9.3,
-        "time": 1620440360625,
         "reviews": {
             "items": [
                 {
@@ -3143,17 +2924,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "The Baltimore drug scene, as seen through the eyes of drug dealers and law enforcement.",
+        "releaseDate": "2002-06-02T04:00:00.000Z",
+        "createdAt": "2021-05-08T02:19:20.625Z"
     },
     {
         "title": "Jupiter's Legacy",
         "rating": 3,
         "type": "tv",
-        "year": 2021,
         "id": "tt5774002",
         "img": "https://m.media-amazon.com/images/M/MV5BMDU4MWViOGItZGJjYi00YjczLTk1YmMtY2ZmNmY4YTllNDA0XkEyXkFqcGdeQXVyMTEyMjM2NDc2._V1_SX300.jpg",
-        "imdbRating": 6.8,
-        "time": 1620942371343,
+        "imdbRating": 6.7,
         "reviews": {
             "items": [
                 {
@@ -3163,17 +2945,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "The first generation of superheroes has kept the world safe for nearly a century. Now their children must live up to their legacy in an epic drama that spans decades and navigates the dynamics of family, power and loyalty.",
+        "releaseDate": "2021-05-07T04:00:00.000Z",
+        "createdAt": "2021-05-13T21:46:11.343Z"
     },
     {
         "title": "StartUp",
         "rating": 3,
         "type": "tv",
-        "year": 2016,
         "id": "tt5028002",
         "img": "https://m.media-amazon.com/images/M/MV5BMTAxNTIwNzE5MTJeQTJeQWpwZ15BbWU4MDE2NDQ2MTMy._V1_SX300.jpg",
-        "imdbRating": 8,
-        "time": 1621561681929,
+        "imdbRating": 7.9,
         "reviews": {
             "items": [
                 {
@@ -3183,17 +2966,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "A desperate banker, a Haitian-American gang lord and a Cuban-American hacker are forced to work together to unwittingly create their version of the American dream - organized crime 2.0.",
+        "releaseDate": "2016-09-06T04:00:00.000Z",
+        "createdAt": "2021-05-21T01:48:01.929Z"
     },
     {
         "title": "Sisyphus",
         "rating": 3,
         "type": "tv",
-        "year": 2017,
         "id": "tt6273022",
         "img": "https://m.media-amazon.com/images/M/MV5BY2ZjZDgxODctZDFiYi00NzExLTk1YzAtN2UyOTUxNjQyZGQ3XkEyXkFqcGdeQXVyMjg0MTI5NzQ@._V1_SX300.jpg",
-        "imdbRating": 5.5,
-        "time": 1622073646013,
+        "imdbRating": 6.1,
         "reviews": {
             "items": [
                 {
@@ -3203,33 +2987,18 @@
                     }
                 }
             ]
-        }
-    },
-    {
-        "title": "Superman & Lois",
-        "rating": 3,
-        "type": "tv",
-        "time": 1622386044211,
-        "reviews": {
-            "items": [
-                {
-                    "rating": 3,
-                    "user": {
-                        "name": "Kent"
-                    }
-                }
-            ]
-        }
+        },
+        "description": "This story is about a cat called Sisyphus. Sisyphus is a stray cat, he is being adopted by a girl named \"Summer\", everything is peaceful until that day, something makes him different. An accident make Summer become vegetative state, ",
+        "releaseDate": "2017-04-01T04:00:00.000Z",
+        "createdAt": "2021-05-27T00:00:46.013Z"
     },
     {
         "title": "The Office",
         "rating": 3,
         "type": "tv",
-        "year": 2005,
         "id": "tt0386676",
         "img": "https://m.media-amazon.com/images/M/MV5BMDNkOTE4NDQtMTNmYi00MWE0LWE4ZTktYTc0NzhhNWIzNzJiXkEyXkFqcGdeQXVyMzQ2MDI5NjU@._V1_SX300.jpg",
         "imdbRating": 8.9,
-        "time": 1622604875158,
         "reviews": {
             "items": [
                 {
@@ -3239,17 +3008,18 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "A mockumentary on a group of typical office workers, where the workday consists of ego clashes, inappropriate behavior, and tedium.",
+        "releaseDate": "2005-03-24T05:00:00.000Z",
+        "createdAt": "2021-06-02T03:34:35.158Z"
     },
     {
         "title": "The Vow",
         "rating": 4,
         "type": "tv",
-        "year": 2020,
         "id": "tt10222764",
         "img": "https://m.media-amazon.com/images/M/MV5BODdhMTUyZmEtNTYwMS00NmUwLWJkNTktOGM5YWUzOTVjMDdiXkEyXkFqcGdeQXVyMTAyMjQ3NzQ1._V1_SX300.jpg",
         "imdbRating": 7,
-        "time": 1622605007271,
         "reviews": {
             "items": [
                 {
@@ -3259,18 +3029,19 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "A look at the experiences of the members of the NXIVM, an organization and sex cult who made headlines for being charged with sex trafficking and racketeering conspiracy.",
+        "releaseDate": "2020-08-23T04:00:00.000Z",
+        "createdAt": "2021-06-02T03:36:47.271Z"
     },
     {
         "title": "Annihilation",
         "rating": 4,
         "type": "movie",
-        "year": 2018,
         "id": "tt2798920",
         "img": "https://m.media-amazon.com/images/M/MV5BMTk2Mjc2NzYxNl5BMl5BanBnXkFtZTgwMTA2OTA1NDM@._V1_SX300.jpg",
         "imdbRating": 6.8,
         "rtRating": 88,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -3280,18 +3051,19 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "A biologist signs up for a dangerous, secret expedition into a mysterious zone where the laws of nature don't apply.",
+        "releaseDate": "2018-02-23T05:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "Arrival",
         "rating": 4,
         "type": "movie",
-        "year": 2016,
         "id": "tt2543164",
         "img": "https://m.media-amazon.com/images/M/MV5BMTExMzU0ODcxNDheQTJeQWpwZ15BbWU4MDE1OTI4MzAy._V1_SX300.jpg",
         "imdbRating": 7.9,
         "rtRating": 94,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -3301,18 +3073,19 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "A linguist works with the military to communicate with alien lifeforms after twelve mysterious spacecraft appear around the world.",
+        "releaseDate": "2016-11-11T05:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "The Shape of Water",
         "rating": 3,
         "type": "movie",
-        "year": 2017,
         "id": "tt5580390",
         "img": "https://m.media-amazon.com/images/M/MV5BNGNiNWQ5M2MtNGI0OC00MDA2LWI5NzEtMmZiYjVjMDEyOWYzXkEyXkFqcGdeQXVyMjM4NTM5NDY@._V1_SX300.jpg",
         "imdbRating": 7.3,
         "rtRating": 92,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -3322,18 +3095,19 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "At a top secret research facility in the 1960s, a lonely janitor forms a unique relationship with an amphibious creature that is being held in captivity.",
+        "releaseDate": "2017-12-22T05:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "Constantine",
         "rating": 3,
         "type": "movie",
-        "year": 2005,
         "id": "tt0360486",
         "img": "https://m.media-amazon.com/images/M/MV5BODRiNmFhY2EtMGY2OC00YjI2LWIyYjQtYzFiM2ZhNjdhYzE4XkEyXkFqcGdeQXVyNDY5MTUyNjU@._V1_SX300.jpg",
         "imdbRating": 7,
         "rtRating": 46,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -3343,18 +3117,19 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "Supernatural exorcist and demonologist John Constantine helps a policewoman prove her sister's death was not a suicide, but something more.",
+        "releaseDate": "2005-02-18T05:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "Valerian and the City of a Thousand Planets",
         "rating": 2,
         "type": "movie",
-        "year": 2017,
         "id": "tt2239822",
         "img": "https://m.media-amazon.com/images/M/MV5BMTkxMDAxNDUyNV5BMl5BanBnXkFtZTgwOTc3MzcxMjI@._V1_SX300.jpg",
         "imdbRating": 6.5,
         "rtRating": 47,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -3364,18 +3139,19 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "A dark force threatens Alpha, a vast metropolis and home to species from a thousand planets. Special operatives Valerian and Laureline must race to identify the marauding menace and safeguard not just Alpha, but the future of the uni",
+        "releaseDate": "2017-07-21T04:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "Jumanji: Welcome to the Jungle",
         "rating": 2,
         "type": "movie",
-        "year": 2017,
         "id": "tt2283362",
         "img": "https://m.media-amazon.com/images/M/MV5BODQ0NDhjYWItYTMxZi00NTk2LWIzNDEtOWZiYWYxZjc2MTgxXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg",
         "imdbRating": 6.9,
         "rtRating": 76,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -3385,34 +3161,19 @@
                     }
                 }
             ]
-        }
-    },
-    {
-        "title": "Underworld Trilogy",
-        "rating": 2,
-        "type": "movie",
-        "time": 1531606415950,
-        "reviews": {
-            "items": [
-                {
-                    "rating": 2,
-                    "user": {
-                        "name": "Kent"
-                    }
-                }
-            ]
-        }
+        },
+        "description": "Four teenagers are sucked into a magical video game, and the only way they can escape is to work together to finish the game.",
+        "releaseDate": "2017-12-20T05:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "No Country for Old Men",
         "rating": 4,
         "type": "movie",
-        "year": 2007,
         "id": "tt0477348",
         "img": "https://m.media-amazon.com/images/M/MV5BMjA5Njk3MjM4OV5BMl5BanBnXkFtZTcwMTc5MTE1MQ@@._V1_SX300.jpg",
         "imdbRating": 8.1,
         "rtRating": 93,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -3422,18 +3183,19 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "Violence and mayhem ensue after a hunter stumbles upon a drug deal gone wrong and more than two million dollars in cash near the Rio Grande.",
+        "releaseDate": "2007-11-21T05:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "Fear and Loathing in Las Vegas",
         "rating": 3,
         "type": "movie",
-        "year": 1998,
         "id": "tt0120669",
         "img": "https://m.media-amazon.com/images/M/MV5BNjA2ZDY3ZjYtZmNiMC00MDU5LTgxMWEtNzk1YmI3NzdkMTU0XkEyXkFqcGdeQXVyNjQyMjcwNDM@._V1_SX300.jpg",
         "imdbRating": 7.6,
         "rtRating": 49,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -3443,34 +3205,19 @@
                     }
                 }
             ]
-        }
-    },
-    {
-        "title": "Lord of The Rings Trilogy",
-        "rating": 4,
-        "type": "movie",
-        "time": 1531606415950,
-        "reviews": {
-            "items": [
-                {
-                    "rating": 4,
-                    "user": {
-                        "name": "Kent"
-                    }
-                }
-            ]
-        }
+        },
+        "description": "An oddball journalist and his psychopathic lawyer travel to Las Vegas for a series of psychedelic escapades.",
+        "releaseDate": "1998-05-22T04:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "Blade Runner 2049",
         "rating": 4,
         "type": "movie",
-        "year": 2017,
         "id": "tt1856101",
         "img": "https://m.media-amazon.com/images/M/MV5BNzA1Njg4NzYxOV5BMl5BanBnXkFtZTgwODk5NjU3MzI@._V1_SX300.jpg",
         "imdbRating": 8,
         "rtRating": 88,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -3498,18 +3245,19 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "Young Blade Runner K's discovery of a long-buried secret leads him to track down former Blade Runner Rick Deckard, who's been missing for thirty years.",
+        "releaseDate": "2017-10-06T04:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "Kingsman: The Golden Circle",
         "rating": 2,
         "type": "movie",
-        "year": 2017,
         "id": "tt4649466",
         "img": "https://m.media-amazon.com/images/M/MV5BMjQ3OTgzMzY4NF5BMl5BanBnXkFtZTgwOTc4OTQyMzI@._V1_SX300.jpg",
         "imdbRating": 6.7,
         "rtRating": 51,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -3525,18 +3273,19 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "After the Kingsman's headquarters are destroyed and the world is held hostage, an allied spy organisation in the United States is discovered. These two elite secret organisations must band together to defeat a common enemy.",
+        "releaseDate": "2017-09-22T04:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "Black Panther",
         "rating": 3.5,
         "type": "movie",
-        "year": 2018,
         "id": "tt1825683",
         "img": "https://m.media-amazon.com/images/M/MV5BMTg1MTY2MjYzNV5BMl5BanBnXkFtZTgwMTc4NTMwNDI@._V1_SX300.jpg",
         "imdbRating": 7.3,
         "rtRating": 96,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -3570,93 +3319,19 @@
                     }
                 }
             ]
-        }
-    },
-    {
-        "title": "Anon",
-        "rating": 2.6666666666666665,
-        "type": "movie",
-        "time": 1531606415950,
-        "reviews": {
-            "items": [
-                {
-                    "rating": 3,
-                    "user": {
-                        "name": "Kent"
-                    }
-                },
-                {
-                    "rating": 3,
-                    "user": {
-                        "name": "Alec"
-                    }
-                },
-                {
-                    "rating": 2,
-                    "user": {
-                        "name": "Collin"
-                    }
-                }
-            ]
-        }
-    },
-    {
-        "title": "Kingsman: The Secret Service",
-        "rating": 3,
-        "type": "movie",
-        "year": 2015,
-        "img": "https://resizing.flixster.com/_3RCahZCmtXTd75-prhhh0EKZlA=/fit-in/80x80/v1.bTsxMTE4OTUwMTtqOzE4OTM5OzEyMDA7MjAyNjszMDAw",
-        "rtRating": 75,
-        "time": 1531606415950,
-        "reviews": {
-            "items": [
-                {
-                    "rating": 3,
-                    "user": {
-                        "name": "Hank"
-                    }
-                },
-                {
-                    "rating": 3,
-                    "user": {
-                        "name": "Ryan"
-                    }
-                }
-            ]
-        }
-    },
-    {
-        "title": "The Imitation Game",
-        "rating": 4,
-        "type": "movie",
-        "time": 1531606415950,
-        "reviews": {
-            "items": [
-                {
-                    "rating": 4,
-                    "user": {
-                        "name": "Alec"
-                    }
-                },
-                {
-                    "rating": 4,
-                    "user": {
-                        "name": "Ryan"
-                    }
-                }
-            ]
-        }
+        },
+        "description": "T'Challa, heir to the hidden but advanced kingdom of Wakanda, must step forward to lead his people into a new future and must confront a challenger from his country's past.",
+        "releaseDate": "2018-02-16T05:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "The Boondock Saints",
         "rating": 3,
         "type": "movie",
-        "year": 1999,
         "id": "tt0144117",
         "img": "https://m.media-amazon.com/images/M/MV5BYzVmMTdjOTYtOTJkYS00ZTg2LWExNTgtNzA1N2Y0MDgwYWFhXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg",
-        "imdbRating": 7.8,
+        "imdbRating": 7.7,
         "rtRating": 28,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -3672,43 +3347,19 @@
                     }
                 }
             ]
-        }
-    },
-    {
-        "title": "Spirited Away",
-        "rating": 4,
-        "type": "movie",
-        "year": 2002,
-        "img": "https://resizing.flixster.com/YSrvGChzYoOyhgN5dN-NKNevnfc=/fit-in/80x80/v1.bTsxMTIwNzQzNztqOzE4OTM5OzEyMDA7MTUzNjsyMDQ4",
-        "rtRating": 97,
-        "time": 1531606415950,
-        "reviews": {
-            "items": [
-                {
-                    "rating": 4,
-                    "user": {
-                        "name": "Ryan"
-                    }
-                },
-                {
-                    "rating": 4,
-                    "user": {
-                        "name": "Kent"
-                    }
-                }
-            ]
-        }
+        },
+        "description": "Two Irish Catholic brothers become vigilantes and wipe out Boston's criminal underworld in the name of God.",
+        "releaseDate": "2000-01-21T05:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "John Wick",
         "rating": 3.5,
         "type": "movie",
-        "year": 2014,
         "id": "tt2911666",
         "img": "https://m.media-amazon.com/images/M/MV5BMTU2NjA1ODgzMF5BMl5BanBnXkFtZTgwMTM2MTI4MjE@._V1_SX300.jpg",
         "imdbRating": 7.4,
         "rtRating": 86,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -3724,71 +3375,19 @@
                     }
                 }
             ]
-        }
-    },
-    {
-        "title": "Kill Bill: Volume 1",
-        "rating": 4,
-        "type": "movie",
-        "year": 2003,
-        "img": "https://resizing.flixster.com/3VqHugWsQ5YwE2FXWULzLgdfKoQ=/fit-in/80x80/v1.bTsxMTE3NDE5MjtqOzE4OTM5OzEyMDA7ODAwOzEyMDA",
-        "rtRating": 85,
-        "time": 1531606415950,
-        "reviews": {
-            "items": [
-                {
-                    "rating": 4,
-                    "user": {
-                        "name": "Kent"
-                    }
-                }
-            ]
-        }
-    },
-    {
-        "title": "Ready Player One",
-        "rating": 2.25,
-        "type": "movie",
-        "time": 1531606415950,
-        "reviews": {
-            "items": [
-                {
-                    "rating": 3,
-                    "user": {
-                        "name": "Collin"
-                    }
-                },
-                {
-                    "rating": 1,
-                    "user": {
-                        "name": "Nick"
-                    }
-                },
-                {
-                    "rating": 2,
-                    "user": {
-                        "name": "Gooch"
-                    }
-                },
-                {
-                    "rating": 3,
-                    "user": {
-                        "name": "Kent"
-                    }
-                }
-            ]
-        }
+        },
+        "description": "An ex-hit-man comes out of retirement to track down the gangsters that killed his dog and took everything from him.",
+        "releaseDate": "2014-10-24T04:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "Rampage",
         "rating": 2.5,
         "type": "movie",
-        "year": 2018,
         "id": "tt2231461",
         "img": "https://m.media-amazon.com/images/M/MV5BNDA1NjA3ODU3OV5BMl5BanBnXkFtZTgwOTg3MTIwNTM@._V1_SX300.jpg",
         "imdbRating": 6.1,
         "rtRating": 52,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -3804,87 +3403,19 @@
                     }
                 }
             ]
-        }
-    },
-    {
-        "title": "Star Wars: The Last Jedi",
-        "rating": 1,
-        "type": "movie",
-        "year": 2017,
-        "img": "https://resizing.flixster.com/ued3vs_aBuKi4tGJs9Q3aNh5us0=/fit-in/80x80/v1.bTsxMjU0NjIzNDtqOzE4ODY1OzEyMDA7MTY4ODsyNTAw",
-        "rtRating": 90,
-        "time": 1531606415950,
-        "reviews": {
-            "items": [
-                {
-                    "rating": 1,
-                    "user": {
-                        "name": "Nick"
-                    }
-                },
-                {
-                    "rating": 0,
-                    "user": {
-                        "name": "Gooch"
-                    }
-                }
-            ]
-        }
-    },
-    {
-        "title": "Extinction",
-        "rating": 1,
-        "type": "movie",
-        "time": 1532922841904,
-        "reviews": {
-            "items": [
-                {
-                    "rating": 1,
-                    "user": {
-                        "name": "Kent"
-                    }
-                },
-                {
-                    "rating": 1,
-                    "user": {
-                        "name": "Alec"
-                    }
-                }
-            ]
-        }
-    },
-    {
-        "title": "The End of the Fucking World",
-        "rating": 3,
-        "type": "movie",
-        "time": 1531606415950,
-        "reviews": {
-            "items": [
-                {
-                    "rating": 3,
-                    "user": {
-                        "name": "Alec"
-                    }
-                },
-                {
-                    "rating": 4,
-                    "user": {
-                        "name": "Collin"
-                    }
-                }
-            ]
-        }
+        },
+        "description": "When three different animals become infected with a dangerous pathogen, a primatologist and a geneticist team up to stop them from destroying Chicago.",
+        "releaseDate": "2018-04-13T04:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "Upgrade",
         "rating": 4,
         "type": "movie",
-        "year": 2018,
         "id": "tt6499752",
         "img": "https://m.media-amazon.com/images/M/MV5BMjI0NzcyMjM5Ml5BMl5BanBnXkFtZTgwMzk2NzAyNTM@._V1_SX300.jpg",
         "imdbRating": 7.5,
         "rtRating": 88,
-        "time": 1535506511797,
         "reviews": {
             "items": [
                 {
@@ -3900,18 +3431,19 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "Set in the near-future, technology controls nearly all aspects of life. But when the world of Grey, a self-labeled technophobe, is turned upside down, his only hope for revenge is an experimental computer chip implant.",
+        "releaseDate": "2018-06-01T04:00:00.000Z",
+        "createdAt": "2018-08-29T01:35:11.797Z"
     },
     {
         "title": "Wrath of Man",
         "rating": 4,
         "type": "movie",
-        "year": 2021,
         "id": "tt11083552",
         "img": "https://m.media-amazon.com/images/M/MV5BNGVkOTlhOTktNjZiNS00NDg3LWIxMDAtZTY5Y2E0YjllN2IxXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_SX300.jpg",
         "imdbRating": 7.2,
         "rtRating": 66,
-        "time": 1622421619845,
         "reviews": {
             "items": [
                 {
@@ -3927,18 +3459,19 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "The plot follows H, a cold and mysterious character working at a cash truck company responsible for moving hundreds of millions of dollars around Los Angeles each week.",
+        "releaseDate": "2021-05-07T04:00:00.000Z",
+        "createdAt": "2021-05-31T00:40:19.845Z"
     },
     {
         "title": "The Tomorrow War",
         "rating": 3,
         "type": "movie",
-        "year": 2021,
         "id": "tt9777666",
         "img": "https://m.media-amazon.com/images/M/MV5BNTI2YTI0MWEtNGQ4OS00ODIzLWE1MWEtZGJiN2E3ZmM1OWI1XkEyXkFqcGdeQXVyODk4OTc3MTY@._V1_SX300.jpg",
         "imdbRating": 6.6,
         "rtRating": 53,
-        "time": 1625754890665,
         "reviews": {
             "items": [
                 {
@@ -3960,18 +3493,19 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "A family man is drafted to fight in a future war where the fate of humanity relies on his ability to confront the past.",
+        "releaseDate": "2021-07-02T04:00:00.000Z",
+        "createdAt": "2021-07-08T14:34:50.665Z"
     },
     {
         "title": "Black Widow",
         "rating": 3,
         "type": "movie",
-        "year": 2021,
         "id": "tt3480822",
         "img": "https://resizing.flixster.com/1Xirdtv_-nfyh9fehgrVeFVQVX4=/fit-in/80x80/v1.bTsxMzg1MjA2NDtqOzE4ODgwOzEyMDA7MTY4ODsyNTAw",
         "imdbRating": 6.8,
         "rtRating": 81,
-        "time": 1625926866020,
         "reviews": {
             "items": [
                 {
@@ -3987,18 +3521,19 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "Natasha Romanoff confronts the darker parts of her ledger when a dangerous conspiracy with ties to her past arises.",
+        "releaseDate": "2021-07-09T04:00:00.000Z",
+        "createdAt": "2021-07-10T14:21:06.020Z"
     },
     {
         "title": "Zodiac",
         "rating": 4,
         "type": "movie",
-        "year": 2007,
         "id": "tt0443706",
         "img": "https://m.media-amazon.com/images/M/MV5BN2UwNDc5NmEtNjVjZS00OTI5LWE5YjctMWM3ZjBiZGYwMGI2XkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SX300.jpg",
         "imdbRating": 7.7,
         "rtRating": 89,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -4008,37 +3543,19 @@
                     }
                 }
             ]
-        }
-    },
-    {
-        "title": "Interview with the Vampire",
-        "rating": 3,
-        "type": "movie",
-        "year": 1994,
-        "img": "https://resizing.flixster.com/sjD1mpspHx8_RUzBnH489LUvOck=/fit-in/80x80/v1.bTsxMTE2OTQ1MztqOzE4OTM5OzEyMDA7ODAwOzEyMDA",
-        "rtRating": 63,
-        "time": 1531606415950,
-        "reviews": {
-            "items": [
-                {
-                    "rating": 3,
-                    "user": {
-                        "name": "Kent"
-                    }
-                }
-            ]
-        }
+        },
+        "description": "In the late 1960s/early 1970s, a San Francisco cartoonist becomes an amateur detective obsessed with tracking down the Zodiac Killer, an unidentified individual who terrorizes Northern California with a killing spree.",
+        "releaseDate": "2007-03-02T05:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "Game Night",
         "rating": 4,
         "type": "movie",
-        "year": 2018,
         "id": "tt2704998",
         "img": "https://m.media-amazon.com/images/M/MV5BMjI3ODkzNDk5MF5BMl5BanBnXkFtZTgwNTEyNjY2NDM@._V1_SX300.jpg",
         "imdbRating": 6.9,
         "rtRating": 85,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -4048,18 +3565,19 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "A group of friends who meet regularly for game nights find themselves entangled in a real-life mystery when the shady brother of one of them is seemingly kidnapped by dangerous gangsters.",
+        "releaseDate": "2018-02-23T05:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "Get Out",
         "rating": 4,
         "type": "movie",
-        "year": 2017,
         "id": "tt5052448",
         "img": "https://m.media-amazon.com/images/M/MV5BMjUxMDQwNjcyNl5BMl5BanBnXkFtZTgwNzcwMzc0MTI@._V1_SX300.jpg",
         "imdbRating": 7.7,
         "rtRating": 98,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -4069,18 +3587,19 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "A young African-American visits his white girlfriend's parents for the weekend, where his simmering uneasiness about their reception of him eventually reaches a boiling point.",
+        "releaseDate": "2017-02-24T05:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "John Wick: Chapter 2",
         "rating": 4,
         "type": "movie",
-        "year": 2017,
         "id": "tt4425200",
         "img": "https://m.media-amazon.com/images/M/MV5BMjE2NDkxNTY2M15BMl5BanBnXkFtZTgwMDc2NzE0MTI@._V1_SX300.jpg",
         "imdbRating": 7.5,
         "rtRating": 89,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -4090,18 +3609,19 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "After returning to the criminal underworld to repay a debt, John Wick discovers that a large bounty has been put on his life.",
+        "releaseDate": "2017-02-10T05:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "Gran Torino",
         "rating": 4,
         "type": "movie",
-        "year": 2009,
         "id": "tt1205489",
         "img": "https://resizing.flixster.com/yW6cHwdSebJGZfJ2tO-QMY5cEuk=/fit-in/80x80/v1.bTsxMTE3MDAyOTtqOzE4OTM5OzEyMDA7ODAwOzEyMDA",
         "imdbRating": 8.1,
         "rtRating": 81,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -4111,18 +3631,19 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "Disgruntled Korean War veteran Walt Kowalski sets out to reform his neighbor, Thao Lor, a Hmong teenager who tried to steal Kowalski's prized possession: a 1972 Gran Torino.",
+        "releaseDate": "2009-01-09T05:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "Blazing Saddles",
         "rating": 4,
         "type": "movie",
-        "year": 1974,
         "id": "tt0071230",
         "img": "https://m.media-amazon.com/images/M/MV5BZGZmMWE1MDYtNzAyNC00MDMzLTgzZjQtNTQ5NjYzN2E4MzkzXkEyXkFqcGdeQXVyNDk3NzU2MTQ@._V1_SX300.jpg",
         "imdbRating": 7.7,
         "rtRating": 88,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -4132,18 +3653,19 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "In order to ruin a western town, a corrupt politician appoints a black Sheriff, who promptly becomes his most formidable adversary.",
+        "releaseDate": "1974-02-07T04:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "Shanghai Noon",
         "rating": 3,
         "type": "movie",
-        "year": 2000,
         "id": "tt0184894",
         "img": "https://m.media-amazon.com/images/M/MV5BMTI0MjE2MzUwOV5BMl5BanBnXkFtZTYwMTk5NjU3._V1_SX300.jpg",
         "imdbRating": 6.6,
         "rtRating": 79,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -4153,18 +3675,19 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "A Chinese man travels to the Wild West to rescue a kidnapped Princess. After teaming up with a train robber, the unlikely duo takes on a Chinese traitor and his corrupt boss.",
+        "releaseDate": "2000-05-26T04:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "127 Hours",
         "rating": 3,
         "type": "movie",
-        "year": 2010,
         "id": "tt1542344",
         "img": "https://m.media-amazon.com/images/M/MV5BMTc2NjMzOTE3Ml5BMl5BanBnXkFtZTcwMDE0OTc5Mw@@._V1_SX300.jpg",
         "imdbRating": 7.5,
         "rtRating": 93,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -4174,18 +3697,19 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "A mountain climber becomes trapped under a boulder while canyoneering alone near Moab, Utah and resorts to desperate measures in order to survive.",
+        "releaseDate": "2011-01-28T05:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "The Grand Budapest Hotel",
         "rating": 3,
         "type": "movie",
-        "year": 2014,
         "id": "tt2278388",
         "img": "https://m.media-amazon.com/images/M/MV5BMzM5NjUxOTEyMl5BMl5BanBnXkFtZTgwNjEyMDM0MDE@._V1_SX300.jpg",
         "imdbRating": 8.1,
         "rtRating": 92,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -4195,18 +3719,19 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "A writer encounters the owner of an aging high-class hotel, who tells him of his early years serving as a lobby boy in the hotel's glorious years under an exceptional concierge.",
+        "releaseDate": "2014-03-28T04:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "GoodFellas",
         "rating": 4,
         "type": "movie",
-        "year": 1990,
         "id": "tt0099685",
         "img": "https://m.media-amazon.com/images/M/MV5BY2NkZjEzMDgtN2RjYy00YzM1LWI4ZmQtMjIwYjFjNmI3ZGEwXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SX300.jpg",
         "imdbRating": 8.7,
         "rtRating": 96,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -4216,18 +3741,19 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "The story of Henry Hill and his life in the mob, covering his relationship with his wife Karen Hill and his mob partners Jimmy Conway and Tommy DeVito in the Italian-American crime syndicate.",
+        "releaseDate": "1990-09-21T04:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "Coach Carter",
         "rating": 3,
         "type": "movie",
-        "year": 2005,
         "id": "tt0393162",
         "img": "https://m.media-amazon.com/images/M/MV5BNWYxZWFiNTItN2FkNS00ZDJmLWE1MWItYjMyMTgyOTI4MmQ4XkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg",
         "imdbRating": 7.3,
         "rtRating": 64,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -4237,18 +3763,19 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "Controversy surrounds high school basketball coach Ken Carter after he benches his entire team for breaking their academic contract with him.",
+        "releaseDate": "2005-01-14T05:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "The Matrix",
         "rating": 4,
         "type": "movie",
-        "year": 1999,
         "id": "tt0133093",
         "img": "https://m.media-amazon.com/images/M/MV5BNzQzOTk3OTAtNDQ0Zi00ZTVkLWI0MTEtMDllZjNkYzNjNTc4L2ltYWdlXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_SX300.jpg",
         "imdbRating": 8.7,
         "rtRating": 88,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -4258,37 +3785,19 @@
                     }
                 }
             ]
-        }
-    },
-    {
-        "title": "The Final Master",
-        "rating": 3,
-        "type": "movie",
-        "year": 2016,
-        "img": "https://resizing.flixster.com/EGrinwDqS6bzd-kDX8RFHi-gHy4=/fit-in/80x80/v1.bTsxMTkxMzQ2NDtqOzE4ODU3OzEyMDA7NjIwMDs4ODAw",
-        "rtRating": 65,
-        "time": 1531606415950,
-        "reviews": {
-            "items": [
-                {
-                    "rating": 3,
-                    "user": {
-                        "name": "Alec"
-                    }
-                }
-            ]
-        }
+        },
+        "description": "When a beautiful stranger leads computer hacker Neo to a forbidding underworld, he discovers the shocking truth--the life he knows is the elaborate deception of an evil cyber-intelligence.",
+        "releaseDate": "1999-03-31T05:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "Warrior",
         "rating": 3,
         "type": "movie",
-        "year": 2011,
         "id": "tt1291584",
         "img": "https://m.media-amazon.com/images/M/MV5BMTk4ODk5MTMyNV5BMl5BanBnXkFtZTcwMDMyNTg0Ng@@._V1_SX300.jpg",
         "imdbRating": 8.1,
         "rtRating": 83,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -4298,37 +3807,19 @@
                     }
                 }
             ]
-        }
-    },
-    {
-        "title": "Limitless",
-        "rating": 3,
-        "type": "movie",
-        "year": 2011,
-        "img": "https://resizing.flixster.com/y8QGPQgA0fgO4k6qJMLyZAGN1aU=/fit-in/80x80/v1.bTsxMTE1NjE4NDtqOzE4OTM5OzEyMDA7NjQ4Ozk2MA",
-        "rtRating": 69,
-        "time": 1531606415950,
-        "reviews": {
-            "items": [
-                {
-                    "rating": 3,
-                    "user": {
-                        "name": "Ryan"
-                    }
-                }
-            ]
-        }
+        },
+        "description": "The youngest son of an alcoholic former boxer returns home, where he's trained by his father for competition in a mixed martial arts tournament - a path that puts the fighter on a collision course with his estranged, older brother.",
+        "releaseDate": "2011-09-09T04:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "Big Trouble in Little China",
         "rating": 3,
         "type": "movie",
-        "year": 1986,
         "id": "tt0090728",
         "img": "https://m.media-amazon.com/images/M/MV5BNzlhYjEzOGItN2MwNS00ODRiLWE5OTItYThiNmJlMTdmMzgxXkEyXkFqcGdeQXVyNTAyODkwOQ@@._V1_SX300.jpg",
         "imdbRating": 7.3,
         "rtRating": 75,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -4338,50 +3829,19 @@
                     }
                 }
             ]
-        }
-    },
-    {
-        "title": "Infiltrator",
-        "rating": 3,
-        "type": "movie",
-        "time": 1531606415950,
-        "reviews": {
-            "items": [
-                {
-                    "rating": 3,
-                    "user": {
-                        "name": "Collin"
-                    }
-                }
-            ]
-        }
-    },
-    {
-        "title": "Tomb Raider",
-        "rating": 3,
-        "type": "movie",
-        "time": 1531606415950,
-        "reviews": {
-            "items": [
-                {
-                    "rating": 3,
-                    "user": {
-                        "name": "Kent"
-                    }
-                }
-            ]
-        }
+        },
+        "description": "A rough-and-tumble trucker helps rescue his friend's fiancée from an ancient sorcerer in a supernatural battle beneath Chinatown.",
+        "releaseDate": "1986-07-02T04:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "Deadpool",
         "rating": 4,
         "type": "movie",
-        "year": 2016,
         "id": "tt1431045",
         "img": "https://m.media-amazon.com/images/M/MV5BYzE5MjY1ZDgtMTkyNC00MTMyLThhMjAtZGI5OTE1NzFlZGJjXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_SX300.jpg",
         "imdbRating": 8,
         "rtRating": 85,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -4391,18 +3851,19 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "A wisecracking mercenary gets experimented on and becomes immortal but ugly, and sets out to track down the man who ruined his looks.",
+        "releaseDate": "2016-02-12T05:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "The Disaster Artist",
         "rating": 3,
         "type": "movie",
-        "year": 2017,
         "id": "tt3521126",
         "img": "https://m.media-amazon.com/images/M/MV5BOGNkMzliMGMtMDI5Ni00OTZkLTgyMTYtNzk5ZTY1NjVhYjVmXkEyXkFqcGdeQXVyNTAzMTY4MDA@._V1_SX300.jpg",
         "imdbRating": 7.4,
         "rtRating": 91,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -4412,37 +3873,19 @@
                     }
                 }
             ]
-        }
-    },
-    {
-        "title": "John Dies at the End",
-        "rating": 3,
-        "type": "movie",
-        "year": 2013,
-        "img": "https://resizing.flixster.com/5twz7m0mOtQv0SSqbfq2lBujOlA=/fit-in/80x80/v1.bTsxMTE2NzE0OTtqOzE4OTM5OzEyMDA7MjAyNTszMDAw",
-        "rtRating": 60,
-        "time": 1531606415950,
-        "reviews": {
-            "items": [
-                {
-                    "rating": 3,
-                    "user": {
-                        "name": "Nick"
-                    }
-                }
-            ]
-        }
+        },
+        "description": "When Greg Sestero, an aspiring film actor, meets the weird and mysterious Tommy Wiseau in an acting class, they form a unique friendship and travel to Hollywood to make their dreams come true.",
+        "releaseDate": "2017-12-08T05:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "Ghost in the Shell",
         "rating": 4,
         "type": "movie",
-        "year": 2017,
         "id": "tt1219827",
         "img": "https://m.media-amazon.com/images/M/MV5BMzJiNTI3MjItMGJiMy00YzA1LTg2MTItZmE1ZmRhOWQ0NGY1XkEyXkFqcGdeQXVyOTk4MTM0NQ@@._V1_SX300.jpg",
         "imdbRating": 6.3,
         "rtRating": 43,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -4452,18 +3895,19 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "In the near future, Major Mira Killian is the first of her kind: A human saved from a terrible crash, who is cyber-enhanced to be a perfect soldier devoted to stopping the world's most dangerous criminals.",
+        "releaseDate": "2017-03-31T04:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "Wonder Woman",
         "rating": 2,
         "type": "movie",
-        "year": 2017,
         "id": "tt0451279",
         "img": "https://m.media-amazon.com/images/M/MV5BMTYzODQzYjQtNTczNC00MzZhLTg1ZWYtZDUxYmQ3ZTY4NzA1XkEyXkFqcGdeQXVyODE5NzE3OTE@._V1_SX300.jpg",
         "imdbRating": 7.4,
         "rtRating": 93,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -4473,18 +3917,19 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "When a pilot crashes and tells of conflict in the outside world, Diana, an Amazonian warrior in training, leaves home to fight a war, discovering her full powers and true destiny.",
+        "releaseDate": "2017-06-02T04:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "Incredibles 2",
         "rating": 2,
         "type": "movie",
-        "year": 2018,
         "id": "tt3606756",
         "img": "https://m.media-amazon.com/images/M/MV5BMTEzNzY0OTg0NTdeQTJeQWpwZ15BbWU4MDU3OTg3MjUz._V1_SX300.jpg",
         "imdbRating": 7.6,
         "rtRating": 93,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -4494,34 +3939,19 @@
                     }
                 }
             ]
-        }
-    },
-    {
-        "title": "The Isle of Dogs",
-        "rating": 4,
-        "type": "movie",
-        "time": 1531606415950,
-        "reviews": {
-            "items": [
-                {
-                    "rating": 4,
-                    "user": {
-                        "name": "Collin"
-                    }
-                }
-            ]
-        }
+        },
+        "description": "The Incredibles family takes on a new mission which involves a change in family roles: Bob Parr (Mr. Incredible) must manage the house while his wife Helen (Elastigirl) goes out to save the world.",
+        "releaseDate": "2018-06-15T04:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "The Endless",
         "rating": 3,
         "type": "movie",
-        "year": 2018,
         "id": "tt3986820",
         "img": "https://resizing.flixster.com/U5VY-SzphGkagIPxw16xbyaxRMQ=/fit-in/80x80/v1.bTsxMjY0OTI2OTtqOzE4ODY2OzEyMDA7MTM4MjsyMDQ4",
         "imdbRating": 6.5,
         "rtRating": 92,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -4531,37 +3961,19 @@
                     }
                 }
             ]
-        }
-    },
-    {
-        "title": "The Death of Stalin",
-        "rating": 2,
-        "type": "movie",
-        "year": 2018,
-        "img": "https://resizing.flixster.com/ZezFg3vDwMJc5P0TNzIf6C4LE-w=/fit-in/80x80/v1.bTsxMjY3MjY3ODtqOzE4ODY2OzEyMDA7NDA1MDs2MDAw",
-        "rtRating": 95,
-        "time": 1531606415950,
-        "reviews": {
-            "items": [
-                {
-                    "rating": 2,
-                    "user": {
-                        "name": "Collin"
-                    }
-                }
-            ]
-        }
+        },
+        "description": "As kids, they escaped a UFO death cult. Now, two adult brothers seek answers after an old videotape surfaces and brings them back to where they began.",
+        "releaseDate": "2018-04-06T04:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "Calibre",
         "rating": 3,
         "type": "movie",
-        "year": 2018,
         "id": "tt6218358",
         "img": "https://m.media-amazon.com/images/M/MV5BMWJmNmRjYzgtNDk0ZC00ZDk5LTkyNGItMDY5OWU4MjU4ZTExXkEyXkFqcGdeQXVyMTA5MzEzOTg@._V1_SX300.jpg",
         "imdbRating": 6.8,
         "rtRating": 95,
-        "time": 1531789374779,
         "reviews": {
             "items": [
                 {
@@ -4571,18 +3983,19 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "A shocking deed turned their weekend trip into a nightmare. Now their only hope is to swallow their paranoia and act normal.",
+        "releaseDate": "2018-06-29T04:00:00.000Z",
+        "createdAt": "2018-07-17T01:02:54.779Z"
     },
     {
         "title": "A Quiet Place",
         "rating": 3,
         "type": "movie",
-        "year": 2018,
         "id": "tt6644200",
         "img": "https://m.media-amazon.com/images/M/MV5BMjI0MDMzNTQ0M15BMl5BanBnXkFtZTgwMTM5NzM3NDM@._V1_SX300.jpg",
         "imdbRating": 7.5,
         "rtRating": 96,
-        "time": 1532831856557,
         "reviews": {
             "items": [
                 {
@@ -4592,18 +4005,19 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "In a post-apocalyptic world, a family is forced to live in silence while hiding from monsters with ultra-sensitive hearing.",
+        "releaseDate": "2018-04-06T04:00:00.000Z",
+        "createdAt": "2018-07-29T02:37:36.557Z"
     },
     {
         "title": "Pacific Rim Uprising",
         "rating": 2,
         "type": "movie",
-        "year": 2018,
         "id": "tt2557478",
         "img": "https://resizing.flixster.com/e3ZNFiDOl0Uhb3eK-nvi7M5fsh4=/fit-in/80x80/v1.bTsxMjY0OTIxNDtqOzE4ODY2OzEyMDA7NTc2OzkxMg",
         "imdbRating": 5.6,
         "rtRating": 43,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -4613,18 +4027,19 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "Jake Pentecost, son of Stacker Pentecost, reunites with Mako Mori to lead a new generation of Jaeger pilots, including rival Lambert and 15-year-old hacker Amara, against a new Kaiju threat.",
+        "releaseDate": "2018-03-23T04:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "Thor: Ragnarok",
         "rating": 2,
         "type": "movie",
-        "year": 2017,
         "id": "tt3501632",
         "img": "https://m.media-amazon.com/images/M/MV5BMjMyNDkzMzI1OF5BMl5BanBnXkFtZTgwODcxODg5MjI@._V1_SX300.jpg",
         "imdbRating": 7.9,
         "rtRating": 93,
-        "time": 1531606415950,
         "reviews": {
             "items": [
                 {
@@ -4634,72 +4049,19 @@
                     }
                 }
             ]
-        }
-    },
-    {
-        "title": "Star Wars: The Force Awakens",
-        "rating": 2,
-        "type": "movie",
-        "time": 1531606415950,
-        "reviews": {
-            "items": [
-                {
-                    "rating": 2,
-                    "user": {
-                        "name": "Nick"
-                    }
-                }
-            ]
-        }
-    },
-    {
-        "title": "Rogue One: A Star Wars Story",
-        "rating": 3,
-        "type": "movie",
-        "year": 2016,
-        "img": "https://resizing.flixster.com/M0m7oY8ts5jHKf-JoVquEyT8uaA=/fit-in/80x80/v1.bTsxMjIzNzIxOTtwOzE4ODYxOzEyMDA7NzIwOzEwNjU",
-        "rtRating": 84,
-        "time": 1531606415950,
-        "reviews": {
-            "items": [
-                {
-                    "rating": 3,
-                    "user": {
-                        "name": "Nick"
-                    }
-                }
-            ]
-        }
-    },
-    {
-        "title": "What We Do In The Shadows",
-        "rating": 3,
-        "type": "movie",
-        "year": 2015,
-        "img": "https://resizing.flixster.com/W-8mFZOF4JF-Lfp0DfN-wpIso3w=/fit-in/80x80/v1.bTsxMTE4OTc0MztqOzE4OTM5OzEyMDA7MjcwMDs0MDAw",
-        "rtRating": 96,
-        "time": 1531606415950,
-        "reviews": {
-            "items": [
-                {
-                    "rating": 3,
-                    "user": {
-                        "name": "Collin"
-                    }
-                }
-            ]
-        }
+        },
+        "description": "Imprisoned on the planet Sakaar, Thor must race against time to return to Asgard and stop Ragnarök, the destruction of his world, at the hands of the powerful and ruthless villain Hela.",
+        "releaseDate": "2017-11-03T04:00:00.000Z",
+        "createdAt": "2018-07-14T22:13:35.950Z"
     },
     {
         "title": "Deadpool 2",
         "rating": 4,
         "type": "movie",
-        "year": 2018,
         "id": "tt5463162",
         "img": "https://m.media-amazon.com/images/M/MV5BNjk1Njk3YjctMmMyYS00Y2I4LThhMzktN2U0MTMyZTFlYWQ5XkEyXkFqcGdeQXVyODM2ODEzMDA@._V1_SX300.jpg",
         "imdbRating": 7.7,
         "rtRating": 84,
-        "time": 1534690963407,
         "reviews": {
             "items": [
                 {
@@ -4709,18 +4071,19 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "Foul-mouthed mutant mercenary Wade Wilson (a.k.a. Deadpool) assembles a team of fellow mutant rogues to protect a young boy with supernatural abilities from the brutal, time-traveling cyborg Cable.",
+        "releaseDate": "2018-05-18T04:00:00.000Z",
+        "createdAt": "2018-08-19T15:02:43.407Z"
     },
     {
         "title": "Avengers: Infinity War",
         "rating": 4,
         "type": "movie",
-        "year": 2018,
         "id": "tt4154756",
         "img": "https://m.media-amazon.com/images/M/MV5BMjMxNjY2MDU1OV5BMl5BanBnXkFtZTgwNzY1MTUwNTM@._V1_SX300.jpg",
         "imdbRating": 8.4,
         "rtRating": 85,
-        "time": 1534691067729,
         "reviews": {
             "items": [
                 {
@@ -4730,18 +4093,19 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "The Avengers and their allies must be willing to sacrifice all in an attempt to defeat the powerful Thanos before his blitz of devastation and ruin puts an end to the universe.",
+        "releaseDate": "2018-04-27T04:00:00.000Z",
+        "createdAt": "2018-08-19T15:04:27.729Z"
     },
     {
         "title": "Batman Begins",
         "rating": 4,
         "type": "movie",
-        "year": 2005,
         "id": "tt0372784",
         "img": "https://m.media-amazon.com/images/M/MV5BOTY4YjI2N2MtYmFlMC00ZjcyLTg3YjEtMDQyM2ZjYzQ5YWFkXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg",
         "imdbRating": 8.2,
         "rtRating": 84,
-        "time": 1534691114338,
         "reviews": {
             "items": [
                 {
@@ -4751,37 +4115,19 @@
                     }
                 }
             ]
-        }
-    },
-    {
-        "title": "The Dark Knight",
-        "rating": 4,
-        "type": "movie",
-        "year": 2008,
-        "img": "https://resizing.flixster.com/9rNwltj2gnfQ9cAoMnSOStX1X9s=/fit-in/80x80/v1.bTsxMTE2NTE2MDtqOzE4OTM5OzEyMDA7ODAwOzEyMDA",
-        "rtRating": 94,
-        "time": 1534691468517,
-        "reviews": {
-            "items": [
-                {
-                    "rating": 4,
-                    "user": {
-                        "name": "Kent"
-                    }
-                }
-            ]
-        }
+        },
+        "description": "After training with his mentor, Batman begins his fight to free crime-ridden Gotham City from corruption.",
+        "releaseDate": "2005-06-15T04:00:00.000Z",
+        "createdAt": "2018-08-19T15:05:14.338Z"
     },
     {
         "title": "The Dark Knight Rises",
         "rating": 3,
         "type": "movie",
-        "year": 2012,
         "id": "tt1345836",
         "img": "https://m.media-amazon.com/images/M/MV5BMTk4ODQzNDY3Ml5BMl5BanBnXkFtZTcwODA0NTM4Nw@@._V1_SX300.jpg",
         "imdbRating": 8.4,
         "rtRating": 87,
-        "time": 1534692337610,
         "reviews": {
             "items": [
                 {
@@ -4791,34 +4137,19 @@
                     }
                 }
             ]
-        }
-    },
-    {
-        "title": "Den of Theives",
-        "rating": 4,
-        "type": "movie",
-        "time": 1535507966741,
-        "reviews": {
-            "items": [
-                {
-                    "rating": 4,
-                    "user": {
-                        "name": "Collin"
-                    }
-                }
-            ]
-        }
+        },
+        "description": "Eight years after the Joker's reign of anarchy, Batman, with the help of the enigmatic Catwoman, is forced from his exile to save Gotham City from the brutal guerrilla terrorist Bane.",
+        "releaseDate": "2012-07-20T04:00:00.000Z",
+        "createdAt": "2018-08-19T15:25:37.610Z"
     },
     {
         "title": "Hold the Dark",
         "rating": 3,
         "type": "movie",
-        "year": 2018,
         "id": "tt5057140",
         "img": "https://m.media-amazon.com/images/M/MV5BMjMwOTQ1MzM3M15BMl5BanBnXkFtZTgwODQyNDQxNjM@._V1_SX300.jpg",
         "imdbRating": 5.6,
         "rtRating": 70,
-        "time": 1538253434135,
         "reviews": {
             "items": [
                 {
@@ -4828,18 +4159,19 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "After the deaths of three children suspected to be killed by wolves, writer Russell Core is hired by the mother of a missing six-year-old boy to track down and locate her son in the Alaskan wilderness.",
+        "releaseDate": "2018-09-28T04:00:00.000Z",
+        "createdAt": "2018-09-29T20:37:14.135Z"
     },
     {
         "title": "Unbreakable",
         "rating": 3,
         "type": "movie",
-        "year": 2000,
         "id": "tt0217869",
         "img": "https://resizing.flixster.com/F9rBzq5Xe5EU28tv6MJEXZGz2hk=/fit-in/80x80/v1.bTsxMTIwNzUxMTtqOzE4OTM5OzEyMDA7MTUzNjsyMDQ4",
         "imdbRating": 7.3,
         "rtRating": 70,
-        "time": 1539329277847,
         "reviews": {
             "items": [
                 {
@@ -4849,72 +4181,19 @@
                     }
                 }
             ]
-        }
-    },
-    {
-        "title": "Split",
-        "rating": 4,
-        "type": "movie",
-        "year": 2017,
-        "img": "https://resizing.flixster.com/XWXM-5FB7lmQVHLHMicqlXejvqQ=/fit-in/80x80/v1.bTsxMjMwMzA0MjtqOzE4ODYyOzEyMDA7NDA1OzYwMA",
-        "rtRating": 77,
-        "time": 1539329286441,
-        "reviews": {
-            "items": [
-                {
-                    "rating": 4,
-                    "user": {
-                        "name": "Nick"
-                    }
-                }
-            ]
-        }
-    },
-    {
-        "title": "The Predator",
-        "rating": 3,
-        "type": "movie",
-        "time": 1543159548981,
-        "reviews": {
-            "items": [
-                {
-                    "rating": 3,
-                    "user": {
-                        "name": "Kent"
-                    }
-                }
-            ]
-        }
-    },
-    {
-        "title": "Mission: Impossible - Fallout",
-        "rating": 3,
-        "type": "movie",
-        "year": 2018,
-        "img": "https://resizing.flixster.com/ykvR5oJGMwgFM2815IyfGCSFy5g=/fit-in/80x80/v1.bTsxMjc0MjEwMjtqOzE4ODY3OzEyMDA7Njk2OzEwMjQ",
-        "rtRating": 97,
-        "time": 1543159712191,
-        "reviews": {
-            "items": [
-                {
-                    "rating": 3,
-                    "user": {
-                        "name": "Kent"
-                    }
-                }
-            ]
-        }
+        },
+        "description": "A man learns something extraordinary about himself after a devastating accident.",
+        "releaseDate": "2000-11-22T05:00:00.000Z",
+        "createdAt": "2018-10-12T07:27:57.847Z"
     },
     {
         "title": "A Star Is Born",
         "rating": 4,
         "type": "movie",
-        "year": 2018,
         "id": "tt1517451",
         "img": "https://m.media-amazon.com/images/M/MV5BNmE5ZmE3OGItNTdlNC00YmMxLWEzNjctYzAwOGQ5ODg0OTI0XkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_SX300.jpg",
         "imdbRating": 7.6,
         "rtRating": 90,
-        "time": 1560531739815,
         "reviews": {
             "items": [
                 {
@@ -4924,18 +4203,19 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "A musician helps a young singer find fame as age and alcoholism send his own career into a downward spiral.",
+        "releaseDate": "2018-10-05T04:00:00.000Z",
+        "createdAt": "2019-06-14T17:02:19.815Z"
     },
     {
         "title": "In the Shadow of the Moon",
         "rating": 3,
         "type": "movie",
-        "year": 2019,
         "id": "tt8110640",
         "img": "https://m.media-amazon.com/images/M/MV5BN2I1MGQ2ZjMtMjc1My00YzU1LThjNzktNzJlMWRkMTc0NjZhXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_SX300.jpg",
         "imdbRating": 6.2,
-        "rtRating": 58,
-        "time": 1570588826113,
+        "rtRating": 95,
         "reviews": {
             "items": [
                 {
@@ -4945,18 +4225,19 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "A Philadelphia police officer struggles with a lifelong obsession to track down a mysterious serial killer whose crimes defy explanation.",
+        "releaseDate": "2019-09-27T04:00:00.000Z",
+        "createdAt": "2019-10-09T02:40:26.113Z"
     },
     {
         "title": "2001: A Space Odyssey",
         "rating": 1,
         "type": "movie",
-        "year": 1968,
         "id": "tt0062622",
         "img": "https://m.media-amazon.com/images/M/MV5BMmNlYzRiNDctZWNhMi00MzI4LThkZTctMTUzMmZkMmFmNThmXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SX300.jpg",
         "imdbRating": 8.3,
         "rtRating": 92,
-        "time": 1571016084963,
         "reviews": {
             "items": [
                 {
@@ -4966,18 +4247,19 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "After discovering a mysterious artifact buried beneath the Lunar surface, mankind sets off on a quest to find its origins with help from intelligent supercomputer H.A.L. 9000.",
+        "releaseDate": "1970-06-24T04:00:00.000Z",
+        "createdAt": "2019-10-14T01:21:24.963Z"
     },
     {
         "title": "Zombieland: Double Tap",
         "rating": 2,
         "type": "movie",
-        "year": 2019,
         "id": "tt1560220",
         "img": "https://m.media-amazon.com/images/M/MV5BYjcwNjZhNGYtOGNlNy00NGI3LTlmODMtMGZlMjA3YjA0Njg0XkEyXkFqcGdeQXVyMDM2NDM2MQ@@._V1_SX300.jpg",
         "imdbRating": 6.7,
         "rtRating": 68,
-        "time": 1579044314671,
         "reviews": {
             "items": [
                 {
@@ -4987,18 +4269,19 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "Columbus, Tallahassee, Wichita, and Little Rock move to the American heartland as they face off against evolved zombies, fellow survivors, and the growing pains of the snarky makeshift family.",
+        "releaseDate": "2019-10-18T04:00:00.000Z",
+        "createdAt": "2020-01-14T23:25:14.671Z"
     },
     {
         "title": "The Old Guard",
         "rating": 3,
         "type": "movie",
-        "year": 2020,
         "id": "tt7556122",
         "img": "https://m.media-amazon.com/images/M/MV5BNDJiZDliZDAtMjc5Yy00MzVhLThkY2MtNDYwNTQ2ZTM5MDcxXkEyXkFqcGdeQXVyMDA4NzMyOA@@._V1_SX300.jpg",
         "imdbRating": 6.7,
         "rtRating": 80,
-        "time": 1595210782094,
         "reviews": {
             "items": [
                 {
@@ -5008,37 +4291,19 @@
                     }
                 }
             ]
-        }
-    },
-    {
-        "title": "Sucker Punch",
-        "rating": 1,
-        "type": "movie",
-        "year": 2011,
-        "img": "https://resizing.flixster.com/_knFG4-WqpOLidHNMkH2Gwm1ybY=/fit-in/80x80/v1.bTsxMTE2NjcxNjtqOzE4OTM5OzEyMDA7ODAwOzEyMDA",
-        "rtRating": 22,
-        "time": 1595211063804,
-        "reviews": {
-            "items": [
-                {
-                    "rating": 1,
-                    "user": {
-                        "name": "Kent"
-                    }
-                }
-            ]
-        }
+        },
+        "description": "A covert team of immortal mercenaries is suddenly exposed and must now fight to keep their identity a secret just as an unexpected new member is discovered.",
+        "releaseDate": "2020-07-10T04:00:00.000Z",
+        "createdAt": "2020-07-20T02:06:22.094Z"
     },
     {
         "title": "Uncut Gems",
         "rating": 3,
         "type": "movie",
-        "year": 2019,
         "id": "tt5727208",
         "img": "https://m.media-amazon.com/images/M/MV5BZDhkMjUyYjItYWVkYi00YTM5LWE4MGEtY2FlMjA3OThlYmZhXkEyXkFqcGdeQXVyODk4OTc3MTY@._V1_SX300.jpg",
         "imdbRating": 7.4,
         "rtRating": 91,
-        "time": 1595211147062,
         "reviews": {
             "items": [
                 {
@@ -5048,18 +4313,19 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "With his debts mounting and angry collectors closing in, a fast-talking New York City jeweler risks everything in hope of staying afloat and alive.",
+        "releaseDate": "2019-12-25T05:00:00.000Z",
+        "createdAt": "2020-07-20T02:12:27.062Z"
     },
     {
         "title": "The Irishman",
         "rating": 2,
         "type": "movie",
-        "year": 2019,
         "id": "tt1302006",
         "img": "https://m.media-amazon.com/images/M/MV5BMGUyM2ZiZmUtMWY0OC00NTQ4LThkOGUtNjY2NjkzMDJiMWMwXkEyXkFqcGdeQXVyMzY0MTE3NzU@._V1_SX300.jpg",
         "imdbRating": 7.8,
         "rtRating": 95,
-        "time": 1595211524669,
         "reviews": {
             "items": [
                 {
@@ -5069,18 +4335,19 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "Hitman Frank Sheeran looks back at the secrets he kept as a loyal member of the Bufalino crime family.",
+        "releaseDate": "2019-11-27T05:00:00.000Z",
+        "createdAt": "2020-07-20T02:18:44.669Z"
     },
     {
         "title": "Braven",
         "rating": 2,
         "type": "movie",
-        "year": 2018,
         "id": "tt5001754",
         "img": "https://m.media-amazon.com/images/M/MV5BMjM1ODUzMTU1NV5BMl5BanBnXkFtZTgwMzcwMzY1NDM@._V1_SX300.jpg",
         "imdbRating": 5.9,
         "rtRating": 77,
-        "time": 1595212725467,
         "reviews": {
             "items": [
                 {
@@ -5090,18 +4357,19 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "A logger defends his family from a group of dangerous drug runners.",
+        "releaseDate": "2018-02-02T05:00:00.000Z",
+        "createdAt": "2020-07-20T02:38:45.467Z"
     },
     {
         "title": "Palm Springs",
         "rating": 3,
         "type": "movie",
-        "year": 2020,
         "id": "tt9484998",
         "img": "https://m.media-amazon.com/images/M/MV5BYjk0MTgzMmQtZmY2My00NmE5LWExNGUtYjZkNTA3ZDkyMTJiXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_SX300.jpg",
         "imdbRating": 7.4,
         "rtRating": 95,
-        "time": 1595386070776,
         "reviews": {
             "items": [
                 {
@@ -5111,50 +4379,19 @@
                     }
                 }
             ]
-        }
-    },
-    {
-        "title": "Ava",
-        "rating": 3,
-        "type": "movie",
-        "time": 1598212440275,
-        "reviews": {
-            "items": [
-                {
-                    "rating": 3,
-                    "user": {
-                        "name": "Collin"
-                    }
-                }
-            ]
-        }
-    },
-    {
-        "title": "Flight (2012)",
-        "rating": 4,
-        "type": "movie",
-        "time": 1598670813145,
-        "reviews": {
-            "items": [
-                {
-                    "rating": 4,
-                    "user": {
-                        "name": "Collin"
-                    }
-                }
-            ]
-        }
+        },
+        "description": "Stuck in a time loop, two wedding guests develop a budding romance while living the same day over and over again.",
+        "releaseDate": "2020-07-10T04:00:00.000Z",
+        "createdAt": "2020-07-22T02:47:50.776Z"
     },
     {
         "title": "Tenet",
         "rating": 4,
         "type": "movie",
-        "year": 2020,
         "id": "tt6723592",
         "img": "https://m.media-amazon.com/images/M/MV5BYzg0NGM2NjAtNmIxOC00MDJmLTg5ZmYtYzM0MTE4NWE2NzlhXkEyXkFqcGdeQXVyMTA4NjE0NjEy._V1_SX300.jpg",
         "imdbRating": 7.4,
         "rtRating": 70,
-        "time": 1607033879876,
         "reviews": {
             "items": [
                 {
@@ -5164,18 +4401,19 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "Armed with only one word, Tenet, and fighting for the survival of the entire world, a Protagonist journeys through a twilight world of international espionage on a mission that will unfold in something beyond real time.",
+        "releaseDate": "2020-09-03T04:00:00.000Z",
+        "createdAt": "2020-12-03T22:17:59.876Z"
     },
     {
         "title": "Predestination",
         "rating": 4,
         "type": "movie",
-        "year": 2015,
         "id": "tt2397535",
         "img": "https://resizing.flixster.com/ICOP9VPQyqoChiXLru_DPzSYyBU=/fit-in/80x80/v1.bTsxMTE4MTY1MTtqOzE4OTM5OzEyMDA7NTEyOzc1NQ",
         "imdbRating": 7.5,
         "rtRating": 84,
-        "time": 1610759418987,
         "reviews": {
             "items": [
                 {
@@ -5185,53 +4423,19 @@
                     }
                 }
             ]
-        }
-    },
-    {
-        "title": "Training Day",
-        "rating": 3,
-        "type": "movie",
-        "year": 2001,
-        "img": "https://resizing.flixster.com/QJLtHO4dxjBTOk0Lxu8Oj-D5utc=/fit-in/80x80/v1.bTsxMTE2OTQ1NDtqOzE4OTM5OzEyMDA7ODAwOzEyMDA",
-        "rtRating": 73,
-        "time": 1615746527824,
-        "reviews": {
-            "items": [
-                {
-                    "rating": 3,
-                    "user": {
-                        "name": "Kent"
-                    }
-                }
-            ]
-        }
-    },
-    {
-        "title": "What Happened to Monday",
-        "rating": 3,
-        "type": "movie",
-        "time": 1615843801695,
-        "reviews": {
-            "items": [
-                {
-                    "rating": 3,
-                    "user": {
-                        "name": "Kent"
-                    }
-                }
-            ]
-        }
+        },
+        "description": "For his final assignment, a top temporal agent must pursue the one criminal that has eluded him throughout time. The chase turns into a unique, surprising and mind-bending exploration of love, fate, identity and time travel taboos.",
+        "releaseDate": "2015-01-09T05:00:00.000Z",
+        "createdAt": "2021-01-16T01:10:18.987Z"
     },
     {
         "title": "Zack Snyder's Justice League",
         "rating": 3,
         "type": "movie",
-        "year": 2021,
         "id": "tt12361974",
         "img": "https://m.media-amazon.com/images/M/MV5BYjI3NDg0ZTEtMDEwYS00YWMyLThjYjktMTNlM2NmYjc1OGRiXkEyXkFqcGdeQXVyMTEyMjM2NDc2._V1_SX300.jpg",
         "imdbRating": 8.1,
         "rtRating": 71,
-        "time": 1616419455935,
         "reviews": {
             "items": [
                 {
@@ -5241,36 +4445,19 @@
                     }
                 }
             ]
-        }
-    },
-    {
-        "title": "Bad Trip",
-        "rating": 4,
-        "type": "movie",
-        "year": 2005,
-        "img": "https://resizing.flixster.com/xSkEmMD3RT1-H58ty0O65aIXees=/fit-in/80x80/v1.bTsxMTIyODA3MTtqOzE4OTM5OzEyMDA7MTUwNjsyMTE0",
-        "time": 1617145144202,
-        "reviews": {
-            "items": [
-                {
-                    "rating": 4,
-                    "user": {
-                        "name": "Kent"
-                    }
-                }
-            ]
-        }
+        },
+        "description": "Determined to ensure Superman's ultimate sacrifice was not in vain, Bruce Wayne aligns forces with Diana Prince with plans to recruit a team of metahumans to protect the world from an approaching threat of catastrophic proportions.",
+        "releaseDate": "2021-03-18T04:00:00.000Z",
+        "createdAt": "2021-03-22T13:24:15.935Z"
     },
     {
         "title": "Doom",
         "rating": 3,
         "type": "movie",
-        "year": 2005,
         "id": "tt0419706",
         "img": "https://m.media-amazon.com/images/M/MV5BN2QwMzZiYmUtNGZhMC00ZjA2LWI2MDYtOWEyNDA4MzYwMTBiXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg",
         "imdbRating": 5.2,
         "rtRating": 18,
-        "time": 1618277667896,
         "reviews": {
             "items": [
                 {
@@ -5280,18 +4467,19 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "Space Marines are sent to investigate strange events at a research facility on Mars but find themselves at the mercy of genetically enhanced killing machines.",
+        "releaseDate": "2005-10-21T04:00:00.000Z",
+        "createdAt": "2021-04-13T01:34:27.896Z"
     },
     {
         "title": "Greenland",
         "rating": 3,
         "type": "movie",
-        "year": 2020,
         "id": "tt7737786",
         "img": "https://m.media-amazon.com/images/M/MV5BMzcyMzU4MDUtM2JhOC00ZDg2LTg5MGMtZjc2OGMyMjhlMGE2XkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_SX300.jpg",
         "imdbRating": 6.4,
         "rtRating": 78,
-        "time": 1620942407320,
         "reviews": {
             "items": [
                 {
@@ -5301,18 +4489,19 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "A family struggles for survival in the face of a cataclysmic natural disaster.",
+        "releaseDate": "2020-12-18T05:00:00.000Z",
+        "createdAt": "2021-05-13T21:46:47.320Z"
     },
     {
         "title": "Those Who Wish Me Dead",
         "rating": 4,
         "type": "movie",
-        "year": 2021,
         "id": "tt3215824",
         "img": "https://m.media-amazon.com/images/M/MV5BMDAxMmQ0NTAtNDllNC00ZjE2LTlkNjUtMmExNmY0MmNkMDQ0XkEyXkFqcGdeQXVyNzYyOTM1ODI@._V1_SX300.jpg",
         "imdbRating": 6,
         "rtRating": 62,
-        "time": 1621133208834,
         "reviews": {
             "items": [
                 {
@@ -5322,18 +4511,19 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "A teenage murder witness finds himself pursued by twin assassins in the Montana wilderness with a survival expert tasked with protecting him -- and a forest fire threatening to consume them all.",
+        "releaseDate": "2021-05-14T04:00:00.000Z",
+        "createdAt": "2021-05-16T02:46:48.834Z"
     },
     {
         "title": "Dredd",
         "rating": 3,
         "type": "movie",
-        "year": 2012,
         "id": "tt1343727",
         "img": "https://m.media-amazon.com/images/M/MV5BODkyNDQzMzUzOF5BMl5BanBnXkFtZTcwODYyMDEyOA@@._V1_SX300.jpg",
         "imdbRating": 7.1,
         "rtRating": 79,
-        "time": 1621447085756,
         "reviews": {
             "items": [
                 {
@@ -5343,18 +4533,19 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "In a violent, futuristic city where the police have the authority to act as judge, jury and executioner, a cop teams with a trainee to take down a gang that deals the reality-altering drug, SLO-MO.",
+        "releaseDate": "2012-09-21T04:00:00.000Z",
+        "createdAt": "2021-05-19T17:58:05.756Z"
     },
     {
         "title": "Army of the Dead",
         "rating": 3,
         "type": "movie",
-        "year": 2021,
         "id": "tt0993840",
         "img": "https://m.media-amazon.com/images/M/MV5BNGY0NzgzYzctYWQwMC00MzM2LThjNGMtZjFjMWUyNzg0ZmM0XkEyXkFqcGdeQXVyODk4OTc3MTY@._V1_SX300.jpg",
         "imdbRating": 5.8,
-        "rtRating": 68,
-        "time": 1621695477894,
+        "rtRating": 67,
         "reviews": {
             "items": [
                 {
@@ -5364,34 +4555,19 @@
                     }
                 }
             ]
-        }
-    },
-    {
-        "title": "Mortal Kombat (2021)",
-        "rating": 3,
-        "type": "movie",
-        "time": 1621784349428,
-        "reviews": {
-            "items": [
-                {
-                    "rating": 3,
-                    "user": {
-                        "name": "Kent"
-                    }
-                }
-            ]
-        }
+        },
+        "description": "Following a zombie outbreak in Las Vegas, a group of mercenaries take the ultimate gamble, venturing into the quarantine zone to pull off the greatest heist ever attempted.",
+        "releaseDate": "2021-05-21T04:00:00.000Z",
+        "createdAt": "2021-05-22T14:57:57.894Z"
     },
     {
         "title": "Monster Hunter",
         "rating": 3,
         "type": "movie",
-        "year": 2020,
         "id": "tt6475714",
         "img": "https://m.media-amazon.com/images/M/MV5BOGU3NTFmNjYtODc3Ny00MWEzLWI3M2ItZjE3NDgwMTI0MzkzXkEyXkFqcGdeQXVyMTEyMjM2NDc2._V1_SX300.jpg",
         "imdbRating": 5.3,
         "rtRating": 45,
-        "time": 1622386031581,
         "reviews": {
             "items": [
                 {
@@ -5401,18 +4577,19 @@
                     }
                 }
             ]
-        }
+        },
+        "description": "When Lt. Artemis and her loyal soldiers are transported to a new world, they engage in a desperate battle for survival against enormous enemies with incredible powers. Feature film based on the video game by Capcom.",
+        "releaseDate": "2020-12-18T05:00:00.000Z",
+        "createdAt": "2021-05-30T14:47:11.581Z"
     },
     {
         "title": "Bo Burnham: Inside",
         "rating": 4,
         "type": "movie",
-        "year": 2021,
         "id": "tt14544192",
         "img": "https://m.media-amazon.com/images/M/MV5BMDE3MjcxNjEtODUzNi00NzdmLWFlMGMtMzhmMTg3NDdmM2IyXkEyXkFqcGdeQXVyNjYyMjE4NDY@._V1_SX300.jpg",
         "imdbRating": 9,
         "rtRating": 94,
-        "time": 1622424257699,
         "reviews": {
             "items": [
                 {
@@ -5422,49 +4599,18 @@
                     }
                 }
             ]
-        }
-    },
-    {
-        "title": "Synchronic",
-        "rating": 2,
-        "type": "movie",
-        "time": 1622583664917,
-        "reviews": {
-            "items": [
-                {
-                    "rating": 2,
-                    "user": {
-                        "name": "Kent"
-                    }
-                }
-            ]
-        }
-    },
-    {
-        "title": "The Informer",
-        "rating": 3,
-        "type": "movie",
-        "time": 1624140825298,
-        "reviews": {
-            "items": [
-                {
-                    "rating": 3,
-                    "user": {
-                        "name": "Kent"
-                    }
-                }
-            ]
-        }
+        },
+        "description": "A new comedy special shot and performed by Bo Burnham, alone, over the course of the past year.",
+        "releaseDate": "2021-05-30T04:00:00.000Z",
+        "createdAt": "2021-05-31T01:24:17.699Z"
     },
     {
         "title": "Swiped: Hooking Up in the Digital Age",
         "rating": 2,
         "type": "movie",
-        "year": 2018,
         "id": "tt8839634",
         "img": "https://m.media-amazon.com/images/M/MV5BMjJiNDU1ZmMtZTBiMy00MWFmLWI1MzktYjdjN2M3MTc2MjdiXkEyXkFqcGdeQXVyNzg5MzIyOA@@._V1_SX300.jpg",
         "imdbRating": 5.7,
-        "time": 1626229962743,
         "reviews": {
             "items": [
                 {
@@ -5474,38 +4620,9 @@
                     }
                 }
             ]
-        }
-    },
-    {
-        "title": "The Hunt",
-        "rating": 4,
-        "type": "movie",
-        "time": 1626318962011,
-        "reviews": {
-            "items": [
-                {
-                    "rating": 4,
-                    "user": {
-                        "name": "Collin"
-                    }
-                }
-            ]
-        }
-    },
-    {
-        "title": "Run",
-        "rating": 2,
-        "type": "movie",
-        "time": 1626318981492,
-        "reviews": {
-            "items": [
-                {
-                    "rating": 2,
-                    "user": {
-                        "name": "Collin"
-                    }
-                }
-            ]
-        }
+        },
+        "description": "Online and app dating provide access for everything from \"hookups\" to long-term relationships.",
+        "releaseDate": "2018-09-10T04:00:00.000Z",
+        "createdAt": "2021-07-14T02:32:42.743Z"
     }
 ]
