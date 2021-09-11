@@ -2,8 +2,8 @@
 // this is an auto generated file. This will be overwritten
 
 export const onCreateWatchlistItem = /* GraphQL */ `
-  subscription OnCreateWatchlistItem {
-    onCreateWatchlistItem {
+  subscription OnCreateWatchlistItem($userId: String!) {
+    onCreateWatchlistItem(userId: $userId) {
       userId
       showId
       show {
@@ -22,6 +22,7 @@ export const onCreateWatchlistItem = /* GraphQL */ `
         createdAt
         source
         updatedAt
+        owner
       }
       createdAt
       updatedAt
@@ -29,8 +30,8 @@ export const onCreateWatchlistItem = /* GraphQL */ `
   }
 `;
 export const onUpdateWatchlistItem = /* GraphQL */ `
-  subscription OnUpdateWatchlistItem {
-    onUpdateWatchlistItem {
+  subscription OnUpdateWatchlistItem($userId: String!) {
+    onUpdateWatchlistItem(userId: $userId) {
       userId
       showId
       show {
@@ -49,6 +50,7 @@ export const onUpdateWatchlistItem = /* GraphQL */ `
         createdAt
         source
         updatedAt
+        owner
       }
       createdAt
       updatedAt
@@ -56,8 +58,8 @@ export const onUpdateWatchlistItem = /* GraphQL */ `
   }
 `;
 export const onDeleteWatchlistItem = /* GraphQL */ `
-  subscription OnDeleteWatchlistItem {
-    onDeleteWatchlistItem {
+  subscription OnDeleteWatchlistItem($userId: String!) {
+    onDeleteWatchlistItem(userId: $userId) {
       userId
       showId
       show {
@@ -76,6 +78,7 @@ export const onDeleteWatchlistItem = /* GraphQL */ `
         createdAt
         source
         updatedAt
+        owner
       }
       createdAt
       updatedAt
@@ -171,6 +174,7 @@ export const onCreateReview = /* GraphQL */ `
         createdAt
         source
         updatedAt
+        owner
       }
       updatedAt
       createdAt
@@ -209,6 +213,7 @@ export const onUpdateReview = /* GraphQL */ `
         createdAt
         source
         updatedAt
+        owner
       }
       updatedAt
       createdAt
@@ -247,6 +252,7 @@ export const onDeleteReview = /* GraphQL */ `
         createdAt
         source
         updatedAt
+        owner
       }
       updatedAt
       createdAt
@@ -279,6 +285,7 @@ export const onCreateShow = /* GraphQL */ `
       createdAt
       source
       updatedAt
+      owner
     }
   }
 `;
@@ -308,6 +315,7 @@ export const onUpdateShow = /* GraphQL */ `
       createdAt
       source
       updatedAt
+      owner
     }
   }
 `;
@@ -337,6 +345,7 @@ export const onDeleteShow = /* GraphQL */ `
       createdAt
       source
       updatedAt
+      owner
     }
   }
 `;

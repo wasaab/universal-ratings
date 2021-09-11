@@ -22,6 +22,7 @@ export const getWatchlistItem = /* GraphQL */ `
         createdAt
         source
         updatedAt
+        owner
       }
       createdAt
       updatedAt
@@ -61,6 +62,7 @@ export const listWatchlistItems = /* GraphQL */ `
           createdAt
           source
           updatedAt
+          owner
         }
         createdAt
         updatedAt
@@ -148,6 +150,7 @@ export const getReview = /* GraphQL */ `
         createdAt
         source
         updatedAt
+        owner
       }
       updatedAt
       createdAt
@@ -195,6 +198,7 @@ export const listReviews = /* GraphQL */ `
           createdAt
           source
           updatedAt
+          owner
         }
         updatedAt
         createdAt
@@ -229,6 +233,7 @@ export const getShow = /* GraphQL */ `
       createdAt
       source
       updatedAt
+      owner
     }
   }
 `;
@@ -263,6 +268,7 @@ export const listShows = /* GraphQL */ `
         createdAt
         source
         updatedAt
+        owner
       }
       nextToken
     }
@@ -309,6 +315,7 @@ export const reviewsByUser = /* GraphQL */ `
           createdAt
           source
           updatedAt
+          owner
         }
         updatedAt
         createdAt
@@ -350,6 +357,7 @@ export const recentlyRated = /* GraphQL */ `
         createdAt
         source
         updatedAt
+        owner
       }
       nextToken
     }
@@ -388,6 +396,7 @@ export const showsByType = /* GraphQL */ `
         createdAt
         source
         updatedAt
+        owner
       }
       nextToken
     }
