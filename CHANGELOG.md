@@ -4,10 +4,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.4.0] - 2021-09-11
+### Added
+- api auth configured in graphql schema
+- favicon added
+
+### Changed
+- default auth type changed from api key to cognito user pool
+- mock shows updated to match new schema
+
+### Fixed
+- next page token no longer used after changing to a view with 1 page
+
 ## [1.3.2] - 2021-09-08
 ### Changed
 - adding/removing favorites updates watchlist
-- new releases changed from < 2 months to < 3 months.
+- new releases changed from < 2 months to < 3 months
 
 ## [1.3.1] - 2021-08-29
 ### Added
