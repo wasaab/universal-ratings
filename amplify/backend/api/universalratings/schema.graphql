@@ -20,6 +20,7 @@ type User @model
   @key(fields: ["id"]) {
   id: ID!
   name: String!
+  color: String!
   watchlist: [WatchlistItem] @connection(fields: ["id"])
 }
 

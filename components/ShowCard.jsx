@@ -60,7 +60,7 @@ const ShowCard = ({ show, userRating, onRatingChange, onClick }) => {
         <StarButtons
           avgRating={show.rating}
           userRating={userRating}
-          maxRating={5}
+          maxRating={4}
           onClick={onRatingChange}
         />
       </CardActions>

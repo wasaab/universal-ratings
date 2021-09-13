@@ -11,6 +11,7 @@ import {
   Grid,
   IconButton,
   makeStyles,
+  Tooltip,
   Typography
 } from '@material-ui/core';
 import {
@@ -20,7 +21,6 @@ import {
   WatchLaterOutlined as WatchLaterOutlineIcon,
 } from '@material-ui/icons/';
 import { AvatarGroup } from '@material-ui/lab';
-import * as matColors from '@material-ui/core/colors';
 import Image from 'next/image';
 import API, { graphqlOperation } from '@aws-amplify/api';
 import { updateReview } from '../src/graphql/mutations';
@@ -33,20 +33,6 @@ import ImdbIcon from '../resources/imdb.svg';
 import RtFreshIcon from '../resources/rt.svg';
 import RtRottenIcon from '../resources/rt-rotten.svg';
 
-// -------------------- User Review Color Mocking --------------------
-const colors = Object.values(matColors)
-  .slice(1)
-  .map(( color ) => color['300']);
-
-function getRandColor() {
-  return colors[Math.floor(Math.random() * colors.length)];
-}
-
-function getRandColors(count = 0) {
-  return [...new Array(count)].map(getRandColor);
-}
-// -------------------------------------------------------------------
-
 const avatarSize = 33;
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -54,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column'
   },
   year: {
-    paddingLeft: 3,
+    paddingLeft: 3
   },
   badge: {
     border: '2px solid transparent'
@@ -66,16 +52,16 @@ const useStyles = makeStyles((theme) => ({
       marginTop: 2,
       marginLeft: -4,
       fontSize: 14,
-      color: theme.palette.text.primary,
+      color: theme.palette.text.primary
     }
   },
   avatar: {
     width: avatarSize,
     height: avatarSize,
-    color: theme.palette.text.primary,
+    color: theme.palette.text.primary
   },
   content: {
-    padding: '20px 24px',
+    padding: '20px 24px'
   },
   showDesc: {
     marginTop: 12
@@ -135,7 +121,6 @@ const ShowDetailsModal = ({ show, userId, userReview, onRatingChange, onShowAdde
   const classes = useStyles();
   const [currUserRating, setCurrUserRating] = useState(userReview?.rating);
   const [isTooltipOpen, setIsTooltipOpen] = useState(false);
-  const [avatarColors] = useState(getRandColors(3));
 
   const toggleTooltip = () => {
     if (show.rating || currUserRating) { return; }
@@ -225,18 +210,20 @@ const ShowDetailsModal = ({ show, userId, userReview, onRatingChange, onShowAdde
                   className={clsx(classes.ratingStars, { [classes.ratingRequiredTip]: isTooltipOpen })}
                   avgRating={show.rating ?? currUserRating}
                   userRating={currUserRating}
-                  maxRating={5}
+                  maxRating={4}
                   onClick={rateShow}
                 />
               </Grid>
               <Grid item xs style={{ paddingRight: 0 }}>
                 {show.rating ? (
                   <AvatarGroup max={4} className={classes.avatarGroup}>
-                    {show.reviews.items.sort((a, b) => b.rating - a.rating).map(({ user: { name }, rating }, i) => (
+                    {show.reviews.items.sort((a, b) => b.rating - a.rating).map(({ user: { name, color }, rating }, i) => (
                       <Badge key={i} color="secondary" badgeContent={rating} className={classes.badge}>
-                        <Avatar className={classes.avatar} style={{ backgroundColor: avatarColors[i] }}>
-                          {name[0].toUpperCase()}
-                        </Avatar>
+                        <Tooltip title={name}>
+                          <Avatar className={classes.avatar} style={{ backgroundColor: color }}>
+                            {name.match(/^(\p{Extended_Pictographic}|.)/u)[0].toUpperCase()}
+                          </Avatar>
+                        </Tooltip>
                       </Badge>
                     ))}
                   </AvatarGroup>
