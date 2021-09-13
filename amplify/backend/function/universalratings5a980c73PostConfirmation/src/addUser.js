@@ -1,5 +1,16 @@
-var aws = require('aws-sdk');
-var dynamoDb = new aws.DynamoDB();
+const aws = require('aws-sdk');
+const dynamoDb = new aws.DynamoDB();
+const colors = [
+  '#e57373', '#f06292', '#ba68c8', '#9575cd',
+  '#7986cb', '#64b5f6', '#4fc3f7', '#4dd0e1',
+  '#4db6ac', '#81c784', '#aed581', '#dce775',
+  '#fff176', '#ffd54f', '#ffb74d', '#ff8a65',
+  '#a1887f', '#e0e0e0', '#90a4ae'
+];
+
+function getRandColor() {
+  return colors[Math.floor(Math.random() * colors.length)];
+}
 
 exports.handler = async (event) => {
   const id = event.request.userAttributes.sub;
@@ -17,8 +28,9 @@ async function addUser(id, event) {
   let params = {
     Item: {
       'id': { S: id },
-      '__typename': { S: 'User' },
       'name': { S: event.userName },
+      'color': { S: getRandColor() },
+      '__typename': { S: 'User' },
       'createdAt': { S: creationTime }, // pretty sure these get added automatically
       'updatedAt': { S: creationTime } // pretty sure these get added automatically
     },

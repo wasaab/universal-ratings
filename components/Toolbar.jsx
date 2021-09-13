@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const Toolbar = ({ drawerOpen, onDrawerOpen, onSearchSubmit, drawerWidth }) => {
+const Toolbar = ({ drawerOpen, onDrawerOpen, onSearchSubmit, onEditProfile, drawerWidth }) => {
   const classes = useStyles({ drawerOpen, drawerWidth });
 
   return (
@@ -57,7 +57,7 @@ const Toolbar = ({ drawerOpen, onDrawerOpen, onSearchSubmit, drawerWidth }) => {
 
         <TitleSearchBar className={classes.searchBar} onSubmit={onSearchSubmit} />
 
-        <UserMenu className={classes.userMenu} />
+        <UserMenu className={classes.userMenu} onEditProfile={onEditProfile} />
       </MaterialToolbar>
     </AppBar>
   )

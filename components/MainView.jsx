@@ -12,6 +12,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Grid } from '@material-ui/core';
 import ShowCard from './ShowCard';
 import ShowDetailsModal from './ShowDetailsModal';
+import UserProfileModal from './UserProfileModal';
 import useOnScreen from './useOnScreen';
 import Toolbar from './Toolbar';
 import Drawer from './Drawer';
@@ -54,6 +55,7 @@ function updateAvgRating(show) {
 const MainView = ({ user }) => {
   const classes = useStyles();
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [profileModalOpen, setProfileModalOpen] = useState(false);
   const [selectedShow, setSelectedShow] = useState();
   const [selectedShowIdx, setSelectedShowIdx] = useState(null);
   const [shows, setShows] = useState([]);
@@ -310,6 +312,25 @@ const MainView = ({ user }) => {
 
   const findUserReview = (reviews) => reviews?.find((review) => review.user.name === user.name);
 
+  const updateUserReviews = (targetShows, name, color) => {
+    targetShows.forEach((show) => {
+      const review = findUserReview(show.reviews.items);
+
+      if (!review) { return; }
+
+      review.user = { name, color };
+    });
+  };
+
+  const handleProfileSave = (name, color) => {
+    setProfileModalOpen(false);
+    updateUserReviews(shows, name, color);
+    updateUserReviews(watchlist, name, color);
+
+    user.name = name;
+    user.color = color;
+  };
+
   useEffect(fetchShows, []);
 
   useEffect(() => {
@@ -325,6 +346,7 @@ const MainView = ({ user }) => {
         drawerOpen={drawerOpen}
         onDrawerOpen={() => setDrawerOpen(true)}
         onSearchSubmit={handleSearch}
+        onEditProfile={() => setProfileModalOpen(true)}
       />
 
       <Drawer
@@ -347,6 +369,14 @@ const MainView = ({ user }) => {
             onFavoriteChange={handleFavoriteChange}
             onWatchlistChange={handleWatchlistChange}
             onClose={unselectShow}
+          />
+        )}
+
+        {profileModalOpen && (
+          <UserProfileModal
+            user={user}
+            onClose={() => setProfileModalOpen(false)}
+            onSave={handleProfileSave}
           />
         )}
 
