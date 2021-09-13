@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const UserMenu = ({ className }) => {
+const UserMenu = ({ className, onEditProfile }) => {
   const classes = useStyles();
   const userMenuButtonRef = useRef();
   const [userMenuOpen, setUserMenuOpen] = useState(false);
@@ -34,6 +34,11 @@ const UserMenu = ({ className }) => {
 
     event.preventDefault();
     setUserMenuOpen(false);
+  };
+
+  const handleEditProfileClick = () => {
+    setUserMenuOpen(false);
+    onEditProfile();
   };
 
   return (
@@ -58,6 +63,9 @@ const UserMenu = ({ className }) => {
             <Paper className={classes.userMenuPaper}>
               <ClickAwayListener onClickAway={() => setUserMenuOpen(false)}>
                 <MenuList autoFocusItem={userMenuOpen} onKeyDown={handleUserMenuKeypress}>
+                  <MenuItem className={classes.hoverHighlight} onClick={handleEditProfileClick}>
+                    Edit Profile
+                  </MenuItem>
                   <MenuItem className={classes.hoverHighlight} onClick={() => Auth.signOut()}>
                     Logout
                   </MenuItem>

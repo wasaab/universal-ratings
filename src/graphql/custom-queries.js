@@ -32,6 +32,7 @@ export const recentlyRated = /* GraphQL */ `
             isFavorite
             user {
               name
+              color
             }
           }
           nextToken
@@ -79,6 +80,7 @@ export const showsByType = /* GraphQL */ `
             isFavorite
             user {
               name
+              color
             }
           }
           nextToken
@@ -111,6 +113,7 @@ export const getShow = /* GraphQL */ `
           isFavorite
           user {
             name
+            color
           }
         }
         nextToken
@@ -156,6 +159,7 @@ export const reviewsByUser = /* GraphQL */ `
               isFavorite
               user {
                 name
+                color
               }
             }
             nextToken
@@ -172,6 +176,7 @@ export const getUser = /* GraphQL */ `
     getUser(id: $id) {
       id
       name
+      color
       watchlist {
         items {
           show {
@@ -191,6 +196,7 @@ export const getUser = /* GraphQL */ `
                 isFavorite
                 user {
                   name
+                  color
                 }
               }
               nextToken

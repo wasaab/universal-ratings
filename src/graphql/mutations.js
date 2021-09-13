@@ -102,6 +102,7 @@ export const createUser = /* GraphQL */ `
     createUser(input: $input, condition: $condition) {
       id
       name
+      color
       watchlist {
         items {
           userId
@@ -124,6 +125,7 @@ export const updateUser = /* GraphQL */ `
     updateUser(input: $input, condition: $condition) {
       id
       name
+      color
       watchlist {
         items {
           userId
@@ -146,6 +148,7 @@ export const deleteUser = /* GraphQL */ `
     deleteUser(input: $input, condition: $condition) {
       id
       name
+      color
       watchlist {
         items {
           userId
@@ -173,6 +176,7 @@ export const createReview = /* GraphQL */ `
       user {
         id
         name
+        color
         watchlist {
           nextToken
         }
@@ -215,6 +219,7 @@ export const updateReview = /* GraphQL */ `
       user {
         id
         name
+        color
         watchlist {
           nextToken
         }
@@ -257,6 +262,7 @@ export const deleteReview = /* GraphQL */ `
       user {
         id
         name
+        color
         watchlist {
           nextToken
         }
