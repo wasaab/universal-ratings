@@ -114,6 +114,9 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: 'flex-end'
       }
     }
+  },
+  huluIcon: {
+    fill: `${theme.palette.text.primary} !important`
   }
 }));
 
@@ -274,7 +277,7 @@ const ShowDetailsModal = ({ show, userId, userReview, onRatingChange, onShowAdde
                 </Typography>
               </Grid>
               <Grid item xs className={classes.evenlySpaced}>
-                <HuluIcon height="17" />
+                <HuluIcon height="17" className={classes.huluIcon} />
                 <NetflixIcon height="17" />
               </Grid>
             </Grid>
