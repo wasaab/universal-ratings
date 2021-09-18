@@ -5,7 +5,7 @@ import {
   Toolbar as MaterialToolbar,
   Typography
 } from '@material-ui/core';
-import { Menu as MenuIcon } from '@material-ui/icons/'
+import { Menu as MenuIcon } from '@material-ui/icons/';
 import { makeStyles } from '@material-ui/core/styles';
 import TitleSearchBar from './TitleSearchBar';
 import UserMenu from './UserMenu';
@@ -30,6 +30,11 @@ const useStyles = makeStyles((theme) => ({
   userMenu: {
     position: 'absolute',
     right: 10
+  },
+  appName: {
+    [theme.breakpoints.down(580)]: {
+      display: 'none'
+    }
   }
 }));
 
@@ -51,7 +56,7 @@ const Toolbar = ({ drawerOpen, onDrawerOpen, onSearchSubmit, onEditProfile, draw
           </IconButton>
         )}
 
-        <Typography variant="h6" noWrap>
+        <Typography variant="h6" noWrap className={classes.appName}>
           Universal Ratings
         </Typography>
 
@@ -60,7 +65,7 @@ const Toolbar = ({ drawerOpen, onDrawerOpen, onSearchSubmit, onEditProfile, draw
         <UserMenu className={classes.userMenu} onEditProfile={onEditProfile} />
       </MaterialToolbar>
     </AppBar>
-  )
+  );
 };
 
 export default Toolbar;

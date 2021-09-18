@@ -56,7 +56,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Drawer = ({ open, width, onClose, onSelect }) => {
-  const classes = useStyles({ width })
+  const classes = useStyles({ width });
   const drawerStateClass = open ? classes.drawerOpen : classes.drawerClose;
   const [selectedView, setSelectedView] = useState(View.HOME);
 
