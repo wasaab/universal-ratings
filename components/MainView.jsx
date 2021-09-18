@@ -1,9 +1,11 @@
-import React, { useEffect, useState, useRef, useMemo } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import axios from 'axios';
 import API, { graphqlOperation } from '@aws-amplify/api';
 import {
   createReview,
   createWatchlistItem,
+  deleteReview,
+  deleteShow,
   deleteWatchlistItem,
   updateReview
 } from '../src/graphql/mutations.js';
@@ -52,21 +54,41 @@ function updateAvgRating(show) {
   show.rating = reviews.reduce((sum, { rating }) => sum + rating, 0) / reviews.length;
 }
 
+function unwrapShowsAndUpdateAvgRatings(shows) {
+  return shows.map(({ show }) => {
+    updateAvgRating(show);
+
+    return show;
+  });
+}
+
+function buildWatchlist(shows) {
+  const existingShows = shows.filter(({ show }) => show);
+
+  return unwrapShowsAndUpdateAvgRatings(existingShows);
+}
+
 const MainView = ({ user }) => {
   const classes = useStyles();
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [profileModalOpen, setProfileModalOpen] = useState(false);
-  const [selectedShow, setSelectedShow] = useState();
+  const [selectedShow, setSelectedShow] = useState(null);
   const [selectedShowIdx, setSelectedShowIdx] = useState(null);
   const [shows, setShows] = useState([]);
   const [nextToken, setNextToken] = useState();
   const [view, setView] = useState(View.HOME);
-  const [watchlist, setWatchlist] = useState(user.watchlist.items.map(({ show }) => show));
+  const [watchlist, setWatchlist] = useState(() => buildWatchlist(user.watchlist.items));
   const findWatchlistIdx = (showId = selectedShow?.id) => watchlist.findIndex(({ id }) => id === showId);
   const watchlistIdx = useMemo(findWatchlistIdx, [selectedShow, watchlist]);
   const endOfPageRef = useRef();
   const isEndOfPageVisisble = useOnScreen(endOfPageRef);
 
+  /**
+   * Builds the query params needed to fetch shows for the provided view.
+   *
+   * @param {View} targetView - the view to fetch shows for
+   * @returns {Object} the query params for the fetch shows request
+   */
   const buildQueryParams = (targetView) => {
     const queryParams = {
       ...targetView.query.params,
@@ -80,8 +102,13 @@ const MainView = ({ user }) => {
     }
 
     return queryParams;
-  }
+  };
 
+  /**
+   * Fetches shows for the provided view.
+   *
+   * @param {View} targetView - the view to fetch shows for
+   */
   const fetchShows = async (targetView = view) => {
     try {
       const queryName = targetView.query.name;
@@ -89,11 +116,7 @@ const MainView = ({ user }) => {
       let updatedShows = data[queryName].items;
 
       if (View.FAVORITES.query.name === queryName) {
-        updatedShows = updatedShows.map(({ show }) => {
-          updateAvgRating(show);
-
-          return show;
-        });
+        updatedShows = unwrapShowsAndUpdateAvgRatings(updatedShows);
       } else {
         updatedShows.forEach(updateAvgRating);
       }
@@ -110,6 +133,11 @@ const MainView = ({ user }) => {
     }
   };
 
+  /**
+   * Changes view and fetches shows for that view upon drawer selection.
+   *
+   * @param {View} selectedView - the selected view
+   */
   const handleDrawerSelection = (selectedView) => {
     if (selectedView === View.WATCHLIST) {
       setShows(watchlist);
@@ -120,19 +148,24 @@ const MainView = ({ user }) => {
     setView(selectedView);
   };
 
-  const handleFavoriteChange = (updatedVal) => {
+  /**
+   * Updates shows and watchlist when a show is favorited/unfavorited.
+   *
+   * @param {boolean} isFavorite - whether or not the show is favorited
+   */
+  const handleFavoriteChange = (isFavorite) => {
     const isShowInGrid = selectedShowIdx !== null;
     const updatedShows = isShowInGrid ? [...shows] : [selectedShow, ...shows];
     const updatedShow = updatedShows[selectedShowIdx ?? 0];
 
-    findUserReview(updatedShow.reviews.items).isFavorite = updatedVal;
+    findUserReview(updatedShow.reviews.items).isFavorite = isFavorite;
     updateWatchlist(updatedShow);
 
     if (view === View.FAVORITES && !isShowInGrid) {
       setSelectedShowIdx(0);
     }
 
-    if (view === View.FAVORITES && !updatedVal) {
+    if (view === View.FAVORITES && !isFavorite) {
       updatedShows.splice(selectedShowIdx, 1);
       unselectShow();
     } else {
@@ -144,8 +177,8 @@ const MainView = ({ user }) => {
     }
   };
 
-  const removeFromWatchlist = () => {
-    const updatedWatchlist = watchlist.filter(({ id }) => id !== selectedShow.id);
+  const removeFromWatchlist = (showId) => {
+    const updatedWatchlist = watchlist.filter(({ id }) => id !== showId);
 
     setWatchlist(updatedWatchlist);
 
@@ -165,10 +198,17 @@ const MainView = ({ user }) => {
     setShows(updatedWatchlist);
   };
 
-  const handleWatchlistChange = async (isRemoval) => {
+
+  /**
+   * Handles watchlist addition and removal.
+   *
+   * @param {boolean} isRemoval - whether or not this is a watchlist removal
+   * @param {string} showId - the id of the show being added/removed from watchlist
+   */
+  const handleWatchlistChange = async (isRemoval, showId = selectedShow.id) => {
     const watchlistItem = {
       userId: user.id,
-      showId: selectedShow.id
+      showId
     };
     const operation = isRemoval ? deleteWatchlistItem : createWatchlistItem;
 
@@ -180,22 +220,45 @@ const MainView = ({ user }) => {
     }
 
     if (isRemoval) {
-      removeFromWatchlist();
+      removeFromWatchlist(showId);
     } else {
       addToWatchlist();
     }
   };
 
-  const updateReviews = (reviews, review) => {
-    const oldReview = reviews.find((review) => review.user.name === user.name);
+  const buildReview = (rating) => ({
+    rating,
+    user: {
+      name: user.name,
+      color: user.color
+    }
+  });
 
-    if (oldReview) {
-      oldReview.rating = review.rating;
-    } else {
-      reviews.push(review);
+  /**
+   * Updates the reviews of a show.
+   *
+   * @param {Object[]} reviews - the show's reviews
+   * @param {number} userRating - the user's rating of the show
+   */
+  const updateReviews = (reviews, userRating) => {
+    const oldReviewIdx = reviews.findIndex(({ user: { name } }) => name === user.name);
+
+    if (!userRating) { // Remove
+      reviews.splice(oldReviewIdx, 1);
+    } else if (oldReviewIdx === -1) { // Add
+      reviews.push(buildReview(userRating));
+    } else { // Update
+      reviews[oldReviewIdx].rating = userRating;
     }
   };
 
+  /**
+   * Creates or updates the user's review of a show.
+   *
+   * @param {Object} show - the show to create review for
+   * @param {number} rating - the user's rating of the show
+   * @param {boolean} isInitialRating - whether or not it is the first time the user has rated the show
+   */
   const createShowReview = async (show, rating, isInitialRating) => {
     const review = {
       showId: show.id,
@@ -211,68 +274,164 @@ const MainView = ({ user }) => {
     }
   };
 
-  const updateReviewsAndAvgRating = (show, review) => {
+  /**
+   * Updates the reviews and avg rating of the provided show.
+   *
+   * @param {Object} show - the show to update
+   * @param {number} userRating - the user's rating of the show
+   */
+  const updateReviewsAndAvgRating = (show, userRating) => {
     if (!show.reviews) { return; }
 
     const reviews = show.reviews.items;
 
-    updateReviews(reviews, review);
+    updateReviews(reviews, userRating);
     updateAvgRating(show);
   };
 
-  const updateWatchlist = (updatedShow, showIdx) => {
-    const watchlistShowIdx = selectedShow ? watchlistIdx : findWatchlistIdx(shows[showIdx].id);
+  /**
+   * Updates the watchlist if the updated show is in the watchlist.
+   *
+   * @param {Object} updatedShow - the updated show
+   */
+  const updateWatchlist = (updatedShow) => {
+    const watchlistShowIdx = selectedShow ? watchlistIdx : findWatchlistIdx(updatedShow.id);
 
     if (watchlistShowIdx === -1) { return; }
 
-    const updatedWatchlist = [...watchlist];
-
-    updatedWatchlist[watchlistShowIdx] = updatedShow;
-    setWatchlist(updatedWatchlist);
+    watchlist[watchlistShowIdx] = updatedShow;
+    setWatchlist([...watchlist]);
   };
 
-  const updateShows = (review, showIdx) => {
-    const updatedShows = [...shows];
-    const updatedShow = updatedShows[showIdx];
+  /**
+   * Updates shows on rating change.
+   *
+   * @param {Object} show - the show to update
+   * @param {boolean} isShowInGrid - whether or not the show is in the card grid
+   * @param {number} userRating - the user's rating of the show
+   */
+  const updateShows = (show, isShowInGrid, userRating) => {
+    updateReviewsAndAvgRating(show, userRating);
+    updateWatchlist(show);
 
-    updateReviewsAndAvgRating(updatedShow, review);
-    updateWatchlist(updatedShow, showIdx);
-    setShows(updatedShows);
+    if (isShowInGrid) {
+      setShows([...shows]);
+    }
 
-    if (!selectedShow) { return; }
-
-    setSelectedShow(updatedShow);
+    if (selectedShow) {
+      setSelectedShow({ ...show });
+    }
   };
 
-  const handleRatingChange = async (show, updatedUserRating, isUnrated, showIdx = selectedShowIdx) => {
-    createShowReview(show, updatedUserRating, isUnrated);
+  /**
+   * Removes the provided show and its watchlist entry.
+   *
+   * @param {Object} show - the show to remove
+   * @param {number} showIdx - the index of the show
+   */
+  const removeShow = async (show, showIdx) => {
+    try {
+      const input = { id: show.id };
 
-    const review = { user, rating: updatedUserRating }
+      await API.graphql(graphqlOperation(deleteShow, { input }));
 
-    if (showIdx == null) {
+      if (watchlistIdx !== -1 || findWatchlistIdx(show.id) !== -1) {
+        handleWatchlistChange(true, show.id);
+      }
+
+      if (showIdx !== -1) {
+        shows.splice(showIdx, 1);
+        setShows([...shows]);
+      }
+
+      if (selectedShow) {
+        unselectShow();
+      }
+    } catch (err) {
+      console.error(`Failed to remove show "${show.id}": `, err);
+    }
+  };
+
+  /**
+   * Removes the logged in user's review of a show and the show itself if sole reviewer.
+   *
+   * @param {Object} show - the show to remove review from
+   * @param {number} showIdx - the index of the show
+   */
+  const removeReview = async (show, showIdx) => {
+    try {
+      const input = {
+        showId: show.id,
+        userId: user.id
+      };
+
+      await API.graphql(graphqlOperation(deleteReview, { input }));
+
+      if (show.reviews.items.length === 1) {
+        removeShow(show, showIdx);
+      } else {
+        updateShows(show, showIdx !== -1);
+      }
+    } catch (err) {
+      console.error(`Failed to remove review "${show.id}:${user.id}": `, err);
+    }
+  };
+
+  /**
+   * Handles show rating change.
+   *
+   * @param {Object} show - the show that had a rating change
+   * @param {number} currUserRating - the user's current rating of the show
+   * @param {number} prevUserRating - the user's previous rating of the show
+   * @param {number} showIdx - the index of the show
+   */
+  const handleRatingChange = (show, currUserRating, prevUserRating, showIdx = selectedShowIdx) => {
+    let isShowInGrid = true;
+
+    if (showIdx === null) {
       showIdx = shows.findIndex(({ id }) => id === selectedShow.id);
 
       if (showIdx === -1) {
-        updateReviewsAndAvgRating(show, review)
-        return;
+        isShowInGrid = false;
+      } else {
+        setSelectedShowIdx(showIdx);
       }
-
-      setSelectedShowIdx(showIdx);
     }
 
-    updateShows(review, showIdx);
+    if (isShowInGrid) {
+      show = shows[showIdx];
+    }
+
+    if (currUserRating === prevUserRating) {
+      removeReview(show, showIdx);
+      return;
+    }
+
+    createShowReview(show, currUserRating, !prevUserRating);
+    updateShows(show, isShowInGrid, currUserRating);
   };
 
+  /**
+   * Selects a rated show with data from graphql.
+   *
+   * @param {Object} show - the show to select
+   */
   const selectRatedShow = async (show) => {
     try {
       const { data } = await API.graphql(graphqlOperation(gqlQuery.getShow, { id: show.objectID }));
 
+      updateAvgRating(data.getShow);
       setSelectedShow(data.getShow);
     } catch (err) {
       console.error(`Failed to get rated show "${show.objectID}": `, err);
     }
   };
 
+  /**
+   * Selects an unrated show with data from OMDB API.
+   *
+   * @param {Object} show - the show to select
+   */
   const selectUnratedShow = async (show) => {
     try {
       const { data } = await axios.get(`/api/search?id=${show.id}`);
@@ -310,8 +469,21 @@ const MainView = ({ user }) => {
     setSelectedShowIdx(showIdx);
   };
 
+  /**
+   * Finds the logged in user's review in the provided reviews.
+   *
+   * @param {Object[]} reviews - the reviews to search
+   * @returns the user's review
+   */
   const findUserReview = (reviews) => reviews?.find((review) => review.user.name === user.name);
 
+  /**
+   * Updates the user's name and avatar color in all their show reviews.
+   *
+   * @param {Object[]} targetShows - the shows that need reviews updated
+   * @param {string} name - the user's updated name
+   * @param {string} color - the user's updated avatar color
+   */
   const updateUserReviews = (targetShows, name, color) => {
     targetShows.forEach((show) => {
       const review = findUserReview(show.reviews.items);
@@ -322,6 +494,13 @@ const MainView = ({ user }) => {
     });
   };
 
+  /**
+   * Handles profile changes by updating the user's name
+   * and avatar color in all their show reviews.
+   *
+   * @param {string} name - the user's updated name
+   * @param {string} color - the user's updated avatar color
+   */
   const handleProfileSave = (name, color) => {
     setProfileModalOpen(false);
     updateUserReviews(shows, name, color);
@@ -331,7 +510,9 @@ const MainView = ({ user }) => {
     user.color = color;
   };
 
-  useEffect(fetchShows, []);
+  useEffect(() => {
+    fetchShows();
+  }, []);
 
   useEffect(() => {
     if (!isEndOfPageVisisble || !nextToken) { return; }
@@ -386,7 +567,7 @@ const MainView = ({ user }) => {
               <ShowCard
                 show={show}
                 userRating={findUserReview(show.reviews?.items)?.rating}
-                onRatingChange={(rating) => handleRatingChange(show, rating, false, i)}
+                onRatingChange={(rating, userRating) => handleRatingChange(show, rating, userRating, i)}
                 onClick={() => selectShow(show, i)}
               />
             </Grid>

@@ -22,7 +22,7 @@ const LabelledIcon = ({ Icon, label }) => {
         {label}
       </Typography>
     </Grid>
-  )
+  );
 };
 
 export default LabelledIcon;

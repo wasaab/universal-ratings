@@ -16,23 +16,23 @@ exports.handler = async (event) => {
   const id = event.request.userAttributes.sub;
 
   if (id) {
-      await addUser(id, event);
+    await addUser(id, event);
   } else {
-      console.error('no authed user ID found');
+    console.error('no authed user ID found');
   }
 };
 
 async function addUser(id, event) {
   const creationTime = new Date().toISOString();
 
-  let params = {
+  const params = {
     Item: {
       'id': { S: id },
       'name': { S: event.userName },
       'color': { S: getRandColor() },
       '__typename': { S: 'User' },
-      'createdAt': { S: creationTime }, // pretty sure these get added automatically
-      'updatedAt': { S: creationTime } // pretty sure these get added automatically
+      'createdAt': { S: creationTime }, // Todo: Check if this is automatically added
+      'updatedAt': { S: creationTime }  // Todo: Check if this is automatically added
     },
     TableName: process.env.USER_TABLE
   };
@@ -41,6 +41,6 @@ async function addUser(id, event) {
     await dynamoDb.putItem(params).promise();
     console.log('user added: ', id);
   } catch (err) {
-    console.log('failed to add user: ', id);
+    console.error(`failed to add user "${id}": `, err);
   }
 }

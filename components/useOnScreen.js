@@ -1,18 +1,18 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react';
 
 const useOnScreen = (ref) => {
-  const [isIntersecting, setIntersecting] = useState(false)
+  const [isIntersecting, setIntersecting] = useState(false);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(([entry]) => setIntersecting(entry.isIntersecting))
+    const observer = new IntersectionObserver(([entry]) => setIntersecting(entry.isIntersecting));
 
-    observer.observe(ref.current)
+    observer.observe(ref.current);
 
     // remove the observer when the component is unmounted
     return () => observer.disconnect();
-  }, [])
+  }, []);
 
-  return isIntersecting
-}
+  return isIntersecting;
+};
 
-export default useOnScreen
+export default useOnScreen;

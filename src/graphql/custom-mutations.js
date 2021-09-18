@@ -19,6 +19,7 @@ export const createShow = /* GraphQL */ `
           rating
           user {
             name
+            color
           }
         }
         nextToken
