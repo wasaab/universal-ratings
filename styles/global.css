@@ -1,9 +1,6 @@
 html {
     height: 100%;
     width: 100%;
-}
-
-body {
     background-attachment: fixed;
     background-color:#bf0fff;
     background-image: radial-gradient(at 1% 0%, hsla(276,69%,51%,1) 0, transparent 20%),
@@ -16,6 +13,10 @@ body {
         radial-gradient(at 0% 47%, hsla(281,52%,36%,1) 0, transparent 50%),
         radial-gradient(at 67% 75%, hsla(242,27%,52%,1) 0, transparent 50%),
         radial-gradient(at 49% 35%, hsla(195,38%,56%,1) 0, transparent 50%);
+}
+
+body {
+    background-color: transparent !important; /* dark reader support */
 }
 
 header {

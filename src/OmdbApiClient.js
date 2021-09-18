@@ -19,11 +19,11 @@ class Show {
     constructor({ imdbID, Title, Type, Poster, Year, Released, Plot, imdbRating, Ratings }) {
         this.id = imdbID;
         this.title = Title;
-        this.type = Type.replace(OmdbShowType.TV, 'tv'),
+        this.type = Type.replace(OmdbShowType.TV, 'tv');
         this.img = parseOptional(Poster);
-        this.releaseDate = new Date(Released ?? Year.replace(/–.*/, '')).toISOString();
+        this.releaseDate = new Date(parseOptional(Released) ?? Year.replace(/–.*/, '')).toISOString();
         this.description = parseOptional(Plot);
-        this.imdbRating = imdbRating === 'N/A' ? null : Number(imdbRating)
+        this.imdbRating = imdbRating === 'N/A' ? null : Number(imdbRating);
         this.rtRating = findRtRating(Ratings);
     }
 }
@@ -60,15 +60,15 @@ class OmdbApiClient {
      * @param {OmdbShowType} type the show type to find matches for
      * @returns {Promise<Show[]>} matching shows
      */
-    async queryAllByTitle(title, type = '') {
+    queryAllByTitle(title, type = '') {
         return this.requestAll(`${this.baseUrl}&s=${title}&type=${type}`);
     }
 
-    async queryByTitle(title, type = '') {
+    queryByTitle(title, type = '') {
         return this.request(`${this.baseUrl}&t=${title}&type=${type}`);
     }
 
-    async queryById(imdbId) {
+    queryById(imdbId) {
         return this.request(`${this.baseUrl}&i=${imdbId}`);
     }
 }

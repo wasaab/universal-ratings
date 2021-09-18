@@ -159,7 +159,7 @@ const TitleSearchBar = ({ className, onSubmit }) => {
         }
     };
 
-    const handleInputChange = async (event, value) => {
+    const handleInputChange = (event, value) => {
         if (value?.length > 1) {
             updateOptions(value);
         } else if (options.length !== 0) {
@@ -198,7 +198,7 @@ const TitleSearchBar = ({ className, onSubmit }) => {
             return buildTitleWithSubstringMatchHighlights(option, inputValue);
         }
 
-        return buildTitleWithAlgoliaFuzzyHighlights(option._highlightResult.title.value)
+        return buildTitleWithAlgoliaFuzzyHighlights(option._highlightResult.title.value);
     };
 
     const renderOption = (option, { inputValue }) => {
@@ -255,8 +255,8 @@ const TitleSearchBar = ({ className, onSubmit }) => {
             getOptionSelected={(option, value) => option.id === value.id || option.objectID === value.objectID}
             getOptionLabel={() => ''} // clears & focuses input on selection
             options={options}
-            filterOptions={(options) => options}
-            groupBy={({ id }) => id ? 'Unrated' : 'Rated'}
+            filterOptions={(unfilteredOptions) => unfilteredOptions}
+            groupBy={({ id }) => (id ? 'Unrated' : 'Rated')}
             loading={isLoading}
             renderInput={renderInput}
             renderOption={renderOption}
@@ -268,6 +268,6 @@ const TitleSearchBar = ({ className, onSubmit }) => {
             clearOnBlur
         />
     );
-}
+};
 
 export default TitleSearchBar;

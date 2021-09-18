@@ -114,6 +114,9 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: 'flex-end'
       }
     }
+  },
+  huluIcon: {
+    fill: `${theme.palette.text.primary} !important`
   }
 }));
 
@@ -135,7 +138,7 @@ const ShowDetailsModal = ({ show, userId, userReview, onRatingChange, onShowAdde
       source: 'UR'
     };
 
-    await onRatingChange(ratedShow, currUserRating, true);
+    await onRatingChange(ratedShow, currUserRating);
 
     try {
       const createShowResp = await API.graphql(graphqlOperation(createShow, { input: ratedShow }));
@@ -146,11 +149,11 @@ const ShowDetailsModal = ({ show, userId, userReview, onRatingChange, onShowAdde
     }
   };
 
-  const rateShow = async (updatedUserRating) => {
+  const rateShow = (updatedUserRating) => {
     setCurrUserRating(updatedUserRating);
 
     if (show.rating) {
-      onRatingChange(show, updatedUserRating, !userReview?.rating);
+      onRatingChange(show, updatedUserRating, userReview?.rating);
     }
   };
 
@@ -170,7 +173,7 @@ const ShowDetailsModal = ({ show, userId, userReview, onRatingChange, onShowAdde
   };
 
   return (
-    <Dialog open={show != null} onClose={onClose} className={classes.root} aria-label={show.title}>
+    <Dialog open={show !== null} onClose={onClose} className={classes.root} aria-label={show.title}>
       <DialogContent className={classes.content}>
         <Grid container spacing={2} direction="row">
           <Grid item container xs={5} direction="column" justifyContent="space-between">
@@ -215,7 +218,7 @@ const ShowDetailsModal = ({ show, userId, userReview, onRatingChange, onShowAdde
                 />
               </Grid>
               <Grid item xs style={{ paddingRight: 0 }}>
-                {show.rating ? (
+                {show.reviews ? (
                   <AvatarGroup max={4} className={classes.avatarGroup}>
                     {show.reviews.items.sort((a, b) => b.rating - a.rating).map(({ user: { name, color }, rating }, i) => (
                       <Badge key={i} color="secondary" badgeContent={rating} className={classes.badge}>
@@ -274,7 +277,7 @@ const ShowDetailsModal = ({ show, userId, userReview, onRatingChange, onShowAdde
                 </Typography>
               </Grid>
               <Grid item xs className={classes.evenlySpaced}>
-                <HuluIcon height="17" />
+                <HuluIcon height="17" className={classes.huluIcon} />
                 <NetflixIcon height="17" />
               </Grid>
             </Grid>
