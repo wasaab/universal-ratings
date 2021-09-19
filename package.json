@@ -1,6 +1,6 @@
 {
   "name": "universal-ratings",
-  "version": "1.6.1",
+  "version": "1.6.2",
   "description": "A site for rating TV shows and movies",
   "repository": {
     "type": "git",
@@ -29,13 +29,13 @@
     "@material-ui/lab": "^4.0.0-alpha.60",
     "algoliasearch": "^4.10.3",
     "autosuggest-highlight": "^3.1.1",
-    "aws-amplify": "^4.2.2",
-    "axios": "^0.21.1",
+    "aws-amplify": "^4.2.10",
+    "axios": "^0.21.4",
     "clsx": "^1.1.1",
     "graphql-algolia-transformer": "^1.1.0",
     "lodash.debounce": "^4.0.8",
     "lru-cache": "^6.0.0",
-    "next": "^11.1.0",
+    "next": "^11.1.1",
     "react": "17.0.2",
     "react-color": "^2.19.3",
     "react-dom": "17.0.2",
@@ -44,7 +44,7 @@
   "devDependencies": {
     "@svgr/webpack": "^5.5.0",
     "eslint": "^7.31.0",
-    "eslint-config-next": "^11.0.1",
+    "eslint-config-next": "^11.1.1",
     "npm-run-all": "^4.1.5",
     "wait-on": "^6.0.0"
   }
