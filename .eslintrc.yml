@@ -1,21 +1,16 @@
 env:
-  commonjs: false
-  es6: true
-  node: true
+  browser: true
+  es2021: true
+  commonjs: true # AWS lambda functions
+  node: true # AWS lambda functions
 extends: 'next'
-globals:
-  Atomics: readonly
-  SharedArrayBuffer: readonly
-parserOptions:
-  ecmaVersion: 2021
-  sourceType: module
 rules:
   accessor-pairs: error
   array-bracket-newline: 'off'
   array-bracket-spacing: 'off'
   array-callback-return: error
   array-element-newline: 'off'
-  arrow-body-style: error
+  arrow-body-style: warn
   arrow-parens:
     - error
     - always
@@ -176,7 +171,7 @@ rules:
   no-undef-init: error
   no-undefined: error
   no-undef: error
-  no-underscore-dangle: error
+  no-underscore-dangle: 'off'
   no-unmodified-loop-condition: error
   no-unneeded-ternary: error
   no-unused-expressions: error
