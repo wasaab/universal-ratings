@@ -5,6 +5,7 @@ env:
   node: true # AWS lambda functions
 extends: 'next'
 rules:
+  '@next/next/no-document-import-in-page': warn
   accessor-pairs: error
   array-bracket-newline: 'off'
   array-bracket-spacing: 'off'
@@ -52,9 +53,6 @@ rules:
   func-call-spacing: error
   func-name-matching: error
   func-names: 'off'
-  # func-style:
-  #   - error
-  #   - declaration
   function-paren-newline: error
   generator-star-spacing: error
   global-require: error
@@ -71,9 +69,6 @@ rules:
   key-spacing: 'off'
   keyword-spacing: error
   line-comment-position: 'off'
-  linebreak-style:
-    - error
-    - windows
   lines-around-comment: error
   lines-around-directive: error
   lines-between-class-members: 'off'
@@ -245,9 +240,6 @@ rules:
   strict: 'off'
   switch-colon-spacing: error
   symbol-description: error
-  template-curly-spacing:
-    - error
-    - never
   template-tag-spacing: error
   unicode-bom:
     - error
