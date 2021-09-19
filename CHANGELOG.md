@@ -144,8 +144,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - readme tech stack and features
 
 ### Changed
--
-**BREAKING**: graphql schema refactored to support rating and sort operations
+- **BREAKING**: graphql schema refactored to support rating and sort operations
 - rating star buttons styling
 - MovieCard renamed to ShowCard
 - readme usage docs
