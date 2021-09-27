@@ -34,10 +34,37 @@ import RtFreshIcon from '../resources/rt.svg';
 import RtRottenIcon from '../resources/rt-rotten.svg';
 
 const avatarSize = 33;
+const backdropWidths = [300, 780, 1280];
+
+function buildBackdropUrl(width) {
+  return ({ backgroundImg: img }) => `url(${width ? img?.replace(backdropWidths[2], width) : img})`;
+}
+
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
-    flexDirection: 'column'
+    flexDirection: 'column',
+    '& .MuiPaper-root': {
+      backgroundColor: 'rgba(0, 0, 0, 0.06)',
+    }
+  },
+  backdrop: {
+    '&:before': {
+      content: '""',
+      [theme.breakpoints.down(backdropWidths[0] + 1)]: {
+        backgroundImage: buildBackdropUrl(backdropWidths[0]),
+      },
+      [theme.breakpoints.up(backdropWidths[0] + 1)]: {
+        backgroundImage: buildBackdropUrl(backdropWidths[1]),
+      },
+      [theme.breakpoints.up(backdropWidths[1] + 1)]: {
+        backgroundImage: buildBackdropUrl(),
+      },
+      backgroundSize: 'cover',
+      position: 'absolute',
+      inset: 0,
+      opacity: 0.7,
+    }
   },
   year: {
     paddingLeft: 3
@@ -81,6 +108,7 @@ const useStyles = makeStyles((theme) => ({
   rateButton: {
     border: '1px solid rgb(255, 180, 0)',
     color: '#ffb400',
+    backgroundColor: 'rgba(0, 0, 0, 0.08)',
     '&:hover': {
       backgroundColor: 'rgba(255, 180, 0, 0.08)'
     }
@@ -120,8 +148,18 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const ShowDetailsModal = ({ show, userId, userReview, onRatingChange, onShowAdded, onFavoriteChange, onWatchlistChange, isInWatchlist, onClose }) => {
-  const classes = useStyles();
+const ShowDetailsModal = ({
+  show,
+  userId,
+  userReview,
+  isInWatchlist,
+  onWatchlistChange,
+  onFavoriteChange,
+  onRatingChange,
+  onShowAdded,
+  onClose
+}) => {
+  const classes = useStyles(show);
   const [currUserRating, setCurrUserRating] = useState(userReview?.rating);
   const [isTooltipOpen, setIsTooltipOpen] = useState(false);
 
@@ -173,7 +211,17 @@ const ShowDetailsModal = ({ show, userId, userReview, onRatingChange, onShowAdde
   };
 
   return (
-    <Dialog open={show !== null} onClose={onClose} className={classes.root} aria-label={show.title}>
+    <Dialog
+      open={show !== null}
+      onClose={onClose}
+      className={classes.root}
+      aria-label={show.title}
+      BackdropProps= {{
+        classes: {
+          root: clsx({ [classes.backdrop]: show.backgroundImg })
+        }
+      }}
+    >
       <DialogContent className={classes.content}>
         <Grid container spacing={2} direction="row">
           <Grid item container xs={5} direction="column" justifyContent="space-between">
@@ -208,10 +256,10 @@ const ShowDetailsModal = ({ show, userId, userReview, onRatingChange, onShowAdde
             </Grid>
 
             <Grid item container xs={12} spacing={2} direction="row">
-              <Grid item xs style={{ paddingRight: 22 }}>
+              <Grid item style={{ paddingRight: 40 }}>
                 <StarButtons
                   className={clsx(classes.ratingStars, { [classes.ratingRequiredTip]: isTooltipOpen })}
-                  avgRating={show.rating ?? currUserRating}
+                  avgRating={show.rating}
                   userRating={currUserRating}
                   maxRating={4}
                   onClick={rateShow}
