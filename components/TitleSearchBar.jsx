@@ -19,6 +19,7 @@ import {
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { SearchClient } from '../src/client';
 import algoliaLogoUrl from '../resources/algolia.svg';
+import { StaleQueryError } from '../src/client/SearchClient';
 
 const useStyles = makeStyles((theme) => ({
     popper: {
@@ -110,17 +111,13 @@ const TitleSearchBar = ({ className, onSubmit }) => {
     const [isLoading, setIsLoading] = useState(false);
 
     const fetchOptions = async (title) => {
-        if (searchClient.isStaleQuery(title)) { return; }
-
         try {
             const shows = await searchClient.fetchShows(title);
-
-            if (searchClient.isStaleQuery(title)) { return; }
 
             console.log(`show options for "${title}": `, shows);
             setOptions(shows);
         } catch (err) {
-            if (axios.isCancel(err)) { return; }
+            if (axios.isCancel(err) || err instanceof StaleQueryError) { return; }
 
             console.error('Unable to find matching show: ', err);
             setOptions([]);
@@ -159,14 +156,16 @@ const TitleSearchBar = ({ className, onSubmit }) => {
         setOptions([]);
 
         if (isLoading) {
-            searchClient.title = null;
+            searchClient.query = null;
             cancelSearch();
         }
     };
 
     const handleInputChange = (event, value) => {
-        if (value?.length > 1) {
-            updateOptions(value);
+        const title = value?.trim();
+
+        if (title?.length > 1) {
+            updateOptions(title);
         } else if (options.length !== 0 || isLoading) {
             clear();
         }
@@ -216,7 +215,7 @@ const TitleSearchBar = ({ className, onSubmit }) => {
         return (
             <div className={classes.option}>
                 <TypeIcon size="small" className={classes.optionIcon} />
-                {renderHighlightedTitle(option, inputValue)}
+                {renderHighlightedTitle(option, inputValue.trim())}
                 <span className={classes.optionYear}>
                     {option.releaseDate.slice(0, 4)}
                 </span>
@@ -257,7 +256,7 @@ const TitleSearchBar = ({ className, onSubmit }) => {
     return (
         <Autocomplete
             open={isOpen}
-            onOpen={({ target }) => setIsOpen(target.value.length > 1)}
+            onOpen={({ target }) => setIsOpen(target.value.trim().length > 1)}
             onClose={() => setIsOpen(false)}
             onInputChange={handleInputChange}
             onChange={handleSelection}
