@@ -34,7 +34,7 @@ const useStyles = makeStyles({
 
 const StarButtons = ({ avgRating, userRating, maxRating, onClick, className }) => {
   const classes = useStyles();
-  const [displayedRating, setDisplayedRating] = useState(avgRating);
+  const [displayedRating, setDisplayedRating] = useState(avgRating ?? userRating);
   const [newlyRated, setNewlyRated] = useState(false);
   const [hovered, setHovered] = useState(false);
 
@@ -78,7 +78,7 @@ const StarButtons = ({ avgRating, userRating, maxRating, onClick, className }) =
   };
 
   const handleMouseLeave = () => {
-    setDisplayedRating(avgRating);
+    setDisplayedRating(avgRating ?? userRating);
     setNewlyRated(false);
     setHovered(false);
   };
@@ -97,7 +97,7 @@ const StarButtons = ({ avgRating, userRating, maxRating, onClick, className }) =
             onMouseEnter={() => handleMouseEnter(rating)}
             onClick={() => handleRatingClick(rating)}
           >
-            {isHoveredOnUserRating && !newlyRated ? (
+            {isHoveredOnUserRating && !newlyRated && avgRating ? (
               <RemoveIcon className={classes.removeRatingIcon} />
             ) : (
               <Star className={Star === StarOutlineIcon ? classes.outlinedStar : classes.star} />

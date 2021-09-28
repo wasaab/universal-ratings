@@ -21,6 +21,7 @@ import {
   Visibility as VisibilityIcon,
   Home as HomeIcon
 } from '@material-ui/icons/';
+import TmdbIcon from '../resources/tmdb.svg';
 import View from '../src/model/View';
 
 const useStyles = makeStyles((theme) => ({
@@ -53,6 +54,13 @@ const useStyles = makeStyles((theme) => ({
     // necessary for content to be below app bar
     ...theme.mixins.toolbar
   },
+  tmdbIcon: {
+    position: 'absolute',
+    bottom: 24,
+    padding: '0px 8px',
+    boxSizing: 'border-box',
+    width: 56
+  }
 }));
 
 const Drawer = ({ open, width, onClose, onSelect }) => {
@@ -104,6 +112,11 @@ const Drawer = ({ open, width, onClose, onSelect }) => {
         <DrawerMenuItem view={View.WATCHLIST} LeftIcon={WatchLaterIcon} />
         <DrawerMenuItem view={View.WATCHED} LeftIcon={VisibilityIcon} />
       </List>
+
+      {/* Todo: TMDB requires this logo and msg to be on about page, not main view. */}
+      <div title="This site uses the TMDB API for show details but is not endorsed or certified by TMDB">
+        <TmdbIcon className={classes.tmdbIcon} />
+      </div>
     </MaterialDrawer>
   );
 };

@@ -52,15 +52,17 @@ type Show @model
     { allow: groups, groups: ["Admin"], operations: [update] },
     { allow: owner, identityClaim: "sub", operations: [create, delete] }
   ])
-  @algolia(fields: { include: ["title", "type", "releaseDate"] })
+  @algolia(fields: { include: ["tmdbId", "title", "type", "releaseDate"] })
   @key(fields: ["id"])
   @key(name: "recentlyRated", fields: ["source", "createdAt"], queryField: "recentlyRated")
   @key(name: "showsByType", fields: ["type", "createdAt"], queryField: "showsByType") {
   id: ID!
+  tmdbId: ID!
   title: String!
   type: ShowType!
   rating: Float!
   img: String
+  backgroundImg: String
   releaseDate: AWSDateTime
   description: String
   imdbRating: Float

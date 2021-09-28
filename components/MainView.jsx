@@ -427,6 +427,12 @@ const MainView = ({ user }) => {
     }
   };
 
+  const determineShorterDesc = (tmdbDesc, omdbDesc) => {
+    if (!omdbDesc) { return tmdbDesc; }
+
+    return tmdbDesc.length < omdbDesc.length ? tmdbDesc : omdbDesc;
+  };
+
   /**
    * Selects an unrated show with data from OMDB API.
    *
@@ -434,9 +440,13 @@ const MainView = ({ user }) => {
    */
   const selectUnratedShow = async (show) => {
     try {
-      const { data } = await axios.get(`/api/search?id=${show.id}`);
+      const { data: { description, ...ratings } } = await axios.get(`/api/search?id=${show.id}&type=${show.type}`);
 
-      setSelectedShow(data);
+      setSelectedShow({
+        ...show,
+        ...ratings,
+        description: determineShorterDesc(show.description, description)
+      });
     } catch (err) {
       console.error(`Failed to get unrated show "${show.id}": `, err);
     }

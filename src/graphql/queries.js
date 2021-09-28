@@ -8,10 +8,12 @@ export const getWatchlistItem = /* GraphQL */ `
       showId
       show {
         id
+        tmdbId
         title
         type
         rating
         img
+        backgroundImg
         releaseDate
         description
         imdbRating
@@ -51,10 +53,12 @@ export const listWatchlistItems = /* GraphQL */ `
         showId
         show {
           id
+          tmdbId
           title
           type
           rating
           img
+          backgroundImg
           releaseDate
           description
           imdbRating
@@ -139,10 +143,12 @@ export const getReview = /* GraphQL */ `
       }
       show {
         id
+        tmdbId
         title
         type
         rating
         img
+        backgroundImg
         releaseDate
         description
         imdbRating
@@ -191,10 +197,12 @@ export const listReviews = /* GraphQL */ `
         }
         show {
           id
+          tmdbId
           title
           type
           rating
           img
+          backgroundImg
           releaseDate
           description
           imdbRating
@@ -215,10 +223,12 @@ export const getShow = /* GraphQL */ `
   query GetShow($id: ID!) {
     getShow(id: $id) {
       id
+      tmdbId
       title
       type
       rating
       img
+      backgroundImg
       releaseDate
       description
       imdbRating
@@ -258,10 +268,12 @@ export const listShows = /* GraphQL */ `
     ) {
       items {
         id
+        tmdbId
         title
         type
         rating
         img
+        backgroundImg
         releaseDate
         description
         imdbRating
@@ -309,10 +321,12 @@ export const reviewsByUser = /* GraphQL */ `
         }
         show {
           id
+          tmdbId
           title
           type
           rating
           img
+          backgroundImg
           releaseDate
           description
           imdbRating
@@ -348,10 +362,12 @@ export const recentlyRated = /* GraphQL */ `
     ) {
       items {
         id
+        tmdbId
         title
         type
         rating
         img
+        backgroundImg
         releaseDate
         description
         imdbRating
@@ -387,10 +403,12 @@ export const showsByType = /* GraphQL */ `
     ) {
       items {
         id
+        tmdbId
         title
         type
         rating
         img
+        backgroundImg
         releaseDate
         description
         imdbRating

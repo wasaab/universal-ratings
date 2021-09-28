@@ -2,110 +2,6 @@
 # yarn lockfile v1
 
 
-"@algolia/cache-browser-local-storage@4.10.3":
-  version "4.10.3"
-  resolved "https://registry.yarnpkg.com/@algolia/cache-browser-local-storage/-/cache-browser-local-storage-4.10.3.tgz#3bf81e0f66a4a1079a75914a987eb1ef432c7c68"
-  integrity sha512-TD1N7zg5lb56/PLjjD4bBl2eccEvVHhC7yfgFu2r9k5tf+gvbGxEZ3NhRZVKu2MObUIcEy2VR4LVLxOQu45Hlg==
-  dependencies:
-    "@algolia/cache-common" "4.10.3"
-
-"@algolia/cache-common@4.10.3":
-  version "4.10.3"
-  resolved "https://registry.yarnpkg.com/@algolia/cache-common/-/cache-common-4.10.3.tgz#311b2b5ae06d55300f4230944c99bc39ad15847d"
-  integrity sha512-q13cPPUmtf8a2suBC4kySSr97EyulSXuxUkn7l1tZUCX/k1y5KNheMp8npBy8Kc8gPPmHpacxddRSfOncjiKFw==
-
-"@algolia/cache-in-memory@4.10.3":
-  version "4.10.3"
-  resolved "https://registry.yarnpkg.com/@algolia/cache-in-memory/-/cache-in-memory-4.10.3.tgz#697e4994538426272ea29ccf2b32b46ea4c48862"
-  integrity sha512-JhPajhOXAjUP+TZrZTh6KJpF5VKTKyWK2aR1cD8NtrcVHwfGS7fTyfXfVm5BqBqkD9U0gVvufUt/mVyI80aZww==
-  dependencies:
-    "@algolia/cache-common" "4.10.3"
-
-"@algolia/client-account@4.10.3":
-  version "4.10.3"
-  resolved "https://registry.yarnpkg.com/@algolia/client-account/-/client-account-4.10.3.tgz#f2cbefb1abce74c341115607d6af199df1b056ae"
-  integrity sha512-S/IsJB4s+e1xYctdpW3nAbwrR2y3pjSo9X21fJGoiGeIpTRdvQG7nydgsLkhnhcgAdLnmqBapYyAqMGmlcyOkg==
-  dependencies:
-    "@algolia/client-common" "4.10.3"
-    "@algolia/client-search" "4.10.3"
-    "@algolia/transporter" "4.10.3"
-
-"@algolia/client-analytics@4.10.3":
-  version "4.10.3"
-  resolved "https://registry.yarnpkg.com/@algolia/client-analytics/-/client-analytics-4.10.3.tgz#43d934ef8df0cf551c78e6b2e9f2452e7fb27d93"
-  integrity sha512-vlHTbBqJktRgclh3v7bPQLfZvFIqY4erNFIZA5C7nisCj9oLeTgzefoUrr+R90+I+XjfoLxnmoeigS1Z1yg1vw==
-  dependencies:
-    "@algolia/client-common" "4.10.3"
-    "@algolia/client-search" "4.10.3"
-    "@algolia/requester-common" "4.10.3"
-    "@algolia/transporter" "4.10.3"
-
-"@algolia/client-common@4.10.3":
-  version "4.10.3"
-  resolved "https://registry.yarnpkg.com/@algolia/client-common/-/client-common-4.10.3.tgz#c4257dd5c57c5c8ec4bd48a7b1897573e372d403"
-  integrity sha512-uFyP2Z14jG2hsFRbAoavna6oJf4NTXaSDAZgouZUZlHlBp5elM38sjNeA5HR9/D9J/GjwaB1SgB7iUiIWYBB4w==
-  dependencies:
-    "@algolia/requester-common" "4.10.3"
-    "@algolia/transporter" "4.10.3"
-
-"@algolia/client-personalization@4.10.3":
-  version "4.10.3"
-  resolved "https://registry.yarnpkg.com/@algolia/client-personalization/-/client-personalization-4.10.3.tgz#58c800f90ab8ab4aa29abdf29a97e89e6bda419e"
-  integrity sha512-NS7Nx8EJ/nduGXT8CFo5z7kLF0jnFehTP3eC+z+GOEESH3rrs7uR12IZHxv5QhQswZa9vl925zCOZDcDVoENCg==
-  dependencies:
-    "@algolia/client-common" "4.10.3"
-    "@algolia/requester-common" "4.10.3"
-    "@algolia/transporter" "4.10.3"
-
-"@algolia/client-search@4.10.3":
-  version "4.10.3"
-  resolved "https://registry.yarnpkg.com/@algolia/client-search/-/client-search-4.10.3.tgz#aa6b02c2d528cb264830f276739b7f68b58988ef"
-  integrity sha512-Zwnp2G94IrNFKWCG/k7epI5UswRkPvL9FCt7/slXe2bkjP2y/HA37gzRn+9tXoLVRwd7gBzrtOA4jFKIyjrtVw==
-  dependencies:
-    "@algolia/client-common" "4.10.3"
-    "@algolia/requester-common" "4.10.3"
-    "@algolia/transporter" "4.10.3"
-
-"@algolia/logger-common@4.10.3":
-  version "4.10.3"
-  resolved "https://registry.yarnpkg.com/@algolia/logger-common/-/logger-common-4.10.3.tgz#6773d2e38581bf9ac57e2dda02f0c4f1bc72ce94"
-  integrity sha512-M6xi+qov2bkgg1H9e1Qtvq/E/eKsGcgz8RBbXNzqPIYoDGZNkv+b3b8YMo3dxd4Wd6M24HU1iqF3kmr1LaXndg==
-
-"@algolia/logger-console@4.10.3":
-  version "4.10.3"
-  resolved "https://registry.yarnpkg.com/@algolia/logger-console/-/logger-console-4.10.3.tgz#bd8bdc1f9dba89db37be25d673ac1f2e68de7913"
-  integrity sha512-vVgRI7b4PHjgBdRkv/cRz490twvkLoGdpC4VYzIouSrKj8SIVLRhey3qgXk7oQXi3xoxVAv6NrklHfpO8Bpx0w==
-  dependencies:
-    "@algolia/logger-common" "4.10.3"
-
-"@algolia/requester-browser-xhr@4.10.3":
-  version "4.10.3"
-  resolved "https://registry.yarnpkg.com/@algolia/requester-browser-xhr/-/requester-browser-xhr-4.10.3.tgz#81ae8f6caf562a28f96102f03da7f4b19bba568c"
-  integrity sha512-4WIk1zreFbc1EF6+gsfBTQvwSNjWc20zJAAExRWql/Jq5yfVHmwOqi/CajA53/cXKFBqo80DAMRvOiwP+hOLYw==
-  dependencies:
-    "@algolia/requester-common" "4.10.3"
-
-"@algolia/requester-common@4.10.3":
-  version "4.10.3"
-  resolved "https://registry.yarnpkg.com/@algolia/requester-common/-/requester-common-4.10.3.tgz#c3112393cff97be79863bc28de76f9c69b2f5a95"
-  integrity sha512-PNfLHmg0Hujugs3rx55uz/ifv7b9HVdSFQDb2hj0O5xZaBEuQCNOXC6COrXR8+9VEfqp2swpg7zwgtqFxh+BtQ==
-
-"@algolia/requester-node-http@4.10.3":
-  version "4.10.3"
-  resolved "https://registry.yarnpkg.com/@algolia/requester-node-http/-/requester-node-http-4.10.3.tgz#75ea7805ac0ba25a1124989d8632ef39c31441c1"
-  integrity sha512-A9ZcGfEvgqf0luJApdNcIhsRh6MShn2zn2tbjwjGG1joF81w+HUY+BWuLZn56vGwAA9ZB9n00IoJJpxibbfofg==
-  dependencies:
-    "@algolia/requester-common" "4.10.3"
-
-"@algolia/transporter@4.10.3":
-  version "4.10.3"
-  resolved "https://registry.yarnpkg.com/@algolia/transporter/-/transporter-4.10.3.tgz#0aeee752923957cffe63e4cf1c7a22ca48d96dde"
-  integrity sha512-n1lRyKDbrckbMEgm7QXtj3nEWUuzA3aKLzVQ43/F/RCFib15j4IwtmYhXR6OIBRSc7+T0Hm48S0J6F+HeYCQkw==
-  dependencies:
-    "@algolia/cache-common" "4.10.3"
-    "@algolia/logger-common" "4.10.3"
-    "@algolia/requester-common" "4.10.3"
-
 "@aws-amplify/analytics@5.0.16":
   version "5.0.16"
   resolved "https://registry.yarnpkg.com/@aws-amplify/analytics/-/analytics-5.0.16.tgz#d7781659fd1bae804c09192bcd5c1b54508712e3"
@@ -3808,6 +3704,11 @@
   resolved "https://registry.yarnpkg.com/@types/cookie/-/cookie-0.3.3.tgz#85bc74ba782fb7aa3a514d11767832b0e3bc6803"
   integrity sha512-LKVP3cgXBT9RYj+t+9FDKwS5tdI+rPBXaNSkma7hvqy35lc7mAokC2zsqWJH0LaqIt3B962nuYI77hsJoT1gow==
 
+"@types/json-schema@^7.0.8":
+  version "7.0.9"
+  resolved "https://registry.yarnpkg.com/@types/json-schema/-/json-schema-7.0.9.tgz#97edc9037ea0c38585320b28964dde3b39e4660d"
+  integrity sha512-qcUXuemtEu+E5wZSJHNxUXeCZhAfXKQ41D+duX+VYPde7xyEVZci+/oXKJL13tnRs9lR2pr4fod59GT6/X1/yQ==
+
 "@types/node@*":
   version "16.4.2"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-16.4.2.tgz#0a95d7fd950cb1eaca0ce11031d72e8f680b775a"
@@ -3910,7 +3811,12 @@ agent-base@6, agent-base@^6.0.0, agent-base@^6.0.2:
   dependencies:
     debug "4"
 
-ajv@^6.10.0, ajv@^6.12.3, ajv@^6.12.4:
+ajv-keywords@^3.5.2:
+  version "3.5.2"
+  resolved "https://registry.yarnpkg.com/ajv-keywords/-/ajv-keywords-3.5.2.tgz#31f29da5ab6e00d1c2d329acf7b5929614d5014d"
+  integrity sha512-5p6WTN0DdTGVQk6VjcEju19IgaHudalcfabD7yhDGeA6bcQnmL+CpveLJq/3hvfwd1aof6L386Ougkx6RfyMIQ==
+
+ajv@^6.10.0, ajv@^6.12.3, ajv@^6.12.4, ajv@^6.12.5:
   version "6.12.6"
   resolved "https://registry.yarnpkg.com/ajv/-/ajv-6.12.6.tgz#baf5a62e802b07d977034586f8c3baf5adf26df4"
   integrity sha512-j3fVLgvTo527anyYyJOGTYJbG+vnnQYvE0m5mmkc1TK+nxAppkCLMIL0aZ4dblVCNoGShhm+kzE4ZUykBoMg4g==
@@ -3929,26 +3835,6 @@ ajv@^8.0.1:
     json-schema-traverse "^1.0.0"
     require-from-string "^2.0.2"
     uri-js "^4.2.2"
-
-algoliasearch@^4.10.3:
-  version "4.10.3"
-  resolved "https://registry.yarnpkg.com/algoliasearch/-/algoliasearch-4.10.3.tgz#22df4bb02fbf13a765b18b85df8745ee9c04f00a"
-  integrity sha512-OLY0AWlPKGLbSaw14ivMB7BT5fPdp8VdzY4L8FtzZnqmLKsyes24cltGlf7/X96ACkYEcT390SReCDt/9SUIRg==
-  dependencies:
-    "@algolia/cache-browser-local-storage" "4.10.3"
-    "@algolia/cache-common" "4.10.3"
-    "@algolia/cache-in-memory" "4.10.3"
-    "@algolia/client-account" "4.10.3"
-    "@algolia/client-analytics" "4.10.3"
-    "@algolia/client-common" "4.10.3"
-    "@algolia/client-personalization" "4.10.3"
-    "@algolia/client-search" "4.10.3"
-    "@algolia/logger-common" "4.10.3"
-    "@algolia/logger-console" "4.10.3"
-    "@algolia/requester-browser-xhr" "4.10.3"
-    "@algolia/requester-common" "4.10.3"
-    "@algolia/requester-node-http" "4.10.3"
-    "@algolia/transporter" "4.10.3"
 
 amazon-cognito-identity-js@5.1.1:
   version "5.1.1"
@@ -5632,6 +5518,14 @@ file-entry-cache@^6.0.1:
   dependencies:
     flat-cache "^3.0.4"
 
+file-loader@~6.2.0:
+  version "6.2.0"
+  resolved "https://registry.yarnpkg.com/file-loader/-/file-loader-6.2.0.tgz#baef7cf8e1840df325e4390b4484879480eebe4d"
+  integrity sha512-qo3glqyTa61Ytg4u73GultjHGjdRyig3tG6lPtyX/jOEJvHif9uB0/OCI2Kif6ctF3caQTW2G5gym21oAsI4pw==
+  dependencies:
+    loader-utils "^2.0.0"
+    schema-utils "^3.0.0"
+
 file-stream-rotator@^0.5.7:
   version "0.5.7"
   resolved "https://registry.yarnpkg.com/file-stream-rotator/-/file-stream-rotator-0.5.7.tgz#868a2e5966f7640a17dd86eda0e4467c089f6286"
@@ -6656,7 +6550,7 @@ loader-utils@1.2.3:
     emojis-list "^2.0.0"
     json5 "^1.0.1"
 
-loader-utils@^2.0.0:
+loader-utils@^2.0.0, loader-utils@~2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/loader-utils/-/loader-utils-2.0.0.tgz#e4cace5b816d425a166b5f097e10cd12b36064b0"
   integrity sha512-rP4F0h2RaWSvPEkD7BLDFQnvSf+nK+wr3ESUjNTyAGobqrijmW92zc+SO6d4p4B1wh7+B/Jg1mkQe5NYUEHtHQ==
@@ -8011,6 +7905,15 @@ scheduler@^0.20.2:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
 
+schema-utils@^3.0.0:
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/schema-utils/-/schema-utils-3.1.1.tgz#bc74c4b6b6995c1d88f76a8b77bea7219e0c8281"
+  integrity sha512-Y5PQxS4ITlC+EahLuXaY86TXfR7Dc5lw294alXOq86JAHCihAIZfqv8nNCWvaEJvaC51uN9hbLGeV0cFBdH+Fw==
+  dependencies:
+    "@types/json-schema" "^7.0.8"
+    ajv "^6.12.5"
+    ajv-keywords "^3.5.2"
+
 "semver@2 || 3 || 4 || 5", semver@^5.4.1, semver@^5.5.0:
   version "5.7.1"
   resolved "https://registry.yarnpkg.com/semver/-/semver-5.7.1.tgz#a954f931aeba508d307bbf069eff0c01c96116f7"
@@ -8509,6 +8412,14 @@ svg-parser@^2.0.2:
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/svg-parser/-/svg-parser-2.0.4.tgz#fdc2e29e13951736140b76cb122c8ee6630eb6b5"
   integrity sha512-e4hG1hRwoOdRb37cIMSgzNsxyzKfayW6VOflrwvR+/bzrkyxY/31WkbgnQpgtrNp1SdpJvpUAGTa/ZoiPNDuRQ==
+
+svg-url-loader@^7.1.1:
+  version "7.1.1"
+  resolved "https://registry.yarnpkg.com/svg-url-loader/-/svg-url-loader-7.1.1.tgz#0cbdb30beb8679cb060c12eaf30085747fa7591f"
+  integrity sha512-NlsMCePODm7FQhU9aEZyGLPx5Xe1QRI1cSEUE6vTq5LJc9l9pStagvXoEIyZ9O3r00w6G3+Wbkimb+SC3DI/Aw==
+  dependencies:
+    file-loader "~6.2.0"
+    loader-utils "~2.0.0"
 
 svgo@^1.2.2:
   version "1.3.2"

@@ -11,10 +11,12 @@ export const createWatchlistItem = /* GraphQL */ `
       showId
       show {
         id
+        tmdbId
         title
         type
         rating
         img
+        backgroundImg
         releaseDate
         description
         imdbRating
@@ -42,10 +44,12 @@ export const updateWatchlistItem = /* GraphQL */ `
       showId
       show {
         id
+        tmdbId
         title
         type
         rating
         img
+        backgroundImg
         releaseDate
         description
         imdbRating
@@ -73,10 +77,12 @@ export const deleteWatchlistItem = /* GraphQL */ `
       showId
       show {
         id
+        tmdbId
         title
         type
         rating
         img
+        backgroundImg
         releaseDate
         description
         imdbRating
@@ -185,10 +191,12 @@ export const createReview = /* GraphQL */ `
       }
       show {
         id
+        tmdbId
         title
         type
         rating
         img
+        backgroundImg
         releaseDate
         description
         imdbRating
@@ -228,10 +236,12 @@ export const updateReview = /* GraphQL */ `
       }
       show {
         id
+        tmdbId
         title
         type
         rating
         img
+        backgroundImg
         releaseDate
         description
         imdbRating
@@ -271,10 +281,12 @@ export const deleteReview = /* GraphQL */ `
       }
       show {
         id
+        tmdbId
         title
         type
         rating
         img
+        backgroundImg
         releaseDate
         description
         imdbRating
@@ -299,10 +311,12 @@ export const createShow = /* GraphQL */ `
   ) {
     createShow(input: $input, condition: $condition) {
       id
+      tmdbId
       title
       type
       rating
       img
+      backgroundImg
       releaseDate
       description
       imdbRating
@@ -332,10 +346,12 @@ export const updateShow = /* GraphQL */ `
   ) {
     updateShow(input: $input, condition: $condition) {
       id
+      tmdbId
       title
       type
       rating
       img
+      backgroundImg
       releaseDate
       description
       imdbRating
@@ -365,10 +381,12 @@ export const deleteShow = /* GraphQL */ `
   ) {
     deleteShow(input: $input, condition: $condition) {
       id
+      tmdbId
       title
       type
       rating
       img
+      backgroundImg
       releaseDate
       description
       imdbRating

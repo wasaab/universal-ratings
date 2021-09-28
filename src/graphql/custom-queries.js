@@ -21,6 +21,7 @@ export const recentlyRated = /* GraphQL */ `
         type
         rating
         img
+        backgroundImg
         releaseDate
         description
         imdbRating
@@ -69,6 +70,7 @@ export const showsByType = /* GraphQL */ `
         type
         rating
         img
+        backgroundImg
         releaseDate
         description
         imdbRating
@@ -102,6 +104,7 @@ export const getShow = /* GraphQL */ `
       type
       rating
       img
+      backgroundImg
       releaseDate
       description
       imdbRating
@@ -148,6 +151,7 @@ export const reviewsByUser = /* GraphQL */ `
           type
           rating
           img
+          backgroundImg
           releaseDate
           description
           imdbRating
@@ -185,6 +189,7 @@ export const getUser = /* GraphQL */ `
             type
             rating
             img
+            backgroundImg
             releaseDate
             description
             imdbRating
