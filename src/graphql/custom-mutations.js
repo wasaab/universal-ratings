@@ -5,10 +5,12 @@ export const createShow = /* GraphQL */ `
   ) {
     createShow(input: $input, condition: $condition) {
       id
+      tmdbId
       title
       type
       rating
       img
+      backgroundImg
       releaseDate
       description
       imdbRating

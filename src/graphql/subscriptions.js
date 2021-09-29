@@ -8,10 +8,12 @@ export const onCreateWatchlistItem = /* GraphQL */ `
       showId
       show {
         id
+        tmdbId
         title
         type
         rating
         img
+        backgroundImg
         releaseDate
         description
         imdbRating
@@ -36,10 +38,12 @@ export const onUpdateWatchlistItem = /* GraphQL */ `
       showId
       show {
         id
+        tmdbId
         title
         type
         rating
         img
+        backgroundImg
         releaseDate
         description
         imdbRating
@@ -64,10 +68,12 @@ export const onDeleteWatchlistItem = /* GraphQL */ `
       showId
       show {
         id
+        tmdbId
         title
         type
         rating
         img
+        backgroundImg
         releaseDate
         description
         imdbRating
@@ -164,10 +170,12 @@ export const onCreateReview = /* GraphQL */ `
       }
       show {
         id
+        tmdbId
         title
         type
         rating
         img
+        backgroundImg
         releaseDate
         description
         imdbRating
@@ -204,10 +212,12 @@ export const onUpdateReview = /* GraphQL */ `
       }
       show {
         id
+        tmdbId
         title
         type
         rating
         img
+        backgroundImg
         releaseDate
         description
         imdbRating
@@ -244,10 +254,12 @@ export const onDeleteReview = /* GraphQL */ `
       }
       show {
         id
+        tmdbId
         title
         type
         rating
         img
+        backgroundImg
         releaseDate
         description
         imdbRating
@@ -269,10 +281,12 @@ export const onCreateShow = /* GraphQL */ `
   subscription OnCreateShow {
     onCreateShow {
       id
+      tmdbId
       title
       type
       rating
       img
+      backgroundImg
       releaseDate
       description
       imdbRating
@@ -299,10 +313,12 @@ export const onUpdateShow = /* GraphQL */ `
   subscription OnUpdateShow {
     onUpdateShow {
       id
+      tmdbId
       title
       type
       rating
       img
+      backgroundImg
       releaseDate
       description
       imdbRating
@@ -329,10 +345,12 @@ export const onDeleteShow = /* GraphQL */ `
   subscription OnDeleteShow {
     onDeleteShow {
       id
+      tmdbId
       title
       type
       rating
       img
+      backgroundImg
       releaseDate
       description
       imdbRating
