@@ -9,7 +9,7 @@ class Show {
         this.title = title ?? name;
         this.type = media_type;
         this.description = overview;
-        this.img = poster_path ? `${imgBasePath}/w342/${poster_path}` : null;
+        this.img = poster_path ? `${imgBasePath}/w342${poster_path}` : null;
         this.backgroundImg = backdrop_path ? `${imgBasePath}/w1280${backdrop_path}` : null;
         this.releaseDate = new Date(release_date ?? first_air_date).toISOString();
     }

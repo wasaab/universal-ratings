@@ -15,7 +15,14 @@ async function queryByIdAndType(tmdbId, type) {
 }
 
 export default async function handler({ query: { id, title, type } }, res) {
-  const shows = title ? await tmdbApi.queryAllByTitle(title) : await queryByIdAndType(id, type);
+  try {
+    const shows = title ? await tmdbApi.queryAllByTitle(title) : await queryByIdAndType(id, type);
 
-  res.status(200).json(shows);
+    res.status(200).json(shows);
+  } catch (err) {
+    const message = 'Cannot find matching show(s)';
+
+    console.error(message, err);
+    res.status(500).send(message);
+  }
 }

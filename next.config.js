@@ -1,6 +1,6 @@
 module.exports = {
   images: {
-    domains: ['m.media-amazon.com', 'resizing.flixster.com'],
+    domains: ['image.tmdb.org', 'm.media-amazon.com'],
   },
   webpack: (config) => {
     config.module.rules.push(
