@@ -4,6 +4,27 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.7.0] - 2021-09-29
+### Added
+- search client for querying Algolia, TMDB, and OMDB
+- TMDB API client
+- Algolia API client
+- search request cancellation for stale queries
+- backdrop image for show modal
+- search button selects first option
+- first search option autohighlighted
+
+### Changed
+- TMDB API used for unrated shows autosuggest/details
+- OMDB API used for imdb/rt ratings
+- remove rating button not shown for unrated show
+- highlighted search option restyled to be more distinct
+- search input trimmed
+
+### Fixed
+- search race conditions
+- rating required tip dynamic width
+
 ## [1.6.2] - 2021-09-19
 ### Fixed
 - Insecure dependency versions
