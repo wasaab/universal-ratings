@@ -21,6 +21,7 @@ export const getWatchlistItem = /* GraphQL */ `
         reviews {
           nextToken
         }
+        providerIds
         createdAt
         source
         updatedAt
@@ -63,6 +64,7 @@ export const listWatchlistItems = /* GraphQL */ `
           description
           imdbRating
           rtRating
+          providerIds
           createdAt
           source
           updatedAt
@@ -156,6 +158,7 @@ export const getReview = /* GraphQL */ `
         reviews {
           nextToken
         }
+        providerIds
         createdAt
         source
         updatedAt
@@ -207,6 +210,7 @@ export const listReviews = /* GraphQL */ `
           description
           imdbRating
           rtRating
+          providerIds
           createdAt
           source
           updatedAt
@@ -244,6 +248,7 @@ export const getShow = /* GraphQL */ `
         }
         nextToken
       }
+      providerIds
       createdAt
       source
       updatedAt
@@ -281,6 +286,7 @@ export const listShows = /* GraphQL */ `
         reviews {
           nextToken
         }
+        providerIds
         createdAt
         source
         updatedAt
@@ -331,6 +337,7 @@ export const reviewsByUser = /* GraphQL */ `
           description
           imdbRating
           rtRating
+          providerIds
           createdAt
           source
           updatedAt
@@ -375,6 +382,7 @@ export const recentlyRated = /* GraphQL */ `
         reviews {
           nextToken
         }
+        providerIds
         createdAt
         source
         updatedAt
@@ -416,6 +424,7 @@ export const showsByType = /* GraphQL */ `
         reviews {
           nextToken
         }
+        providerIds
         createdAt
         source
         updatedAt

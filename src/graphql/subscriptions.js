@@ -21,6 +21,7 @@ export const onCreateWatchlistItem = /* GraphQL */ `
         reviews {
           nextToken
         }
+        providerIds
         createdAt
         source
         updatedAt
@@ -51,6 +52,7 @@ export const onUpdateWatchlistItem = /* GraphQL */ `
         reviews {
           nextToken
         }
+        providerIds
         createdAt
         source
         updatedAt
@@ -81,6 +83,7 @@ export const onDeleteWatchlistItem = /* GraphQL */ `
         reviews {
           nextToken
         }
+        providerIds
         createdAt
         source
         updatedAt
@@ -183,6 +186,7 @@ export const onCreateReview = /* GraphQL */ `
         reviews {
           nextToken
         }
+        providerIds
         createdAt
         source
         updatedAt
@@ -225,6 +229,7 @@ export const onUpdateReview = /* GraphQL */ `
         reviews {
           nextToken
         }
+        providerIds
         createdAt
         source
         updatedAt
@@ -267,6 +272,7 @@ export const onDeleteReview = /* GraphQL */ `
         reviews {
           nextToken
         }
+        providerIds
         createdAt
         source
         updatedAt
@@ -302,6 +308,7 @@ export const onCreateShow = /* GraphQL */ `
         }
         nextToken
       }
+      providerIds
       createdAt
       source
       updatedAt
@@ -334,6 +341,7 @@ export const onUpdateShow = /* GraphQL */ `
         }
         nextToken
       }
+      providerIds
       createdAt
       source
       updatedAt
@@ -366,6 +374,7 @@ export const onDeleteShow = /* GraphQL */ `
         }
         nextToken
       }
+      providerIds
       createdAt
       source
       updatedAt

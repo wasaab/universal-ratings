@@ -21,7 +21,7 @@ import {
   Visibility as VisibilityIcon,
   Home as HomeIcon
 } from '@material-ui/icons/';
-import TmdbIcon from '../resources/tmdb.svg';
+import TmdbIcon from '../resources/images/tmdb.svg';
 import View from '../src/model/View';
 
 const useStyles = makeStyles((theme) => ({

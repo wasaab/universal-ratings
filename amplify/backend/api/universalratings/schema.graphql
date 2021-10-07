@@ -68,6 +68,7 @@ type Show @model
   imdbRating: Float
   rtRating: Int
   reviews: [Review] @connection(fields: ["id"])
+  providerIds: [Int]
   createdAt: AWSDateTime
   source: String!
 }

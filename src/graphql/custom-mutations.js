@@ -15,6 +15,7 @@ export const createShow = /* GraphQL */ `
       description
       imdbRating
       rtRating
+      providerIds
       reviews {
         items {
           showId
