@@ -26,6 +26,7 @@ export const recentlyRated = /* GraphQL */ `
         description
         imdbRating
         rtRating
+        providerIds
         reviews {
           items {
             showId
@@ -75,6 +76,7 @@ export const showsByType = /* GraphQL */ `
         description
         imdbRating
         rtRating
+        providerIds
         reviews {
           items {
             showId
@@ -109,6 +111,7 @@ export const getShow = /* GraphQL */ `
       description
       imdbRating
       rtRating
+      providerIds
       reviews {
         items {
           showId
@@ -156,6 +159,7 @@ export const reviewsByUser = /* GraphQL */ `
           description
           imdbRating
           rtRating
+          providerIds
           reviews {
             items {
               showId
@@ -194,6 +198,7 @@ export const getUser = /* GraphQL */ `
             description
             imdbRating
             rtRating
+            providerIds
             reviews {
               items {
                 showId

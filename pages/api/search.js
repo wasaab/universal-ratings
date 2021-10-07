@@ -3,13 +3,20 @@ import { OmdbApiClient, TmdbApiClient } from '../../src/client';
 const omdbApi = new OmdbApiClient(process.env.OMDB_API_KEY);
 const tmdbApi = new TmdbApiClient(process.env.TMDB_API_KEY);
 
+function fetchExternalRatingsAndDesc(tmdbId, type) {
+  return tmdbApi.getImdbId(tmdbId, type)
+    .then((imdbId) => omdbApi.fetchExternalRatingsAndDesc(imdbId));
+}
+
 async function queryByIdAndType(tmdbId, type) {
-  const imdbId = await tmdbApi.getImdbId(tmdbId, type);
-  const ratingsAndDesc = await omdbApi.fetchExternalRatingsAndDesc(imdbId);
+  const [ratingsAndDesc, providerIds] = await Promise.all([
+    fetchExternalRatingsAndDesc(tmdbId, type),
+    tmdbApi.getProviderIds(tmdbId, type)
+  ]);
 
   return {
-    id: imdbId,
     tmdbId,
+    providerIds,
     ...ratingsAndDesc
   };
 }

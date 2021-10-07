@@ -27,11 +27,11 @@ import { updateReview } from '../src/graphql/mutations';
 import { createShow } from '../src/graphql/custom-mutations';
 import StarButtons from './StarButtons';
 import LabelledIcon from './LabelledIcon';
-import HuluIcon from '../resources/hulu.svg';
-import NetflixIcon from '../resources/netflix.svg';
-import ImdbIcon from '../resources/imdb.svg';
-import RtFreshIcon from '../resources/rt.svg';
-import RtRottenIcon from '../resources/rt-rotten.svg';
+import JustWatchIcon from '../resources/images/justWatch.svg';
+import ImdbIcon from '../resources/images/imdb.svg';
+import RtFreshIcon from '../resources/images/rt.svg';
+import RtRottenIcon from '../resources/images/rt-rotten.svg';
+import providerIdToInfo from '../resources/data/providers';
 
 const avatarSize = 33;
 const backdropWidths = [300, 780, 1280];
@@ -99,10 +99,24 @@ const useStyles = makeStyles((theme) => ({
   },
   streamingSitesLabel: {
     fontSize: '0.9rem',
+    lineHeight: '1em',
     whiteSpace: 'nowrap'
   },
-  evenlySpaced: {
+  streamingSitesLabelContainer: {
     display: 'flex',
+    alignItems: 'center',
+    gap: 4
+  },
+  toggleButtonsContainer: {
+    display: 'flex',
+    justifyContent: 'space-evenly'
+  },
+  providerLogosContainer: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between'
+  },
+  singleProvider: {
     justifyContent: 'space-evenly'
   },
   rateButton: {
@@ -210,6 +224,12 @@ const ShowDetailsModal = ({
     }
   };
 
+  const renderProviderLogo = (id, i) => {
+    const { logo: ProviderLogo } = providerIdToInfo[id];
+
+    return <ProviderLogo key={i} />;
+  };
+
   return (
     <Dialog
       open={show !== null}
@@ -235,7 +255,7 @@ const ShowDetailsModal = ({
                 unoptimized
               />
             )}
-            <Box className={classes.evenlySpaced} pt="10px">
+            <Box className={classes.toggleButtonsContainer} pt="10px">
               <IconButton disabled={!userReview} onClick={toggleFavorite}>
                 {userReview?.isFavorite ? <FavoriteIcon /> : <FavoriteOutlineIcon />}
               </IconButton>
@@ -319,15 +339,26 @@ const ShowDetailsModal = ({
               className={classes.streamingSitesContainer}
               direction="row"
             >
-              <Grid item xs>
-                <Typography variant="overline" className={classes.streamingSitesLabel}>
-                  Available on
-                </Typography>
-              </Grid>
-              <Grid item xs className={classes.evenlySpaced}>
-                <HuluIcon height="17" className={classes.huluIcon} />
-                <NetflixIcon height="17" />
-              </Grid>
+              {show.providerIds?.length > 0 && (
+                <>
+                  <Grid item xs className={classes.streamingSitesLabelContainer} title="Powered by JustWatch">
+                    <JustWatchIcon />
+                    <Typography variant="overline" className={classes.streamingSitesLabel}>
+                      Available on
+                    </Typography>
+                  </Grid>
+                  <Grid
+                    item
+                    xs
+                    className={clsx(
+                      classes.providerLogosContainer,
+                      { [classes.singleProvider]: show.providerIds.length === 1 }
+                    )}
+                  >
+                    {show.providerIds.map(renderProviderLogo)}
+                  </Grid>
+                </>
+              )}
             </Grid>
           </Grid>
         </Grid>

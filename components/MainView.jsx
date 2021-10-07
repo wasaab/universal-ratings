@@ -385,7 +385,7 @@ const MainView = ({ user }) => {
    * @param {number} prevUserRating - the user's previous rating of the show
    * @param {number} showIdx - the index of the show
    */
-  const handleRatingChange = (show, currUserRating, prevUserRating, showIdx = selectedShowIdx) => {
+  const handleRatingChange = async (show, currUserRating, prevUserRating, showIdx = selectedShowIdx) => {
     let isShowInGrid = true;
 
     if (showIdx === null) {
@@ -407,8 +407,8 @@ const MainView = ({ user }) => {
       return;
     }
 
-    createShowReview(show, currUserRating, !prevUserRating);
     updateShows(show, isShowInGrid, currUserRating);
+    await createShowReview(show, currUserRating, !prevUserRating);
   };
 
   /**
