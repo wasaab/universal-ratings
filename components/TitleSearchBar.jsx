@@ -18,7 +18,7 @@ import {
 } from '@material-ui/icons';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { SearchClient } from '../src/client';
-import algoliaLogoUrl from '../resources/algolia.svg';
+import algoliaLogoUrl from '../resources/images/algolia.svg';
 import { StaleQueryError } from '../src/client/SearchClient';
 
 const useStyles = makeStyles((theme) => ({

@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" viewBox="0 55 1200 1306" height="16" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd">
+  <defs>
+    <style type="text/css">
+      <![CDATA[
+     .fil1 {fill:url(#id0)}
+     .fil2 {fill:url(#id1)}
+     .fil3 {fill:url(#id2)}
+     .fil4 {fill:url(#id3)}
+     .fil5 {fill:url(#id4)}
+     .fil6 {fill:url(#id5)}
+     .fil7 {fill:url(#id6)}
+     .fil8 {fill:url(#id7)}
+     .fil9 {fill:url(#id8)}
+     .fil0 {fill:url(#id9)}
+    ]]>
+    </style>
+    <linearGradient id="id0" gradientUnits="userSpaceOnUse" x1="1326.56" y1="688.051" x2="2006.98" y2="688.051">
+      <stop offset="0" style="stop-color:#E1BA41" />
+      <stop offset="0.501961" style="stop-color:#F9D36E" />
+      <stop offset="1" style="stop-color:#E1BA41" />
+    </linearGradient>
+    <linearGradient id="id1" gradientUnits="userSpaceOnUse" xlink:href="#id0" x1="2169.03" y1="882.831" x2="2895.39" y2="882.831"></linearGradient>
+    <linearGradient id="id2" gradientUnits="userSpaceOnUse" xlink:href="#id0" x1="2988.07" y1="871.772" x2="3634.48" y2="871.772"></linearGradient>
+    <linearGradient id="id3" gradientUnits="userSpaceOnUse" xlink:href="#id0" x1="3682.52" y1="762.894" x2="4209.86" y2="762.894"></linearGradient>
+    <linearGradient id="id4" gradientUnits="userSpaceOnUse" xlink:href="#id0" x1="4211.56" y1="672.756" x2="5858.21" y2="672.756"></linearGradient>
+    <linearGradient id="id5" gradientUnits="userSpaceOnUse" xlink:href="#id0" x1="5801.08" y1="870.917" x2="6527.44" y2="870.917"></linearGradient>
+    <linearGradient id="id6" gradientUnits="userSpaceOnUse" xlink:href="#id0" x1="6590.39" y1="762.894" x2="7117.71" y2="762.894"></linearGradient>
+    <linearGradient id="id7" gradientUnits="userSpaceOnUse" xlink:href="#id0" x1="7187.44" y1="871.772" x2="7922.32" y2="871.772"></linearGradient>
+    <linearGradient id="id8" gradientUnits="userSpaceOnUse" xlink:href="#id0" x1="8041.37" y1="631.933" x2="8760.94" y2="631.933"></linearGradient>
+    <linearGradient id="id9" gradientUnits="userSpaceOnUse" x1="-6.15748" y1="671.472" x2="1249.89" y2="671.472">
+      <stop offset="0" style="stop-color:#F9D36E" />
+      <stop offset="0.0588235" style="stop-color:#F9D36E" />
+      <stop offset="1" style="stop-color:#E1BA41" />
+    </linearGradient>
+  </defs>
+  <g id="Layer_x0020_1">
+    <metadata id="CorelCorpID_0Corel-Layer" />
+    <path class="fil0" d="M941 551l0 245c0,0 -3,36 30,19 33,-17 129,-66 191,-98 89,-45 0,-89 0,-89 0,0 -160,-82 -192,-98 -32,-16 -29,21 -29,21zm-275 426c45,-22 196,-100 229,-118 46,-23 1,-45 1,-45l-229 -119c0,0 -41,-22 -39,24 2,46 0,230 0,230 0,0 -6,49 39,27zm-313 158c45,-22 196,-100 229,-118 46,-23 1,-45 1,-45l-229 -119c0,0 -41,-22 -39,24 2,46 0,230 0,230 0,0 -6,49 39,27zm-314 -164c45,-22 196,-100 229,-118 46,-23 1,-45 1,-45l-229 -119c0,0 -41,-22 -39,24 2,46 0,230 0,230 0,0 -6,49 39,27zm314 -157c45,-22 196,-100 229,-118 46,-23 1,-45 1,-45l-229 -119c0,0 -41,-22 -39,24 2,46 0,230 0,230 0,0 -7,49 39,27zm313 -166c45,-22 196,-100 229,-118 46,-23 1,-45 1,-45l-229 -119c0,0 -41,-22 -39,24 2,46 0,230 0,230 0,0 -6,49 39,27zm-627 6c45,-22 196,-100 229,-118 46,-23 1,-45 1,-45l-229 -119c0,0 -41,-22 -39,24 2,46 0,230 0,230 0,0 -6,49 39,27zm313 -165c45,-22 196,-100 229,-118 46,-23 1,-45 1,-45l-229 -119c0,0 -41,-22 -39,24 2,46 0,230 0,230 0,0 -6,49 39,27zm-352 529l0 200c0,0 6,92 97,44 92,-47 186,-95 186,-95 0,0 26,-15 0,-29 -26,-14 -260,-134 -260,-134 0,0 -24,-10 -24,14zm1 -694l0 -200c0,0 6,-92 97,-44 92,47 186,95 186,95 0,0 26,15 0,29 -26,14 -260,134 -260,134 0,0 -24,10 -24,-14z" />
+  </g>
+  <style xmlns="" class="darkreader darkreader--fallback">html, body, body :not(iframe) {
+     background-color: #17191a !important;
+     border-color: #71695d !important;
+     color: #dcdbd8 !important;
+ }</style>
+</svg>
