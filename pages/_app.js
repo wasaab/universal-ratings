@@ -52,7 +52,7 @@ const App = () => {
         <AmplifyAuthenticator handleAuthStateChange={storeUser}>
           <ThemeProvider theme={theme}>
             <CssBaseline />
-            {user && <MainView user={user} />}
+            {user && <MainView authedUser={user} />}
           </ThemeProvider>
         </AmplifyAuthenticator>
       </AmplifyAuthContainer>

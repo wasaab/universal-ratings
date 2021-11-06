@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import clsx from 'clsx';
 import {
-  Avatar,
   Badge,
   Box,
   Button,
@@ -11,7 +10,6 @@ import {
   Grid,
   IconButton,
   makeStyles,
-  Tooltip,
   Typography
 } from '@material-ui/core';
 import {
@@ -32,6 +30,7 @@ import ImdbIcon from '../resources/images/imdb.svg';
 import RtFreshIcon from '../resources/images/rt.svg';
 import RtRottenIcon from '../resources/images/rt-rotten.svg';
 import providerIdToInfo from '../resources/data/providers';
+import UserAvatar from './UserAvatar';
 
 const avatarSize = 33;
 const backdropWidths = [300, 780, 1280];
@@ -82,20 +81,18 @@ const useStyles = makeStyles((theme) => ({
       color: theme.palette.text.primary
     }
   },
-  avatar: {
-    width: avatarSize,
-    height: avatarSize,
-    color: theme.palette.text.primary
-  },
   content: {
     padding: '20px 24px'
   },
   showDesc: {
-    marginTop: 12
+    marginTop: 12,
+    maxHeight: 150,
+    overflowY: 'auto'
   },
   streamingSitesContainer: {
     alignItems: 'center',
-    marginTop: 0
+    marginTop: 0,
+    maxWidth: '90%'
   },
   streamingSitesLabel: {
     fontSize: '0.9rem',
@@ -151,6 +148,7 @@ const useStyles = makeStyles((theme) => ({
     }
   },
   thirdPartyRatingsContainer: {
+    maxWidth: '78%',
     [theme.breakpoints.up(565)]: {
       '& :nth-child(2)': {
         justifyContent: 'flex-end'
@@ -162,9 +160,21 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
+function buildReviews(rating, name, color) {
+  return {
+    items: [{
+      rating,
+      user: {
+        name,
+        color
+      }
+    }]
+  };
+}
+
 const ShowDetailsModal = ({
   show,
-  userId,
+  user,
   userReview,
   isInWatchlist,
   onWatchlistChange,
@@ -183,22 +193,22 @@ const ShowDetailsModal = ({
     setIsTooltipOpen(!isTooltipOpen);
   };
 
-  const createRatedShow = async () => {
+  const createRatedShow = () => {
     const ratedShow = {
       ...show,
       rating: currUserRating,
       source: 'UR'
     };
 
-    await onRatingChange(ratedShow, currUserRating);
-
-    try {
-      const createShowResp = await API.graphql(graphqlOperation(createShow, { input: ratedShow }));
-
-      onShowAdded(createShowResp.data.createShow);
-    } catch (err) {
-      console.error('GraphQL create show failed. ', err);
-    }
+    onRatingChange(ratedShow, currUserRating);
+    API.graphql(graphqlOperation(createShow, { input: ratedShow }))
+      .catch((err) => {
+        console.error('GraphQL create show failed. ', err);
+      });
+    onShowAdded({
+      ...ratedShow,
+      reviews: buildReviews(currUserRating, user.name, user.color)
+    });
   };
 
   const rateShow = (updatedUserRating) => {
@@ -213,7 +223,7 @@ const ShowDetailsModal = ({
     try {
       const updatedReview = {
         showId: show.id,
-        userId,
+        userId: user.id,
         isFavorite: !userReview.isFavorite
       };
 
@@ -275,7 +285,7 @@ const ShowDetailsModal = ({
               </Typography>
             </Grid>
 
-            <Grid item container xs={12} spacing={2} direction="row">
+            <Grid item container xs spacing={2} direction="row">
               <Grid item style={{ paddingRight: 40 }}>
                 <StarButtons
                   className={clsx(classes.ratingStars, { [classes.ratingRequiredTip]: isTooltipOpen })}
@@ -290,11 +300,7 @@ const ShowDetailsModal = ({
                   <AvatarGroup max={4} className={classes.avatarGroup}>
                     {show.reviews.items.sort((a, b) => b.rating - a.rating).map(({ user: { name, color }, rating }, i) => (
                       <Badge key={i} color="secondary" badgeContent={rating} className={classes.badge}>
-                        <Tooltip title={name}>
-                          <Avatar className={classes.avatar} style={{ backgroundColor: color }}>
-                            {name.match(/^(\p{Extended_Pictographic}|.)/u)[0].toUpperCase()}
-                          </Avatar>
-                        </Tooltip>
+                        <UserAvatar name={name} backgroundColor={color} size={avatarSize} tooltip />
                       </Badge>
                     ))}
                   </AvatarGroup>
@@ -322,7 +328,7 @@ const ShowDetailsModal = ({
             <Grid
               item
               container
-              xs={9}
+              xs
               spacing={1}
               className={classes.thirdPartyRatingsContainer}
               direction="row"
@@ -334,7 +340,7 @@ const ShowDetailsModal = ({
             <Grid
               item
               container
-              xs={11}
+              xs
               spacing={3}
               className={classes.streamingSitesContainer}
               direction="row"
