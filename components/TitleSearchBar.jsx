@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
             borderRadius: 10,
             border: '1px solid rgba(255, 255, 255, 0.18)',
             '&:after': {
-                marginLeft: 101,
+                marginLeft: 176,
                 opacity: 0.8,
                 content: `url("${algoliaLogoUrl}")`
             }
