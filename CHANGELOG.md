@@ -4,6 +4,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.9.0] - 2021-11-06
+### Added
+- Loading symbols for infinite scroll and view change
+- auto-scroll to top on view change
+- UserAvatar component
+- icons for user menu items
+- username displayed in user menu
+
+### Changed
+- show modal restyled for better mobile support
+- long show descriptions scrollable in show modal
+- algolia logo size reduced in search results
+- user modal save button restyled for visiblity
+- ratings.json --> sampleShows.json
+- new release threshold 2 months --> 3 months
+- show creation time reduced
+
 ## [1.8.0] - 2021-10-06
 ### Added
 - streaming providers
