@@ -13,7 +13,8 @@
     },
     "categories": {
       "auth": {
-        "universalratings5a980c73": {}
+        "universalratings5a980c73": {},
+        "userPoolGroups": {}
       },
       "function": {
         "universalratings5a980c73PostConfirmation": {

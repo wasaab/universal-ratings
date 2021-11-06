@@ -1,8 +1,9 @@
 import React, { useMemo, useState } from 'react';
-import { Avatar, Box, Button, Dialog, DialogContent, makeStyles, TextField } from '@material-ui/core';
+import { Box, Button, Dialog, DialogContent, makeStyles, TextField } from '@material-ui/core';
 import { SliderPicker } from 'react-color';
 import API, { graphqlOperation } from '@aws-amplify/api';
 import { updateUser } from '../src/graphql/mutations';
+import UserAvatar from './UserAvatar';
 
 const useStyles = makeStyles((theme) => ({
   content: {
@@ -14,17 +15,13 @@ const useStyles = makeStyles((theme) => ({
       width: 300
     }
   },
-  avatar: {
-    width: 40,
-    height: 40,
-    color: theme.palette.text.primary
-  },
   slider: {
     flex: 0.8,
     paddingBottom: 5
   },
   saveButton: {
-    marginBottom: 4
+    marginBottom: 4,
+    backgroundColor: 'rgba(0, 0, 0, 0.08)'
   }
 }));
 
@@ -64,15 +61,12 @@ const UserProfileModal = ({ user, onClose, onSave }) => {
           onBlur={() => setName(name.trim())}
         />
         <Box display="flex" justifyContent="space-between">
-          <Avatar className={classes.avatar} style={{ backgroundColor: color }}>
-            {name ? name.match(/^(\p{Extended_Pictographic}|.)/u)[0].toUpperCase() : ''}
-          </Avatar>
+          <UserAvatar name={name} backgroundColor={color} size={40} />
           <SliderPicker color={color} onChangeComplete={handleColorChange} className={classes.slider} />
         </Box>
         <Button
           disabled={!isNameValid || (color === user.color && name === user.name)}
           variant="outlined"
-          color="secondary"
           onClick={saveChanges}
           className={classes.saveButton}
         >

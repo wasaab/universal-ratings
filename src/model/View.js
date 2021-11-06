@@ -1,7 +1,7 @@
 const recentlyRatedArgs = ['recentlyRated', { source: 'UR' }];
 const newReleaseThreshold = new Date();
 
-newReleaseThreshold.setMonth(newReleaseThreshold.getMonth() - 2);
+newReleaseThreshold.setMonth(newReleaseThreshold.getMonth() - 3);
 
 export default class View {
   static HOME = new View('Home', ...recentlyRatedArgs);

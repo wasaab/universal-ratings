@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
   },
   userMenu: {
     position: 'absolute',
-    right: 10
+    right: 12
   },
   appName: {
     [theme.breakpoints.down(580)]: {
@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const Toolbar = ({ drawerOpen, onDrawerOpen, onSearchSubmit, onEditProfile, drawerWidth }) => {
+const Toolbar = ({ user, drawerOpen, onDrawerOpen, onSearchSubmit, onEditProfile, drawerWidth }) => {
   const classes = useStyles({ drawerOpen, drawerWidth });
 
   return (
@@ -62,7 +62,7 @@ const Toolbar = ({ drawerOpen, onDrawerOpen, onSearchSubmit, onEditProfile, draw
 
         <TitleSearchBar className={classes.searchBar} onSubmit={onSearchSubmit} />
 
-        <UserMenu className={classes.userMenu} onEditProfile={onEditProfile} />
+        <UserMenu className={classes.userMenu} user={user} onEditProfile={onEditProfile} />
       </MaterialToolbar>
     </AppBar>
   );

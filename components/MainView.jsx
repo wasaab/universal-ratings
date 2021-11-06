@@ -11,7 +11,7 @@ import {
 } from '../src/graphql/mutations.js';
 import * as gqlQuery from '../src/graphql/custom-queries';
 import { makeStyles } from '@material-ui/core/styles';
-import { Grid } from '@material-ui/core';
+import { Backdrop, Box, CircularProgress, Grid, LinearProgress } from '@material-ui/core';
 import ShowCard from './ShowCard';
 import ShowDetailsModal from './ShowDetailsModal';
 import UserProfileModal from './UserProfileModal';
@@ -42,8 +42,28 @@ const useStyles = makeStyles((theme) => ({
   reducedGrow: {
     flexGrow: 0.2,
     flexBasis: 'unset'
+  },
+  progressRoot: {
+    width: '100%',
+    backgroundColor: 'rgba(255, 255, 255, 0.27)',
+    borderRadius: 4
+  },
+  progressBar: {
+    borderRadius: 4
+  },
+  loadingBackdrop: {
+    zIndex: 1
   }
 }));
+
+class Loading {
+  static VIEW = 'view';
+  static PAGE = 'page';
+
+  static determineType(currView, targetView) {
+    return targetView === currView ? Loading.PAGE : Loading.VIEW;
+  }
+}
 
 const updateOnShowAddedViews = [View.HOME, View.WATCHED, View.RECENTLY_RATED];
 
@@ -68,8 +88,9 @@ function buildWatchlist(shows) {
   return unwrapShowsAndUpdateAvgRatings(existingShows);
 }
 
-const MainView = ({ user }) => {
+const MainView = ({ authedUser }) => {
   const classes = useStyles();
+  const [user, setUser] = useState(authedUser);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [profileModalOpen, setProfileModalOpen] = useState(false);
   const [selectedShow, setSelectedShow] = useState(null);
@@ -77,6 +98,7 @@ const MainView = ({ user }) => {
   const [shows, setShows] = useState([]);
   const [nextToken, setNextToken] = useState();
   const [view, setView] = useState(View.HOME);
+  const [loading, setLoading] = useState(null);
   const [watchlist, setWatchlist] = useState(() => buildWatchlist(user.watchlist.items));
   const findWatchlistIdx = (showId = selectedShow?.id) => watchlist.findIndex(({ id }) => id === showId);
   const watchlistIdx = useMemo(findWatchlistIdx, [selectedShow, watchlist]);
@@ -110,6 +132,8 @@ const MainView = ({ user }) => {
    * @param {View} targetView - the view to fetch shows for
    */
   const fetchShows = async (targetView = view) => {
+    setLoading(Loading.determineType(view, targetView));
+
     try {
       const queryName = targetView.query.name;
       const { data } = await API.graphql(graphqlOperation(gqlQuery[queryName], buildQueryParams(targetView)));
@@ -125,12 +149,15 @@ const MainView = ({ user }) => {
         setShows([...shows, ...updatedShows]);
       } else {
         setShows(updatedShows);
+        window.scrollTo(0, 0);
       }
 
       setNextToken(data[queryName].nextToken);
     } catch (err) {
       console.error(`Failed to list shows for view "${targetView.label}": `, err);
     }
+
+    setLoading(null);
   };
 
   /**
@@ -141,6 +168,7 @@ const MainView = ({ user }) => {
   const handleDrawerSelection = (selectedView) => {
     if (selectedView === View.WATCHLIST) {
       setShows(watchlist);
+      window.scrollTo(0, 0);
     } else {
       fetchShows(selectedView);
     }
@@ -385,7 +413,7 @@ const MainView = ({ user }) => {
    * @param {number} prevUserRating - the user's previous rating of the show
    * @param {number} showIdx - the index of the show
    */
-  const handleRatingChange = async (show, currUserRating, prevUserRating, showIdx = selectedShowIdx) => {
+  const handleRatingChange = (show, currUserRating, prevUserRating, showIdx = selectedShowIdx) => {
     let isShowInGrid = true;
 
     if (showIdx === null) {
@@ -407,8 +435,8 @@ const MainView = ({ user }) => {
       return;
     }
 
+    createShowReview(show, currUserRating, !prevUserRating);
     updateShows(show, isShowInGrid, currUserRating);
-    await createShowReview(show, currUserRating, !prevUserRating);
   };
 
   /**
@@ -516,23 +544,25 @@ const MainView = ({ user }) => {
     updateUserReviews(shows, name, color);
     updateUserReviews(watchlist, name, color);
 
-    user.name = name;
-    user.color = color;
+    setUser({ ...user, name, color });
   };
 
   useEffect(() => {
     fetchShows();
   }, []);
 
-  useEffect(() => {
+  const infiniteScroll = () => {
     if (!isEndOfPageVisisble || !nextToken) { return; }
 
     fetchShows();
-  }, [isEndOfPageVisisble]);
+  };
+
+  useEffect(infiniteScroll, [isEndOfPageVisisble]);
 
   return (
     <div className={classes.root}>
       <Toolbar
+        user={user}
         drawerWidth={drawerWidth}
         drawerOpen={drawerOpen}
         onDrawerOpen={() => setDrawerOpen(true)}
@@ -552,7 +582,7 @@ const MainView = ({ user }) => {
         {selectedShow && (
           <ShowDetailsModal
             show={selectedShow}
-            userId={user.id}
+            user={user}
             userReview={findUserReview(selectedShow.reviews?.items)}
             isInWatchlist={watchlistIdx !== -1}
             onRatingChange={handleRatingChange}
@@ -583,6 +613,22 @@ const MainView = ({ user }) => {
             </Grid>
           ))}
         </Grid>
+
+        {loading === Loading.PAGE && isEndOfPageVisisble && (
+          <Box display="flex" justifyContent="center" mt="24px" width="100%">
+            <LinearProgress classes={{ root: classes.progressRoot, bar: classes.progressBar}} />
+          </Box>
+        )}
+
+        <Backdrop
+          style={{ left: drawerOpen ? drawerWidth + 1 : 57 }}
+          className={classes.loadingBackdrop}
+          transitionDuration={{ exit: 500 }}
+          open={loading === Loading.VIEW}
+        >
+          <CircularProgress disableShrink size={50} />
+        </Backdrop>
+
         <div ref={endOfPageRef} style={{ position: 'relative', bottom: 500 }} />
       </main>
     </div>
