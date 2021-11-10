@@ -17,9 +17,8 @@ import {
     Tv as TvIcon
 } from '@material-ui/icons';
 import Autocomplete from '@material-ui/lab/Autocomplete';
-import { SearchClient } from '../src/client';
+import { searchClient, StaleQueryError } from '../src/client';
 import algoliaLogoUrl from '../resources/images/algolia.svg';
-import { StaleQueryError } from '../src/client/SearchClient';
 
 const useStyles = makeStyles((theme) => ({
     popper: {
@@ -101,8 +100,6 @@ const typeToIcon = {
     movie: MovieIcon,
     tv: TvIcon
 };
-
-const searchClient = new SearchClient();
 
 const TitleSearchBar = ({ className, onSubmit }) => {
     const classes = useStyles();

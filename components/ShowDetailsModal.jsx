@@ -160,18 +160,6 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-function buildReviews(rating, name, color) {
-  return {
-    items: [{
-      rating,
-      user: {
-        name,
-        color
-      }
-    }]
-  };
-}
-
 const ShowDetailsModal = ({
   show,
   user,
@@ -191,24 +179,6 @@ const ShowDetailsModal = ({
     if (show.rating || currUserRating) { return; }
 
     setIsTooltipOpen(!isTooltipOpen);
-  };
-
-  const createRatedShow = () => {
-    const ratedShow = {
-      ...show,
-      rating: currUserRating,
-      source: 'UR'
-    };
-
-    onRatingChange(ratedShow, currUserRating);
-    API.graphql(graphqlOperation(createShow, { input: ratedShow }))
-      .catch((err) => {
-        console.error('GraphQL create show failed. ', err);
-      });
-    onShowAdded({
-      ...ratedShow,
-      reviews: buildReviews(currUserRating, user.name, user.color)
-    });
   };
 
   const rateShow = (updatedUserRating) => {
@@ -310,7 +280,7 @@ const ShowDetailsModal = ({
                       className={classes.rateButton}
                       variant="outlined"
                       disabled={!currUserRating}
-                      onClick={createRatedShow}
+                      onClick={() => onShowAdded(show, currUserRating)}
                     >
                       Rate
                     </Button>

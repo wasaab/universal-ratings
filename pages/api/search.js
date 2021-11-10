@@ -3,14 +3,17 @@ import { OmdbApiClient, TmdbApiClient } from '../../src/client';
 const omdbApi = new OmdbApiClient(process.env.OMDB_API_KEY);
 const tmdbApi = new TmdbApiClient(process.env.TMDB_API_KEY);
 
-function fetchExternalRatingsAndDesc(tmdbId, type) {
-  return tmdbApi.getImdbId(tmdbId, type)
-    .then((imdbId) => omdbApi.fetchExternalRatingsAndDesc(imdbId));
+async function fetchExternalRatingsAndDesc(tmdbId, type, imdbId) {
+  if (!imdbId) {
+    imdbId = await tmdbApi.getImdbId(tmdbId, type);
+  }
+
+  return omdbApi.fetchExternalRatingsAndDesc(imdbId);
 }
 
-async function queryByIdAndType(tmdbId, type) {
+async function queryByIdAndType(tmdbId, type, imdbId) {
   const [ratingsAndDesc, providerIds] = await Promise.all([
-    fetchExternalRatingsAndDesc(tmdbId, type),
+    fetchExternalRatingsAndDesc(tmdbId, type, imdbId),
     tmdbApi.getProviderIds(tmdbId, type)
   ]);
 
@@ -21,9 +24,16 @@ async function queryByIdAndType(tmdbId, type) {
   };
 }
 
-export default async function handler({ query: { id, title, type } }, res) {
+function fetchShows({ id, imdbId, title, type }) {
+  if (title) { return tmdbApi.queryAllByTitle(title); }
+  if (id) { return queryByIdAndType(id, type, imdbId); }
+
+  return tmdbApi.getTrendingShows();
+}
+
+export default async function handler({ query }, res) {
   try {
-    const shows = title ? await tmdbApi.queryAllByTitle(title) : await queryByIdAndType(id, type);
+    const shows = await fetchShows(query);
 
     res.status(200).json(shows);
   } catch (err) {

@@ -19,7 +19,7 @@
       "function": {
         "universalratings5a980c73PostConfirmation": {
           "deploymentBucketName": "amplify-amplify6604b332b57b4-staging-21636-deployment",
-          "s3Key": "amplify-builds/universalratings5a980c73PostConfirmation-4d5934566a376b586f70-build.zip"
+          "s3Key": "amplify-builds/universalratings5a980c73PostConfirmation-4e4159376b6e64366857-build.zip"
         }
       }
     }

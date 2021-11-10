@@ -1,8 +1,8 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import axios from 'axios';
 import API, { graphqlOperation } from '@aws-amplify/api';
 import {
   createReview,
+  createShow,
   createWatchlistItem,
   deleteReview,
   deleteShow,
@@ -11,7 +11,14 @@ import {
 } from '../src/graphql/mutations.js';
 import * as gqlQuery from '../src/graphql/custom-queries';
 import { makeStyles } from '@material-ui/core/styles';
-import { Backdrop, Box, CircularProgress, Grid, LinearProgress } from '@material-ui/core';
+import {
+  Backdrop,
+  Box,
+  CircularProgress,
+  Grid,
+  LinearProgress,
+  Typography
+} from '@material-ui/core';
 import ShowCard from './ShowCard';
 import ShowDetailsModal from './ShowDetailsModal';
 import UserProfileModal from './UserProfileModal';
@@ -20,6 +27,7 @@ import Toolbar from './Toolbar';
 import Drawer from './Drawer';
 import View from '../src/model/View';
 import clsx from 'clsx';
+import { searchClient } from '../src/client';
 
 const drawerWidth = 240;
 
@@ -53,6 +61,13 @@ const useStyles = makeStyles((theme) => ({
   },
   loadingBackdrop: {
     zIndex: 1
+  },
+  sectionHeader: {
+    margin: '70px 0px 10px 0px',
+    fontWeight: 500,
+    '&:first-of-type': {
+      marginTop: 0
+    }
   }
 }));
 
@@ -67,7 +82,26 @@ class Loading {
 
 const updateOnShowAddedViews = [View.HOME, View.WATCHED, View.RECENTLY_RATED];
 
-// Todo: add logic for updating show's avg rating in db when reviews are updated, rather than calculating client-side.
+async function maybeAddShowMetadata(show) {
+  if (show.providerIds) { return; } // metadata already populated
+
+  const { data } = await searchClient.fetchShowByIdAndType(show.tmdbId, show.type, show.id);
+
+  Object.assign(show, data);
+}
+
+function buildReviews(rating, name, color) {
+  return {
+    items: [{
+      rating,
+      user: {
+        name,
+        color
+      }
+    }]
+  };
+};
+
 function updateAvgRating(show) {
   const reviews = show.reviews.items;
 
@@ -96,10 +130,11 @@ const MainView = ({ authedUser }) => {
   const [selectedShow, setSelectedShow] = useState(null);
   const [selectedShowIdx, setSelectedShowIdx] = useState(null);
   const [shows, setShows] = useState([]);
+  const [trendingShows, setTrendingShows] = useState([]);
   const [nextToken, setNextToken] = useState();
   const [view, setView] = useState(View.HOME);
   const [loading, setLoading] = useState(null);
-  const [watchlist, setWatchlist] = useState(() => buildWatchlist(user.watchlist.items));
+  const [watchlist, setWatchlist] = useState(() => buildWatchlist(authedUser.watchlist.items));
   const findWatchlistIdx = (showId = selectedShow?.id) => watchlist.findIndex(({ id }) => id === showId);
   const watchlistIdx = useMemo(findWatchlistIdx, [selectedShow, watchlist]);
   const endOfPageRef = useRef();
@@ -126,6 +161,8 @@ const MainView = ({ authedUser }) => {
     return queryParams;
   };
 
+  const isTrending = ({ id }) => -1 !== trendingShows.findIndex((show) => show.id === id);
+
   /**
    * Fetches shows for the provided view.
    *
@@ -136,7 +173,8 @@ const MainView = ({ authedUser }) => {
 
     try {
       const queryName = targetView.query.name;
-      const { data } = await API.graphql(graphqlOperation(gqlQuery[queryName], buildQueryParams(targetView)));
+      const queryParams = buildQueryParams(targetView);
+      const { data } = await API.graphql(graphqlOperation(gqlQuery[queryName], queryParams));
       let updatedShows = data[queryName].items;
 
       if (View.FAVORITES.query.name === queryName) {
@@ -145,8 +183,12 @@ const MainView = ({ authedUser }) => {
         updatedShows.forEach(updateAvgRating);
       }
 
-      if (targetView === view) {
+      if (queryParams.nextToken) {
         setShows([...shows, ...updatedShows]);
+      } else if (targetView === View.HOME) {
+        const uniqueShows = updatedShows.filter((show) => !isTrending(show));
+
+        setShows([...trendingShows, ...uniqueShows]);
       } else {
         setShows(updatedShows);
         window.scrollTo(0, 0);
@@ -309,12 +351,15 @@ const MainView = ({ authedUser }) => {
    * @param {number} userRating - the user's rating of the show
    */
   const updateReviewsAndAvgRating = (show, userRating) => {
-    if (!show.reviews) { return; }
+    if (show.reviews) { // rated show
+      const reviews = show.reviews.items;
 
-    const reviews = show.reviews.items;
-
-    updateReviews(reviews, userRating);
-    updateAvgRating(show);
+      updateReviews(reviews, userRating);
+      updateAvgRating(show);
+    } else { // unrated show
+      show.reviews = buildReviews(userRating, user.name, user.color);
+      show.rating = userRating;
+    }
   };
 
   /**
@@ -352,6 +397,24 @@ const MainView = ({ authedUser }) => {
   };
 
   /**
+   * Removes the provided show from the card grid if not trending.
+   * If trending, the show's rating and reviews are reset.
+   *
+   * @param {Object} show - the show to remove
+   * @param {number} showIdx - the index of the show
+   */
+  const removeOrResetShowInGrid = (show, showIdx) => {
+    if (view === View.HOME && showIdx < trendingShows.length) {
+      delete show.rating;
+      delete show.reviews;
+    } else {
+      shows.splice(showIdx, 1);
+    }
+
+    setShows([...shows]);
+  };
+
+  /**
    * Removes the provided show and its watchlist entry.
    *
    * @param {Object} show - the show to remove
@@ -368,8 +431,7 @@ const MainView = ({ authedUser }) => {
       }
 
       if (showIdx !== -1) {
-        shows.splice(showIdx, 1);
-        setShows([...shows]);
+        removeOrResetShowInGrid(show, showIdx);
       }
 
       if (selectedShow) {
@@ -406,6 +468,21 @@ const MainView = ({ authedUser }) => {
   };
 
   /**
+   * Finds the index of the selected show.
+   *
+   * @returns {number|null} the selected show's index if found
+   */
+  const findSelectedShowIdx = () => {
+    const showIdx = shows.findIndex(({ id }) => id === selectedShow.id);
+
+    if (showIdx === -1) { return null; }
+
+    setSelectedShowIdx(showIdx);
+
+    return showIdx;
+  };
+
+  /**
    * Handles show rating change.
    *
    * @param {Object} show - the show that had a rating change
@@ -414,17 +491,11 @@ const MainView = ({ authedUser }) => {
    * @param {number} showIdx - the index of the show
    */
   const handleRatingChange = (show, currUserRating, prevUserRating, showIdx = selectedShowIdx) => {
-    let isShowInGrid = true;
-
     if (showIdx === null) {
-      showIdx = shows.findIndex(({ id }) => id === selectedShow.id);
-
-      if (showIdx === -1) {
-        isShowInGrid = false;
-      } else {
-        setSelectedShowIdx(showIdx);
-      }
+      showIdx = findSelectedShowIdx(showIdx);
     }
+
+    const isShowInGrid = showIdx !== null;
 
     if (isShowInGrid) {
       show = shows[showIdx];
@@ -468,7 +539,7 @@ const MainView = ({ authedUser }) => {
    */
   const selectUnratedShow = async (show) => {
     try {
-      const { data: { description, ...ratings } } = await axios.get(`/api/search?id=${show.id}&type=${show.type}`);
+      const { data: { description, ...ratings } } = await searchClient.fetchShowByIdAndType(show.id, show.type);
 
       setSelectedShow({
         ...show,
@@ -491,10 +562,49 @@ const MainView = ({ authedUser }) => {
   const addShow = (show) => {
     setSelectedShow(show);
 
-    if (updateOnShowAddedViews.includes(view) || view === View[show.type.toUpperCase()]) {
+    if (view === View.HOME) {
+      setSelectedShowIdx(trendingShows.length);
+      shows.splice(trendingShows.length, 0, show);
+      setShows([...shows]);
+    } else if (updateOnShowAddedViews.includes(view) || view === View[show.type.toUpperCase()]) {
       setSelectedShowIdx(0);
       setShows([show, ...shows]);
     }
+  };
+
+  /**
+   * Creates a rated show.
+   *
+   * @param {Object} show - show to create
+   * @param {number} rating - user's rating of the show
+   * @param {number} showIdx - index of the show
+   */
+  const createRatedShow = async (show, rating, showIdx = selectedShowIdx) => {
+    if (showIdx === null) {
+      showIdx = findSelectedShowIdx(showIdx);
+
+      if (showIdx !== null) {
+        show = shows[showIdx];
+      }
+    }
+
+    await maybeAddShowMetadata(show);
+
+    const ratedShow = {
+      ...show,
+      rating,
+      source: 'UR'
+    };
+
+    API.graphql(graphqlOperation(createShow, { input: ratedShow }))
+      .catch((err) => {
+        console.error('GraphQL create show failed. ', err);
+      });
+    handleRatingChange(show, rating, null, showIdx);
+
+    if (null !== showIdx) { return; }
+
+    addShow(show);
   };
 
   const unselectShow = () => {
@@ -547,9 +657,71 @@ const MainView = ({ authedUser }) => {
     setUser({ ...user, name, color });
   };
 
+  const renderShowCard = (show, showIdx) => (
+    <Grid key={showIdx} item xs className={clsx({ [classes.reducedGrow]: shows.length === 2 })}>
+      <ShowCard
+        show={show}
+        userRating={findUserReview(show.reviews?.items)?.rating}
+        onRatingChange={(rating, userRating) => {
+          if (show.rating) {
+            handleRatingChange(show, rating, userRating, showIdx);
+          } else { // unrated trending show
+            createRatedShow(show, rating, showIdx);
+          }
+        }}
+        onClick={async () => {
+          if (!show.rating) { // unrated trending show
+            await maybeAddShowMetadata(show);
+          }
+
+          selectShow(show, showIdx);
+        }}
+      />
+    </Grid>
+  );
+
+  /**
+   * Fetches the rated version of the provided trending show.
+   *
+   * @param {Object} show - the show to fetch
+   * @returns {Object} the rated show if found; otherwise the provided show.
+   */
+  const maybeFetchRatedTrendingShow = async (show) => {
+    try {
+      const { data: { getShow } } = await API.graphql(graphqlOperation(gqlQuery.getShow, { id: show.id }));
+
+      if (!getShow) { return show; }
+
+      updateAvgRating(getShow);
+
+      return getShow;
+    } catch (err) {
+      console.error(`Failed to get rated show "${show.id}": `, err);
+
+      return show;
+    }
+  };
+
+  /**
+   * Fetches trending shows for the week.
+   */
+  const fetchTrendingShows = async () => {
+    const { data: unratedTrendingShows } = await searchClient.fetchTrendingShows();
+    const ratedTrendingShows = await Promise.all(unratedTrendingShows.map(maybeFetchRatedTrendingShow));
+
+    setTrendingShows(ratedTrendingShows);
+    setShows(ratedTrendingShows);
+  };
+
   useEffect(() => {
-    fetchShows();
+    fetchTrendingShows();
   }, []);
+
+  useEffect(() => {
+    if (trendingShows.length === 0) { return; }
+
+    fetchShows();
+  }, [trendingShows]);
 
   const infiniteScroll = () => {
     if (!isEndOfPageVisisble || !nextToken) { return; }
@@ -586,7 +758,7 @@ const MainView = ({ authedUser }) => {
             userReview={findUserReview(selectedShow.reviews?.items)}
             isInWatchlist={watchlistIdx !== -1}
             onRatingChange={handleRatingChange}
-            onShowAdded={addShow}
+            onShowAdded={createRatedShow}
             onFavoriteChange={handleFavoriteChange}
             onWatchlistChange={handleWatchlistChange}
             onClose={unselectShow}
@@ -601,17 +773,18 @@ const MainView = ({ authedUser }) => {
           />
         )}
 
-        <Grid container spacing={3} wrap="wrap">
-          {shows.map((show, i) => (
-            <Grid key={i} item xs className={clsx({ [classes.reducedGrow]: shows.length === 2 })}>
-              <ShowCard
-                show={show}
-                userRating={findUserReview(show.reviews?.items)?.rating}
-                onRatingChange={(rating, userRating) => handleRatingChange(show, rating, userRating, i)}
-                onClick={() => selectShow(show, i)}
-              />
+        {view === View.HOME && trendingShows.length !== 0 && (
+          <>
+            <Typography variant="h5" className={classes.sectionHeader}>Trending</Typography>
+            <Grid container spacing={3} wrap="wrap">
+              {shows.slice(0, trendingShows.length).map(renderShowCard)}
             </Grid>
-          ))}
+            <Typography variant="h5" className={classes.sectionHeader}>Recently Rated</Typography>
+          </>
+        )}
+
+        <Grid container spacing={3} wrap="wrap">
+          {shows.slice(view === View.HOME ? trendingShows.length : 0).map(renderShowCard)}
         </Grid>
 
         {loading === Loading.PAGE && isEndOfPageVisisble && (
