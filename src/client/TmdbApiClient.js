@@ -44,6 +44,31 @@ export default class TmdbApiClient {
     return this.requestAll(`/search/multi?query=${title}&api_key=${this.apiKey}`);
   }
 
+  /**
+   * Sets the show's IMDB & TMDB IDs after retreiving the IMDB ID.
+   *
+   * @param {Show} show - show to append imdbId to
+   */
+  async appendImdbId(show) {
+    const imdbId = await this.getImdbId(show.id, show.type);
+
+    show.tmdbId = show.id;
+    show.id = imdbId;
+  }
+
+  /**
+   * Gets trending shows for the week.
+   *
+   * @returns {Promise<Show[]>} trending shows
+   */
+  async getTrendingShows() {
+    const shows = await this.requestAll(`/trending/all/week?api_key=${this.apiKey}`);
+
+    await Promise.all(shows.map((show) => this.appendImdbId(show)));
+
+    return shows;
+  }
+
   async getImdbId(tmdbId, type) {
     const path = `/${type}/${tmdbId}/external_ids?api_key=${this.apiKey}`;
     const { data: { imdb_id } } = await axios.get(`${this.baseUrl}${path}`);
