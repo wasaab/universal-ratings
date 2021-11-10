@@ -8,7 +8,7 @@ export class StaleQueryError extends Error {
   }
 }
 
-export default class SearchClient {
+class SearchClient {
   constructor() {
     this.request = null;
     this.query = null;
@@ -88,9 +88,29 @@ export default class SearchClient {
   }
 
   /**
+   * Fetches trending shows for the week.
+   *
+   * @returns {Promise<Object[]>} trending shows
+   */
+  fetchTrendingShows() {
+    return axios.get('/api/search');
+  }
+
+  /**
+   * Fetches trending shows for the week.
+   *
+   * @returns {Promise<Object[]>} trending shows
+   */
+  fetchShowByIdAndType(id, type, imdbId) {
+    return axios.get(`/api/search`, { params: { id, type, imdbId } });
+  }
+
+  /**
    * Cancels in progress show request via axios CancelToken.
    */
   cancelShowsRequest() {
     this.request?.cancel();
   }
 }
+
+export default new SearchClient();
