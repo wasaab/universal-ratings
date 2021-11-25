@@ -239,7 +239,7 @@ const ShowDetailsModal = ({
               <IconButton disabled={!userReview} onClick={toggleFavorite}>
                 {userReview?.isFavorite ? <FavoriteIcon /> : <FavoriteOutlineIcon />}
               </IconButton>
-              <IconButton disabled={!show.rating} onClick={() => onWatchlistChange(isInWatchlist)}>
+              <IconButton onClick={() => onWatchlistChange(isInWatchlist)}>
                 {isInWatchlist ? <WatchLaterIcon /> : <WatchLaterOutlineIcon />}
               </IconButton>
             </Box>
@@ -266,7 +266,7 @@ const ShowDetailsModal = ({
                 />
               </Grid>
               <Grid item xs style={{ paddingRight: 0 }}>
-                {show.reviews ? (
+                {show.rating ? (
                   <AvatarGroup max={4} className={classes.avatarGroup}>
                     {show.reviews.items.sort((a, b) => b.rating - a.rating).map(({ user: { name, color }, rating }, i) => (
                       <Badge key={i} color="secondary" badgeContent={rating} className={classes.badge}>

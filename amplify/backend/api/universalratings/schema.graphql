@@ -50,6 +50,7 @@ enum ShowType {
 type Show @model
   @auth(rules: [
     { allow: groups, groups: ["Admin"], operations: [update] },
+    { allow: private, operations: [update] },
     { allow: owner, identityClaim: "sub", operations: [create, delete] }
   ])
   @algolia(fields: { include: ["tmdbId", "title", "type", "releaseDate"] })
@@ -57,18 +58,18 @@ type Show @model
   @key(name: "recentlyRated", fields: ["source", "createdAt"], queryField: "recentlyRated")
   @key(name: "showsByType", fields: ["type", "createdAt"], queryField: "showsByType") {
   id: ID!
-  tmdbId: ID!
-  title: String!
-  type: ShowType!
+  tmdbId: ID!               @auth(rules: [{ allow: groups, groups: ["Admin"], operations: [update] }])
+  title: String!            @auth(rules: [{ allow: groups, groups: ["Admin"], operations: [update] }])
+  type: ShowType!           @auth(rules: [{ allow: groups, groups: ["Admin"], operations: [update] }])
   rating: Float!
-  img: String
-  backgroundImg: String
-  releaseDate: AWSDateTime
-  description: String
-  imdbRating: Float
-  rtRating: Int
-  reviews: [Review] @connection(fields: ["id"])
-  providerIds: [Int]
-  createdAt: AWSDateTime
+  img: String               @auth(rules: [{ allow: groups, groups: ["Admin"], operations: [update] }])
+  backgroundImg: String     @auth(rules: [{ allow: groups, groups: ["Admin"], operations: [update] }])
+  releaseDate: AWSDateTime  @auth(rules: [{ allow: groups, groups: ["Admin"], operations: [update] }])
+  description: String       @auth(rules: [{ allow: groups, groups: ["Admin"], operations: [update] }])
+  imdbRating: Float         @auth(rules: [{ allow: groups, groups: ["Admin"], operations: [update] }])
+  rtRating: Int             @auth(rules: [{ allow: groups, groups: ["Admin"], operations: [update] }])
+  reviews: [Review]         @connection(fields: ["id"])
+  providerIds: [Int]        @auth(rules: [{ allow: groups, groups: ["Admin"], operations: [update] }])
+  createdAt: AWSDateTime    @auth(rules: [{ allow: groups, groups: ["Admin"], operations: [update] }])
   source: String!
 }

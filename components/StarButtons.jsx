@@ -78,7 +78,7 @@ const StarButtons = ({ avgRating, userRating, maxRating, onClick, className }) =
   };
 
   const handleMouseLeave = () => {
-    setDisplayedRating(avgRating ?? userRating);
+    setDisplayedRating(avgRating || userRating);
     setNewlyRated(false);
     setHovered(false);
   };

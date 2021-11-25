@@ -7,7 +7,8 @@ import {
   deleteReview,
   deleteShow,
   deleteWatchlistItem,
-  updateReview
+  updateReview,
+  updateShow
 } from '../src/graphql/mutations.js';
 import * as gqlQuery from '../src/graphql/custom-queries';
 import { makeStyles } from '@material-ui/core/styles';
@@ -110,7 +111,9 @@ function updateAvgRating(show) {
 
 function unwrapShowsAndUpdateAvgRatings(shows) {
   return shows.map(({ show }) => {
-    updateAvgRating(show);
+    if (show.rating) {
+      updateAvgRating(show);
+    }
 
     return show;
   });
@@ -281,6 +284,11 @@ const MainView = ({ authedUser }) => {
       showId
     };
     const operation = isRemoval ? deleteWatchlistItem : createWatchlistItem;
+
+    if (!selectedShow.rating && !isRemoval) {
+      createRatedShow(selectedShow, 0);
+      selectedShow.rating = 0;
+    }
 
     try {
       await API.graphql(graphqlOperation(operation, { input: watchlistItem }));
@@ -591,15 +599,21 @@ const MainView = ({ authedUser }) => {
     await maybeAddShowMetadata(show);
 
     const ratedShow = {
-      ...show,
       rating,
-      source: 'UR'
+      source: rating ? 'UR' : 'WL'
     };
 
-    API.graphql(graphqlOperation(createShow, { input: ratedShow }))
-      .catch((err) => {
-        console.error('GraphQL create show failed. ', err);
-      });
+    if (rating && show.rating === 0) { // unrated WL item
+      API.graphql(graphqlOperation(updateShow, { input: { ...ratedShow, id: show.id } }));
+    } else { // unrated show
+      API.graphql(graphqlOperation(createShow, { input: { ...show, ...ratedShow } }))
+        .catch((err) => {
+          console.error('GraphQL create show failed. ', err);
+        });
+    }
+
+    if (!rating) { return; } // Unrated show added to WL
+
     handleRatingChange(show, rating, null, showIdx);
 
     if (null !== showIdx) { return; }
