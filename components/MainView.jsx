@@ -500,7 +500,7 @@ const MainView = ({ authedUser }) => {
    */
   const handleRatingChange = (show, currUserRating, prevUserRating, showIdx = selectedShowIdx) => {
     if (showIdx === null) {
-      showIdx = findSelectedShowIdx(showIdx);
+      showIdx = findSelectedShowIdx();
     }
 
     const isShowInGrid = showIdx !== null;
@@ -589,7 +589,7 @@ const MainView = ({ authedUser }) => {
    */
   const createRatedShow = async (show, rating, showIdx = selectedShowIdx) => {
     if (showIdx === null) {
-      showIdx = findSelectedShowIdx(showIdx);
+      showIdx = findSelectedShowIdx();
 
       if (showIdx !== null) {
         show = shows[showIdx];
@@ -798,7 +798,10 @@ const MainView = ({ authedUser }) => {
         )}
 
         <Grid container spacing={3} wrap="wrap">
-          {shows.slice(view === View.HOME ? trendingShows.length : 0).map(renderShowCard)}
+          {
+            shows.slice(view === View.HOME ? trendingShows.length : 0)
+              .map((show, i) => renderShowCard(show, View.HOME ? trendingShows.length + i : 0))
+          }
         </Grid>
 
         {loading === Loading.PAGE && isEndOfPageVisisble && (
