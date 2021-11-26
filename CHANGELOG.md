@@ -4,6 +4,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.11.0] - 2021-11-26
+### Added
+- unrated shows can be added to watchlist
+- discord webhook posted when shows are added
+
+### Changed
+- Show auth updated in GraphQL schema to allow rating unrated watchlist items
+
+### Fixed
+- show index for non-trending shows while on HOME view
+
 ## [1.10.0] - 2021-11-10
 ### Added
 - trending shows on home view
