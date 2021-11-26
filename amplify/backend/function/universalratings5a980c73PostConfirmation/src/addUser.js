@@ -31,8 +31,8 @@ async function addUser(id, event) {
       'name': { S: event.userName },
       'color': { S: getRandColor() },
       '__typename': { S: 'User' },
-      'createdAt': { S: creationTime }, // Todo: Check if this is automatically added
-      'updatedAt': { S: creationTime }  // Todo: Check if this is automatically added
+      'createdAt': { S: creationTime },
+      'updatedAt': { S: creationTime }
     },
     TableName: process.env.USER_TABLE
   };
