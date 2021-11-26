@@ -1,0 +1,10 @@
+{
+  "lambdaLayers": [],
+  "environmentVariableList": [
+    {
+      "cloudFormationParameterName": "webhookUrl",
+      "environmentVariableName": "WEBHOOK_URL"
+    }
+  ],
+  "secretNames": []
+}
