@@ -1,5 +1,76 @@
 {
-  "key1": "value1",
-  "key2": "value2",
-  "key3": "value3"
+  "Records": [
+      {
+          "eventID": "9dba9dc6c91ab2f07d01259833bb4750",
+          "eventName": "INSERT",
+          "eventVersion": "1.1",
+          "eventSource": "aws:dynamodb",
+          "awsRegion": "us-east-1",
+          "dynamodb": {
+              "ApproximateCreationDateTime": 1637887945,
+              "Keys": {
+                  "id": {
+                      "S": "tt0030848"
+                  }
+              },
+              "NewImage": {
+                  "owner": {
+                      "S": "f0308460-2bae-4761-80f2-e8f155b9bf1d"
+                  },
+                  "img": {
+                      "S": "https://image.tmdb.org/t/p/w342/sY218ldL8mL4n7v9vTEfCJG3Wat.jpg"
+                  },
+                  "releaseDate": {
+                      "S": "1938-04-16T00:00:00.000Z"
+                  },
+                  "__typename": {
+                      "S": "Show"
+                  },
+                  "rating": {
+                      "N": "1"
+                  },
+                  "description": {
+                      "S": "Jim is a test pilot. His wife Ann and best friend Gunner try their best to keep him sober. But the life of a test pilot is anything but safe."
+                  },
+                  "imdbRating": {
+                      "N": "6.8"
+                  },
+                  "source": {
+                      "S": "UR"
+                  },
+                  "rtRating": {
+                      "N": "75"
+                  },
+                  "title": {
+                      "S": "Test Pilot"
+                  },
+                  "type": {
+                      "S": "movie"
+                  },
+                  "createdAt": {
+                      "S": "2021-11-26T00:52:24.798Z"
+                  },
+                  "tmdbId": {
+                      "S": "43155"
+                  },
+                  "backgroundImg": {
+                      "S": "https://image.tmdb.org/t/p/w1280/qyM5OA9UfIlNWocQrI3BH7CZhxo.jpg"
+                  },
+                  "providerIds": {
+                      "L": []
+                  },
+                  "id": {
+                      "S": "tt0030848"
+                  },
+                  "updatedAt": {
+                      "S": "2021-11-26T00:52:24.798Z"
+                  }
+              },
+              "SequenceNumber": "422191300000000014469777587",
+              "SizeBytes": 561,
+              "StreamViewType": "NEW_AND_OLD_IMAGES"
+          },
+          "eventSourceARN": "arn:aws:dynamodb:us-east-1:338281274125:table/Show-pq4plv1hi5dzpehro85tclllym-staging/stream/2021-08-29T18:06:06.270"
+      }
+  ]
 }
