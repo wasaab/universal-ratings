@@ -2,6 +2,20 @@ import axios from 'axios';
 import LruCache from 'lru-cache';
 import AlgoliaApiClient from './AlgoliaApiClient';
 
+/**
+ * Sorts the rated shows before watchlisted, unrated, shows.
+ *
+ * @param {Object} ratedShowsResp - rated shows response from algolia
+ */
+function sortRatedBeforeWatchlist(ratedShowsResp) {
+  ratedShowsResp.hits.sort((a, b) => {
+    if (a.source === 'UR') { return -1; }
+    if (b.source === 'UR') { return 1; }
+
+    return 0;
+  });
+}
+
 export class StaleQueryError extends Error {
   constructor(query) {
     super(`Stale query cancelled: ${query}`);
@@ -63,6 +77,9 @@ class SearchClient {
     const uniqueUnratedShows = unratedShowsResp.data.filter(({ id }) => {   // eslint-disable-line arrow-body-style
       return -1 === ratedShowsResp.hits.findIndex(({ tmdbId }) => tmdbId === id);
     });
+
+    sortRatedBeforeWatchlist(ratedShowsResp);
+
     const shows = ratedShowsResp.hits.concat(uniqueUnratedShows);
 
     this.maybeUpdateCache(title, shows);
@@ -97,9 +114,12 @@ class SearchClient {
   }
 
   /**
-   * Fetches trending shows for the week.
+   * Fetches a show by it's ID and type.
    *
-   * @returns {Promise<Object[]>} trending shows
+   * @param {string} id - the id of the show
+   * @param {type} type - the type of the show ('tv' or 'movie')
+   * @param {imdbId} imdbId - the IMDB ID of the show
+   * @returns {Promise<Object>} the show
    */
   fetchShowByIdAndType(id, type, imdbId) {
     return axios.get(`/api/search`, { params: { id, type, imdbId } });

@@ -32,12 +32,14 @@ const fetchUser = async (id) => {
 const App = () => {
   const [user, setUser] = useState();
 
-  const storeUser = async (authState, authedUser) => {
-    if (user || !authedUser || authState !== AuthState.SignedIn) { return; }
+  const handleAuthStateChange = async (authState, authedUser) => {
+    if (!user && authState === AuthState.SignedIn) { // handle login
+      const userInfo = await fetchUser(authedUser.attributes.sub);
 
-    const userInfo = await fetchUser(authedUser.attributes.sub);
-
-    setUser(userInfo);
+      setUser(userInfo);
+    } else if (user && authState === AuthState.SignIn) { // handle logout
+      setUser(null);
+    }
   };
 
   useEffect(removeJss, []);
@@ -49,7 +51,7 @@ const App = () => {
       </Head>
 
       <AmplifyAuthContainer>
-        <AmplifyAuthenticator handleAuthStateChange={storeUser}>
+        <AmplifyAuthenticator handleAuthStateChange={handleAuthStateChange}>
           <ThemeProvider theme={theme}>
             <CssBaseline />
             {user && <MainView authedUser={user} />}

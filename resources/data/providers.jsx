@@ -7,40 +7,40 @@ import AppleIcon from '../images/apple.svg';
 import PeacockIcon from '../images/peacock.svg';
 
 const providerIdToInfo = {
-  "8": {
-    "name": "netflix",
-    "networkId": 213,
-    "logo": NetflixIcon
+  8: {
+    name: 'netflix',
+    networkId: 213,
+    logo: NetflixIcon
   },
-  "15": {
-    "name": "hulu",
-    "networkId": 453,
-    "logo": HuluIcon
+  15: {
+    name: 'hulu',
+    networkId: 453,
+    logo: HuluIcon
   },
-  "9": {
-    "name": "amazon",
-    "networkId": 1024,
-    "logo": AmazonIcon
+  9: {
+    name: 'amazon',
+    networkId: 1024,
+    logo: AmazonIcon
   },
-  "384": {
-    "name": "hbo",
-    "networkId": 3186,
-    "logo": HboIcon
+  384: {
+    name: 'hbo',
+    networkId: 3186,
+    logo: HboIcon
   },
-  "337": {
-    "name": "disney",
-    "networkId": 2739,
-    "logo": DisneyIcon
+  337: {
+    name: 'disney',
+    networkId: 2739,
+    logo: DisneyIcon
   },
-  "350": {
-    "name": "apple",
-    "networkId": 2552,
-    "logo": AppleIcon
+  350: {
+    name: 'apple',
+    networkId: 2552,
+    logo: AppleIcon
   },
-  "386": {
-    "name": "peacock",
-    "networkId": 3353,
-    "logo": PeacockIcon
+  386: {
+    name: 'peacock',
+    networkId: 3353,
+    logo: PeacockIcon
   }
 };
 
