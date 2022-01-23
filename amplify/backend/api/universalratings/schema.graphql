@@ -53,7 +53,7 @@ type Show @model
     { allow: private, operations: [update] },
     { allow: owner, identityClaim: "sub", operations: [create, delete] }
   ])
-  @algolia(fields: { include: ["tmdbId", "title", "type", "releaseDate"] })
+  @algolia(fields: { include: ["tmdbId", "title", "type", "releaseDate", "source"] })
   @key(fields: ["id"])
   @key(name: "recentlyRated", fields: ["source", "createdAt"], queryField: "recentlyRated")
   @key(name: "showsByType", fields: ["type", "createdAt"], queryField: "showsByType") {

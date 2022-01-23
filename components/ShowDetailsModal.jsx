@@ -111,7 +111,8 @@ const useStyles = makeStyles((theme) => ({
   providerLogosContainer: {
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    gap: 8
   },
   singleProvider: {
     justifyContent: 'space-evenly'
