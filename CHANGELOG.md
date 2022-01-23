@@ -4,6 +4,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.12.0] - 2022-01-23
+### Added
+- Show's source field added to algolia
+- rated shows sorted before unrated watchlist shows in search results
+- discord webhook posted to when a watchlisted show is first rated
+- new functionality added to readme
+
+### Changed
+- search results grouped by source prop instead of id to handle watchlist items
+- @aws-amplify/ui-react dep upgraded (v1.2.8 --> v1.2.26)
+
+### Fixed
+- page scrolled to top when view changed to HOME
+- login/logout flow handles double event bug with AmplifyAuthenticator
+
 ## [1.11.0] - 2021-11-26
 ### Added
 - unrated shows can be added to watchlist
