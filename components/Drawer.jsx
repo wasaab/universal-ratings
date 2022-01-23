@@ -113,7 +113,6 @@ const Drawer = ({ open, width, onClose, onSelect }) => {
         <DrawerMenuItem view={View.WATCHED} LeftIcon={VisibilityIcon} />
       </List>
 
-      {/* Todo: TMDB requires this logo and msg to be on about page, not main view. */}
       <div title="This site uses the TMDB API for show details but is not endorsed or certified by TMDB">
         <TmdbIcon className={classes.tmdbIcon} />
       </div>

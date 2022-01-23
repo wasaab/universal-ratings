@@ -192,6 +192,7 @@ const MainView = ({ authedUser }) => {
         const uniqueShows = updatedShows.filter((show) => !isTrending(show));
 
         setShows([...trendingShows, ...uniqueShows]);
+        window.scrollTo(0, 0);
       } else {
         setShows(updatedShows);
         window.scrollTo(0, 0);
@@ -527,7 +528,10 @@ const MainView = ({ authedUser }) => {
     try {
       const { data } = await API.graphql(graphqlOperation(gqlQuery.getShow, { id: show.objectID }));
 
-      updateAvgRating(data.getShow);
+      if (show.rating) {
+        updateAvgRating(data.getShow);
+      }
+
       setSelectedShow(data.getShow);
     } catch (err) {
       console.error(`Failed to get rated show "${show.objectID}": `, err);

@@ -261,7 +261,7 @@ const TitleSearchBar = ({ className, onSubmit }) => {
             getOptionLabel={() => ''} // clears & focuses input on selection
             options={options}
             filterOptions={(unfilteredOptions) => unfilteredOptions}
-            groupBy={({ id }) => (id ? 'Unrated' : 'Rated')}
+            groupBy={({ source }) => (source === 'UR' ? 'Rated' : 'Unrated')}
             loading={isLoading}
             renderInput={renderInput}
             renderOption={renderOption}
