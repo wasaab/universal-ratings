@@ -24,7 +24,7 @@
         "ShowAddedDiscordWebhookPublisher": {
           "webhookUrl": "WEBHOOK_URL_VALUE",
           "deploymentBucketName": "amplify-amplify6604b332b57b4-staging-21636-deployment",
-          "s3Key": "amplify-builds/ShowAddedDiscordWebhookPublisher-6a32492b4a3670535548-build.zip"
+          "s3Key": "amplify-builds/ShowAddedDiscordWebhookPublisher-79594879447430417348-build.zip"
         }
       }
     }
