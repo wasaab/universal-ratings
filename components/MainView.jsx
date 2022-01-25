@@ -610,7 +610,9 @@ const MainView = ({ authedUser }) => {
     if (rating && show.rating === 0) { // unrated WL item
       API.graphql(graphqlOperation(updateShow, { input: { ...ratedShow, id: show.id } }));
     } else { // unrated show
-      API.graphql(graphqlOperation(createShow, { input: { ...show, ...ratedShow } }))
+      const { reviews, updatedAt, ...input } = { ...show, ...ratedShow };
+
+      API.graphql(graphqlOperation(createShow, { input }))
         .catch((err) => {
           console.error('GraphQL create show failed. ', err);
         });
@@ -804,7 +806,7 @@ const MainView = ({ authedUser }) => {
         <Grid container spacing={3} wrap="wrap">
           {
             shows.slice(view === View.HOME ? trendingShows.length : 0)
-              .map((show, i) => renderShowCard(show, View.HOME ? trendingShows.length + i : 0))
+              .map((show, i) => renderShowCard(show, view === View.HOME ? trendingShows.length + i : i))
           }
         </Grid>
 
