@@ -17,6 +17,7 @@ export const recentlyRated = /* GraphQL */ `
     ) {
       items {
         id
+        tmdbId
         title
         type
         rating
@@ -67,6 +68,7 @@ export const showsByType = /* GraphQL */ `
     ) {
       items {
         id
+        tmdbId
         title
         type
         rating
@@ -102,6 +104,7 @@ export const getShow = /* GraphQL */ `
   query GetShow($id: ID!) {
     getShow(id: $id) {
       id
+      tmdbId
       title
       type
       rating
@@ -150,6 +153,7 @@ export const reviewsByUser = /* GraphQL */ `
       items {
         show {
           id
+          tmdbId
           title
           type
           rating
@@ -189,6 +193,7 @@ export const getUser = /* GraphQL */ `
         items {
           show {
             id
+            tmdbId
             title
             type
             rating
