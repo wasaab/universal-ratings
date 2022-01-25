@@ -6,8 +6,8 @@ newReleaseThreshold.setMonth(newReleaseThreshold.getMonth() - 3);
 
 export default class View {
   static HOME = new View('Home', ...recentlyRatedArgs);
-  static TV = new View('TV Shows', 'showsByType', { type: 'tv', source });
-  static MOVIES = new View('Movies', 'showsByType', { type: 'movie', source });
+  static TV = new View('TV Shows', 'showsByType', { type: 'tv', filter: { source: { eq: source } } });
+  static MOVIES = new View('Movies', 'showsByType', { type: 'movie', filter: { source: { eq: source } } });
   static FAVORITES = new View('Favorites', 'reviewsByUser', { filter: { isFavorite: { eq: true } } });
   static WATCHLIST = new View('Watchlist');
   static WATCHED = new View('Watched', 'reviewsByUser');
