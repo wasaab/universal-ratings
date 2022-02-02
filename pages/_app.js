@@ -8,8 +8,8 @@ import { AuthState } from '@aws-amplify/ui-components';
 import amplify from 'aws-amplify';
 import amplifyConfig from '../src/aws-exports';
 import MainView from '../components/MainView';
-import theme from '../src/theme';
-import '../styles/global.css';
+import theme from '../resources/styles/theme';
+import '../resources/styles/global.css';
 
 /**
  * Remove the server-side injected CSS, as it will be injected client-side.
