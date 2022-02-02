@@ -4,6 +4,31 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [UNRELEASED] - 2022-##-##
+### Changed
+- ShowCardGrid extracted from MainView
+- ScrollAwareProgress extracted from MainView
+- Loading class extracted from MainView
+- watchlist items sorted by createdAt date
+
+### Fixed
+- movies added while on MOVIES view shown
+- prevent createShow call for unrated watchlist shows
+
+## [1.12.2] - 2022-01-24
+### Fixed
+- source filter for showsByType request
+
+## [1.12.1] - 2022-01-24
+### Changed
+- readme feature section updated for search and auth
+- tmdbId returned from custom GraphQL queries
+
+### Fixed
+- show creation unrecognized fields
+- source 'UR' for getShows request to omit WL items
+- showIdx determination for all views
+
 ## [1.12.0] - 2022-01-23
 ### Added
 - Show's source field added to algolia

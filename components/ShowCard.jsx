@@ -7,8 +7,8 @@ import {
   CardContent,
   Typography,
 } from '@material-ui/core';
-import StarButtons from './StarButtons';
 import Image from 'next/image';
+import StarButtons from './StarButtons';
 
 const useStyles = makeStyles({
   root: {

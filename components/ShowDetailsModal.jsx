@@ -22,7 +22,7 @@ import { AvatarGroup } from '@material-ui/lab';
 import Image from 'next/image';
 import API, { graphqlOperation } from '@aws-amplify/api';
 import { updateReview } from '../src/graphql/mutations';
-import { createShow } from '../src/graphql/custom-mutations';
+import UserAvatar from './UserAvatar';
 import StarButtons from './StarButtons';
 import LabelledIcon from './LabelledIcon';
 import JustWatchIcon from '../resources/images/justWatch.svg';
@@ -30,7 +30,6 @@ import ImdbIcon from '../resources/images/imdb.svg';
 import RtFreshIcon from '../resources/images/rt.svg';
 import RtRottenIcon from '../resources/images/rt-rotten.svg';
 import providerIdToInfo from '../resources/data/providers';
-import UserAvatar from './UserAvatar';
 
 const avatarSize = 33;
 const backdropWidths = [300, 780, 1280];

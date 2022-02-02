@@ -22,7 +22,7 @@
 
 ## Features
 
-+ Federated, live, search for rated and unrated shows with autosuggest, fuzzy matching, and result grouping
++ Federated, live, search for rated/unrated shows with fuzzy matching and result grouping
   + Rated shows retrieved from [Algolia](https://www.algolia.com/products/search-and-discovery/hosted-search-api/)
   + Unrated shows retrieved from [TMDB API](https://developers.themoviedb.org/3/)
 + Client and server side caching of search results
@@ -41,6 +41,7 @@
   + Fetches paginated shows from GraphQL when user scrolls to end of page
 + AWS Cognito user auth
   + signup, login, and logout
+  + GraphQL read/write auth
 + Views for trending shows, recently rated, recently released, tv, movies, watchlist, watched, and favorites.
 + User profile with customizable avatar and display name
 + Posts to a Discord webhook when a show is first rated
