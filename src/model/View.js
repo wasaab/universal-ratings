@@ -1,8 +1,18 @@
 const source = 'UR';
-const recentlyRatedArgs = ['recentlyRated', { source }];
-const newReleaseThreshold = new Date();
+const recentlyRatedArgs = ['recentlyRated', { source }, true];
 
-newReleaseThreshold.setMonth(newReleaseThreshold.getMonth() - 3);
+function buildRecentlyReleasedQueryParams() {
+  const newReleaseThreshold = new Date();
+
+  newReleaseThreshold.setMonth(newReleaseThreshold.getMonth() - 3);
+
+  return {
+    source,
+    filter: {
+      releaseDate: { gt: newReleaseThreshold.toISOString() }
+    }
+  };
+}
 
 export default class View {
   static HOME = new View('Home', ...recentlyRatedArgs);
@@ -10,22 +20,20 @@ export default class View {
   static MOVIES = new View('Movies', 'showsByType', { type: 'movie', filter: { source: { eq: source } } });
   static FAVORITES = new View('Favorites', 'reviewsByUser', { filter: { isFavorite: { eq: true } } });
   static WATCHLIST = new View('Watchlist');
-  static WATCHED = new View('Watched', 'reviewsByUser');
+  static WATCHED = new View('Watched', 'reviewsByUser', {}, true);
   static RECENTLY_RATED = new View('Recently Rated', ...recentlyRatedArgs);
-  static RECENTLY_RELEASED = new View(
-    'Recently Released',
-    recentlyRatedArgs[0],
-    {
-      ...recentlyRatedArgs[1],
-      filter: { releaseDate: { gt: newReleaseThreshold.toISOString() } }
-    }
-  );
+  static RECENTLY_RELEASED = new View('Recently Released', recentlyRatedArgs[0], buildRecentlyReleasedQueryParams());
 
-  constructor(label, queryName, queryParams = {}) {
+  constructor(label, queryName, queryParams = {}, includeAdded) {
     this.label = label;
     this.query = {
       name: queryName,
       params: queryParams
     };
+    this.includeAdded = includeAdded;
+  }
+
+  static fromShowType(showType) {
+    return showType === 'tv' ? this.TV : this.MOVIES;
   }
 }

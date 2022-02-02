@@ -4,9 +4,6 @@
   WEBHOOK_URL
 Amplify Params - DO NOT EDIT */
 
-// Todo: I mapped convertIndentToSpaces to Ctrl + S so it fixes them on save. it was looking weird mixed tabs/spaces in github.
-// Todo: Save all my files to convert them in some branch.
-
 const axios = require('axios');
 
 function buildRatingDesc(imdbRating, rtRating) {
