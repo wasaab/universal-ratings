@@ -217,6 +217,7 @@ export const getUser = /* GraphQL */ `
               nextToken
             }
           }
+          createdAt
         }
         nextToken
       }

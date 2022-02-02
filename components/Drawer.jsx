@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import {
@@ -22,7 +22,7 @@ import {
   Home as HomeIcon
 } from '@material-ui/icons/';
 import TmdbIcon from '../resources/images/tmdb.svg';
-import View from '../src/model/View';
+import { View } from '../src/model';
 
 const useStyles = makeStyles((theme) => ({
   drawer: ({ width }) => ({
@@ -65,7 +65,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Drawer = ({ open, width, onClose, onSelect }) => {
   const classes = useStyles({ width });
-  const drawerStateClass = open ? classes.drawerOpen : classes.drawerClose;
+  const drawerStateClass = useMemo(() => (open ? classes.drawerOpen : classes.drawerClose), [open]);
   const [selectedView, setSelectedView] = useState(View.HOME);
 
   const handleSelection = (title) => {
@@ -74,7 +74,12 @@ const Drawer = ({ open, width, onClose, onSelect }) => {
   };
 
   const DrawerMenuItem = ({ view, LeftIcon }) => (
-    <ListItem button key={view.label} onClick={() => handleSelection(view)} disabled={view === selectedView}>
+    <ListItem
+      button
+      key={view.label}
+      onClick={() => handleSelection(view)}
+      disabled={view === selectedView}
+    >
       <ListItemIcon>
         <LeftIcon />
       </ListItemIcon>
