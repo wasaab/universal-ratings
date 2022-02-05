@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [UNRELEASED] - 2022-##-##
 ### Fixed
 - selected search result cleared between searches
+- rating not highlighted after removing review
 
 ## [1.12.3] - 2022-02-01
 ### Changed
