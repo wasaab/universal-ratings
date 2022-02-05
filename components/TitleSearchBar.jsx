@@ -31,9 +31,11 @@ const useStyles = makeStyles((theme) => ({
       borderRadius: 10,
       border: '1px solid rgba(255, 255, 255, 0.18)',
       '&:after': {
-        marginLeft: 176,
         opacity: 0.8,
-        content: `url("${algoliaLogoUrl}")`
+        content: `url("${algoliaLogoUrl}")`,
+        display: 'flex',
+        justifyContent: 'right',
+        marginRight: 19,
       }
     },
     '& .MuiAutocomplete-option': {
@@ -259,6 +261,7 @@ const TitleSearchBar = ({ className, onSubmit }) => {
       onChange={handleSelection}
       getOptionSelected={isOptionSelected}
       getOptionLabel={() => ''} // clears & focuses input on selection
+      value={null} // prevents selected option persistence after blur
       options={options}
       filterOptions={(unfilteredOptions) => unfilteredOptions}
       groupBy={({ source }) => (source === 'UR' ? 'Rated' : 'Unrated')}
