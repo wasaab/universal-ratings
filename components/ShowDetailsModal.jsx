@@ -181,8 +181,10 @@ const ShowDetailsModal = ({
     setIsTooltipOpen(!isTooltipOpen);
   };
 
+  const isDeletion = (updatedUserRating) => updatedUserRating === currUserRating;
+
   const rateShow = (updatedUserRating) => {
-    setCurrUserRating(updatedUserRating);
+    setCurrUserRating(isDeletion(updatedUserRating) ? null : updatedUserRating);
 
     if (show.rating) {
       onRatingChange(show, updatedUserRating, userReview?.rating);
