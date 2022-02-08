@@ -19,6 +19,7 @@ import {
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { searchClient, StaleQueryError } from '../src/client';
 import algoliaLogoUrl from '../resources/images/algolia.svg';
+import { ShowType } from '../src/model';
 
 const useStyles = makeStyles((theme) => ({
   popper: {
@@ -98,11 +99,6 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const typeToIcon = {
-  movie: MovieIcon,
-  tv: TvIcon
-};
-
 const TitleSearchBar = ({ className, onSubmit }) => {
   const classes = useStyles();
   const [isOpen, setIsOpen] = useState(false);
@@ -113,7 +109,6 @@ const TitleSearchBar = ({ className, onSubmit }) => {
     try {
       const shows = await searchClient.fetchShows(title);
 
-      console.log(`show options for "${title}": `, shows);
       setOptions(shows);
     } catch (err) {
       if (axios.isCancel(err) || err instanceof StaleQueryError) { return; }
@@ -209,7 +204,7 @@ const TitleSearchBar = ({ className, onSubmit }) => {
   };
 
   const renderOption = (option, { inputValue }) => {
-    const TypeIcon = typeToIcon[option.type];
+    const TypeIcon = ShowType.toIcon(option.type);
 
     return (
       <div className={classes.option}>
