@@ -9,6 +9,7 @@ import {
 } from '@material-ui/core';
 import Image from 'next/image';
 import StarButtons from './StarButtons';
+import { ShowType } from '../src/model';
 
 const useStyles = makeStyles({
   root: {
@@ -27,13 +28,21 @@ const useStyles = makeStyles({
     paddingBottom: 4,
     display: '-webkit-box',
     overflow: 'hidden',
-    '-webkit-line-clamp': 2,
-    '-webkit-box-orient': 'vertical'
+    lineClamp: 2,
+    boxOrient: 'vertical',
+    position: 'relative'
+  },
+  showTypeIcon: {
+    position: 'absolute',
+    right: 5,
+    top: 3,
+    fontSize: 18
   }
 });
 
 const ShowCard = ({ show, userRating, onRatingChange, onClick }) => {
   const classes = useStyles();
+  const TypeIcon = ShowType.toTwoToneIcon(show.type);
 
   return (
     <Card className={classes.root}>
@@ -51,6 +60,7 @@ const ShowCard = ({ show, userRating, onRatingChange, onClick }) => {
           )}
         </div>
         <CardContent className={classes.content}>
+          <TypeIcon className={classes.showTypeIcon} />
           <Typography variant="h6" component="h6">
             {show.title}
           </Typography>

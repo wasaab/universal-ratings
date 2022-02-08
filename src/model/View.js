@@ -1,3 +1,5 @@
+import ShowType from './ShowType';
+
 const source = 'UR';
 const recentlyRatedArgs = ['recentlyRated', { source }, true];
 
@@ -16,8 +18,8 @@ function buildRecentlyReleasedQueryParams() {
 
 export default class View {
   static HOME = new View('Home', ...recentlyRatedArgs);
-  static TV = new View('TV Shows', 'showsByType', { type: 'tv', filter: { source: { eq: source } } });
-  static MOVIES = new View('Movies', 'showsByType', { type: 'movie', filter: { source: { eq: source } } });
+  static TV = new View('TV Shows', 'showsByType', { type: ShowType.TV, filter: { source: { eq: source } } });
+  static MOVIES = new View('Movies', 'showsByType', { type: ShowType.MOVIE, filter: { source: { eq: source } } });
   static FAVORITES = new View('Favorites', 'reviewsByUser', { filter: { isFavorite: { eq: true } } });
   static WATCHLIST = new View('Watchlist');
   static WATCHED = new View('Watched', 'reviewsByUser', {}, true);
@@ -34,6 +36,6 @@ export default class View {
   }
 
   static fromShowType(showType) {
-    return showType === 'tv' ? this.TV : this.MOVIES;
+    return showType === ShowType.TV ? this.TV : this.MOVIES;
   }
 }

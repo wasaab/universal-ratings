@@ -30,6 +30,7 @@ import ImdbIcon from '../resources/images/imdb.svg';
 import RtFreshIcon from '../resources/images/rt.svg';
 import RtRottenIcon from '../resources/images/rt-rotten.svg';
 import providerIdToInfo from '../resources/data/providers';
+import { ShowType } from '../src/model';
 
 const avatarSize = 33;
 const backdropWidths = [300, 780, 1280];
@@ -174,6 +175,7 @@ const ShowDetailsModal = ({
   const classes = useStyles(show);
   const [currUserRating, setCurrUserRating] = useState(userReview?.rating);
   const [isTooltipOpen, setIsTooltipOpen] = useState(false);
+  const TypeIcon = ShowType.toTwoToneIcon(show.type);
 
   const toggleTooltip = () => {
     if (show.rating || currUserRating) { return; }
@@ -249,9 +251,12 @@ const ShowDetailsModal = ({
 
           <Grid item container xs={7} direction="column" justifyContent="space-between" wrap="nowrap">
             <Grid item xs>
-              <Typography variant="subtitle2" className={classes.year}>
-                {show.releaseDate.slice(0, 4)}
-              </Typography>
+              <Box display="flex" alignItems="center" gridGap={4}>
+                <TypeIcon fontSize="small" />
+                <Typography variant="subtitle2" className={classes.year}>
+                  {show.releaseDate.slice(0, 4)}
+                </Typography>
+              </Box>
               <Typography variant="h4" gutterBottom>
                 {show.title}
               </Typography>
