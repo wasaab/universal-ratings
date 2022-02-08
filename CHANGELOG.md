@@ -6,6 +6,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [UNRELEASED] - 2022-##-##
 
+## [1.13.0] - 2022-02-07
+### Added
+- show type icon added to ShowCard and ShowDetailsModal
+
+### Fixed
+- selected search result cleared between searches
+- rating not highlighted after removing review
+
 ## [1.12.3] - 2022-02-01
 ### Changed
 - ShowCardGrid extracted from MainView

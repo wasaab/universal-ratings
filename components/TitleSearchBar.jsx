@@ -19,6 +19,7 @@ import {
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { searchClient, StaleQueryError } from '../src/client';
 import algoliaLogoUrl from '../resources/images/algolia.svg';
+import { ShowType } from '../src/model';
 
 const useStyles = makeStyles((theme) => ({
   popper: {
@@ -31,9 +32,11 @@ const useStyles = makeStyles((theme) => ({
       borderRadius: 10,
       border: '1px solid rgba(255, 255, 255, 0.18)',
       '&:after': {
-        marginLeft: 176,
         opacity: 0.8,
-        content: `url("${algoliaLogoUrl}")`
+        content: `url("${algoliaLogoUrl}")`,
+        display: 'flex',
+        justifyContent: 'right',
+        marginRight: 19,
       }
     },
     '& .MuiAutocomplete-option': {
@@ -96,11 +99,6 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const typeToIcon = {
-  movie: MovieIcon,
-  tv: TvIcon
-};
-
 const TitleSearchBar = ({ className, onSubmit }) => {
   const classes = useStyles();
   const [isOpen, setIsOpen] = useState(false);
@@ -111,7 +109,6 @@ const TitleSearchBar = ({ className, onSubmit }) => {
     try {
       const shows = await searchClient.fetchShows(title);
 
-      console.log(`show options for "${title}": `, shows);
       setOptions(shows);
     } catch (err) {
       if (axios.isCancel(err) || err instanceof StaleQueryError) { return; }
@@ -207,7 +204,7 @@ const TitleSearchBar = ({ className, onSubmit }) => {
   };
 
   const renderOption = (option, { inputValue }) => {
-    const TypeIcon = typeToIcon[option.type];
+    const TypeIcon = ShowType.toIcon(option.type);
 
     return (
       <div className={classes.option}>
@@ -259,6 +256,7 @@ const TitleSearchBar = ({ className, onSubmit }) => {
       onChange={handleSelection}
       getOptionSelected={isOptionSelected}
       getOptionLabel={() => ''} // clears & focuses input on selection
+      value={null} // prevents selected option persistence after blur
       options={options}
       filterOptions={(unfilteredOptions) => unfilteredOptions}
       groupBy={({ source }) => (source === 'UR' ? 'Rated' : 'Unrated')}
