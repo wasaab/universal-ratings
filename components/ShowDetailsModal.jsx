@@ -115,7 +115,7 @@ const useStyles = makeStyles((theme) => ({
     gap: 8
   },
   singleProvider: {
-    justifyContent: 'space-evenly'
+    justifyContent: 'center'
   },
   rateButton: {
     border: '1px solid rgb(255, 180, 0)',
