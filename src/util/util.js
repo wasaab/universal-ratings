@@ -24,6 +24,8 @@ function buildReview(rating, name, color) {
 export function updateAvgRating(show) {
   const reviews = show.reviews.items;
 
+  if (reviews.length === 0) { return; }
+
   show.rating = reviews.reduce((sum, { rating }) => sum + rating, 0) / reviews.length;
 }
 
@@ -144,7 +146,7 @@ export const findUserReview = (reviews, name) => reviews?.find((review) => revie
  */
 export const updateUserReviews = (targetShows, prevName, name, color) => {
   targetShows.forEach((show) => {
-    const review = findUserReview(show.reviews.items, prevName);
+    const review = findUserReview(show.reviews?.items, prevName);
 
     if (!review) { return; }
 
