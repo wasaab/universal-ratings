@@ -77,7 +77,9 @@ const MainView = ({ authedUser }) => {
     return queryParams;
   };
 
-  const isTrending = ({ id }) => -1 !== trendingShows.findIndex((show) => show.id === id);
+
+  const findTrendingShowIdx = ({ id }) => trendingShows.findIndex((show) => show.id === id);
+  const isTrending = (show) => -1 !== findTrendingShowIdx(show);
 
   /**
    * Fetches shows for the provided view.
@@ -144,9 +146,11 @@ const MainView = ({ authedUser }) => {
     const isShowInGrid = selectedShowIdx !== null;
     const updatedShows = isShowInGrid ? [...shows] : [selectedShow, ...shows];
     const updatedShow = updatedShows[selectedShowIdx ?? 0];
+    const userReview = util.findUserReview(updatedShow.reviews.items, user.name);
 
-    util.findUserReview(updatedShow.reviews.items, user.name).isFavorite = isFavorite;
+    userReview.isFavorite = isFavorite;
     updateWatchlist(updatedShow);
+    maybeUpdateTrending(updatedShow);
 
     if (view === View.FAVORITES && !isShowInGrid) {
       setSelectedShowIdx(0);
@@ -192,16 +196,16 @@ const MainView = ({ authedUser }) => {
    * @param {boolean} isRemoval - whether or not this is a watchlist removal
    * @param {string} showId - the id of the show being added/removed from watchlist
    */
-  const handleWatchlistChange = async (isRemoval, showId = selectedShow.id) => {
+  const handleWatchlistChange = async (isRemoval, showId = selectedShow.id, show = selectedShow) => {
     const watchlistItem = {
       userId: user.id,
       showId
     };
     const operation = isRemoval ? deleteWatchlistItem : createWatchlistItem;
 
-    if (isNaN(selectedShow.rating) && !isRemoval) {
+    if (isNaN(show.rating) && !isRemoval) {
       createRatedShow(selectedShow, 0);
-      selectedShow.rating = 0;
+      show.rating = 0;
     }
 
     try {
@@ -232,6 +236,32 @@ const MainView = ({ authedUser }) => {
     setWatchlist([...watchlist]);
   };
 
+  const resetTrendingShow = (show) => {
+    delete show.rating;
+    delete show.reviews;
+    delete show.updatedAt;
+  };
+
+  /**
+   * Updates the trending shows if the updated show is trending.
+   *
+   * @param {Object} updatedShow - the updated show
+   */
+  const maybeUpdateTrending = (updatedShow, isReset) => {
+    if (view === View.HOME) { return; }
+
+    const trendingShowIdx = findTrendingShowIdx(updatedShow);
+
+    if (trendingShowIdx === -1) { return; }
+
+    if (isReset) {
+      resetTrendingShow(updatedShow);
+    }
+
+    trendingShows[trendingShowIdx] = updatedShow;
+    setTrendingShows([...trendingShows]);
+  };
+
   /**
    * Updates shows on rating change.
    *
@@ -242,6 +272,7 @@ const MainView = ({ authedUser }) => {
   const updateShows = (show, isShowInGrid, userRating) => {
     util.updateReviewsAndAvgRating(show, userRating, user);
     updateWatchlist(show);
+    maybeUpdateTrending(show);
 
     if (isShowInGrid) {
       setShows([...shows]);
@@ -261,8 +292,7 @@ const MainView = ({ authedUser }) => {
    */
   const removeOrResetShowInGrid = (show, showIdx) => {
     if (view === View.HOME && showIdx < trendingShows.length) {
-      delete show.rating;
-      delete show.reviews;
+      resetTrendingShow(show);
     } else {
       shows.splice(showIdx, 1);
     }
@@ -282,9 +312,11 @@ const MainView = ({ authedUser }) => {
 
       await API.graphql(graphqlOperation(deleteShow, { input }));
 
-      if (watchlistIdx !== -1 || findWatchlistIdx(show.id) !== -1) {
-        handleWatchlistChange(true, show.id);
+      if (watchlistIdx !== -1 || (!selectedShow && findWatchlistIdx(show.id) !== -1)) {
+        handleWatchlistChange(true, show.id, show);
       }
+
+      maybeUpdateTrending(show, true);
 
       if (showIdx !== -1) {
         removeOrResetShowInGrid(show, showIdx);
@@ -359,11 +391,10 @@ const MainView = ({ authedUser }) => {
 
     if (currUserRating === prevUserRating) {
       removeReview(show, showIdx);
-      return;
+    } else {
+      util.createShowReview(show, currUserRating, !prevUserRating, user.id);
+      updateShows(show, isShowInGrid, currUserRating);
     }
-
-    util.createShowReview(show, currUserRating, !prevUserRating, user.id);
-    updateShows(show, isShowInGrid, currUserRating);
   };
 
   /**

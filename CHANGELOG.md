@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - show type icon styling
 
+### Fixed
+- trending show updates persisted for all views
+- watchlist show removal via ShowCard
+
 ## [1.13.0] - 2022-02-07
 ### Added
 - show type icon added to ShowCard and ShowDetailsModal
