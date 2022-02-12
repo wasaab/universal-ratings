@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react';
 import clsx from 'clsx';
-import { Box, IconButton, makeStyles } from '@material-ui/core';
+import { Box, IconButton, makeStyles, Tooltip } from '@material-ui/core';
 import {
   Star as StarIcon,
   StarOutline as StarOutlineIcon,
   StarHalf as StarHalfIcon,
   Remove as RemoveIcon
 } from '@material-ui/icons';
+import { RatingTip } from '../src/model';
 
 const useStyles = makeStyles({
   star: {
@@ -37,6 +38,7 @@ const StarButtons = ({ avgRating, userRating, maxRating, onClick, className }) =
   const [displayedRating, setDisplayedRating] = useState(avgRating ?? userRating);
   const [newlyRated, setNewlyRated] = useState(false);
   const [hovered, setHovered] = useState(false);
+  const ratingTips = RatingTip.getTipsForRatingScale(maxRating);
 
   useEffect(() => {
     if (avgRating === displayedRating) { return; }
@@ -87,22 +89,29 @@ const StarButtons = ({ avgRating, userRating, maxRating, onClick, className }) =
     <Box className={className} display="flex" flexDirection="row" onMouseLeave={handleMouseLeave}>
       {buildStars().map((Star, i) => {
         const rating = i + 1;
-        const isHoveredOnUserRating = hovered && userRating === rating && displayedRating === rating;
+        const isRemovableRating = userRating === rating && !newlyRated && Boolean(avgRating);
+        const isHoveredOnRating = hovered && displayedRating === rating;
 
         return (
-          <IconButton
+          <Tooltip
             key={i}
-            size="small"
-            className={clsx(classes.button, { [classes.userRating]: rating === userRating })}
-            onMouseEnter={() => handleMouseEnter(rating)}
-            onClick={() => handleRatingClick(rating)}
+            title={isRemovableRating ? RatingTip.DELETE_REVIEW : ratingTips[i]}
+            enterDelay={500}
+            enterNextDelay={500}
           >
-            {isHoveredOnUserRating && !newlyRated && avgRating ? (
-              <RemoveIcon className={classes.removeRatingIcon} />
-            ) : (
-              <Star className={Star === StarOutlineIcon ? classes.outlinedStar : classes.star} />
-            )}
-          </IconButton>
+            <IconButton
+              size="small"
+              className={clsx(classes.button, { [classes.userRating]: rating === userRating })}
+              onMouseEnter={() => handleMouseEnter(rating)}
+              onClick={() => handleRatingClick(rating)}
+            >
+              {isRemovableRating && isHoveredOnRating ? (
+                <RemoveIcon className={classes.removeRatingIcon} />
+              ) : (
+                <Star className={Star === StarOutlineIcon ? classes.outlinedStar : classes.star} />
+              )}
+            </IconButton>
+          </Tooltip>
         );
       })}
     </Box>

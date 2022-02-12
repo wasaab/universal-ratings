@@ -36,7 +36,8 @@ const useStyles = makeStyles({
     position: 'absolute',
     right: 5,
     top: 3,
-    fontSize: 18
+    fontSize: 18,
+    opacity: 0.8
   }
 });
 
