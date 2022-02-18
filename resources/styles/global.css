@@ -1,33 +1,20 @@
-html {
+body {
   height: 100%;
   width: 100%;
   background-attachment: fixed;
-  background-color:#bf0fff;
-  background-image: radial-gradient(at 1% 0%, hsla(276,69%,51%,1) 0, transparent 20%),
-    radial-gradient(at 95% 92%, hsla(296,88%,40%,1) 0, transparent 58%),
-    radial-gradient(at 32% 35%, hsla(296,83%,65%,1) 0, transparent 48%),
-    radial-gradient(at 2% 4%, hsla(215,87%,64%,1) 0, transparent 50%),
-    radial-gradient(at 88% 9%, hsla(296,78%,75%,1) 0, transparent 50%),
-    radial-gradient(at 37% 12%, hsla(307,87%,34%,1) 0, transparent 50%),
-    radial-gradient(at 77% 83%, hsla(184,98%,65%,1) 0, transparent 50%),
-    radial-gradient(at 0% 47%, hsla(281,52%,36%,1) 0, transparent 50%),
-    radial-gradient(at 67% 75%, hsla(242,27%,52%,1) 0, transparent 50%),
-    radial-gradient(at 49% 35%, hsla(195,38%,56%,1) 0, transparent 50%);
-}
-
-body {
-  background-color: transparent !important; /* dark reader support */
-}
-
-header {
-  background: linear-gradient(to right, #E100FF, #7F00FF);
 }
 
 .MuiPaper-root.MuiPaper-rounded,
 .MuiPaper-root.MuiDrawer-paper {
-  background-color: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.1);
   backdrop-filter: blur(10px);
+}
+
+.MuiPaper-root.MuiPaper-rounded {
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.MuiInputLabel-marginDense:not(.MuiInputLabel-shrink) {
+  transform: translate(0, 20px) scale(1);
 }
 
 *::-webkit-scrollbar {
@@ -37,12 +24,4 @@ header {
   background-color: rgba(255,255,255,0.06);
   border: 1px solid rgba(255,255,255,0.1);
   backdrop-filter: blur(10px);
-}
-*::-webkit-scrollbar-thumb {
-  background-color: rgba(127, 0, 255, 0.8);
-  border-radius: 4px;
-}
-
-.MuiInputLabel-marginDense:not(.MuiInputLabel-shrink) {
-  transform: translate(0, 20px) scale(1);
 }

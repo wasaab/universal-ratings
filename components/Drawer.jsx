@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState } from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import {
@@ -65,8 +65,8 @@ const useStyles = makeStyles((theme) => ({
 
 const Drawer = ({ open, width, onClose, onSelect }) => {
   const classes = useStyles({ width });
-  const drawerStateClass = useMemo(() => (open ? classes.drawerOpen : classes.drawerClose), [open]);
   const [selectedView, setSelectedView] = useState(View.HOME);
+  const drawerStateClass = open ? classes.drawerOpen : classes.drawerClose;
 
   const handleSelection = (title) => {
     onSelect(title);

@@ -6,6 +6,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [UNRELEASED] - 2022-##-##
 ### Added
+- Dark and Blue themes
+- SettingsModal for theme selection and preference saving
+- themePref added to GraphQL User schema
+
+### Changed
+- app restyled to support theming
+
+## [1.14.0] - 2022-02-11
+### Added
 - rating button tips
 
 ### Changed
