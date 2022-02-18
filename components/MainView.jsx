@@ -11,13 +11,15 @@ import {
 } from '../src/graphql/mutations.js';
 import * as gqlQuery from '../src/graphql/custom-queries';
 import util from '../src/util';
+import { setTheme, useTheme } from './ThemeProvider.jsx';
 import ShowCardGrid from './ShowCardGrid';
 import ShowDetailsModal from './ShowDetailsModal';
+import SettingsModal from './SettingsModal.jsx';
 import UserProfileModal from './UserProfileModal';
 import ScrollAwareProgress from './ScrollAwareProgress';
 import Toolbar from './Toolbar';
 import Drawer from './Drawer';
-import { View, Loading } from '../src/model';
+import { View, Loading, ModalType } from '../src/model';
 import { searchClient } from '../src/client';
 
 const drawerWidth = 240;
@@ -42,9 +44,10 @@ const useStyles = makeStyles((theme) => ({
 
 const MainView = ({ authedUser }) => {
   const classes = useStyles();
+  const { dispatch } = useTheme();
   const [user, setUser] = useState(authedUser);
   const [drawerOpen, setDrawerOpen] = useState(false);
-  const [profileModalOpen, setProfileModalOpen] = useState(false);
+  const [openedModal, setOpenedModal] = useState(null);
   const [selectedShow, setSelectedShow] = useState(null);
   const [selectedShowIdx, setSelectedShowIdx] = useState(null);
   const [shows, setShows] = useState([]);
@@ -511,6 +514,10 @@ const MainView = ({ authedUser }) => {
     setSelectedShowIdx(showIdx);
   };
 
+  const closeModal = () => {
+    setOpenedModal(null);
+  };
+
   /**
    * Handles profile changes by updating the user's name
    * and avatar color in all their show reviews.
@@ -519,7 +526,7 @@ const MainView = ({ authedUser }) => {
    * @param {string} color - the user's updated avatar color
    */
   const handleProfileSave = (name, color) => {
-    setProfileModalOpen(false);
+    closeModal();
     util.updateUserReviews(shows, user.name, name, color);
     util.updateUserReviews(watchlist, user.name, name, color);
 
@@ -545,6 +552,7 @@ const MainView = ({ authedUser }) => {
 
   useEffect(() => {
     fetchTrendingShows();
+    setTheme(dispatch, authedUser.themePref, true);
   }, []);
 
   useEffect(() => {
@@ -561,7 +569,8 @@ const MainView = ({ authedUser }) => {
         drawerOpen={drawerOpen}
         onDrawerOpen={() => setDrawerOpen(true)}
         onSearchSubmit={handleSearch}
-        onEditProfile={() => setProfileModalOpen(true)}
+        onEditProfile={() => setOpenedModal(ModalType.PROFILE)}
+        onEditSettings={() => setOpenedModal(ModalType.SETTINGS)}
       />
 
       <Drawer
@@ -587,12 +596,16 @@ const MainView = ({ authedUser }) => {
           />
         )}
 
-        {profileModalOpen && (
+        {openedModal === ModalType.PROFILE && (
           <UserProfileModal
             user={user}
-            onClose={() => setProfileModalOpen(false)}
+            onClose={closeModal}
             onSave={handleProfileSave}
           />
+        )}
+
+        {openedModal === ModalType.SETTINGS && (
+          <SettingsModal onClose={closeModal} />
         )}
 
         <ShowCardGrid

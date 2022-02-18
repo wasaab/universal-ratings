@@ -100,6 +100,7 @@ export const onCreateUser = /* GraphQL */ `
       id
       name
       color
+      themePref
       watchlist {
         items {
           userId
@@ -120,6 +121,7 @@ export const onUpdateUser = /* GraphQL */ `
       id
       name
       color
+      themePref
       watchlist {
         items {
           userId
@@ -140,6 +142,7 @@ export const onDeleteUser = /* GraphQL */ `
       id
       name
       color
+      themePref
       watchlist {
         items {
           userId
@@ -165,6 +168,7 @@ export const onCreateReview = /* GraphQL */ `
         id
         name
         color
+        themePref
         watchlist {
           nextToken
         }
@@ -208,6 +212,7 @@ export const onUpdateReview = /* GraphQL */ `
         id
         name
         color
+        themePref
         watchlist {
           nextToken
         }
@@ -251,6 +256,7 @@ export const onDeleteReview = /* GraphQL */ `
         id
         name
         color
+        themePref
         watchlist {
           nextToken
         }

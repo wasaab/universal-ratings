@@ -1,14 +1,13 @@
 import { useEffect, useState } from 'react';
 import Head from 'next/head';
-import { CssBaseline, ThemeProvider } from '@material-ui/core';
 import API, { graphqlOperation } from '@aws-amplify/api';
 import { getUser } from '../src/graphql/custom-queries.js';
 import { AmplifyAuthContainer, AmplifyAuthenticator } from '@aws-amplify/ui-react';
 import { AuthState } from '@aws-amplify/ui-components';
 import amplify from 'aws-amplify';
 import amplifyConfig from '../src/aws-exports';
+import { ThemeProvider } from '../components/ThemeProvider.jsx';
 import MainView from '../components/MainView';
-import theme from '../resources/styles/theme';
 import '../resources/styles/global.css';
 
 /**
@@ -52,8 +51,7 @@ const App = () => {
 
       <AmplifyAuthContainer>
         <AmplifyAuthenticator handleAuthStateChange={handleAuthStateChange}>
-          <ThemeProvider theme={theme}>
-            <CssBaseline />
+          <ThemeProvider userId={user?.id}>
             {user && <MainView authedUser={user} />}
           </ThemeProvider>
         </AmplifyAuthenticator>

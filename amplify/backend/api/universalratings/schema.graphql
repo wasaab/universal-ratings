@@ -21,6 +21,7 @@ type User @model
   id: ID!
   name: String!
   color: String!
+  themePref: String
   watchlist: [WatchlistItem] @connection(fields: ["id"])
 }
 

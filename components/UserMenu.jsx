@@ -13,11 +13,13 @@ import {
   MenuItem,
   MenuList,
   Paper,
-  Popper
+  Popper,
+  useTheme
 } from '@material-ui/core';
 import {
   AccountCircle as AccountCircleIcon,
-  PowerSettingsNew as LogoutIcon
+  PowerSettingsNew as LogoutIcon,
+  Settings as SettingsIcon
 } from '@material-ui/icons';
 import UserAvatar from './UserAvatar';
 
@@ -28,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
     }
   },
   userMenuPaper: {
-    backgroundColor: `${alpha(theme.palette.background.default, 0.55)} !important`
+    backgroundColor: `${alpha(theme.palette.background.default, 0.55)}`
   },
   listItemIcon: {
     minWidth: 36
@@ -50,8 +52,9 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const UserMenu = ({ className, user, onEditProfile }) => {
+const UserMenu = ({ className, user, onEditProfile, onEditSettings }) => {
   const classes = useStyles();
+  const theme = useTheme();
   const userMenuButtonRef = useRef();
   const [userMenuOpen, setUserMenuOpen] = useState(false);
 
@@ -67,6 +70,11 @@ const UserMenu = ({ className, user, onEditProfile }) => {
     onEditProfile();
   };
 
+  const handleEditSettingsClick = () => {
+    setUserMenuOpen(false);
+    onEditSettings();
+  };
+
   return (
     <div className={className}>
       <IconButton
@@ -75,7 +83,7 @@ const UserMenu = ({ className, user, onEditProfile }) => {
         onClick={() => setUserMenuOpen(true)}
         aria-label="user menu button"
         >
-        <UserAvatar name={user.name} color="#8100ff" size={35} />
+        <UserAvatar name={user.name} color={theme.palette.text.avatar} size={35} />
       </IconButton>
 
       <Popper
@@ -99,12 +107,21 @@ const UserMenu = ({ className, user, onEditProfile }) => {
                   }
                 >
                   <Divider />
+
                   <MenuItem className={classes.hoverHighlight} onClick={handleEditProfileClick}>
                     <ListItemIcon className={classes.listItemIcon}>
                       <AccountCircleIcon fontSize="small" />
                     </ListItemIcon>
                     Profile
                   </MenuItem>
+
+                  <MenuItem className={classes.hoverHighlight} onClick={handleEditSettingsClick}>
+                    <ListItemIcon className={classes.listItemIcon}>
+                      <SettingsIcon fontSize="small" />
+                    </ListItemIcon>
+                    Settings
+                  </MenuItem>
+
                   <MenuItem className={classes.hoverHighlight} onClick={() => Auth.signOut()}>
                   <ListItemIcon className={classes.listItemIcon}>
                     <LogoutIcon fontSize="small" />
