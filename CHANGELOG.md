@@ -6,6 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [UNRELEASED] - 2022-##-##
 
+## [1.15.1] - 2022-02-19
+### Changed
+- amplify config for upgraded version of CLI
+
+### Fixed
+- handling of missing theme pref
+
 ## [1.15.0] - 2022-02-19
 ### Added
 - Dark and Blue themes

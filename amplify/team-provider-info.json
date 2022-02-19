@@ -19,12 +19,12 @@
       "function": {
         "universalratings5a980c73PostConfirmation": {
           "deploymentBucketName": "amplify-amplify6604b332b57b4-staging-21636-deployment",
-          "s3Key": "amplify-builds/universalratings5a980c73PostConfirmation-2b433431435a466d3062-build.zip"
+          "s3Key": "amplify-builds/universalratings5a980c73PostConfirmation-7a74726d305859496c53-build.zip"
         },
         "ShowAddedDiscordWebhookPublisher": {
           "webhookUrl": "WEBHOOK_URL_VALUE",
           "deploymentBucketName": "amplify-amplify6604b332b57b4-staging-21636-deployment",
-          "s3Key": "amplify-builds/ShowAddedDiscordWebhookPublisher-474e2f47487474595844-build.zip"
+          "s3Key": "amplify-builds/ShowAddedDiscordWebhookPublisher-35776141615a37564936-build.zip"
         }
       }
     }
