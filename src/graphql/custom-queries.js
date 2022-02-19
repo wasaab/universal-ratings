@@ -189,6 +189,7 @@ export const getUser = /* GraphQL */ `
       id
       name
       color
+      themePref
       watchlist {
         items {
           show {

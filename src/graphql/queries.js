@@ -83,6 +83,7 @@ export const getUser = /* GraphQL */ `
       id
       name
       color
+      themePref
       watchlist {
         items {
           userId
@@ -116,6 +117,7 @@ export const listUsers = /* GraphQL */ `
         id
         name
         color
+        themePref
         watchlist {
           nextToken
         }
@@ -137,6 +139,7 @@ export const getReview = /* GraphQL */ `
         id
         name
         color
+        themePref
         watchlist {
           nextToken
         }
@@ -195,6 +198,7 @@ export const listReviews = /* GraphQL */ `
           id
           name
           color
+          themePref
           createdAt
           updatedAt
         }
@@ -322,6 +326,7 @@ export const reviewsByUser = /* GraphQL */ `
           id
           name
           color
+          themePref
           createdAt
           updatedAt
         }

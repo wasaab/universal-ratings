@@ -18,7 +18,8 @@ const useStyles = makeStyles((theme) => ({
     transition: theme.transitions.create(['width', 'margin'], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen
-    })
+    }),
+    background: theme.palette.background.header
   }),
   menuButton: {
     marginRight: 36
@@ -38,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const Toolbar = ({ user, drawerOpen, onDrawerOpen, onSearchSubmit, onEditProfile, drawerWidth }) => {
+const Toolbar = ({ user, drawerOpen, onDrawerOpen, onSearchSubmit, onEditProfile, onEditSettings, drawerWidth }) => {
   const classes = useStyles({ drawerOpen, drawerWidth });
 
   return (
@@ -62,7 +63,12 @@ const Toolbar = ({ user, drawerOpen, onDrawerOpen, onSearchSubmit, onEditProfile
 
         <TitleSearchBar className={classes.searchBar} onSubmit={onSearchSubmit} />
 
-        <UserMenu className={classes.userMenu} user={user} onEditProfile={onEditProfile} />
+        <UserMenu
+          className={classes.userMenu}
+          user={user}
+          onEditProfile={onEditProfile}
+          onEditSettings={onEditSettings}
+        />
       </MaterialToolbar>
     </AppBar>
   );
