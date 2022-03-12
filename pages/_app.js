@@ -1,13 +1,16 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
 import API, { graphqlOperation } from '@aws-amplify/api';
 import { getUser } from '../src/graphql/custom-queries.js';
 import { AmplifyAuthContainer, AmplifyAuthenticator } from '@aws-amplify/ui-react';
 import { AuthState } from '@aws-amplify/ui-components';
 import amplify from 'aws-amplify';
+// import amplify from '@aws-amplify/core'; // Todo: smaller bundle, but causes an error in console
+  // Expected server HTML to contain a matching <amplify-authenticator> in <amplify-auth-container></amplify-auth-container>
+  // I'm getting that now... even with aws-amplify import. what is going on?
+  // on refresh the error is gone... so does it just happen after initial build?
 import amplifyConfig from '../src/aws-exports';
 import { ThemeProvider } from '../components/ThemeProvider.jsx';
-import MainView from '../components/MainView';
 import '../resources/styles/global.css';
 
 /**
@@ -20,7 +23,7 @@ function removeJss() {
   jssStyles?.parentElement?.removeChild(jssStyles);
 }
 
-amplify.configure(amplifyConfig);
+amplify.configure({ ...amplifyConfig, ssr: true });
 
 const fetchUser = async (id) => {
   const { data } = await API.graphql(graphqlOperation(getUser, { id }));
@@ -28,7 +31,7 @@ const fetchUser = async (id) => {
   return data.getUser;
 };
 
-const App = () => {
+const App = ({ Component, pageProps }) => {
   const [user, setUser] = useState();
 
   const handleAuthStateChange = async (authState, authedUser) => {
@@ -52,7 +55,7 @@ const App = () => {
       <AmplifyAuthContainer>
         <AmplifyAuthenticator handleAuthStateChange={handleAuthStateChange}>
           <ThemeProvider userId={user?.id}>
-            {user && <MainView authedUser={user} />}
+            {user && <Component {...pageProps} authedUser={user} />}
           </ThemeProvider>
         </AmplifyAuthenticator>
       </AmplifyAuthContainer>

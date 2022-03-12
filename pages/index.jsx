@@ -1,6 +1,7 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useMemo, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import API, { graphqlOperation } from '@aws-amplify/api';
+// import { API, withSSRContext, graphqlOperation } from 'aws-amplify'; // Todo: Use these imports for server-side fetching of trending
 import {
   createShow,
   createWatchlistItem,
@@ -10,19 +11,22 @@ import {
   updateShow
 } from '../src/graphql/mutations.js';
 import * as gqlQuery from '../src/graphql/custom-queries';
-import util from '../src/util';
-import { setTheme, useTheme } from './ThemeProvider.jsx';
-import ShowCardGrid from './ShowCardGrid';
-import ShowDetailsModal from './ShowDetailsModal';
-import SettingsModal from './SettingsModal.jsx';
-import UserProfileModal from './UserProfileModal';
-import ScrollAwareProgress from './ScrollAwareProgress';
-import Toolbar from './Toolbar';
-import Drawer from './Drawer';
-import { View, Loading, ModalType } from '../src/model';
-import { searchClient } from '../src/client';
+import * as util from '../src/util';
+import {
+  Drawer,
+  Toolbar,
+  ShowCardGrid,
+  ShowDetailsModal,
+  SettingsModal,
+  UserProfileModal,
+  ScrollAwareProgress,
+  setTheme,
+  useTheme
+} from '../components';
+import { View, Loading, ModalType, Width } from '../src/model';
+import { searchClient, TmdbApiClient } from '../src/client'; // todo: Remove tmdbapi if not getting server-side
 
-const drawerWidth = 240;
+// const tmdbApi = new TmdbApiClient(process.env.TMDB_API_KEY);
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -42,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const MainView = ({ authedUser }) => {
+const Index = ({ authedUser, initialTrendingShows = [] }) => {
   const classes = useStyles();
   const { dispatch } = useTheme();
   const [user, setUser] = useState(authedUser);
@@ -50,8 +54,8 @@ const MainView = ({ authedUser }) => {
   const [openedModal, setOpenedModal] = useState(null);
   const [selectedShow, setSelectedShow] = useState(null);
   const [selectedShowIdx, setSelectedShowIdx] = useState(null);
-  const [shows, setShows] = useState([]);
-  const [trendingShows, setTrendingShows] = useState([]);
+  const [shows, setShows] = useState(initialTrendingShows);
+  const [trendingShows, setTrendingShows] = useState(initialTrendingShows);
   const [nextToken, setNextToken] = useState();
   const [view, setView] = useState(View.HOME);
   const [loading, setLoading] = useState(null);
@@ -84,10 +88,14 @@ const MainView = ({ authedUser }) => {
   const findTrendingShowIdx = ({ id }) => trendingShows.findIndex((show) => show.id === id);
   const isTrending = (show) => -1 !== findTrendingShowIdx(show);
 
+  const scrollToTop = () => {
+    window.scrollTo(0, 0);
+  };
+
   /**
    * Fetches shows for the provided view.
    *
-   * @param {View} targetView - the view to fetch shows for
+   * @param {View=} targetView - the view to fetch shows for
    */
   const fetchShows = async (targetView = view) => {
     setLoading(Loading.determineType(view, targetView));
@@ -110,10 +118,10 @@ const MainView = ({ authedUser }) => {
         const uniqueShows = updatedShows.filter((show) => !isTrending(show));
 
         setShows([...trendingShows, ...uniqueShows]);
-        util.scrollToTop();
+        scrollToTop();
       } else {
         setShows(updatedShows);
-        util.scrollToTop();
+        scrollToTop();
       }
 
       setNextToken(data[queryName].nextToken);
@@ -132,7 +140,7 @@ const MainView = ({ authedUser }) => {
   const handleDrawerSelection = (selectedView) => {
     if (selectedView === View.WATCHLIST) {
       setShows(watchlist);
-      util.scrollToTop();
+      scrollToTop();
     } else {
       fetchShows(selectedView);
     }
@@ -197,7 +205,8 @@ const MainView = ({ authedUser }) => {
    * Handles watchlist addition and removal.
    *
    * @param {boolean} isRemoval - whether or not this is a watchlist removal
-   * @param {string} showId - the id of the show being added/removed from watchlist
+   * @param {string=} showId - the id of the show being added/removed from watchlist
+   * @param {Object=} show - the show being added/removed from watchlist
    */
   const handleWatchlistChange = async (isRemoval, showId = selectedShow.id, show = selectedShow) => {
     const watchlistItem = {
@@ -239,16 +248,11 @@ const MainView = ({ authedUser }) => {
     setWatchlist([...watchlist]);
   };
 
-  const resetTrendingShow = (show) => {
-    delete show.rating;
-    delete show.reviews;
-    delete show.updatedAt;
-  };
-
   /**
    * Updates the trending shows if the updated show is trending.
    *
    * @param {Object} updatedShow - the updated show
+   * @param {boolean=} isReset - whether the trending show is being reset to unrated
    */
   const maybeUpdateTrending = (updatedShow, isReset) => {
     if (view === View.HOME) { return; }
@@ -258,7 +262,7 @@ const MainView = ({ authedUser }) => {
     if (trendingShowIdx === -1) { return; }
 
     if (isReset) {
-      resetTrendingShow(updatedShow);
+      util.resetTrendingShow(updatedShow);
     }
 
     trendingShows[trendingShowIdx] = updatedShow;
@@ -295,7 +299,7 @@ const MainView = ({ authedUser }) => {
    */
   const removeOrResetShowInGrid = (show, showIdx) => {
     if (view === View.HOME && showIdx < trendingShows.length) {
-      resetTrendingShow(show);
+      util.resetTrendingShow(show);
     } else {
       shows.splice(showIdx, 1);
     }
@@ -379,7 +383,7 @@ const MainView = ({ authedUser }) => {
    * @param {Object} show - the show that had a rating change
    * @param {number} currUserRating - the user's current rating of the show
    * @param {number} prevUserRating - the user's previous rating of the show
-   * @param {number} showIdx - the index of the show
+   * @param {number=} showIdx - the index of the show
    */
   const handleRatingChange = (show, currUserRating, prevUserRating, showIdx = selectedShowIdx) => {
     if (showIdx === null) {
@@ -406,17 +410,11 @@ const MainView = ({ authedUser }) => {
    * @param {Object} show - the show to select
    */
   const selectRatedShow = async (show) => {
-    try {
-      const { data } = await API.graphql(graphqlOperation(gqlQuery.getShow, { id: show.objectID }));
+    const ratedShow = await util.fetchRatedShow(show.objectID);
 
-      if (show.rating) {
-        util.updateAvgRating(data.getShow);
-      }
+    if (!ratedShow) { return; }
 
-      setSelectedShow(data.getShow);
-    } catch (err) {
-      console.error(`Failed to get rated show "${show.objectID}": `, err);
-    }
+    setSelectedShow(ratedShow);
   };
 
   /**
@@ -464,7 +462,7 @@ const MainView = ({ authedUser }) => {
    *
    * @param {Object} show - show to create
    * @param {number} rating - user's rating of the show
-   * @param {number} showIdx - index of the show
+   * @param {number=} showIdx - index of the show
    */
   const createRatedShow = async (show, rating, showIdx = selectedShowIdx) => {
     if (showIdx === null) {
@@ -543,29 +541,49 @@ const MainView = ({ authedUser }) => {
    * Fetches trending shows for the week.
    */
   const fetchTrendingShows = async () => {
+    // Todo: Remove console.time statements when done optimizing
+    // console.time('fetch trending');
     const { data: unratedTrendingShows } = await searchClient.fetchTrendingShows();
+    // console.timeEnd('fetch trending');
+    // console.time('fetch rated trending from gql');
     const ratedTrendingShows = await Promise.all(unratedTrendingShows.map(util.maybeFetchRatedTrendingShow));
+    // console.timeEnd('fetch rated trending from gql');
 
+    // console.time('state update');
     setTrendingShows(ratedTrendingShows);
     setShows(ratedTrendingShows);
   };
 
-  useEffect(() => {
+  // Todo: determine if useEffect or useLayoutEffect gets DOM rendered with trending faster
+    // I need a way to automate refreshing and averaging LCP so I can do like 100 refreshes and get a good avg
+      // results are inconsistent, so avg is necessary
+      // i think i can find a site for this like https://webpagetest.org/
+  useLayoutEffect(() => {
+    // console.time('LCP');
     fetchTrendingShows();
     setTheme(dispatch, authedUser.themePref, true);
   }, []);
 
   useEffect(() => {
     if (trendingShows.length === 0) { return; }
+    console.timeEnd('state update');
 
     fetchShows();
   }, [trendingShows]);
+
+  // Todo: Use this if getting trending shows on server-side
+  // useEffect(() => {
+  //   fetchShows();
+  // }, []);
+
+  // if (trendingShows.length !== 0) {
+  //   console.timeEnd('LCP');
+  // }
 
   return (
     <div className={classes.root}>
       <Toolbar
         user={user}
-        drawerWidth={drawerWidth}
         drawerOpen={drawerOpen}
         onDrawerOpen={() => setDrawerOpen(true)}
         onSearchSubmit={handleSearch}
@@ -574,7 +592,6 @@ const MainView = ({ authedUser }) => {
       />
 
       <Drawer
-        width={drawerWidth}
         open={drawerOpen}
         onClose={() => setDrawerOpen(false)}
         onSelect={handleDrawerSelection}
@@ -619,7 +636,7 @@ const MainView = ({ authedUser }) => {
 
         <ScrollAwareProgress
           loadingType={loading}
-          backdropLeftStyle={drawerOpen ? drawerWidth + 1 : 57}
+          backdropLeftStyle={drawerOpen ? Width.OPEN_DRAWER + 1 : Width.CLOSED_DRAWER}
           onEndOfPageReached={handleEndOfPageReached}
         />
       </main>
@@ -627,4 +644,30 @@ const MainView = ({ authedUser }) => {
   );
 };
 
-export default MainView;
+// Todo: Somehow my app loads white page initially now on refresh when before it was styled
+  // you can see this in devtools with lighthouse and perf tabs
+  // no clue what causes this. maybe related to this staticProps thing with SSR, but w/e user never sees white. just possibly indication i hurt load perf.
+export const getStaticProps = () => ({ props: {} });
+
+// Todo: This seems to perf test worse in lighthouse than client side...
+  // I could make a branch for SSR to retain these changes If i ever wanna use them again or shove in boostnote
+  // I get all kinds of fun lighthouse issues related to using SSR cuz the DOM can't begin hydrating until this finishes
+    // before It would hydrate dom, run requests, hydrate some more, sharing allocated time
+  // odd. I get basically the same perf results. I feel like my perf results change day by day for same code.
+    // because of this I create a lighthouse cli util to avg perf scores and they remain consistent, so I can revisit this using the tool.
+// export async function getServerSideProps(context) {
+//   const { API: ssrApi } = withSSRContext(context);
+//   const fetchRatedShow = util.buildRatedShowFetcher(ssrApi);
+//   const unratedTrendingShows = await tmdbApi.getTrendingShows();
+//   const ratedTrendingShows = await Promise.all(unratedTrendingShows.map(fetchRatedShow));
+
+//   return {
+//     props: {
+//       initialTrendingShows: ratedTrendingShows
+//     }
+//   };
+// }
+
+export default Index;
+
+// Todo: Compare to deleted MainView.jsx to see what changes exist for commit msg
