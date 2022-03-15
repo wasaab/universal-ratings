@@ -41,7 +41,7 @@ const darkTheme = createTheme({
   palette: {
     type: 'dark',
     background: {
-      paper: 'rgba(255, 255, 255, 0.08)',
+      paper: 'rgba(255, 255, 255, 0.1)',
       header: grey[900]
     },
     primary: {
@@ -86,7 +86,7 @@ const blueTheme = createTheme({
     },
     secondary: {
       light: '#fff',
-      main: blue['A400']
+      main: blue.A400
     },
     text: {
       avatar: '#538de6'
