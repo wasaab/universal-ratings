@@ -1,7 +1,6 @@
-import React, { useEffect, useLayoutEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import API, { graphqlOperation } from '@aws-amplify/api';
-// import { API, withSSRContext, graphqlOperation } from 'aws-amplify'; // Todo: Use these imports for server-side fetching of trending
 import {
   createShow,
   createWatchlistItem,
@@ -24,9 +23,7 @@ import {
   useTheme
 } from '../components';
 import { View, Loading, ModalType, Width } from '../src/model';
-import { searchClient, TmdbApiClient } from '../src/client'; // todo: Remove tmdbapi if not getting server-side
-
-// const tmdbApi = new TmdbApiClient(process.env.TMDB_API_KEY);
+import { searchClient } from '../src/client';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -46,6 +43,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
+// Todo: Remove initialTrendingShows prop if not using SSR to fetch trending
 const Index = ({ authedUser, initialTrendingShows = [] }) => {
   const classes = useStyles();
   const { dispatch } = useTheme();
@@ -541,44 +539,24 @@ const Index = ({ authedUser, initialTrendingShows = [] }) => {
    * Fetches trending shows for the week.
    */
   const fetchTrendingShows = async () => {
-    // Todo: Remove console.time statements when done optimizing
-    // console.time('fetch trending');
     const { data: unratedTrendingShows } = await searchClient.fetchTrendingShows();
-    // console.timeEnd('fetch trending');
-    // console.time('fetch rated trending from gql');
-    const ratedTrendingShows = await Promise.all(unratedTrendingShows.map(util.maybeFetchRatedTrendingShow));
-    // console.timeEnd('fetch rated trending from gql');
 
-    // console.time('state update');
+    const ratedTrendingShows = await Promise.all(unratedTrendingShows.map(util.maybeFetchRatedTrendingShow));
+
     setTrendingShows(ratedTrendingShows);
     setShows(ratedTrendingShows);
   };
 
-  // Todo: determine if useEffect or useLayoutEffect gets DOM rendered with trending faster
-    // I need a way to automate refreshing and averaging LCP so I can do like 100 refreshes and get a good avg
-      // results are inconsistent, so avg is necessary
-      // i think i can find a site for this like https://webpagetest.org/
-  useLayoutEffect(() => {
-    // console.time('LCP');
+  useEffect(() => {
     fetchTrendingShows();
     setTheme(dispatch, authedUser.themePref, true);
   }, []);
 
   useEffect(() => {
     if (trendingShows.length === 0) { return; }
-    console.timeEnd('state update');
 
     fetchShows();
   }, [trendingShows]);
-
-  // Todo: Use this if getting trending shows on server-side
-  // useEffect(() => {
-  //   fetchShows();
-  // }, []);
-
-  // if (trendingShows.length !== 0) {
-  //   console.timeEnd('LCP');
-  // }
 
   return (
     <div className={classes.root}>
@@ -644,30 +622,6 @@ const Index = ({ authedUser, initialTrendingShows = [] }) => {
   );
 };
 
-// Todo: Somehow my app loads white page initially now on refresh when before it was styled
-  // you can see this in devtools with lighthouse and perf tabs
-  // no clue what causes this. maybe related to this staticProps thing with SSR, but w/e user never sees white. just possibly indication i hurt load perf.
 export const getStaticProps = () => ({ props: {} });
 
-// Todo: This seems to perf test worse in lighthouse than client side...
-  // I could make a branch for SSR to retain these changes If i ever wanna use them again or shove in boostnote
-  // I get all kinds of fun lighthouse issues related to using SSR cuz the DOM can't begin hydrating until this finishes
-    // before It would hydrate dom, run requests, hydrate some more, sharing allocated time
-  // odd. I get basically the same perf results. I feel like my perf results change day by day for same code.
-    // because of this I create a lighthouse cli util to avg perf scores and they remain consistent, so I can revisit this using the tool.
-// export async function getServerSideProps(context) {
-//   const { API: ssrApi } = withSSRContext(context);
-//   const fetchRatedShow = util.buildRatedShowFetcher(ssrApi);
-//   const unratedTrendingShows = await tmdbApi.getTrendingShows();
-//   const ratedTrendingShows = await Promise.all(unratedTrendingShows.map(fetchRatedShow));
-
-//   return {
-//     props: {
-//       initialTrendingShows: ratedTrendingShows
-//     }
-//   };
-// }
-
 export default Index;
-
-// Todo: Compare to deleted MainView.jsx to see what changes exist for commit msg
