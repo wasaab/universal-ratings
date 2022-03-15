@@ -20,6 +20,7 @@
     "mock": "amplify mock api",
     "lint": "next lint",
     "build": "next build",
+    "build:profile": "next build --profile",
     "start": "next start"
   },
   "dependencies": {
