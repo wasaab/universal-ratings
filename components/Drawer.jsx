@@ -21,23 +21,23 @@ import {
   Visibility as VisibilityIcon,
   Home as HomeIcon
 } from '@material-ui/icons/';
+import { View, Width } from '../src/model';
 import TmdbIcon from '../resources/images/tmdb.svg';
-import { View } from '../src/model';
 
 const useStyles = makeStyles((theme) => ({
-  drawer: ({ width }) => ({
-    width: width,
+  drawer: {
+    width: Width.OPEN_DRAWER,
     flexShrink: 0,
     whiteSpace: 'nowrap'
-  }),
-  drawerOpen: ({ width }) => ({
+  },
+  drawerOpen: {
     overflowX: 'hidden',
-    width: width,
+    width: Width.OPEN_DRAWER,
     transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen
     })
-  }),
+  },
   drawerClose: {
     transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.sharp,
@@ -63,8 +63,8 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const Drawer = ({ open, width, onClose, onSelect }) => {
-  const classes = useStyles({ width });
+const Drawer = ({ open, onClose, onSelect }) => {
+  const classes = useStyles();
   const [selectedView, setSelectedView] = useState(View.HOME);
   const drawerStateClass = open ? classes.drawerOpen : classes.drawerClose;
 
@@ -95,7 +95,7 @@ const Drawer = ({ open, width, onClose, onSelect }) => {
       classes={{ paper: drawerStateClass }}
     >
       <div className={classes.toolbar}>
-        <IconButton onClick={onClose}>
+        <IconButton aria-label="close drawer" onClick={onClose}>
           <ChevronLeftIcon />
         </IconButton>
       </div>
