@@ -28,6 +28,12 @@ const useStyles = makeStyles((theme) => ({
   saveButton: {
     marginBottom: 4,
     backgroundColor: 'rgba(0, 0, 0, 0.08)'
+  },
+  themeForm: {
+    alignSelf: 'start'
+  },
+  revertButton: {
+    alignSelf: 'end'
   }
 }));
 
@@ -38,8 +44,8 @@ const SettingsModal = ({ onClose }) => {
   return (
     <Dialog open onClose={onClose}>
       <DialogContent className={classes.content}>
-        <Box display="flex" alignItems="end" gridGap={20}>
-          <FormControl fullWidth>
+        <Box display="flex" height={56} gridGap={20}>
+          <FormControl className={classes.themeForm} fullWidth>
             <InputLabel id="theme-select-label">Theme</InputLabel>
             <Select
               labelId="theme-select-label"
@@ -61,7 +67,7 @@ const SettingsModal = ({ onClose }) => {
             </Select>
           </FormControl>
 
-          <IconButton size="small" onClick={() => revertTheme(dispatch)}>
+          <IconButton className={classes.revertButton} onClick={() => revertTheme(dispatch)}>
             <RevertIcon />
           </IconButton>
         </Box>

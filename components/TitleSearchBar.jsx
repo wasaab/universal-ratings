@@ -234,7 +234,7 @@ const TitleSearchBar = ({ className, onSubmit }) => {
   const renderInput = (params) => (
     <TextField
       {...params}
-      label="Title"
+      label="Search Titles"
       size="small"
       inputProps={{
         ...params.inputProps,

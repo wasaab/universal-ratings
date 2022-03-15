@@ -25,18 +25,17 @@ import { updateReview } from '../src/graphql/mutations';
 import UserAvatar from './UserAvatar';
 import StarButtons from './StarButtons';
 import LabelledIcon from './LabelledIcon';
+import { ShowType, Width } from '../src/model';
 import JustWatchIcon from '../resources/images/justWatch.svg';
 import ImdbIcon from '../resources/images/imdb.svg';
 import RtFreshIcon from '../resources/images/rt.svg';
 import RtRottenIcon from '../resources/images/rt-rotten.svg';
 import providerIdToInfo from '../resources/data/providers';
-import { ShowType } from '../src/model';
 
 const avatarSize = 33;
-const backdropWidths = [300, 780, 1280];
 
 function buildBackdropUrl(width) {
-  return ({ backgroundImg: img }) => `url(${width ? img?.replace(backdropWidths[2], width) : img})`;
+  return ({ backgroundImg: img }) => `url(${width ? img?.replace(Width.BACKDROP_LARGE, width) : img})`;
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -50,13 +49,13 @@ const useStyles = makeStyles((theme) => ({
   backdrop: {
     '&:before': {
       content: '""',
-      [theme.breakpoints.down(backdropWidths[0] + 1)]: {
-        backgroundImage: buildBackdropUrl(backdropWidths[0]),
+      [theme.breakpoints.down(Width.BACKDROP_SMALL + 1)]: {
+        backgroundImage: buildBackdropUrl(Width.BACKDROP_SMALL),
       },
-      [theme.breakpoints.up(backdropWidths[0] + 1)]: {
-        backgroundImage: buildBackdropUrl(backdropWidths[1]),
+      [theme.breakpoints.up(Width.BACKDROP_SMALL + 1)]: {
+        backgroundImage: buildBackdropUrl(Width.BACKDROP_MEDIUM),
       },
-      [theme.breakpoints.up(backdropWidths[1] + 1)]: {
+      [theme.breakpoints.up(Width.BACKDROP_MEDIUM + 1)]: {
         backgroundImage: buildBackdropUrl(),
       },
       backgroundSize: 'cover',
