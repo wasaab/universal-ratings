@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "storage": {
+      "Show:@model(appsync)": [
+        "read",
+        "update"
+      ]
+    }
+  },
+  "lambdaLayers": [],
+  "environmentVariableList": [
+    {
+      "cloudFormationParameterName": "tmdbApiKey",
+      "environmentVariableName": "TMDB_API_KEY"
+    },
+    {
+      "cloudFormationParameterName": "omdbApiKey",
+      "environmentVariableName": "OMDB_API_KEY"
+    }
+  ]
+}
