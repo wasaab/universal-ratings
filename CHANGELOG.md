@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [UNRELEASED] - 2022-##-##
 
+## [1.16.0-rc1] - 2022-04-09
+### Added
+- external ratings and streaming providers updated daily
+
 ## [1.15.1] - 2022-02-19
 ### Changed
 - amplify config for upgraded version of CLI
