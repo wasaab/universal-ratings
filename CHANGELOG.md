@@ -10,6 +10,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - external ratings and streaming providers updated daily
 
+## [1.15.1] - 2022-02-19
+### Changed
+- amplify config for upgraded version of CLI
+
+### Fixed
+- handling of missing theme pref
+
 ## [1.15.0] - 2022-02-19
 ### Added
 - Dark and Blue themes
