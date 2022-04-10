@@ -21,8 +21,14 @@ function populateProviderParams({ value: providerIds }, params) {
     '#PIDS': 'providerIds',
   };
   params.ExpressionAttributeValues = {
-    ':pids': { NS: providerIds.map((id) => `${id}`) }
+    ':pids': {
+      L: providerIds.map((id) => ({ N: `${id}` }))
+    }
   };
+}
+
+function buildNumVal(num) {
+  return num === null ? { NULL: true } : { N: `${num}` };
 }
 
 function populateRatingParams({ value: { imdbRating, rtRating } }, params) {
@@ -33,8 +39,8 @@ function populateRatingParams({ value: { imdbRating, rtRating } }, params) {
   };
   params.ExpressionAttributeValues = {
     ...params.ExpressionAttributeValues,
-    ':imdb': { N: `${imdbRating ?? 0}` },
-    ':rt': { N: `${rtRating ?? 0}` }
+    ':imdb': buildNumVal(imdbRating),
+    ':rt': buildNumVal(rtRating)
   };
 }
 
@@ -85,12 +91,10 @@ async function updateShow({ showId, providerResp, ratingResp }) {
     ...metadataUpdateParams
   };
 
-  console.log('params: ', params); // Todo: Temp. remove.
-  console.log('providerIds: ', metadataUpdateParams.ExpressionAttributeValues[':pids'].NS); // Todo: Temp. remove.
+  console.log('update params: ', params);
 
   try {
-    const resp = await dynamoDb.updateItem(params).promise();
-    console.log('resp:', resp); // todo: temp. remove.
+    await dynamoDb.updateItem(params).promise();
   } catch (err) {
     console.error(`Failed to update show "${showId}": `, err);
   }
@@ -113,8 +117,7 @@ async function fetchShows() {
   const { hits } = await algoliaApi.search({
     query: ' ',
     attributesToRetrieve: ['tmdbId', 'type'],
-    // hitsPerPage: 1000
-    hitsPerPage: 1 // todo: temp. remove.
+    hitsPerPage: 1000
   });
 
   return hits;
@@ -125,11 +128,8 @@ async function fetchShows() {
  */
 export const handler = async () => {
   const shows = await fetchShows();
-  // Todo: temp. Remove slice when done testing.
-  const metadataResponses = await Promise.all(shows.slice(0, 1).map(fetchShowMetadata));
+  const metadataResponses = await Promise.all(shows.map(fetchShowMetadata));
 
   await Promise.all(metadataResponses.map(updateShow)); // todo: batch update
   console.log('All shows updated');
 };
-
-// handler(); // todo: temp remove.
