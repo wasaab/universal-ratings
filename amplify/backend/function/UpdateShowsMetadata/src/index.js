@@ -11,7 +11,7 @@ Amplify Params - DO NOT EDIT */
 import aws from 'aws-sdk';
 import { OmdbApiClient, TmdbApiClient, AlgoliaApiClient } from './client/index.mjs';
 
-const dynamoDb = new aws.DynamoDB();
+const dynamoDb = new aws.DynamoDB.DocumentClient({ convertEmptyValues: true });
 const algoliaApi = new AlgoliaApiClient('QVUO52LVSK', 'ae8c0c082adf1cd9dace13ea68322713');
 const omdbApi = new OmdbApiClient(process.env.OMDB_API_KEY);
 const tmdbApi = new TmdbApiClient(process.env.TMDB_API_KEY);
@@ -21,14 +21,8 @@ function populateProviderParams({ value: providerIds }, params) {
     '#PIDS': 'providerIds',
   };
   params.ExpressionAttributeValues = {
-    ':pids': {
-      L: providerIds.map((id) => ({ N: `${id}` }))
-    }
+    ':pids': providerIds
   };
-}
-
-function buildNumVal(num) {
-  return num === null ? { NULL: true } : { N: `${num}` };
 }
 
 function populateRatingParams({ value: { imdbRating, rtRating } }, params) {
@@ -39,8 +33,8 @@ function populateRatingParams({ value: { imdbRating, rtRating } }, params) {
   };
   params.ExpressionAttributeValues = {
     ...params.ExpressionAttributeValues,
-    ':imdb': buildNumVal(imdbRating),
-    ':rt': buildNumVal(rtRating)
+    ':imdb': imdbRating,
+    ':rt': rtRating
   };
 }
 
@@ -58,7 +52,7 @@ function buildExpression({ ExpressionAttributeNames }, isConditionExp) {
 
 function buildMetadataUpdateParams(providerResp, ratingResp) {
   const params = {};
-  
+
   if (providerResp.status === 'fulfilled') {
     populateProviderParams(providerResp, params);
   }
@@ -77,7 +71,7 @@ function buildMetadataUpdateParams(providerResp, ratingResp) {
 
 async function updateShow({ showId, providerResp, ratingResp }) {
   const metadataUpdateParams = buildMetadataUpdateParams(providerResp, ratingResp);
-  
+
   if (!metadataUpdateParams) {
     console.error(`Unable to update show "${showId}". Metadata requests failed.`);
     return;
@@ -86,7 +80,7 @@ async function updateShow({ showId, providerResp, ratingResp }) {
   const params = {
     TableName: process.env.API_UNIVERSALRATINGS_SHOWTABLE_NAME,
     Key: {
-      id: { S: showId }
+      id: showId
     },
     ...metadataUpdateParams
   };
@@ -94,7 +88,7 @@ async function updateShow({ showId, providerResp, ratingResp }) {
   console.log('update params: ', params);
 
   try {
-    await dynamoDb.updateItem(params).promise();
+    await dynamoDb.update(params).promise();
   } catch (err) {
     console.error(`Failed to update show "${showId}": `, err);
   }
@@ -117,6 +111,7 @@ async function fetchShows() {
   const { hits } = await algoliaApi.search({
     query: ' ',
     attributesToRetrieve: ['tmdbId', 'type'],
+    attributesToHighlight: [],
     hitsPerPage: 1000
   });
 

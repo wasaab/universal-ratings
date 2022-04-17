@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [UNRELEASED] - 2022-##-##
 
-## [1.16.0-rc3] - 2022-04-09
+## [1.16.0] - 2022-04-17
 ### Added
 - external ratings and streaming providers updated daily
 
