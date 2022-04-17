@@ -5,6 +5,7 @@
 Amplify Params - DO NOT EDIT */
 
 const axios = require('axios');
+const ratedShowSource = 'UR';
 
 function buildRatingDesc(imdbRating, rtRating) {
   let ratingsLabel = '';
@@ -57,11 +58,16 @@ function postToWebhook(embed, showId) {
     });
 }
 
+function isFirstRating({ OldImage, NewImage }) {
+  return NewImage.source.S === ratedShowSource
+    && OldImage?.source.S !== ratedShowSource;
+}
+
 exports.handler = (event) => {
   console.log('posting to webhook url: ', process.env.WEBHOOK_URL);
 
   const showsAdded = event.Records
-    .filter((record) => record.eventName !== 'REMOVE' && record.dynamodb.NewImage.source.S === 'UR')
+    .filter((record) => record.eventName !== 'REMOVE' && isFirstRating(record.dynamodb))
     .map((record) => {
       console.log('eventId: ', record.eventID);
       console.log('show added: %j', record.dynamodb);
