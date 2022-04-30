@@ -114,6 +114,27 @@ class SearchClient {
   }
 
   /**
+   * Fetches the episode schedule metadata for a tv show.
+   *
+   * @param {string} id - the id of the show
+   * @returns {Promise<Object>} the show schedule metadata
+   */
+  fetchScheduleMetadata(id) {
+    return axios.get(`/api/search`, { params: { id, schedule: true } });
+  }
+
+  /**
+   * Gets the episodes of a tv show's season.
+   *
+   * @param {string} tmdbId the show's TMDB ID
+   * @param {number} season the season to get episodes of
+   * @returns {Object[]} the episodes of the season
+   */
+  fetchEpisodesOfSeason(id, season) {
+    return axios.get(`/api/search`, { params: { id, season } });
+  }
+
+  /**
    * Fetches a show by it's ID and type.
    *
    * @param {string} id - the id of the show

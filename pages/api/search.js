@@ -24,8 +24,10 @@ async function queryByIdAndType(tmdbId, type, imdbId) {
   };
 }
 
-function fetchShows({ id, imdbId, title, type }) {
+function fetchShows({ id, imdbId, title, type, schedule, season }) {
   if (title) { return tmdbApi.queryAllByTitle(title); }
+  if (schedule) { return tmdbApi.getScheduleMetadata(id); }
+  if (season) { return tmdbApi.getEpisodesOfSeason(id, season); }
   if (id) { return queryByIdAndType(id, type, imdbId); }
 
   return tmdbApi.getTrendingShows();
