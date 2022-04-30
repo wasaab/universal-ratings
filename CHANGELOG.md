@@ -6,6 +6,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [UNRELEASED] - 2022-##-##
 
+## [1.17.0] - 2022-04-30
+### Added
+- schedule view
+- EpisodeSchedule, EpisodeCard, and Alert
+- episode schedule for all rated/watchlisted via Drawer
+- episode schedule per show via button in ShowDetailsModal
+- streamable icon on ShowCard
+
+### Changed
+- ShowImage extracted from ShowCard
+- scroll to top on view change instead of after fetch
+- useOnScreen also provides position
+- readme usage, features, and styling
+
 ## [1.16.0] - 2022-04-17
 ### Added
 - external ratings and streaming providers updated daily

@@ -6,6 +6,8 @@ import DisneyIcon from '../images/disney.svg';
 import AppleIcon from '../images/apple.svg';
 import PeacockIcon from '../images/peacock.svg';
 
+export const disneyProviderId = 337;
+
 const providerIdToInfo = {
   8: {
     name: 'netflix',
@@ -27,7 +29,7 @@ const providerIdToInfo = {
     networkId: 3186,
     logo: HboIcon
   },
-  337: {
+  [disneyProviderId]: {
     name: 'disney',
     networkId: 2739,
     logo: DisneyIcon
