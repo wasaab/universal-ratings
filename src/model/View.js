@@ -25,6 +25,7 @@ export default class View {
   static WATCHED = new View('Watched', 'reviewsByUser', {}, true);
   static RECENTLY_RATED = new View('Recently Rated', ...recentlyRatedArgs);
   static RECENTLY_RELEASED = new View('Recently Released', recentlyRatedArgs[0], buildRecentlyReleasedQueryParams());
+  static SCHEDULE = new View('Schedule', null, null, true);
 
   constructor(label, queryName, queryParams = {}, includeAdded) {
     this.label = label;

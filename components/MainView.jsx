@@ -10,8 +10,9 @@ import {
   updateShow
 } from '../src/graphql/mutations.js';
 import * as gqlQuery from '../src/graphql/custom-queries';
-import util from '../src/util';
+import util, { schedule } from '../src/util';
 import { setTheme, useTheme } from './ThemeProvider.jsx';
+import EpisodeSchedule from './EpisodeSchedule';
 import ShowCardGrid from './ShowCardGrid';
 import ShowDetailsModal from './ShowDetailsModal';
 import SettingsModal from './SettingsModal.jsx';
@@ -52,6 +53,7 @@ const MainView = ({ authedUser }) => {
   const [selectedShowIdx, setSelectedShowIdx] = useState(null);
   const [shows, setShows] = useState([]);
   const [trendingShows, setTrendingShows] = useState([]);
+  const [dateToEpisodes, setDateToEpisodes] = useState();
   const [nextToken, setNextToken] = useState();
   const [view, setView] = useState(View.HOME);
   const [loading, setLoading] = useState(null);
@@ -110,10 +112,8 @@ const MainView = ({ authedUser }) => {
         const uniqueShows = updatedShows.filter((show) => !isTrending(show));
 
         setShows([...trendingShows, ...uniqueShows]);
-        util.scrollToTop();
       } else {
         setShows(updatedShows);
-        util.scrollToTop();
       }
 
       setNextToken(data[queryName].nextToken);
@@ -125,6 +125,31 @@ const MainView = ({ authedUser }) => {
   };
 
   /**
+   * Fetches the schedule of the selected TV show or
+   * all TV shows the user has rated/watchlisted.
+   */
+  const fetchSchedule = async () => {
+    setLoading(Loading.VIEW);
+
+    if (selectedShow) {
+      unselectShow();
+
+      const updatedShow = await schedule.fetchShowSchedule(selectedShow);
+
+      setShows([updatedShow]);
+      setDateToEpisodes(updatedShow.dateToEpisodes);
+    } else {
+      const { recentShows, overallDateToEpisodes } = await schedule.fetchOverallShowSchedule(user.id, watchlist);
+
+      setShows(recentShows);
+      setDateToEpisodes(overallDateToEpisodes);
+    }
+
+    setNextToken(null);
+    setLoading(null);
+  };
+
+  /**
    * Changes view and fetches shows for that view upon drawer selection.
    *
    * @param {View} selectedView - the selected view
@@ -132,12 +157,14 @@ const MainView = ({ authedUser }) => {
   const handleDrawerSelection = (selectedView) => {
     if (selectedView === View.WATCHLIST) {
       setShows(watchlist);
-      util.scrollToTop();
+    } else if (selectedView === View.SCHEDULE) {
+      fetchSchedule();
     } else {
       fetchShows(selectedView);
     }
 
     setView(selectedView);
+    util.scrollToTop();
   };
 
   /**
@@ -171,15 +198,35 @@ const MainView = ({ authedUser }) => {
     }
   };
 
+  const addToSchedule = async (show = selectedShow) => {
+    const updatedShow = await schedule.getEpisodesOfLatestSeason(show);
+
+    if (!updatedShow) { return; }
+
+    if (updatedShow.rating) {
+      addShow(updatedShow);
+    }
+
+    schedule.buildOrUpdateOverallDateToEpisodes([updatedShow], dateToEpisodes);
+  };
+
+  const removeFromSchedule = (show = selectedShow, showIdx = selectedShowIdx) => {
+    schedule.removeShow(show, dateToEpisodes);
+    removeOrResetShowInGrid(show, showIdx ?? findSelectedShowIdx());
+    unselectShow();
+  };
+
+  const isShowReviewedByUser = () => util.findUserReview(selectedShow.reviews?.items, user.name);
+
   const removeFromWatchlist = (showId) => {
     const updatedWatchlist = watchlist.filter(({ id }) => id !== showId);
 
     setWatchlist(updatedWatchlist);
 
-    if (view !== View.WATCHLIST) { return; }
-
-    setShows(updatedWatchlist);
-    unselectShow();
+    if (view === View.WATCHLIST) {
+      setShows(updatedWatchlist);
+      unselectShow();
+    }
   };
 
   const addToWatchlist = () => {
@@ -187,11 +234,36 @@ const MainView = ({ authedUser }) => {
 
     setWatchlist(updatedWatchlist);
 
-    if (view !== View.WATCHLIST) { return; }
-
-    setShows(updatedWatchlist);
+    if (view === View.WATCHLIST) {
+      setShows(updatedWatchlist);
+    }
   };
 
+  /**
+   * Adds or removes show from watchlist.
+   * Also adds or removes show from schedule when on SCHEDULE view
+   * and the show is not rated by the user.
+   *
+   * @param {boolean} isRemoval - whether or not this is a watchlist removal
+   * @param {string} showId - the id of the show being added/removed from watchlist
+   */
+  const updateWatchlistAndSchedule = (isRemoval, showId) => {
+    const isScheduleChange = view === View.SCHEDULE && !isShowReviewedByUser();
+
+    if (isRemoval) {
+      removeFromWatchlist(showId);
+
+      if (isScheduleChange) {
+        removeFromSchedule();
+      }
+    } else {
+      addToWatchlist();
+
+      if (isScheduleChange) {
+        addToSchedule();
+      }
+    }
+  };
 
   /**
    * Handles watchlist addition and removal.
@@ -218,11 +290,7 @@ const MainView = ({ authedUser }) => {
       return;
     }
 
-    if (isRemoval) {
-      removeFromWatchlist(showId);
-    } else {
-      addToWatchlist();
-    }
+    updateWatchlistAndSchedule(isRemoval, showId);
   };
 
   /**
@@ -353,6 +421,10 @@ const MainView = ({ authedUser }) => {
       } else {
         updateShows(show, showIdx !== -1);
       }
+
+      if (view === View.SCHEDULE && watchlistIdx === -1) {
+        removeFromSchedule(show, showIdx);
+      }
     } catch (err) {
       console.error(`Failed to remove review "${show.id}:${user.id}": `, err);
     }
@@ -397,6 +469,10 @@ const MainView = ({ authedUser }) => {
     } else {
       util.createShowReview(show, currUserRating, !prevUserRating, user.id);
       updateShows(show, isShowInGrid, currUserRating);
+
+      if (view === View.SCHEDULE && !prevUserRating && watchlistIdx === -1) {
+        addToSchedule(show);
+      }
     }
   };
 
@@ -409,7 +485,7 @@ const MainView = ({ authedUser }) => {
     try {
       const { data } = await API.graphql(graphqlOperation(gqlQuery.getShow, { id: show.objectID }));
 
-      if (show.rating) {
+      if (data.getShow.rating) {
         util.updateAvgRating(data.getShow);
       }
 
@@ -576,6 +652,7 @@ const MainView = ({ authedUser }) => {
       <Drawer
         width={drawerWidth}
         open={drawerOpen}
+        selectedView={view}
         onClose={() => setDrawerOpen(false)}
         onSelect={handleDrawerSelection}
       />
@@ -592,6 +669,7 @@ const MainView = ({ authedUser }) => {
             onShowAdded={createRatedShow}
             onFavoriteChange={handleFavoriteChange}
             onWatchlistChange={handleWatchlistChange}
+            onScheduleOpen={() => handleDrawerSelection(View.SCHEDULE)}
             onClose={unselectShow}
           />
         )}
@@ -608,14 +686,22 @@ const MainView = ({ authedUser }) => {
           <SettingsModal onClose={closeModal} />
         )}
 
-        <ShowCardGrid
-          shows={shows}
-          trendingShowsCount={view === View.HOME ? trendingShows.length : 0}
-          userName={user.name}
-          onRatingChange={handleRatingChange}
-          onShowAdded={createRatedShow}
-          onShowSelected={selectShow}
-        />
+        {view === View.SCHEDULE && !loading ? (
+          <EpisodeSchedule
+            shows={shows}
+            dateToEpisodes={dateToEpisodes}
+            onShowSelected={selectShow}
+          />
+        ) : (
+          <ShowCardGrid
+            shows={shows}
+            trendingShowsCount={view === View.HOME ? trendingShows.length : 0}
+            userName={user.name}
+            onRatingChange={handleRatingChange}
+            onShowAdded={createRatedShow}
+            onShowSelected={selectShow}
+          />
+        )}
 
         <ScrollAwareProgress
           loadingType={loading}

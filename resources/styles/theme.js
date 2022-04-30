@@ -22,6 +22,9 @@ const defaultTheme = createTheme({
       avatar: '#8100ff'
     }
   },
+  elevation: {
+    card: 3
+  },
   overrides: {
     MuiCssBaseline: {
       '@global': {
@@ -57,6 +60,9 @@ const darkTheme = createTheme({
       avatar: grey[900]
     }
   },
+  elevation: {
+    card: 6
+  },
   overrides: {
     MuiCssBaseline: {
       '@global': {
@@ -91,6 +97,9 @@ const blueTheme = createTheme({
     text: {
       avatar: '#538de6'
     }
+  },
+  elevation: {
+    card: 3
   },
   overrides: {
     MuiCssBaseline: {
