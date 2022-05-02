@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [UNRELEASED] - 2022-##-##
 
+## [1.17.2] - 2022-05-02
+### Fixed
+- shows evicted from search cache on addition/removal
+
 ## [1.17.1] - 2022-05-01
 ### Fixed
 - show addition/removal while on schedule view

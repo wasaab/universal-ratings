@@ -16,6 +16,17 @@ function sortRatedBeforeWatchlist(ratedShowsResp) {
   });
 }
 
+/**
+ * Determines if the provided show is among the cached shows for a query.
+ *
+ * @param {Object[]} shows - the shows to check
+ * @param {string} showId - ID of the show to find
+ * @returns {boolean} whether the show is in the cache entry
+ */
+function isShowInCacheEntry(shows, showId) {
+  return -1 !== shows.findIndex(({ id, tmdbId }) => id === showId || tmdbId === showId);
+}
+
 export class StaleQueryError extends Error {
   constructor(query) {
     super(`Stale query cancelled: ${query}`);
@@ -43,6 +54,19 @@ class SearchClient {
     if (!title || this.cache.has(title)) { return; }
 
     this.cache.set(title, shows);
+  }
+
+  /**
+   * Removes the provided show from the cache.
+   *
+   * @param {string} showId - ID of the show to remove
+   */
+  removeShowFromCache(showId) {
+    this.cache.forEach((shows, query, cache) => {
+      if (!isShowInCacheEntry(shows, showId)) { return; }
+
+      cache.del(query);
+    });
   }
 
   /**

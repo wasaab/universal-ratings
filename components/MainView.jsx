@@ -398,6 +398,8 @@ const MainView = ({ authedUser }) => {
       if (selectedShow) {
         unselectShow();
       }
+
+      searchClient.removeShowFromCache(show.tmdbId);
     } catch (err) {
       console.error(`Failed to remove show "${show.id}": `, err);
     }
@@ -567,6 +569,7 @@ const MainView = ({ authedUser }) => {
         .catch((err) => {
           console.error('GraphQL create show failed. ', err);
         });
+      searchClient.removeShowFromCache(show.tmdbId);
     }
 
     if (!rating) { return; } // Unrated show added to WL
