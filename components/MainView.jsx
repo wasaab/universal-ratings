@@ -201,18 +201,20 @@ const MainView = ({ authedUser }) => {
   const addToSchedule = async (show = selectedShow) => {
     const updatedShow = await schedule.getEpisodesOfLatestSeason(show);
 
-    if (!updatedShow) { return; }
+    if (!updatedShow?.dateToEpisodes) { return; }
 
-    if (updatedShow.rating) {
-      addShow(updatedShow);
-    }
-
+    addShow(updatedShow);
     schedule.buildOrUpdateOverallDateToEpisodes([updatedShow], dateToEpisodes);
+    setDateToEpisodes({ ...dateToEpisodes });
   };
 
-  const removeFromSchedule = (show = selectedShow, showIdx = selectedShowIdx) => {
+  const removeFromSchedule = (showIdx = findSelectedShowIdx()) => {
+    const show = shows[showIdx];
+
+    if (!show) { return; }
+
     schedule.removeShow(show, dateToEpisodes);
-    removeOrResetShowInGrid(show, showIdx ?? findSelectedShowIdx());
+    removeOrResetShowInGrid(show, showIdx);
     unselectShow();
   };
 
@@ -389,7 +391,7 @@ const MainView = ({ authedUser }) => {
 
       maybeUpdateTrending(show, true);
 
-      if (showIdx !== -1) {
+      if (showIdx && showIdx !== -1) {
         removeOrResetShowInGrid(show, showIdx);
       }
 
@@ -423,7 +425,7 @@ const MainView = ({ authedUser }) => {
       }
 
       if (view === View.SCHEDULE && watchlistIdx === -1) {
-        removeFromSchedule(show, showIdx);
+        removeFromSchedule(showIdx);
       }
     } catch (err) {
       console.error(`Failed to remove review "${show.id}:${user.id}": `, err);
@@ -571,9 +573,9 @@ const MainView = ({ authedUser }) => {
 
     handleRatingChange(show, rating, null, showIdx);
 
-    if (null !== showIdx) { return; }
-
-    addShow(show);
+    if (null === showIdx && view !== View.SCHEDULE) {
+      addShow(show);
+    }
   };
 
   const unselectShow = () => {
@@ -686,7 +688,7 @@ const MainView = ({ authedUser }) => {
           <SettingsModal onClose={closeModal} />
         )}
 
-        {view === View.SCHEDULE && !loading ? (
+        {view === View.SCHEDULE && !loading && dateToEpisodes ? (
           <EpisodeSchedule
             shows={shows}
             dateToEpisodes={dateToEpisodes}
