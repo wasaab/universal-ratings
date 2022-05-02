@@ -104,9 +104,9 @@ const EpisodeSchedule = ({ shows, dateToEpisodes, onShowSelected }) => {
     scrollToNearestDay();
   }, [nearestDayRef.current]);
 
-  const renderShowCard = (scheduledShow, ep, releaseDate) => {
-    const show = { ...scheduledShow, ...ep, releaseDate };
-    const showIdx = shows.findIndex(({ id }) => id === show.id);
+  const renderShowCard = (ep, releaseDate) => {
+    const showIdx = shows.findIndex(({ id }) => id === ep.showId);
+    const show = { ...shows[showIdx], ...ep, releaseDate };
 
     return (
       <Grid key={`${showIdx}-${show.episodeNum}`} item>
@@ -119,13 +119,11 @@ const EpisodeSchedule = ({ shows, dateToEpisodes, onShowSelected }) => {
     );
   };
 
-  const renderEpisodes = (day) => dateToEpisodes[day]
-    .map((show) => show.episodes.map((ep) => renderShowCard(show, ep, day)));
-
   const renderSchedule = () => {
+    const days = Object.keys(dateToEpisodes).sort();
     let nearestDay;
 
-    return Object.keys(dateToEpisodes).map((day) => {
+    return days.map((day) => {
       if (!nearestDay && today.isSameOrBefore(day, 'day')) {
         nearestDay = day;
       }
@@ -149,7 +147,7 @@ const EpisodeSchedule = ({ shows, dateToEpisodes, onShowSelected }) => {
             </Typography>
           </Box>
           <Grid container spacing={2} wrap="wrap">
-           {renderEpisodes(day)}
+           {dateToEpisodes[day].map((ep) => renderShowCard(ep, day))}
           </Grid>
         </Fragment>
       );

@@ -25,16 +25,16 @@ function isRecentlyAired(airDate) {
  * Builds the mapping of date to episodes that air on that day
  * for the season of a show.
  *
- * @param {Object} show - the show to build date to episode mapping for
+ * @param {string} showId - ID of the show to build date to episode mapping for
  * @param {Object[]} episodes - the episodes in the season
  * @param {number} seasonNum - the season number
  * @returns {Object} the date to episode mapping
  */
-function buildSeasonDateToEpisodes(show, episodes, seasonNum) {
+function buildSeasonDateToEpisodes(showId, episodes, seasonNum) {
   const dateToEpisodes = {};
 
   episodes.forEach(({ airDate, title, episodeNum, description }) => {
-    const episode = { title, seasonNum, episodeNum };
+    const episode = { showId, title, seasonNum, episodeNum };
 
     if (description) {
       episode.description = description;
@@ -45,9 +45,9 @@ function buildSeasonDateToEpisodes(show, episodes, seasonNum) {
     }
 
     if (dateToEpisodes[airDate]) {
-      dateToEpisodes[airDate].episodes.push(episode);
+      dateToEpisodes[airDate].push(episode);
     } else {
-      dateToEpisodes[airDate] = { ...show, episodes: [episode] };
+      dateToEpisodes[airDate] = [episode];
     }
   });
 
@@ -70,7 +70,7 @@ export async function getEpisodesOfLatestSeason(show, unlimitedTimeframe) {
     const { data: episodes } = await searchClient.fetchEpisodesOfSeason(show.tmdbId, seasonNum);
 
     show.seasonNum = seasonNum;
-    show.dateToEpisodes = buildSeasonDateToEpisodes(show, episodes, seasonNum);
+    show.dateToEpisodes = buildSeasonDateToEpisodes(show.id, episodes, seasonNum);
   } catch (err) {
     console.error(`Failed to fetch schedule for show "${show.id}"`, err);
 
@@ -97,8 +97,8 @@ export function buildOrUpdateOverallDateToEpisodes(shows, overallDateToEpisodes 
   do {
     const day = date.add(1, 'days').format('YYYY-MM-DD'); // date addition is cumulative
     const epsOnDay = shows
-      .map((show) => show.dateToEpisodes[day])
-      .filter((episodes) => episodes);
+      .flatMap((show) => show.dateToEpisodes[day])
+      .filter((ep) => ep);
 
     if (epsOnDay.length === 0) { continue; }
 
@@ -124,11 +124,6 @@ export async function fetchShowSchedule(show) {
   if (!updatedShow?.dateToEpisodes) {
     return { ...show, dateToEpisodes: {} };
   }
-
-  // map to overall dateToEpsidodes array format that EpisodeSchedule uses
-  Object.keys(updatedShow.dateToEpisodes).forEach((day) => {
-    updatedShow.dateToEpisodes[day] = [updatedShow.dateToEpisodes[day]];
-  });
 
   return updatedShow;
 }
@@ -187,7 +182,7 @@ export async function fetchOverallShowSchedule(userId, watchlist) {
  */
 export function removeShow(show, dateToEpisodes) {
   Object.keys(show.dateToEpisodes).forEach((day) => {
-    const epsOnDay = dateToEpisodes[day]?.filter(({ id }) => id !== show.id);
+    const epsOnDay = dateToEpisodes[day]?.filter(({ showId }) => showId !== show.id);
 
     if (epsOnDay?.length === 0) {
       delete dateToEpisodes[day];
