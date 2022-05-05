@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
+import moment from 'moment';
 import { makeStyles } from '@material-ui/core/styles';
 import API, { graphqlOperation } from '@aws-amplify/api';
 import {
@@ -52,7 +53,7 @@ const MainView = ({ authedUser }) => {
   const [selectedShow, setSelectedShow] = useState(null);
   const [selectedShowIdx, setSelectedShowIdx] = useState(null);
   const [shows, setShows] = useState([]);
-  const [trendingShows, setTrendingShows] = useState([]);
+  const [trending, setTrending] = useState(null);
   const [dateToEpisodes, setDateToEpisodes] = useState();
   const [nextToken, setNextToken] = useState();
   const [view, setView] = useState(View.HOME);
@@ -83,7 +84,7 @@ const MainView = ({ authedUser }) => {
   };
 
 
-  const findTrendingShowIdx = ({ id }) => trendingShows.findIndex((show) => show.id === id);
+  const findTrendingShowIdx = ({ id }) => trending.shows.findIndex((show) => show.id === id);
   const isTrending = (show) => -1 !== findTrendingShowIdx(show);
 
   /**
@@ -111,7 +112,7 @@ const MainView = ({ authedUser }) => {
       } else if (targetView === View.HOME) {
         const uniqueShows = updatedShows.filter((show) => !isTrending(show));
 
-        setShows([...trendingShows, ...uniqueShows]);
+        setShows([...trending.shows, ...uniqueShows]);
       } else {
         setShows(updatedShows);
       }
@@ -159,6 +160,8 @@ const MainView = ({ authedUser }) => {
       setShows(watchlist);
     } else if (selectedView === View.SCHEDULE) {
       fetchSchedule();
+    } else if (selectedView === View.HOME && moment().isAfter(trending.expirationTime)) {
+      fetchTrendingShows();
     } else {
       fetchShows(selectedView);
     }
@@ -331,8 +334,8 @@ const MainView = ({ authedUser }) => {
       resetTrendingShow(updatedShow);
     }
 
-    trendingShows[trendingShowIdx] = updatedShow;
-    setTrendingShows([...trendingShows]);
+    trending.shows[trendingShowIdx] = updatedShow;
+    setTrending({ ...trending });
   };
 
   /**
@@ -364,7 +367,7 @@ const MainView = ({ authedUser }) => {
    * @param {number} showIdx - the index of the show
    */
   const removeOrResetShowInGrid = (show, showIdx) => {
-    if (view === View.HOME && showIdx < trendingShows.length) {
+    if (view === View.HOME && showIdx < trending.shows.length) {
       resetTrendingShow(show);
     } else {
       shows.splice(showIdx, 1);
@@ -530,8 +533,8 @@ const MainView = ({ authedUser }) => {
     setSelectedShow(show);
 
     if (view === View.HOME) {
-      setSelectedShowIdx(trendingShows.length);
-      shows.splice(trendingShows.length, 0, show);
+      setSelectedShowIdx(trending.shows.length);
+      shows.splice(trending.shows.length, 0, show);
       setShows([...shows]);
     } else if (view.includeAdded || view === View.fromShowType(show.type)) {
       setSelectedShowIdx(0);
@@ -626,8 +629,13 @@ const MainView = ({ authedUser }) => {
   const fetchTrendingShows = async () => {
     const { data: unratedTrendingShows } = await searchClient.fetchTrendingShows();
     const ratedTrendingShows = await Promise.all(unratedTrendingShows.map(util.maybeFetchRatedTrendingShow));
+    const expirationTime = moment()
+      .startOf('day')
+      .add(1, 'day') // trending updates daily
+      .valueOf();
 
-    setTrendingShows(ratedTrendingShows);
+    setNextToken(null);
+    setTrending({ shows: ratedTrendingShows, expirationTime });
     setShows(ratedTrendingShows);
   };
 
@@ -637,10 +645,10 @@ const MainView = ({ authedUser }) => {
   }, []);
 
   useEffect(() => {
-    if (trendingShows.length === 0) { return; }
+    if (!trending) { return; }
 
     fetchShows();
-  }, [trendingShows]);
+  }, [trending]);
 
   return (
     <div className={classes.root}>
@@ -700,7 +708,7 @@ const MainView = ({ authedUser }) => {
         ) : (
           <ShowCardGrid
             shows={shows}
-            trendingShowsCount={view === View.HOME ? trendingShows.length : 0}
+            trendingShowsCount={view === View.HOME && trending ? trending.shows.length : 0}
             userName={user.name}
             onRatingChange={handleRatingChange}
             onShowAdded={createRatedShow}
