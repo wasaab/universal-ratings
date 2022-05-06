@@ -20,7 +20,7 @@ const useStyles = makeStyles({
 const ScrollAwareProgress = ({ loadingType, backdropLeftStyle, onEndOfPageReached }) => {
   const classes = useStyles();
   const endOfPageRef = useRef();
-  const isEndOfPageVisisble = useOnScreen(endOfPageRef);
+  const [isEndOfPageVisisble] = useOnScreen(endOfPageRef);
 
   useEffect(() => {
     if (!isEndOfPageVisisble) { return; }

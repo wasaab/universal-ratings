@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
+import moment from 'moment';
 import { makeStyles } from '@material-ui/core/styles';
 import API, { graphqlOperation } from '@aws-amplify/api';
 import {
@@ -14,6 +15,7 @@ import * as util from '../src/util';
 import {
   Drawer,
   Toolbar,
+  EpisodeSchedule,
   ShowCardGrid,
   ShowDetailsModal,
   SettingsModal,
@@ -52,8 +54,9 @@ const Index = ({ authedUser, initialTrendingShows = [] }) => {
   const [openedModal, setOpenedModal] = useState(null);
   const [selectedShow, setSelectedShow] = useState(null);
   const [selectedShowIdx, setSelectedShowIdx] = useState(null);
-  const [shows, setShows] = useState(initialTrendingShows);
-  const [trendingShows, setTrendingShows] = useState(initialTrendingShows);
+  const [shows, setShows] = useState([]);
+  const [trending, setTrending] = useState(null);
+  const [dateToEpisodes, setDateToEpisodes] = useState();
   const [nextToken, setNextToken] = useState();
   const [view, setView] = useState(View.HOME);
   const [loading, setLoading] = useState(null);
@@ -83,7 +86,7 @@ const Index = ({ authedUser, initialTrendingShows = [] }) => {
   };
 
 
-  const findTrendingShowIdx = ({ id }) => trendingShows.findIndex((show) => show.id === id);
+  const findTrendingShowIdx = ({ id }) => trending.shows.findIndex((show) => show.id === id);
   const isTrending = (show) => -1 !== findTrendingShowIdx(show);
 
   const scrollToTop = () => {
@@ -115,11 +118,9 @@ const Index = ({ authedUser, initialTrendingShows = [] }) => {
       } else if (targetView === View.HOME) {
         const uniqueShows = updatedShows.filter((show) => !isTrending(show));
 
-        setShows([...trendingShows, ...uniqueShows]);
-        scrollToTop();
+        setShows([...trending.shows, ...uniqueShows]);
       } else {
         setShows(updatedShows);
-        scrollToTop();
       }
 
       setNextToken(data[queryName].nextToken);
@@ -131,6 +132,31 @@ const Index = ({ authedUser, initialTrendingShows = [] }) => {
   };
 
   /**
+   * Fetches the schedule of the selected TV show or
+   * all TV shows the user has rated/watchlisted.
+   */
+  const fetchSchedule = async () => {
+    setLoading(Loading.VIEW);
+
+    if (selectedShow) {
+      unselectShow();
+
+      const updatedShow = await schedule.fetchShowSchedule(selectedShow);
+
+      setShows([updatedShow]);
+      setDateToEpisodes(updatedShow.dateToEpisodes);
+    } else {
+      const { recentShows, overallDateToEpisodes } = await schedule.fetchOverallShowSchedule(user.id, watchlist);
+
+      setShows(recentShows);
+      setDateToEpisodes(overallDateToEpisodes);
+    }
+
+    setNextToken(null);
+    setLoading(null);
+  };
+
+  /**
    * Changes view and fetches shows for that view upon drawer selection.
    *
    * @param {View} selectedView - the selected view
@@ -138,12 +164,16 @@ const Index = ({ authedUser, initialTrendingShows = [] }) => {
   const handleDrawerSelection = (selectedView) => {
     if (selectedView === View.WATCHLIST) {
       setShows(watchlist);
-      scrollToTop();
+    } else if (selectedView === View.SCHEDULE) {
+      fetchSchedule();
+    } else if (selectedView === View.HOME && moment().isAfter(trending.expirationTime)) {
+      fetchTrendingShows();
     } else {
       fetchShows(selectedView);
     }
 
     setView(selectedView);
+    util.scrollToTop();
   };
 
   /**
@@ -177,15 +207,37 @@ const Index = ({ authedUser, initialTrendingShows = [] }) => {
     }
   };
 
+  const addToSchedule = async (show = selectedShow) => {
+    const updatedShow = await schedule.getEpisodesOfLatestSeason(show);
+
+    if (!updatedShow?.dateToEpisodes) { return; }
+
+    addShow(updatedShow);
+    schedule.buildOrUpdateOverallDateToEpisodes([updatedShow], dateToEpisodes);
+    setDateToEpisodes({ ...dateToEpisodes });
+  };
+
+  const removeFromSchedule = (showIdx = findSelectedShowIdx()) => {
+    const show = shows[showIdx];
+
+    if (!show) { return; }
+
+    schedule.removeShow(show, dateToEpisodes);
+    removeOrResetShowInGrid(show, showIdx);
+    unselectShow();
+  };
+
+  const isShowReviewedByUser = () => util.findUserReview(selectedShow.reviews?.items, user.name);
+
   const removeFromWatchlist = (showId) => {
     const updatedWatchlist = watchlist.filter(({ id }) => id !== showId);
 
     setWatchlist(updatedWatchlist);
 
-    if (view !== View.WATCHLIST) { return; }
-
-    setShows(updatedWatchlist);
-    unselectShow();
+    if (view === View.WATCHLIST) {
+      setShows(updatedWatchlist);
+      unselectShow();
+    }
   };
 
   const addToWatchlist = () => {
@@ -193,11 +245,36 @@ const Index = ({ authedUser, initialTrendingShows = [] }) => {
 
     setWatchlist(updatedWatchlist);
 
-    if (view !== View.WATCHLIST) { return; }
-
-    setShows(updatedWatchlist);
+    if (view === View.WATCHLIST) {
+      setShows(updatedWatchlist);
+    }
   };
 
+  /**
+   * Adds or removes show from watchlist.
+   * Also adds or removes show from schedule when on SCHEDULE view
+   * and the show is not rated by the user.
+   *
+   * @param {boolean} isRemoval - whether or not this is a watchlist removal
+   * @param {string} showId - the id of the show being added/removed from watchlist
+   */
+  const updateWatchlistAndSchedule = (isRemoval, showId) => {
+    const isScheduleChange = view === View.SCHEDULE && !isShowReviewedByUser();
+
+    if (isRemoval) {
+      removeFromWatchlist(showId);
+
+      if (isScheduleChange) {
+        removeFromSchedule();
+      }
+    } else {
+      addToWatchlist();
+
+      if (isScheduleChange) {
+        addToSchedule();
+      }
+    }
+  };
 
   /**
    * Handles watchlist addition and removal.
@@ -225,11 +302,7 @@ const Index = ({ authedUser, initialTrendingShows = [] }) => {
       return;
     }
 
-    if (isRemoval) {
-      removeFromWatchlist(showId);
-    } else {
-      addToWatchlist();
-    }
+    updateWatchlistAndSchedule(isRemoval, showId);
   };
 
   /**
@@ -263,8 +336,8 @@ const Index = ({ authedUser, initialTrendingShows = [] }) => {
       util.resetTrendingShow(updatedShow);
     }
 
-    trendingShows[trendingShowIdx] = updatedShow;
-    setTrendingShows([...trendingShows]);
+    trending.shows[trendingShowIdx] = updatedShow;
+    setTrending({ ...trending });
   };
 
   /**
@@ -296,7 +369,7 @@ const Index = ({ authedUser, initialTrendingShows = [] }) => {
    * @param {number} showIdx - the index of the show
    */
   const removeOrResetShowInGrid = (show, showIdx) => {
-    if (view === View.HOME && showIdx < trendingShows.length) {
+    if (view === View.HOME && showIdx < trending.shows.length) {
       util.resetTrendingShow(show);
     } else {
       shows.splice(showIdx, 1);
@@ -323,13 +396,15 @@ const Index = ({ authedUser, initialTrendingShows = [] }) => {
 
       maybeUpdateTrending(show, true);
 
-      if (showIdx !== -1) {
+      if (showIdx && showIdx !== -1) {
         removeOrResetShowInGrid(show, showIdx);
       }
 
       if (selectedShow) {
         unselectShow();
       }
+
+      searchClient.removeShowFromCache(show.tmdbId);
     } catch (err) {
       console.error(`Failed to remove show "${show.id}": `, err);
     }
@@ -354,6 +429,10 @@ const Index = ({ authedUser, initialTrendingShows = [] }) => {
         removeShow(show, showIdx);
       } else {
         updateShows(show, showIdx !== -1);
+      }
+
+      if (view === View.SCHEDULE && watchlistIdx === -1) {
+        removeFromSchedule(showIdx);
       }
     } catch (err) {
       console.error(`Failed to remove review "${show.id}:${user.id}": `, err);
@@ -399,6 +478,10 @@ const Index = ({ authedUser, initialTrendingShows = [] }) => {
     } else {
       util.createShowReview(show, currUserRating, !prevUserRating, user.id);
       updateShows(show, isShowInGrid, currUserRating);
+
+      if (view === View.SCHEDULE && !prevUserRating && watchlistIdx === -1) {
+        addToSchedule(show);
+      }
     }
   };
 
@@ -446,8 +529,8 @@ const Index = ({ authedUser, initialTrendingShows = [] }) => {
     setSelectedShow(show);
 
     if (view === View.HOME) {
-      setSelectedShowIdx(trendingShows.length);
-      shows.splice(trendingShows.length, 0, show);
+      setSelectedShowIdx(trending.shows.length);
+      shows.splice(trending.shows.length, 0, show);
       setShows([...shows]);
     } else if (view.includeAdded || view === View.fromShowType(show.type)) {
       setSelectedShowIdx(0);
@@ -485,15 +568,16 @@ const Index = ({ authedUser, initialTrendingShows = [] }) => {
         .catch((err) => {
           console.error('GraphQL create show failed. ', err);
         });
+      searchClient.removeShowFromCache(show.tmdbId);
     }
 
     if (!rating) { return; } // Unrated show added to WL
 
     handleRatingChange(show, rating, null, showIdx);
 
-    if (null !== showIdx) { return; }
-
-    addShow(show);
+    if (null === showIdx && view !== View.SCHEDULE) {
+      addShow(show);
+    }
   };
 
   const unselectShow = () => {
@@ -542,8 +626,13 @@ const Index = ({ authedUser, initialTrendingShows = [] }) => {
     const { data: unratedTrendingShows } = await searchClient.fetchTrendingShows();
 
     const ratedTrendingShows = await Promise.all(unratedTrendingShows.map(util.maybeFetchRatedTrendingShow));
+    const expirationTime = moment()
+      .startOf('day')
+      .add(1, 'day') // trending updates daily
+      .valueOf();
 
-    setTrendingShows(ratedTrendingShows);
+    setNextToken(null);
+    setTrending({ shows: ratedTrendingShows, expirationTime });
     setShows(ratedTrendingShows);
   };
 
@@ -553,10 +642,10 @@ const Index = ({ authedUser, initialTrendingShows = [] }) => {
   }, []);
 
   useEffect(() => {
-    if (trendingShows.length === 0) { return; }
+    if (!trending) { return; }
 
     fetchShows();
-  }, [trendingShows]);
+  }, [trending]);
 
   return (
     <div className={classes.root}>
@@ -571,6 +660,7 @@ const Index = ({ authedUser, initialTrendingShows = [] }) => {
 
       <Drawer
         open={drawerOpen}
+        selectedView={view}
         onClose={() => setDrawerOpen(false)}
         onSelect={handleDrawerSelection}
       />
@@ -587,6 +677,7 @@ const Index = ({ authedUser, initialTrendingShows = [] }) => {
             onShowAdded={createRatedShow}
             onFavoriteChange={handleFavoriteChange}
             onWatchlistChange={handleWatchlistChange}
+            onScheduleOpen={() => handleDrawerSelection(View.SCHEDULE)}
             onClose={unselectShow}
           />
         )}
@@ -603,14 +694,22 @@ const Index = ({ authedUser, initialTrendingShows = [] }) => {
           <SettingsModal onClose={closeModal} />
         )}
 
-        <ShowCardGrid
-          shows={shows}
-          trendingShowsCount={view === View.HOME ? trendingShows.length : 0}
-          userName={user.name}
-          onRatingChange={handleRatingChange}
-          onShowAdded={createRatedShow}
-          onShowSelected={selectShow}
-        />
+        {view === View.SCHEDULE && !loading && dateToEpisodes ? (
+          <EpisodeSchedule
+            shows={shows}
+            dateToEpisodes={dateToEpisodes}
+            onShowSelected={selectShow}
+          />
+        ) : (
+          <ShowCardGrid
+            shows={shows}
+            trendingShowsCount={view === View.HOME && trending ? trending.shows.length : 0}
+            userName={user.name}
+            onRatingChange={handleRatingChange}
+            onShowAdded={createRatedShow}
+            onShowSelected={selectShow}
+          />
+        )}
 
         <ScrollAwareProgress
           loadingType={loading}

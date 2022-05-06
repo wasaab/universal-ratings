@@ -16,6 +16,17 @@ function sortRatedBeforeWatchlist(ratedShowsResp) {
   });
 }
 
+/**
+ * Determines if the provided show is among the cached shows for a query.
+ *
+ * @param {Object[]} shows - the shows to check
+ * @param {string} showId - ID of the show to find
+ * @returns {boolean} whether the show is in the cache entry
+ */
+function isShowInCacheEntry(shows, showId) {
+  return -1 !== shows.findIndex(({ id, tmdbId }) => id === showId || tmdbId === showId);
+}
+
 export class StaleQueryError extends Error {
   constructor(query) {
     super(`Stale query cancelled: ${query}`);
@@ -43,6 +54,19 @@ class SearchClient {
     if (!title || this.cache.has(title)) { return; }
 
     this.cache.set(title, shows);
+  }
+
+  /**
+   * Removes the provided show from the cache.
+   *
+   * @param {string} showId - ID of the show to remove
+   */
+  removeShowFromCache(showId) {
+    this.cache.forEach((shows, query, cache) => {
+      if (!isShowInCacheEntry(shows, showId)) { return; }
+
+      cache.del(query);
+    });
   }
 
   /**
@@ -111,6 +135,27 @@ class SearchClient {
    */
   fetchTrendingShows() {
     return axios.get('/api/search');
+  }
+
+  /**
+   * Fetches the episode schedule metadata for a tv show.
+   *
+   * @param {string} id - the id of the show
+   * @returns {Promise<Object>} the show schedule metadata
+   */
+  fetchScheduleMetadata(id) {
+    return axios.get(`/api/search`, { params: { id, schedule: true } });
+  }
+
+  /**
+   * Gets the episodes of a tv show's season.
+   *
+   * @param {string} tmdbId the show's TMDB ID
+   * @param {number} season the season to get episodes of
+   * @returns {Object[]} the episodes of the season
+   */
+  fetchEpisodesOfSeason(id, season) {
+    return axios.get(`/api/search`, { params: { id, season } });
   }
 
   /**

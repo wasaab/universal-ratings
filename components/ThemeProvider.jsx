@@ -39,7 +39,7 @@ const reducer = (userId) => (state, action) => {
     }
     case ThemeAction.SET_THEME: {
       return {
-        theme: nameToTheme[action.themeName],
+        theme: nameToTheme[action.themeName] ?? state.theme,
         themePref: action.isPreference ? action.themeName : state.themePref
       };
     }

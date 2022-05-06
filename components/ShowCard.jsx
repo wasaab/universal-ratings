@@ -7,38 +7,44 @@ import {
   CardContent,
   Typography,
 } from '@material-ui/core';
-import Image from 'next/image';
+import { PlayCircleFilledTwoTone as StreamableIcon } from '@material-ui/icons';
 import StarButtons from './StarButtons';
+import ShowImage from './ShowImage';
 import { ShowType } from '../src/model';
 
 const useStyles = makeStyles({
-  root: {
+  dynamicWidthRoot: {
     maxWidth: 345,
     minWidth: 200
   },
-  media: {
-    height: 200,
+  content: {
+    paddingBottom: 8,
     position: 'relative'
   },
-  actions: {
-    justifyContent: 'center'
-  },
-  content: {
-    height: 84,
-    paddingBottom: 4,
+  title: {
+    height: '3em',
     display: '-webkit-box',
     overflow: 'hidden',
     lineClamp: 2,
     boxOrient: 'vertical',
     position: 'relative'
   },
-  showTypeIcon: {
+  actions: {
+    justifyContent: 'center'
+  },
+  tags: {
+    display: 'flex',
+    alignItems: 'center',
+    gridGap: 8,
     position: 'absolute',
     right: 5,
     top: 3,
-    fontSize: 18,
-    opacity: 0.8
-  }
+    opacity: 0.8,
+    '& .MuiSvgIcon-root': {
+      fontSize: 18,
+      opacity: 0.8
+    }
+  },
 });
 
 const ShowCard = ({ show, userRating, onRatingChange, onClick }) => {
@@ -46,22 +52,16 @@ const ShowCard = ({ show, userRating, onRatingChange, onClick }) => {
   const TypeIcon = ShowType.toTwoToneIcon(show.type);
 
   return (
-    <Card className={classes.root}>
+    <Card className={classes.dynamicWidthRoot}>
       <CardActionArea onClick={onClick}>
-        <div className={classes.media}>
-          {show.img && (
-            <Image
-              src={show.img}
-              alt={show.title}
-              layout="fill"
-              objectFit="cover"
-              objectPosition="top"
-            />
-          )}
-        </div>
+        <ShowImage show={show} />
         <CardContent className={classes.content}>
-          <TypeIcon className={classes.showTypeIcon} />
-          <Typography variant="h6" component="h6">
+          <div className={classes.tags}>
+            <TypeIcon />
+            {show.providerIds?.length > 0 && <StreamableIcon />}
+          </div>
+
+          <Typography className={classes.title} variant="h6">
             {show.title}
           </Typography>
         </CardContent>

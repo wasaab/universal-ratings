@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import {
@@ -19,7 +18,8 @@ import {
   Favorite as FavoriteIcon,
   WatchLater as WatchLaterIcon,
   Visibility as VisibilityIcon,
-  Home as HomeIcon
+  Home as HomeIcon,
+  Today as CalendarIcon
 } from '@material-ui/icons/';
 import { View, Width } from '../src/model';
 import TmdbIcon from '../resources/images/tmdb.svg';
@@ -63,21 +63,15 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const Drawer = ({ open, onClose, onSelect }) => {
-  const classes = useStyles();
-  const [selectedView, setSelectedView] = useState(View.HOME);
+const Drawer = ({ open, width, selectedView, onClose, onSelect }) => {
+  const classes = useStyles({ width });
   const drawerStateClass = open ? classes.drawerOpen : classes.drawerClose;
-
-  const handleSelection = (title) => {
-    onSelect(title);
-    setSelectedView(title);
-  };
 
   const DrawerMenuItem = ({ view, LeftIcon }) => (
     <ListItem
       button
       key={view.label}
-      onClick={() => handleSelection(view)}
+      onClick={() => onSelect(view)}
       disabled={view === selectedView}
     >
       <ListItemIcon>
@@ -116,6 +110,7 @@ const Drawer = ({ open, onClose, onSelect }) => {
         <DrawerMenuItem view={View.FAVORITES} LeftIcon={FavoriteIcon} />
         <DrawerMenuItem view={View.WATCHLIST} LeftIcon={WatchLaterIcon} />
         <DrawerMenuItem view={View.WATCHED} LeftIcon={VisibilityIcon} />
+        <DrawerMenuItem view={View.SCHEDULE} LeftIcon={CalendarIcon} />
       </List>
 
       <div title="This site uses the TMDB API for show details but is not endorsed or certified by TMDB">

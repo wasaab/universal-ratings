@@ -15,6 +15,7 @@ import {
 import {
   Favorite as FavoriteIcon,
   FavoriteBorder as FavoriteOutlineIcon,
+  Today as ScheduleIcon,
   WatchLater as WatchLaterIcon,
   WatchLaterOutlined as WatchLaterOutlineIcon,
 } from '@material-ui/icons/';
@@ -155,8 +156,12 @@ const useStyles = makeStyles((theme) => ({
       }
     }
   },
-  huluIcon: {
-    fill: `${theme.palette.text.primary} !important`
+  scheduleButton: {
+    position: 'absolute',
+    top: 10,
+    right: 12,
+    padding: 8,
+    fontSize: 22
   }
 }));
 
@@ -169,6 +174,7 @@ const ShowDetailsModal = ({
   onFavoriteChange,
   onRatingChange,
   onShowAdded,
+  onScheduleOpen,
   onClose
 }) => {
   const classes = useStyles(show);
@@ -207,10 +213,10 @@ const ShowDetailsModal = ({
     }
   };
 
-  const renderProviderLogo = (id, i) => {
-    const { logo: ProviderLogo } = providerIdToInfo[id];
+  const renderProviderLogo = (providerId) => {
+    const { logo: ProviderLogo } = providerIdToInfo[providerId];
 
-    return <ProviderLogo key={i} />;
+    return <ProviderLogo key={providerId} />;
   };
 
   return (
@@ -259,6 +265,11 @@ const ShowDetailsModal = ({
               <Typography variant="h4" gutterBottom>
                 {show.title}
               </Typography>
+              {show.type === ShowType.TV && (
+                <IconButton className={classes.scheduleButton} onClick={onScheduleOpen}>
+                  <ScheduleIcon fontSize="inherit" />
+                </IconButton>
+              )}
             </Grid>
 
             <Grid item container xs spacing={2} direction="row">

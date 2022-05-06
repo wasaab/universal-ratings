@@ -5,6 +5,41 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [UNRELEASED] - 2022-##-##
+### Added
+- trending shows ttl
+
+## [1.17.2] - 2022-05-02
+### Fixed
+- shows evicted from search cache on addition/removal
+
+## [1.17.1] - 2022-05-01
+### Fixed
+- show addition/removal while on schedule view
+
+## [1.17.0] - 2022-04-30
+### Added
+- schedule view
+- EpisodeSchedule, EpisodeCard, and Alert
+- episode schedule for all rated/watchlisted via Drawer
+- episode schedule per show via button in ShowDetailsModal
+- streamable icon on ShowCard
+
+### Changed
+- ShowImage extracted from ShowCard
+- scroll to top on view change instead of after fetch
+- useOnScreen also provides position
+- readme usage, features, and styling
+
+## [1.16.0] - 2022-04-17
+### Added
+- external ratings and streaming providers updated daily
+
+## [1.15.1] - 2022-02-19
+### Changed
+- amplify config for upgraded version of CLI
+
+### Fixed
+- handling of missing theme pref
 
 ## [1.15.0] - 2022-02-19
 ### Added
