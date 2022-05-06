@@ -79,6 +79,8 @@ const useTheme = () => useContext(ThemeContext);
  * @param {boolean=} isPreference - whether the provided theme is the user's preference
  */
 function setTheme(dispatch, themeName, isPreference) {
+  if (!themeName) { return; }
+
   dispatch({ type: ThemeAction.SET_THEME, themeName, isPreference });
 }
 

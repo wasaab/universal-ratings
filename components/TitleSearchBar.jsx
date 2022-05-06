@@ -267,7 +267,6 @@ const TitleSearchBar = ({ className, onSubmit }) => {
       className={className}
       loadingText="Searching..."
       noOptionsText="No results"
-      openOnFocus={false}
       autoHighlight
       clearOnBlur
     />

@@ -1,6 +1,6 @@
 import { Grid, makeStyles, Typography } from '@material-ui/core';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles({
   root: {
     alignItems: 'center',
     display: 'flex'
@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 500,
     padding: '1px 0px 0px 8px',
   }
-}));
+});
 
 const LabelledIcon = ({ Icon, label }) => {
   const classes = useStyles();

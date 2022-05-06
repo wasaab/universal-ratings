@@ -1,15 +1,5 @@
 import API, { graphqlOperation } from '@aws-amplify/api';
 import { createReview, updateReview } from '../graphql/mutations.js';
-import { getShow as gqlGetShow } from '../graphql/custom-queries';
-import { searchClient } from '../client';
-
-export async function maybeAddShowMetadata(show) {
-  if (show.providerIds) { return; } // metadata already populated
-
-  const { data } = await searchClient.fetchShowByIdAndType(show.tmdbId, show.type, show.id);
-
-  Object.assign(show, data);
-}
 
 function buildReview(rating, name, color) {
   return {
@@ -47,27 +37,13 @@ export function updateAvgRating(show) {
 }
 
 /**
- * Builds the user's watchlist with updated avg ratings, sorted by
- * creation date in descending order.
- *
- * @param {Object[]} shows - the shows in the user's watchlist
- * @returns {Object[]} the user's watchlist
- */
-export function buildWatchlist(shows) {
-  const existingShows = shows.filter(({ show }) => show)
-    .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-
-  return unwrapShowsAndUpdateAvgRatings(existingShows);
-}
-
-/**
  * Updates the reviews of a show.
  *
  * @param {Object[]} reviews - the show's reviews
  * @param {number} userRating - the user's rating of the show
  * @param {Object} user - the user to update review for
  */
-export const updateReviews = (reviews, userRating, user) => {
+ export const updateReviews = (reviews, userRating, user) => {
   const oldReviewIdx = reviews.findIndex(({ user: { name } }) => name === user.name);
 
   if (!userRating) { // Remove
@@ -121,12 +97,6 @@ export const updateReviewsAndAvgRating = (show, userRating, user) => {
   }
 };
 
-export const determineShorterDesc = (tmdbDesc, omdbDesc) => {
-  if (!omdbDesc) { return tmdbDesc; }
-
-  return tmdbDesc.length < omdbDesc.length ? tmdbDesc : omdbDesc;
-};
-
 /**
  * Finds the logged in user's review in the provided reviews.
  *
@@ -134,48 +104,33 @@ export const determineShorterDesc = (tmdbDesc, omdbDesc) => {
  * @param {string} name - the name of the user to find review from
  * @returns {Object} the user's review
  */
-export const findUserReview = (reviews, name) => reviews?.find((review) => review.user.name === name);
+ export const findUserReview = (reviews, name) => reviews?.find((review) => review.user.name === name);
 
-/**
- * Updates the user's name and avatar color in all of their show reviews.
+ /**
+  * Updates the user's name and avatar color in all of their show reviews.
+  *
+  * @param {Object[]} targetShows - the shows that need reviews updated
+  * @param {string} prevName - the user's name prior to being updated
+  * @param {string} name - the user's updated name
+  * @param {string} color - the user's updated avatar color
+  */
+ export const updateUserReviews = (targetShows, prevName, name, color) => {
+   targetShows.forEach((show) => {
+     const review = findUserReview(show.reviews?.items, prevName);
+ 
+     if (!review) { return; }
+ 
+     review.user = { name, color };
+   });
+ };
+
+ /**
+ * Resets the provided trending show to an unrated state.
  *
- * @param {Object[]} targetShows - the shows that need reviews updated
- * @param {string} prevName - the user's name prior to being updated
- * @param {string} name - the user's updated name
- * @param {string} color - the user's updated avatar color
+ * @param {Object} show - the show to reset
  */
-export const updateUserReviews = (targetShows, prevName, name, color) => {
-  targetShows.forEach((show) => {
-    const review = findUserReview(show.reviews?.items, prevName);
-
-    if (!review) { return; }
-
-    review.user = { name, color };
-  });
-};
-
-/**
- * Fetches the rated version of the provided trending show.
- *
- * @param {Object} show - the show to fetch
- * @returns {Object} the rated show if found; otherwise the provided show.
- */
-export const maybeFetchRatedTrendingShow = async (show) => {
-  try {
-    const { data: { getShow } } = await API.graphql(graphqlOperation(gqlGetShow, { id: show.id }));
-
-    if (!getShow) { return show; }
-
-    updateAvgRating(getShow);
-
-    return getShow;
-  } catch (err) {
-    console.error(`Failed to get rated show "${show.id}": `, err);
-
-    return show;
-  }
-};
-
-export const scrollToTop = () => {
-  window.scrollTo(0, 0);
+export const resetTrendingShow = (show) => {
+  delete show.rating;
+  delete show.reviews;
+  delete show.updatedAt;
 };
