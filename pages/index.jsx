@@ -63,9 +63,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-// Todo: Remove initialTrendingShows prop if not using SSR to fetch trending
-  // if using ssr, init trending obj with shows and expiration time
-const Index = ({ authedUser, initialTrendingShows = [] }) => {
+const Index = ({ authedUser }) => {
   const classes = useStyles();
   const { dispatch } = useTheme();
   const [user, setUser] = useState(authedUser);
@@ -738,7 +736,5 @@ const Index = ({ authedUser, initialTrendingShows = [] }) => {
     </div>
   );
 };
-
-export const getStaticProps = () => ({ props: {} });
 
 export default Index;

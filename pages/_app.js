@@ -5,10 +5,6 @@ import { getUser } from '../src/graphql/custom-queries.js';
 import { AmplifyAuthContainer, AmplifyAuthenticator } from '@aws-amplify/ui-react';
 import { AuthState } from '@aws-amplify/ui-components';
 import amplify from 'aws-amplify';
-// import amplify from '@aws-amplify/core'; // Todo: smaller bundle, but causes an error in console
-  // Expected server HTML to contain a matching <amplify-authenticator> in <amplify-auth-container></amplify-auth-container>
-  // I'm getting that now... even with aws-amplify import. what is going on?
-  // on refresh the error is gone... so does it just happen after initial build?
 import amplifyConfig from '../src/aws-exports';
 import { ThemeProvider } from '../components/ThemeProvider.jsx';
 import '../resources/styles/global.css';
@@ -23,7 +19,7 @@ function removeJss() {
   jssStyles?.parentElement?.removeChild(jssStyles);
 }
 
-amplify.configure({ ...amplifyConfig, ssr: true }); // todo: undecided on SSR
+amplify.configure(amplifyConfig);
 
 const fetchUser = async (id) => {
   const { data } = await API.graphql(graphqlOperation(getUser, { id }));

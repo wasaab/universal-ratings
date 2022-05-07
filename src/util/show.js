@@ -7,12 +7,11 @@ import { unwrapShowsAndUpdateAvgRatings, updateAvgRating } from './rating.js';
  * Fetches the rated show with the provided ID.
  *
  * @param {string} showId - ID of the show to fetch
- * @param {APIClass=} api - Amplify server/client-side API to use for GraphQL request
  * @returns {Object|undefined} the rated show if found
  */
-export const fetchRatedShow = async (showId, api = API) => { // Todo: Remove api param if not getting server-side
+export const fetchRatedShow = async (showId) => {
   try {
-    const { data: { getShow: show } } = await api.graphql(graphqlOperation(gqlGetShow, { id: showId }));
+    const { data: { getShow: show } } = await API.graphql(graphqlOperation(gqlGetShow, { id: showId }));
 
     if (!show) { return; }
 
@@ -26,7 +25,6 @@ export const fetchRatedShow = async (showId, api = API) => { // Todo: Remove api
   }
 };
 
-// Todo: Remove this if not getting client-side
 /**
  * Fetches the rated version of the provided trending show.
  *
@@ -34,16 +32,6 @@ export const fetchRatedShow = async (showId, api = API) => { // Todo: Remove api
  * @returns {Object} the rated show if found; otherwise the provided show.
  */
 export const maybeFetchRatedTrendingShow = async (show) => await fetchRatedShow(show.id) ?? show;
-
-// Todo: Remove this if not getting server-side
-/**
- * Builds a fetcher to get the rated version of the provided unrated show.
- * Uses the provided api for compatibility with server-side and client-side requests.
- *
- * @param {APIClass=} api - Amplify server/client-side API to use for GraphQL request
- * @returns {(show: Object) => Object} fetcher that returns the rated show if found; otherwise provided show.
- */
-export const buildRatedShowFetcher = (api) => async (show) => await fetchRatedShow(show.id, api) ?? show;
 
 export async function maybeAddShowMetadata(show) {
   if (show.providerIds) { return; } // metadata already populated
