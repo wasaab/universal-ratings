@@ -101,6 +101,7 @@ export const onCreateUser = /* GraphQL */ `
       name
       color
       themePref
+      plexSearchEnabled
       watchlist {
         items {
           userId
@@ -122,6 +123,7 @@ export const onUpdateUser = /* GraphQL */ `
       name
       color
       themePref
+      plexSearchEnabled
       watchlist {
         items {
           userId
@@ -143,6 +145,7 @@ export const onDeleteUser = /* GraphQL */ `
       name
       color
       themePref
+      plexSearchEnabled
       watchlist {
         items {
           userId
@@ -169,6 +172,7 @@ export const onCreateReview = /* GraphQL */ `
         name
         color
         themePref
+        plexSearchEnabled
         watchlist {
           nextToken
         }
@@ -213,6 +217,7 @@ export const onUpdateReview = /* GraphQL */ `
         name
         color
         themePref
+        plexSearchEnabled
         watchlist {
           nextToken
         }
@@ -257,6 +262,7 @@ export const onDeleteReview = /* GraphQL */ `
         name
         color
         themePref
+        plexSearchEnabled
         watchlist {
           nextToken
         }

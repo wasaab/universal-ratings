@@ -84,6 +84,7 @@ export const getUser = /* GraphQL */ `
       name
       color
       themePref
+      plexSearchEnabled
       watchlist {
         items {
           userId
@@ -118,6 +119,7 @@ export const listUsers = /* GraphQL */ `
         name
         color
         themePref
+        plexSearchEnabled
         watchlist {
           nextToken
         }
@@ -140,6 +142,7 @@ export const getReview = /* GraphQL */ `
         name
         color
         themePref
+        plexSearchEnabled
         watchlist {
           nextToken
         }
@@ -199,6 +202,7 @@ export const listReviews = /* GraphQL */ `
           name
           color
           themePref
+          plexSearchEnabled
           createdAt
           updatedAt
         }
@@ -327,6 +331,7 @@ export const reviewsByUser = /* GraphQL */ `
           name
           color
           themePref
+          plexSearchEnabled
           createdAt
           updatedAt
         }

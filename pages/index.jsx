@@ -630,6 +630,10 @@ const Index = ({ authedUser }) => {
     setUser({ ...user, name, color });
   };
 
+  const handleSettingsSave = (plexSearchEnabled) => {
+    setUser({ ...user, plexSearchEnabled });
+  };
+
   const handleEndOfPageReached = () => {
     if (!nextToken) { return; }
 
@@ -707,7 +711,11 @@ const Index = ({ authedUser }) => {
         )}
 
         {openedModal === ModalType.SETTINGS && (
-          <SettingsModal onClose={closeModal} />
+          <SettingsModal
+            user={user}
+            onClose={closeModal}
+            onSave={handleSettingsSave}
+          />
         )}
 
         {view === View.SCHEDULE && !loading && dateToEpisodes ? (

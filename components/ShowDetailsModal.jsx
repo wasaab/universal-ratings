@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import clsx from 'clsx';
 import {
+  alpha,
   Badge,
   Box,
   Button,
@@ -9,7 +10,9 @@ import {
   DialogContentText,
   Grid,
   IconButton,
+  Link,
   makeStyles,
+  Tooltip,
   Typography
 } from '@material-ui/core';
 import {
@@ -31,6 +34,7 @@ import JustWatchIcon from '../resources/images/justWatch.svg';
 import ImdbIcon from '../resources/images/imdb.svg';
 import RtFreshIcon from '../resources/images/rt.svg';
 import RtRottenIcon from '../resources/images/rt-rotten.svg';
+import PlexIcon from '../resources/images/plex.svg';
 import providerIdToInfo from '../resources/data/providers';
 
 const avatarSize = 33;
@@ -162,8 +166,16 @@ const useStyles = makeStyles((theme) => ({
     right: 12,
     padding: 8,
     fontSize: 22
+  },
+  plexLink: {
+    lineHeight: 0,
+    '&:hover': {
+      color: alpha(theme.palette.text.primary, 0.6)
+    }
   }
 }));
+
+const plexSearchBaseUrl = 'https://app.plex.tv/desktop/#!/search?query=';
 
 const ShowDetailsModal = ({
   show,
@@ -233,8 +245,7 @@ const ShowDetailsModal = ({
     >
       <DialogContent className={classes.content}>
         <Grid container spacing={2} direction="row">
-          <Grid item container xs={5} direction="column" justifyContent="space-between">
-            {/* Todo: Placeholder image when none found or change styling to work with no image */}
+          <Grid item container xs={show.img ? 5 : 3} direction="column" justifyContent="center">
             {show.img && (
               <Image
                 src={show.img}
@@ -254,7 +265,7 @@ const ShowDetailsModal = ({
             </Box>
           </Grid>
 
-          <Grid item container xs={7} direction="column" justifyContent="space-between" wrap="nowrap">
+          <Grid item container xs direction="column" justifyContent="space-between" wrap="nowrap">
             <Grid item xs>
               <Box display="flex" alignItems="center" gridGap={4}>
                 <TypeIcon fontSize="small" />
@@ -349,7 +360,24 @@ const ShowDetailsModal = ({
                     )}
                   >
                     {show.providerIds.map(renderProviderLogo)}
+
+                    {/* ---------- For feature/plex-search 4/4 ---------- */}
+                    {/* Todo: Conditionally render this if user has plex search pref set to true. even when 0 providers. */}
+                    {/* Todo: Need to redo styling logic around 1 provider now that there is the additional built in plex provider */}
+                    {/* Todo: Need to redo conditional render of providers block now that u can have 0 but plex */}
+                    {/* Todo: Need to store user pref in DB, update and get via graphql somehow, and reference here and in settings modal */}
+                    <Tooltip title="Search your available Plex libraries">
+                      <Link
+                        className={classes.plexLink}
+                        href={`${plexSearchBaseUrl}${show.title}`}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        <PlexIcon />
+                      </Link>
+                    </Tooltip>
                   </Grid>
+                  {/* ---------- For feature/plex-search 4/4 ---------- */}
                 </>
               )}
             </Grid>

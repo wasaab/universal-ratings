@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
+import API, { graphqlOperation } from '@aws-amplify/api';
+import { updateUser } from '../src/graphql/mutations';
 import {
   Box,
   Button,
@@ -9,11 +11,14 @@ import {
   InputLabel,
   makeStyles,
   MenuItem,
-  Select
+  Select,
+  Switch,
+  Typography
 } from '@material-ui/core';
 import { SettingsBackupRestore as RevertIcon } from '@material-ui/icons';
 import { revertTheme, saveThemePref, setTheme, useTheme } from './ThemeProvider';
 import { themeNames } from '../resources/styles/theme';
+import PlexIcon from '../resources/images/plex.svg';
 
 const useStyles = makeStyles((theme) => ({
   content: {
@@ -34,12 +39,44 @@ const useStyles = makeStyles((theme) => ({
   },
   revertButton: {
     alignSelf: 'end'
+  },
+  plexSearchLabel: {
+    fontSize: 22,
+    lineHeight: 1,
+    margin: '0px 12px 0px 6px'
   }
 }));
 
-const SettingsModal = ({ onClose }) => {
+const SettingsModal = ({ user, onClose, onSave }) => {
   const classes = useStyles();
   const { theme, themePref, dispatch } = useTheme();
+  const [plexSearchEnabled, setPlexSearchEnabled] = useState(user.plexSearchEnabled);
+
+  const savePlexSearchPref = async () => {
+    const input = {
+      id: user.id,
+      plexSearchEnabled
+    };
+
+    try {
+      await API.graphql(graphqlOperation(updateUser, { input }));
+      onSave(plexSearchEnabled);
+    } catch (err) {
+      console.error('Failed to update user: ', err);
+    }
+  };
+
+  const handleSave = () => {
+    if (themePref !== theme) {
+      saveThemePref(dispatch);
+    }
+
+    if (plexSearchEnabled !== user.plexSearchEnabled) {
+      savePlexSearchPref();
+    }
+
+    onClose();
+  };
 
   return (
     <Dialog open onClose={onClose}>
@@ -72,13 +109,22 @@ const SettingsModal = ({ onClose }) => {
           </IconButton>
         </Box>
 
+        <Box display="flex" alignItems="center">
+          <PlexIcon />
+          <Typography variant="subtitle2" className={classes.plexSearchLabel}>
+            Search
+          </Typography>
+          <Switch
+            color="primary"
+            checked={plexSearchEnabled}
+            onChange={() => setPlexSearchEnabled(!plexSearchEnabled)}
+          />
+        </Box>
+
         <Button
-          disabled={themePref === theme}
+          disabled={themePref === theme && plexSearchEnabled === user.plexSearchEnabled}
           variant="outlined"
-          onClick={() => {
-            saveThemePref(dispatch);
-            onClose();
-          }}
+          onClick={handleSave}
           className={classes.saveButton}
         >
           Save Preference
