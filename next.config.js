@@ -7,7 +7,16 @@ module.exports = {
       {
         test: /\.svg$/,
         exclude: [/algolia\.svg$/],
-        use: ['@svgr/webpack']
+        use: [{
+          loader: '@svgr/webpack',
+          options: {
+            svgoConfig: {
+              plugins: {
+                removeViewBox: false
+              }
+            }
+          }
+        }],
       },
       {
         test: /algolia\.svg$/,
