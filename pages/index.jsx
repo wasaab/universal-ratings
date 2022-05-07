@@ -26,28 +26,24 @@ import {
 import { View, Loading, ModalType, Width } from '../src/model';
 import { searchClient } from '../src/client';
 import {
+  buildOrUpdateOverallDateToEpisodes,
   buildWatchlist,
-  determineShorterDesc,
-  fetchRatedShow,
-  maybeAddShowMetadata,
-  maybeFetchRatedTrendingShow
-} from '../src/util/show.js';
-import {
   createShowReview,
+  determineShorterDesc,
+  fetchOverallShowSchedule,
+  fetchRatedShow,
+  fetchShowSchedule,
   findUserReview,
+  getEpisodesOfLatestSeason,
+  maybeAddShowMetadata,
+  maybeFetchRatedTrendingShow,
+  removeShowFromSchedule,
   resetTrendingShow,
   unwrapShowsAndUpdateAvgRatings,
   updateAvgRating,
   updateReviewsAndAvgRating,
   updateUserReviews
-} from '../src/util/rating.js';
-import {
-  buildOrUpdateOverallDateToEpisodes,
-  fetchOverallShowSchedule,
-  fetchShowSchedule,
-  getEpisodesOfLatestSeason,
-  removeShowFromSchedule
-} from '../src/util/schedule.js';
+} from '../src/util';
 
 const useStyles = makeStyles((theme) => ({
   root: {
