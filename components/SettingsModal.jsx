@@ -50,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
 const SettingsModal = ({ user, onClose, onSave }) => {
   const classes = useStyles();
   const { theme, themePref, dispatch } = useTheme();
-  const [plexSearchEnabled, setPlexSearchEnabled] = useState(user.plexSearchEnabled);
+  const [plexSearchEnabled, setPlexSearchEnabled] = useState(Boolean(user.plexSearchEnabled));
 
   const savePlexSearchPref = async () => {
     const input = {

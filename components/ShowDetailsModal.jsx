@@ -343,7 +343,7 @@ const ShowDetailsModal = ({
               className={classes.streamingSitesContainer}
               direction="row"
             >
-              {show.providerIds?.length > 0 && (
+              {(show.providerIds?.length > 0 || user.plexSearchEnabled) && (
                 <>
                   <Grid item xs className={classes.streamingSitesLabelContainer} title="Powered by JustWatch">
                     <JustWatchIcon />
@@ -356,28 +356,24 @@ const ShowDetailsModal = ({
                     xs
                     className={clsx(
                       classes.providerLogosContainer,
-                      { [classes.singleProvider]: show.providerIds.length === 1 }
+                      { [classes.singleProvider]: show.providerIds.length === Number(!user.plexSearchEnabled) }
                     )}
                   >
                     {show.providerIds.map(renderProviderLogo)}
 
-                    {/* ---------- For feature/plex-search 4/4 ---------- */}
-                    {/* Todo: Conditionally render this if user has plex search pref set to true. even when 0 providers. */}
-                    {/* Todo: Need to redo styling logic around 1 provider now that there is the additional built in plex provider */}
-                    {/* Todo: Need to redo conditional render of providers block now that u can have 0 but plex */}
-                    {/* Todo: Need to store user pref in DB, update and get via graphql somehow, and reference here and in settings modal */}
-                    <Tooltip title="Search your available Plex libraries">
-                      <Link
-                        className={classes.plexLink}
-                        href={`${plexSearchBaseUrl}${show.title}`}
-                        target="_blank"
-                        rel="noreferrer"
-                      >
-                        <PlexIcon />
-                      </Link>
-                    </Tooltip>
+                    {user.plexSearchEnabled && (
+                      <Tooltip title="Search your available Plex libraries">
+                        <Link
+                          className={classes.plexLink}
+                          href={`${plexSearchBaseUrl}${show.title}`}
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          <PlexIcon />
+                        </Link>
+                      </Tooltip>
+                    )}
                   </Grid>
-                  {/* ---------- For feature/plex-search 4/4 ---------- */}
                 </>
               )}
             </Grid>

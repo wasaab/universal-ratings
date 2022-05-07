@@ -190,6 +190,7 @@ export const getUser = /* GraphQL */ `
       name
       color
       themePref
+      plexSearchEnabled
       watchlist {
         items {
           show {
