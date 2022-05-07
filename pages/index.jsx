@@ -64,6 +64,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 // Todo: Remove initialTrendingShows prop if not using SSR to fetch trending
+  // if using ssr, init trending obj with shows and expiration time
 const Index = ({ authedUser, initialTrendingShows = [] }) => {
   const classes = useStyles();
   const { dispatch } = useTheme();
@@ -642,7 +643,6 @@ const Index = ({ authedUser, initialTrendingShows = [] }) => {
    */
   const fetchTrendingShows = async () => {
     const { data: unratedTrendingShows } = await searchClient.fetchTrendingShows();
-
     const ratedTrendingShows = await Promise.all(unratedTrendingShows.map(maybeFetchRatedTrendingShow));
     const expirationTime = moment()
       .startOf('day')

@@ -26,7 +26,7 @@ export function updateAvgRating(show) {
  * @param {Object[]} shows - the shows to unwrap and update avg rating of
  * @returns {Object[]} the updated shows
  */
- export function unwrapShowsAndUpdateAvgRatings(shows) {
+export function unwrapShowsAndUpdateAvgRatings(shows) {
   return shows.map(({ show }) => {
     if (show.rating) {
       updateAvgRating(show);
@@ -43,7 +43,7 @@ export function updateAvgRating(show) {
  * @param {number} userRating - the user's rating of the show
  * @param {Object} user - the user to update review for
  */
- export const updateReviews = (reviews, userRating, user) => {
+export const updateReviews = (reviews, userRating, user) => {
   const oldReviewIdx = reviews.findIndex(({ user: { name } }) => name === user.name);
 
   if (!userRating) { // Remove
@@ -104,27 +104,27 @@ export const updateReviewsAndAvgRating = (show, userRating, user) => {
  * @param {string} name - the name of the user to find review from
  * @returns {Object} the user's review
  */
- export const findUserReview = (reviews, name) => reviews?.find((review) => review.user.name === name);
+export const findUserReview = (reviews, name) => reviews?.find((review) => review.user.name === name);
 
- /**
-  * Updates the user's name and avatar color in all of their show reviews.
-  *
-  * @param {Object[]} targetShows - the shows that need reviews updated
-  * @param {string} prevName - the user's name prior to being updated
-  * @param {string} name - the user's updated name
-  * @param {string} color - the user's updated avatar color
-  */
- export const updateUserReviews = (targetShows, prevName, name, color) => {
-   targetShows.forEach((show) => {
-     const review = findUserReview(show.reviews?.items, prevName);
- 
-     if (!review) { return; }
- 
-     review.user = { name, color };
-   });
- };
+/**
+ * Updates the user's name and avatar color in all of their show reviews.
+ *
+ * @param {Object[]} targetShows - the shows that need reviews updated
+ * @param {string} prevName - the user's name prior to being updated
+ * @param {string} name - the user's updated name
+ * @param {string} color - the user's updated avatar color
+ */
+export const updateUserReviews = (targetShows, prevName, name, color) => {
+  targetShows.forEach((show) => {
+    const review = findUserReview(show.reviews?.items, prevName);
 
- /**
+    if (!review) { return; }
+
+    review.user = { name, color };
+  });
+};
+
+/**
  * Resets the provided trending show to an unrated state.
  *
  * @param {Object} show - the show to reset
