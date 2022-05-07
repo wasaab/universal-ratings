@@ -7,7 +7,6 @@ import { AuthState } from '@aws-amplify/ui-components';
 import amplify from 'aws-amplify';
 import amplifyConfig from '../src/aws-exports';
 import { ThemeProvider } from '../components/ThemeProvider.jsx';
-import MainView from '../components/MainView';
 import '../resources/styles/global.css';
 
 /**
@@ -28,7 +27,7 @@ const fetchUser = async (id) => {
   return data.getUser;
 };
 
-const App = () => {
+const App = ({ Component, pageProps }) => {
   const [user, setUser] = useState();
 
   const handleAuthStateChange = async (authState, authedUser) => {
@@ -52,7 +51,7 @@ const App = () => {
       <AmplifyAuthContainer>
         <AmplifyAuthenticator handleAuthStateChange={handleAuthStateChange}>
           <ThemeProvider userId={user?.id}>
-            {user && <MainView authedUser={user} />}
+            {user && <Component {...pageProps} authedUser={user} />}
           </ThemeProvider>
         </AmplifyAuthenticator>
       </AmplifyAuthContainer>

@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { Auth } from 'aws-amplify';
+import Auth from '@aws-amplify/auth';
 import clsx from 'clsx';
 import {
   alpha,

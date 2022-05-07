@@ -32,13 +32,18 @@ export default class AlgoliaApiClient {
   }
 
   /**
-   * Gets the next fallback host if retrying a failed request.
-   *
+   * Builds the host of the algolia search url.
+   * If retrying a failed request, the next fallback host is used.
+   * 
    * @param {number} retriesRemaining - the number of request retries remaining
-   * @returns {string|number} the fallback host postfix
+   * @returns {string} the host of the search url
    */
-  getFallback(retriesRemaining) {
-    return retriesRemaining === this.fallbacks.length ? '' : this.fallbacks[retriesRemaining];
+  buildHost(retriesRemaining) {
+    const hostPostfix = retriesRemaining === this.fallbacks.length
+      ? 'dsn.algolia.net'
+      : `${this.fallbacks[retriesRemaining]}.algolianet.com`;
+
+    return `${this.appId}-${hostPostfix}`;
   }
 
   /**
@@ -48,28 +53,29 @@ export default class AlgoliaApiClient {
    * @returns {string} the request url
    */
   buildUrl(retriesRemaining) {
-    const fallback = this.getFallback(retriesRemaining);
-
-    return `https://${this.appId}${fallback}-dsn.algolia.net/1/indexes/show/query`;
+    return `https://${this.buildHost(retriesRemaining)}/1/indexes/show/query`;
   }
 
   /**
    * Searches for shows matching the provided query.
    * Retries on failure, using a different fallback host each time.
    *
-   * @param {string} query - the query to search for
-   * @param {number} retriesRemaining - the number of req retries remaining
+   * @param {Object} params - the request parameters
+   * @param {string} params.query - the query to search for
+   * @param {number=} params.hitsPerPage - show hits per page (limit 1000)
+   * @param {string[]=} params.attributesToRetrieve - the show attributes to retrieve
+   * @param {number=} retriesRemaining - the number of req retries remaining
    * @returns {Promise<Object[]>} matching shows
    */
-  async search(query, retriesRemaining = this.fallbacks.length) {
+  async search(params, retriesRemaining = this.fallbacks.length) {
     try {
-      const { data } = await axios.post(this.buildUrl(retriesRemaining), { query }, this.reqConfig);
+      const { data } = await axios.post(this.buildUrl(retriesRemaining), params, this.reqConfig);
 
       return data;
     } catch (err) {
       if (!retriesRemaining || axios.isCancel(err)) { throw err; }
 
-      return this.search(query, retriesRemaining - 1);
+      return this.search(params, retriesRemaining - 1);
     }
   }
 
@@ -77,12 +83,12 @@ export default class AlgoliaApiClient {
    * Searches algolia by title for matching shows.
    *
    * @param {string} title - the title to search for
-   * @param {CancelToken} cancelToken - the token used to cancel the req
+   * @param {CancelToken=} cancelToken - the token used to cancel the req
    * @returns {Promise<Object[]>} matching shows
    */
   searchByTitle(title, cancelToken) {
     this.reqConfig.cancelToken = cancelToken;
 
-    return this.search(title);
+    return this.search({ query: title });
   }
 }

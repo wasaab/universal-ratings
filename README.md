@@ -48,8 +48,8 @@ A site for rating TV shows and movies.
 ### Searching
 + Federated, live, search for rated/unrated shows with fuzzy matching and result grouping
   + Rated/watchlisted shows retrieved from [Algolia](https://www.algolia.com/products/search-and-discovery/hosted-search-api/)
-+ Client and server side caching of search results
   + Unrated shows retrieved from [TMDB API](https://developers.themoviedb.org/3/)
++ Client and server side caching of search results
 + Debouncing and request cancellation to ensure the user is presented with search results for their current query
 
 ### Shows
