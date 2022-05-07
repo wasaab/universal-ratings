@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Head from 'next/head';
 import API, { graphqlOperation } from '@aws-amplify/api';
 import { getUser } from '../src/graphql/custom-queries.js';
@@ -23,7 +23,7 @@ function removeJss() {
   jssStyles?.parentElement?.removeChild(jssStyles);
 }
 
-amplify.configure({ ...amplifyConfig, ssr: true });
+amplify.configure({ ...amplifyConfig, ssr: true }); // todo: undecided on SSR
 
 const fetchUser = async (id) => {
   const { data } = await API.graphql(graphqlOperation(getUser, { id }));

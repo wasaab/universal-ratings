@@ -11,7 +11,6 @@ import {
   updateShow
 } from '../src/graphql/mutations.js';
 import * as gqlQuery from '../src/graphql/custom-queries';
-import * as util from '../src/util';
 import {
   Drawer,
   Toolbar,
@@ -26,6 +25,29 @@ import {
 } from '../components';
 import { View, Loading, ModalType, Width } from '../src/model';
 import { searchClient } from '../src/client';
+import {
+  buildWatchlist,
+  determineShorterDesc,
+  fetchRatedShow,
+  maybeAddShowMetadata,
+  maybeFetchRatedTrendingShow
+} from '../src/util/show.js';
+import {
+  createShowReview,
+  findUserReview,
+  resetTrendingShow,
+  unwrapShowsAndUpdateAvgRatings,
+  updateAvgRating,
+  updateReviewsAndAvgRating,
+  updateUserReviews
+} from '../src/util/rating.js';
+import {
+  buildOrUpdateOverallDateToEpisodes,
+  fetchOverallShowSchedule,
+  fetchShowSchedule,
+  getEpisodesOfLatestSeason,
+  removeShowFromSchedule
+} from '../src/util/schedule.js';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -60,7 +82,7 @@ const Index = ({ authedUser, initialTrendingShows = [] }) => {
   const [nextToken, setNextToken] = useState();
   const [view, setView] = useState(View.HOME);
   const [loading, setLoading] = useState(null);
-  const [watchlist, setWatchlist] = useState(() => util.buildWatchlist(authedUser.watchlist.items));
+  const [watchlist, setWatchlist] = useState(() => buildWatchlist(authedUser.watchlist.items));
   const findWatchlistIdx = (showId = selectedShow?.id) => watchlist.findIndex(({ id }) => id === showId);
   const watchlistIdx = useMemo(findWatchlistIdx, [selectedShow, watchlist]);
 
@@ -89,10 +111,6 @@ const Index = ({ authedUser, initialTrendingShows = [] }) => {
   const findTrendingShowIdx = ({ id }) => trending.shows.findIndex((show) => show.id === id);
   const isTrending = (show) => -1 !== findTrendingShowIdx(show);
 
-  const scrollToTop = () => {
-    window.scrollTo(0, 0);
-  };
-
   /**
    * Fetches shows for the provided view.
    *
@@ -108,9 +126,9 @@ const Index = ({ authedUser, initialTrendingShows = [] }) => {
       let updatedShows = data[queryName].items;
 
       if (View.FAVORITES.query.name === queryName) {
-        updatedShows = util.unwrapShowsAndUpdateAvgRatings(updatedShows);
+        updatedShows = unwrapShowsAndUpdateAvgRatings(updatedShows);
       } else {
-        updatedShows.forEach(util.updateAvgRating);
+        updatedShows.forEach(updateAvgRating);
       }
 
       if (queryParams.nextToken) {
@@ -141,12 +159,12 @@ const Index = ({ authedUser, initialTrendingShows = [] }) => {
     if (selectedShow) {
       unselectShow();
 
-      const updatedShow = await schedule.fetchShowSchedule(selectedShow);
+      const updatedShow = await fetchShowSchedule(selectedShow);
 
       setShows([updatedShow]);
       setDateToEpisodes(updatedShow.dateToEpisodes);
     } else {
-      const { recentShows, overallDateToEpisodes } = await schedule.fetchOverallShowSchedule(user.id, watchlist);
+      const { recentShows, overallDateToEpisodes } = await fetchOverallShowSchedule(user.id, watchlist);
 
       setShows(recentShows);
       setDateToEpisodes(overallDateToEpisodes);
@@ -154,6 +172,10 @@ const Index = ({ authedUser, initialTrendingShows = [] }) => {
 
     setNextToken(null);
     setLoading(null);
+  };
+
+  const scrollToTop = () => {
+    window.scrollTo(0, 0);
   };
 
   /**
@@ -173,7 +195,7 @@ const Index = ({ authedUser, initialTrendingShows = [] }) => {
     }
 
     setView(selectedView);
-    util.scrollToTop();
+    scrollToTop();
   };
 
   /**
@@ -185,7 +207,7 @@ const Index = ({ authedUser, initialTrendingShows = [] }) => {
     const isShowInGrid = selectedShowIdx !== null;
     const updatedShows = isShowInGrid ? [...shows] : [selectedShow, ...shows];
     const updatedShow = updatedShows[selectedShowIdx ?? 0];
-    const userReview = util.findUserReview(updatedShow.reviews.items, user.name);
+    const userReview = findUserReview(updatedShow.reviews.items, user.name);
 
     userReview.isFavorite = isFavorite;
     updateWatchlist(updatedShow);
@@ -208,12 +230,12 @@ const Index = ({ authedUser, initialTrendingShows = [] }) => {
   };
 
   const addToSchedule = async (show = selectedShow) => {
-    const updatedShow = await schedule.getEpisodesOfLatestSeason(show);
+    const updatedShow = await getEpisodesOfLatestSeason(show);
 
     if (!updatedShow?.dateToEpisodes) { return; }
 
     addShow(updatedShow);
-    schedule.buildOrUpdateOverallDateToEpisodes([updatedShow], dateToEpisodes);
+    buildOrUpdateOverallDateToEpisodes([updatedShow], dateToEpisodes);
     setDateToEpisodes({ ...dateToEpisodes });
   };
 
@@ -222,12 +244,12 @@ const Index = ({ authedUser, initialTrendingShows = [] }) => {
 
     if (!show) { return; }
 
-    schedule.removeShow(show, dateToEpisodes);
+    removeShowFromSchedule(show, dateToEpisodes);
     removeOrResetShowInGrid(show, showIdx);
     unselectShow();
   };
 
-  const isShowReviewedByUser = () => util.findUserReview(selectedShow.reviews?.items, user.name);
+  const isShowReviewedByUser = () => findUserReview(selectedShow.reviews?.items, user.name);
 
   const removeFromWatchlist = (showId) => {
     const updatedWatchlist = watchlist.filter(({ id }) => id !== showId);
@@ -333,7 +355,7 @@ const Index = ({ authedUser, initialTrendingShows = [] }) => {
     if (trendingShowIdx === -1) { return; }
 
     if (isReset) {
-      util.resetTrendingShow(updatedShow);
+      resetTrendingShow(updatedShow);
     }
 
     trending.shows[trendingShowIdx] = updatedShow;
@@ -348,7 +370,7 @@ const Index = ({ authedUser, initialTrendingShows = [] }) => {
    * @param {number} userRating - the user's rating of the show
    */
   const updateShows = (show, isShowInGrid, userRating) => {
-    util.updateReviewsAndAvgRating(show, userRating, user);
+    updateReviewsAndAvgRating(show, userRating, user);
     updateWatchlist(show);
     maybeUpdateTrending(show);
 
@@ -370,7 +392,7 @@ const Index = ({ authedUser, initialTrendingShows = [] }) => {
    */
   const removeOrResetShowInGrid = (show, showIdx) => {
     if (view === View.HOME && showIdx < trending.shows.length) {
-      util.resetTrendingShow(show);
+      resetTrendingShow(show);
     } else {
       shows.splice(showIdx, 1);
     }
@@ -476,7 +498,7 @@ const Index = ({ authedUser, initialTrendingShows = [] }) => {
     if (currUserRating === prevUserRating) {
       removeReview(show, showIdx);
     } else {
-      util.createShowReview(show, currUserRating, !prevUserRating, user.id);
+      createShowReview(show, currUserRating, !prevUserRating, user.id);
       updateShows(show, isShowInGrid, currUserRating);
 
       if (view === View.SCHEDULE && !prevUserRating && watchlistIdx === -1) {
@@ -491,7 +513,7 @@ const Index = ({ authedUser, initialTrendingShows = [] }) => {
    * @param {Object} show - the show to select
    */
   const selectRatedShow = async (show) => {
-    const ratedShow = await util.fetchRatedShow(show.objectID);
+    const ratedShow = await fetchRatedShow(show.objectID);
 
     if (!ratedShow) { return; }
 
@@ -510,7 +532,7 @@ const Index = ({ authedUser, initialTrendingShows = [] }) => {
       setSelectedShow({
         ...show,
         ...ratings,
-        description: util.determineShorterDesc(show.description, description)
+        description: determineShorterDesc(show.description, description)
       });
     } catch (err) {
       console.error(`Failed to get unrated show "${show.id}": `, err);
@@ -554,7 +576,7 @@ const Index = ({ authedUser, initialTrendingShows = [] }) => {
       }
     }
 
-    await util.maybeAddShowMetadata(show);
+    await maybeAddShowMetadata(show);
 
     const ratedShow = {
       rating,
@@ -587,7 +609,7 @@ const Index = ({ authedUser, initialTrendingShows = [] }) => {
 
   const selectShow = async (show, showIdx) => {
     if (!show.rating) { // unrated trending show
-      await util.maybeAddShowMetadata(show);
+      await maybeAddShowMetadata(show);
     }
 
     setSelectedShow(show);
@@ -607,8 +629,8 @@ const Index = ({ authedUser, initialTrendingShows = [] }) => {
    */
   const handleProfileSave = (name, color) => {
     closeModal();
-    util.updateUserReviews(shows, user.name, name, color);
-    util.updateUserReviews(watchlist, user.name, name, color);
+    updateUserReviews(shows, user.name, name, color);
+    updateUserReviews(watchlist, user.name, name, color);
 
     setUser({ ...user, name, color });
   };
@@ -625,7 +647,7 @@ const Index = ({ authedUser, initialTrendingShows = [] }) => {
   const fetchTrendingShows = async () => {
     const { data: unratedTrendingShows } = await searchClient.fetchTrendingShows();
 
-    const ratedTrendingShows = await Promise.all(unratedTrendingShows.map(util.maybeFetchRatedTrendingShow));
+    const ratedTrendingShows = await Promise.all(unratedTrendingShows.map(maybeFetchRatedTrendingShow));
     const expirationTime = moment()
       .startOf('day')
       .add(1, 'day') // trending updates daily
@@ -671,7 +693,7 @@ const Index = ({ authedUser, initialTrendingShows = [] }) => {
           <ShowDetailsModal
             show={selectedShow}
             user={user}
-            userReview={util.findUserReview(selectedShow.reviews?.items, user.name)}
+            userReview={findUserReview(selectedShow.reviews?.items, user.name)}
             isInWatchlist={watchlistIdx !== -1}
             onRatingChange={handleRatingChange}
             onShowAdded={createRatedShow}

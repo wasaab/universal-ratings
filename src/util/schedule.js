@@ -1,9 +1,9 @@
 import moment from 'moment';
 import API, { graphqlOperation } from '@aws-amplify/api';
 import { reviewsByUser } from '../graphql/custom-queries';
-import * as util from './util';
 import { ShowType } from '../model';
 import { searchClient } from '../client';
+import { unwrapShowsAndUpdateAvgRatings } from './rating';
 
 /**
  * Determines if the episode air date is within 2 weeks of today.
@@ -145,7 +145,7 @@ async function buildReviewedAndWatchlistedTvShows(watchlist, userId) {
   try {
     const { data: { reviewsByUser: { items } } } = await API.graphql(graphqlOperation(reviewsByUser, { userId }));
 
-    reviewedShows = util.unwrapShowsAndUpdateAvgRatings(items)
+    reviewedShows = unwrapShowsAndUpdateAvgRatings(items)
       .filter((show) => !isWatchlisted(show));
   } catch (err) {
     console.error('Failed to get shows reviewed by user:', err);
@@ -180,7 +180,7 @@ export async function fetchOverallShowSchedule(userId, watchlist) {
  * @param {Object} show - the show to remove from the schedule
  * @param {Object} dateToEpisodes - the overall mapping of date to episodes for all shows
  */
-export function removeShow(show, dateToEpisodes) {
+export function removeShowFromSchedule(show, dateToEpisodes) {
   Object.keys(show.dateToEpisodes).forEach((day) => {
     const epsOnDay = dateToEpisodes[day]?.filter(({ showId }) => showId !== show.id);
 

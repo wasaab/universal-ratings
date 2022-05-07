@@ -6,23 +6,12 @@ module.exports = {
     config.module.rules.push(
       {
         test: /\.svg$/,
-        exclude: [
-          /algolia\.svg$/
-        ],
-        use: [{
-          loader: '@svgr/webpack',
-          options: {
-            svgoConfig: {
-              plugins: {
-                removeViewBox: false
-              }
-            }
-          }
-        }],
+        exclude: [/algolia\.svg$/],
+        use: ['@svgr/webpack']
       },
       {
         test: /algolia\.svg$/,
-        use: ['svg-url-loader'],
+        use: ['svg-url-loader']
       }
     );
 

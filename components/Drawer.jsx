@@ -26,7 +26,6 @@ import TmdbIcon from '../resources/images/tmdb.svg';
 
 const useStyles = makeStyles((theme) => ({
   drawer: {
-    width: Width.OPEN_DRAWER,
     flexShrink: 0,
     whiteSpace: 'nowrap'
   },
@@ -39,12 +38,12 @@ const useStyles = makeStyles((theme) => ({
     })
   },
   drawerClose: {
+    overflowX: 'hidden',
+    width: `${theme.spacing(7)}px`,
     transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen
     }),
-    overflowX: 'hidden',
-    width: `${theme.spacing(7)}px !important`
   },
   toolbar: {
     display: 'flex',
