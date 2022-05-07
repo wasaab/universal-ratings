@@ -1,6 +1,6 @@
 {
   "name": "universal-ratings",
-  "version": "1.17.2",
+  "version": "1.18.0",
   "description": "A site for rating TV shows and movies",
   "repository": {
     "type": "git",
@@ -20,6 +20,7 @@
     "mock": "amplify mock api",
     "lint": "next lint",
     "build": "next build",
+    "build:profile": "next build --profile",
     "start": "next start"
   },
   "dependencies": {

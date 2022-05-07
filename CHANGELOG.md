@@ -6,6 +6,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [UNRELEASED] - 2022-##-##
 
+## [1.18.0] - 2022-05-07
+### Added
+- trending shows ttl
+- button aria-labels for accesibility.
+- width enum
+- manifest names
+
+## Changed
+- Toolbar styling for alignment
+- `MainView` --> `Index`
+- show and rating utils extracted from util
+- Alogolia fallback logic
+- amplify deps imported from sub-packages (reduced bundle)
+- SSG --> Static
+
 ## [1.17.2] - 2022-05-02
 ### Fixed
 - shows evicted from search cache on addition/removal

@@ -234,7 +234,7 @@ const TitleSearchBar = ({ className, onSubmit }) => {
   const renderInput = (params) => (
     <TextField
       {...params}
-      label="Title"
+      label="Search Titles"
       size="small"
       inputProps={{
         ...params.inputProps,
@@ -267,7 +267,6 @@ const TitleSearchBar = ({ className, onSubmit }) => {
       className={className}
       loadingText="Searching..."
       noOptionsText="No results"
-      openOnFocus={false}
       autoHighlight
       clearOnBlur
     />

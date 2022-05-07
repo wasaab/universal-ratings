@@ -21,30 +21,29 @@ import {
   Home as HomeIcon,
   Today as CalendarIcon
 } from '@material-ui/icons/';
+import { View, Width } from '../src/model';
 import TmdbIcon from '../resources/images/tmdb.svg';
-import { View } from '../src/model';
 
 const useStyles = makeStyles((theme) => ({
-  drawer: ({ width }) => ({
-    width: width,
+  drawer: {
     flexShrink: 0,
     whiteSpace: 'nowrap'
-  }),
-  drawerOpen: ({ width }) => ({
+  },
+  drawerOpen: {
     overflowX: 'hidden',
-    width: width,
+    width: Width.OPEN_DRAWER,
     transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen
     })
-  }),
+  },
   drawerClose: {
+    overflowX: 'hidden',
+    width: `${theme.spacing(7)}px`,
     transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen
     }),
-    overflowX: 'hidden',
-    width: `${theme.spacing(7)}px !important`
   },
   toolbar: {
     display: 'flex',
@@ -89,7 +88,7 @@ const Drawer = ({ open, width, selectedView, onClose, onSelect }) => {
       classes={{ paper: drawerStateClass }}
     >
       <div className={classes.toolbar}>
-        <IconButton onClick={onClose}>
+        <IconButton aria-label="close drawer" onClick={onClose}>
           <ChevronLeftIcon />
         </IconButton>
       </div>

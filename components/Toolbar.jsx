@@ -9,42 +9,48 @@ import { Menu as MenuIcon } from '@material-ui/icons/';
 import { makeStyles } from '@material-ui/core/styles';
 import TitleSearchBar from './TitleSearchBar';
 import UserMenu from './UserMenu';
+import { Width } from '../src/model';
 
 const useStyles = makeStyles((theme) => ({
-  appBar: ({ drawerOpen, drawerWidth }) => ({
+  appBar: ({ drawerOpen }) => ({
     zIndex: theme.zIndex.drawer + 1,
-    marginLeft: drawerOpen ? drawerWidth : 0,
-    width: drawerOpen ? `calc(100% - ${drawerWidth}px)` : '100%',
+    marginLeft: drawerOpen ? Width.OPEN_DRAWER : 0,
+    width: drawerOpen ? `calc(100% - ${Width.OPEN_DRAWER}px)` : '100%',
     transition: theme.transitions.create(['width', 'margin'], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen
     }),
     background: theme.palette.background.header
   }),
+  toolbar: {
+    paddingLeft: 16
+  },
   menuButton: {
-    marginRight: 36
+    marginRight: 20
   },
   searchBar: {
     position: 'absolute',
-    right: 100
+    right: 100,
+    marginBottom: 6
   },
   userMenu: {
     position: 'absolute',
     right: 12
   },
   appName: {
+    marginLeft: 8,
     [theme.breakpoints.down(580)]: {
       display: 'none'
     }
   }
 }));
 
-const Toolbar = ({ user, drawerOpen, onDrawerOpen, onSearchSubmit, onEditProfile, onEditSettings, drawerWidth }) => {
-  const classes = useStyles({ drawerOpen, drawerWidth });
+const Toolbar = ({ user, drawerOpen, onDrawerOpen, onSearchSubmit, onEditProfile, onEditSettings }) => {
+  const classes = useStyles({ drawerOpen });
 
   return (
     <AppBar position="fixed" className={classes.appBar}>
-      <MaterialToolbar>
+      <MaterialToolbar className={classes.toolbar}>
         {!drawerOpen && (
           <IconButton
             color="inherit"

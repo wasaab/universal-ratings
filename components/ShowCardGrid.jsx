@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import { Grid, Typography } from '@material-ui/core';
 import ShowCard from './ShowCard';
-import util from '../src/util';
+import { findUserReview } from '../src/util';
 
 const useStyles = makeStyles({
   reducedGrow: {
@@ -23,10 +23,10 @@ const ShowCardGrid = ({ shows, trendingShowsCount, userName, onRatingChange, onS
   const classes = useStyles();
 
   const renderShowCard = (show, showIdx) => (
-    <Grid key={showIdx} item xs className={clsx({ [classes.reducedGrow]: shows.length === 2 })}>
+    <Grid key={show.id} item xs className={clsx({ [classes.reducedGrow]: shows.length === 2 })}>
       <ShowCard
         show={show}
-        userRating={util.findUserReview(show.reviews?.items, userName)?.rating}
+        userRating={findUserReview(show.reviews?.items, userName)?.rating}
         onClick={() => onShowSelected(show, showIdx)}
         onRatingChange={(currUserRating, prevUserRating) => {
           if (show.rating) { // rated show
