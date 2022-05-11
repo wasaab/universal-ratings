@@ -1,5 +1,5 @@
 import API, { graphqlOperation } from '@aws-amplify/api';
-import { getShow as gqlGetShow } from '../graphql/custom-queries';
+import { getShow, watchlistItemsByShow } from '../graphql/custom-queries';
 import { searchClient } from '../client';
 import { unwrapShowsAndUpdateAvgRatings, updateAvgRating } from './rating.js';
 
@@ -11,7 +11,7 @@ import { unwrapShowsAndUpdateAvgRatings, updateAvgRating } from './rating.js';
  */
 export const fetchRatedShow = async (showId) => {
   try {
-    const { data: { getShow: show } } = await API.graphql(graphqlOperation(gqlGetShow, { id: showId }));
+    const { data: { getShow: show } } = await API.graphql(graphqlOperation(getShow, { id: showId }));
 
     if (!show) { return; }
 
@@ -40,6 +40,24 @@ export async function maybeAddShowMetadata(show) {
 
   Object.assign(show, data);
 }
+
+/**
+ * Determines if the show is in any user's watchlist.
+ *
+ * @param {string} showId - id of the show
+ * @returns {boolean} whether the show is in any user's watchlist
+ */
+export async function isInAnyUsersWatchlist(showId) {
+  try {
+    const { data } = await API.graphql(graphqlOperation(watchlistItemsByShow, { showId, limit: 1 }));
+
+    return data.watchlistItemsByShow.items.length !== 0;
+  } catch (err) {
+    console.error('Failed to determine if show has watchlist items.', err);
+
+    return false;
+  }
+};
 
 /**
  * Builds the user's watchlist with updated avg ratings, sorted by

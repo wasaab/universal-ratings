@@ -226,3 +226,19 @@ export const getUser = /* GraphQL */ `
     }
   }
 `;
+
+export const watchlistItemsByShow = /* GraphQL */ `
+  query WatchlistItemsByShow(
+    $showId: ID
+    $limit: Int
+  ) {
+    watchlistItemsByShow(
+      showId: $showId
+      limit: $limit
+    ) {
+      items {
+        showId
+      }
+    }
+  }
+`;

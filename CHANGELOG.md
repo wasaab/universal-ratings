@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - svgr config retains viewboxes
+- watchlisted shows no longer removable
+
+### Fixed
+- removing/updating show upon removal of last review
 
 ## [1.18.0] - 2022-05-07
 ### Added
