@@ -304,6 +304,49 @@ export const listShows = /* GraphQL */ `
     }
   }
 `;
+export const watchlistItemsByShow = /* GraphQL */ `
+  query WatchlistItemsByShow(
+    $showId: ID
+    $sortDirection: ModelSortDirection
+    $filter: ModelWatchlistItemFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    watchlistItemsByShow(
+      showId: $showId
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        userId
+        showId
+        show {
+          id
+          tmdbId
+          title
+          type
+          rating
+          img
+          backgroundImg
+          releaseDate
+          description
+          imdbRating
+          rtRating
+          providerIds
+          createdAt
+          source
+          updatedAt
+          owner
+        }
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
 export const reviewsByUser = /* GraphQL */ `
   query ReviewsByUser(
     $userId: ID

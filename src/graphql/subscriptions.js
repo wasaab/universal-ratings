@@ -2,8 +2,8 @@
 // this is an auto generated file. This will be overwritten
 
 export const onCreateWatchlistItem = /* GraphQL */ `
-  subscription OnCreateWatchlistItem($userId: String!) {
-    onCreateWatchlistItem(userId: $userId) {
+  subscription OnCreateWatchlistItem {
+    onCreateWatchlistItem {
       userId
       showId
       show {
@@ -33,8 +33,8 @@ export const onCreateWatchlistItem = /* GraphQL */ `
   }
 `;
 export const onUpdateWatchlistItem = /* GraphQL */ `
-  subscription OnUpdateWatchlistItem($userId: String!) {
-    onUpdateWatchlistItem(userId: $userId) {
+  subscription OnUpdateWatchlistItem {
+    onUpdateWatchlistItem {
       userId
       showId
       show {
@@ -64,8 +64,8 @@ export const onUpdateWatchlistItem = /* GraphQL */ `
   }
 `;
 export const onDeleteWatchlistItem = /* GraphQL */ `
-  subscription OnDeleteWatchlistItem($userId: String!) {
-    onDeleteWatchlistItem(userId: $userId) {
+  subscription OnDeleteWatchlistItem {
+    onDeleteWatchlistItem {
       userId
       showId
       show {
