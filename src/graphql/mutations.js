@@ -113,6 +113,7 @@ export const createUser = /* GraphQL */ `
       name
       color
       themePref
+      plexSearchEnabled
       watchlist {
         items {
           userId
@@ -137,6 +138,7 @@ export const updateUser = /* GraphQL */ `
       name
       color
       themePref
+      plexSearchEnabled
       watchlist {
         items {
           userId
@@ -161,6 +163,7 @@ export const deleteUser = /* GraphQL */ `
       name
       color
       themePref
+      plexSearchEnabled
       watchlist {
         items {
           userId
@@ -190,6 +193,7 @@ export const createReview = /* GraphQL */ `
         name
         color
         themePref
+        plexSearchEnabled
         watchlist {
           nextToken
         }
@@ -237,6 +241,7 @@ export const updateReview = /* GraphQL */ `
         name
         color
         themePref
+        plexSearchEnabled
         watchlist {
           nextToken
         }
@@ -284,6 +289,7 @@ export const deleteReview = /* GraphQL */ `
         name
         color
         themePref
+        plexSearchEnabled
         watchlist {
           nextToken
         }

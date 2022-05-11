@@ -2,9 +2,11 @@ type WatchlistItem @model
   @auth(rules: [{
     allow: owner,
     ownerField: "userId",
-    identityClaim: "sub"
+    identityClaim: "sub",
+    operations: [create, delete, update]
   }])
-  @key(fields: ["userId", "showId"]) {
+  @key(fields: ["userId", "showId"])
+  @key(name: "watchlistItemsByShow", fields: ["showId"], queryField: "watchlistItemsByShow") {
   userId: ID!
   showId: ID!
   show: Show @connection(fields: ["showId"])
@@ -22,6 +24,7 @@ type User @model
   name: String!
   color: String!
   themePref: String
+  plexSearchEnabled: Boolean
   watchlist: [WatchlistItem] @connection(fields: ["id"])
 }
 

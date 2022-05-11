@@ -134,3 +134,13 @@ export const resetTrendingShow = (show) => {
   delete show.reviews;
   delete show.updatedAt;
 };
+
+/**
+ * Resets the provided watchlist show to an unrated state.
+ *
+ * @param {Object} show - the show to reset
+ */
+ export const resetWatchlistShow = (show) => {
+  show.rating = 0;
+  show.reviews.items = [];
+};

@@ -190,6 +190,7 @@ export const getUser = /* GraphQL */ `
       name
       color
       themePref
+      plexSearchEnabled
       watchlist {
         items {
           show {
@@ -221,6 +222,22 @@ export const getUser = /* GraphQL */ `
           createdAt
         }
         nextToken
+      }
+    }
+  }
+`;
+
+export const watchlistItemsByShow = /* GraphQL */ `
+  query WatchlistItemsByShow(
+    $showId: ID
+    $limit: Int
+  ) {
+    watchlistItemsByShow(
+      showId: $showId
+      limit: $limit
+    ) {
+      items {
+        showId
       }
     }
   }

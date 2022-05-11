@@ -2,8 +2,8 @@
 // this is an auto generated file. This will be overwritten
 
 export const onCreateWatchlistItem = /* GraphQL */ `
-  subscription OnCreateWatchlistItem($userId: String!) {
-    onCreateWatchlistItem(userId: $userId) {
+  subscription OnCreateWatchlistItem {
+    onCreateWatchlistItem {
       userId
       showId
       show {
@@ -33,8 +33,8 @@ export const onCreateWatchlistItem = /* GraphQL */ `
   }
 `;
 export const onUpdateWatchlistItem = /* GraphQL */ `
-  subscription OnUpdateWatchlistItem($userId: String!) {
-    onUpdateWatchlistItem(userId: $userId) {
+  subscription OnUpdateWatchlistItem {
+    onUpdateWatchlistItem {
       userId
       showId
       show {
@@ -64,8 +64,8 @@ export const onUpdateWatchlistItem = /* GraphQL */ `
   }
 `;
 export const onDeleteWatchlistItem = /* GraphQL */ `
-  subscription OnDeleteWatchlistItem($userId: String!) {
-    onDeleteWatchlistItem(userId: $userId) {
+  subscription OnDeleteWatchlistItem {
+    onDeleteWatchlistItem {
       userId
       showId
       show {
@@ -101,6 +101,7 @@ export const onCreateUser = /* GraphQL */ `
       name
       color
       themePref
+      plexSearchEnabled
       watchlist {
         items {
           userId
@@ -122,6 +123,7 @@ export const onUpdateUser = /* GraphQL */ `
       name
       color
       themePref
+      plexSearchEnabled
       watchlist {
         items {
           userId
@@ -143,6 +145,7 @@ export const onDeleteUser = /* GraphQL */ `
       name
       color
       themePref
+      plexSearchEnabled
       watchlist {
         items {
           userId
@@ -169,6 +172,7 @@ export const onCreateReview = /* GraphQL */ `
         name
         color
         themePref
+        plexSearchEnabled
         watchlist {
           nextToken
         }
@@ -213,6 +217,7 @@ export const onUpdateReview = /* GraphQL */ `
         name
         color
         themePref
+        plexSearchEnabled
         watchlist {
           nextToken
         }
@@ -257,6 +262,7 @@ export const onDeleteReview = /* GraphQL */ `
         name
         color
         themePref
+        plexSearchEnabled
         watchlist {
           nextToken
         }

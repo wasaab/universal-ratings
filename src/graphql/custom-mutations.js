@@ -33,3 +33,20 @@ export const createShow = /* GraphQL */ `
     }
   }
 `;
+
+export const deleteReview = /* GraphQL */ `
+  mutation DeleteReview(
+    $input: DeleteReviewInput!
+    $condition: ModelReviewConditionInput
+  ) {
+    deleteReview(input: $input, condition: $condition) {
+      show {
+        reviews {
+          items {
+            rating
+          }
+        }
+      }
+    }
+  }
+`;

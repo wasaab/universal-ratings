@@ -5,11 +5,11 @@ import API, { graphqlOperation } from '@aws-amplify/api';
 import {
   createShow,
   createWatchlistItem,
-  deleteReview,
   deleteShow,
   deleteWatchlistItem,
   updateShow
 } from '../src/graphql/mutations.js';
+import { deleteReview } from '../src/graphql/custom-mutations.js';
 import * as gqlQuery from '../src/graphql/custom-queries';
 import {
   Drawer,
@@ -23,7 +23,7 @@ import {
   setTheme,
   useTheme
 } from '../components';
-import { View, Loading, ModalType, Width } from '../src/model';
+import { View, Loading, ModalType, Width, ShowType } from '../src/model';
 import { searchClient } from '../src/client';
 import {
   buildOrUpdateOverallDateToEpisodes,
@@ -35,10 +35,12 @@ import {
   fetchShowSchedule,
   findUserReview,
   getEpisodesOfLatestSeason,
+  isInAnyUsersWatchlist,
   maybeAddShowMetadata,
   maybeFetchRatedTrendingShow,
   removeShowFromSchedule,
   resetTrendingShow,
+  resetWatchlistShow,
   unwrapShowsAndUpdateAvgRatings,
   updateAvgRating,
   updateReviewsAndAvgRating,
@@ -184,6 +186,7 @@ const Index = ({ authedUser }) => {
     } else if (selectedView === View.SCHEDULE) {
       fetchSchedule();
     } else if (selectedView === View.HOME && moment().isAfter(trending.expirationTime)) {
+      setLoading(Loading.VIEW);
       fetchTrendingShows();
     } else {
       fetchShows(selectedView);
@@ -240,7 +243,7 @@ const Index = ({ authedUser }) => {
     if (!show) { return; }
 
     removeShowFromSchedule(show, dateToEpisodes);
-    removeOrResetShowInGrid(show, showIdx);
+    updateShowCardGrid(showIdx);
     unselectShow();
   };
 
@@ -268,28 +271,34 @@ const Index = ({ authedUser }) => {
   };
 
   /**
-   * Adds or removes show from watchlist.
-   * Also adds or removes show from schedule when on SCHEDULE view
-   * and the show is not rated by the user.
+   * Adds or removes a show from the user's watchlist.
    *
    * @param {boolean} isRemoval - whether or not this is a watchlist removal
    * @param {string} showId - the id of the show being added/removed from watchlist
    */
-  const updateWatchlistAndSchedule = (isRemoval, showId) => {
-    const isScheduleChange = view === View.SCHEDULE && !isShowReviewedByUser();
-
+  const changeWatchlist = (isRemoval, showId) => {
     if (isRemoval) {
       removeFromWatchlist(showId);
-
-      if (isScheduleChange) {
-        removeFromSchedule();
-      }
     } else {
       addToWatchlist();
+    }
+  };
 
-      if (isScheduleChange) {
-        addToSchedule();
-      }
+  /**
+   * Adds or removes TV show from schedule when on SCHEDULE view.
+   *
+   * @param {boolean} isRemoval - whether or not this is a watchlist removal
+   * @param {ShowType} showType - the type of the show being added/removed from watchlist
+   */
+  const maybeUpdateSchedule = (isRemoval, showType) => {
+    const isScheduleChange = view === View.SCHEDULE && showType === ShowType.TV && !isShowReviewedByUser();
+
+    if (!isScheduleChange) { return; }
+
+    if (isRemoval) {
+      removeFromSchedule();
+    } else {
+      addToSchedule();
     }
   };
 
@@ -319,7 +328,8 @@ const Index = ({ authedUser }) => {
       return;
     }
 
-    updateWatchlistAndSchedule(isRemoval, showId);
+    changeWatchlist(isRemoval, showId);
+    maybeUpdateSchedule(isRemoval, show.type);
   };
 
   /**
@@ -340,18 +350,13 @@ const Index = ({ authedUser }) => {
    * Updates the trending shows if the updated show is trending.
    *
    * @param {Object} updatedShow - the updated show
-   * @param {boolean=} isReset - whether the trending show is being reset to unrated
    */
-  const maybeUpdateTrending = (updatedShow, isReset) => {
+   const maybeUpdateTrending = (updatedShow) => {
     if (view === View.HOME) { return; }
 
     const trendingShowIdx = findTrendingShowIdx(updatedShow);
 
     if (trendingShowIdx === -1) { return; }
-
-    if (isReset) {
-      resetTrendingShow(updatedShow);
-    }
 
     trending.shows[trendingShowIdx] = updatedShow;
     setTrending({ ...trending });
@@ -379,16 +384,13 @@ const Index = ({ authedUser }) => {
   };
 
   /**
-   * Removes the provided show from the card grid if not trending.
-   * If trending, the show's rating and reviews are reset.
+   * Removes the provided show from the card grid if not trending,
+   * otherwise updates shows in place.
    *
-   * @param {Object} show - the show to remove
    * @param {number} showIdx - the index of the show
    */
-  const removeOrResetShowInGrid = (show, showIdx) => {
-    if (view === View.HOME && showIdx < trending.shows.length) {
-      resetTrendingShow(show);
-    } else {
+  const updateShowCardGrid = (showIdx) => {
+    if (view !== View.WATCHLIST && (view !== View.HOME || showIdx >= trending.shows.length)) {
       shows.splice(showIdx, 1);
     }
 
@@ -396,39 +398,88 @@ const Index = ({ authedUser }) => {
   };
 
   /**
-   * Removes the provided show and its watchlist entry.
+   * Converts a previously rated show into an unrated watchlist show.
+   *
+   * @param {Object} show - the show to convert
+   */
+  const convertToWatchlist = async (show) => {
+    const input = {
+      id: show.id,
+      source: 'WL',
+      rating: 0
+    };
+
+    await API.graphql(graphqlOperation(updateShow, { input }));
+    resetWatchlistShow(show);
+  };
+
+  /**
+   * Removes a show.
    *
    * @param {Object} show - the show to remove
-   * @param {number} showIdx - the index of the show
    */
-  const removeShow = async (show, showIdx) => {
+  const removeShow = async (show) => {
+    if (isTrending(show)) {
+      resetTrendingShow(show);
+    }
+
     try {
-      const input = { id: show.id };
-
-      await API.graphql(graphqlOperation(deleteShow, { input }));
-
-      if (watchlistIdx !== -1 || (!selectedShow && findWatchlistIdx(show.id) !== -1)) {
-        handleWatchlistChange(true, show.id, show);
-      }
-
-      maybeUpdateTrending(show, true);
-
-      if (showIdx && showIdx !== -1) {
-        removeOrResetShowInGrid(show, showIdx);
-      }
-
-      if (selectedShow) {
-        unselectShow();
-      }
-
-      searchClient.removeShowFromCache(show.tmdbId);
+      await API.graphql(graphqlOperation(deleteShow, { input: { id: show.id } }));
     } catch (err) {
-      console.error(`Failed to remove show "${show.id}": `, err);
+      console.error('Unable to remove show owned by another user. ', err);
+      await convertToWatchlist(show);
     }
   };
 
   /**
-   * Removes the logged in user's review of a show and the show itself if sole reviewer.
+   * Removes unrated show if not watchlisted by any user.
+   * Updates show to have watchlist source if watchlisted.
+   *
+   * @param {Object} show - the show to delete or convert to WL
+   */
+  const removeShowOrConvertToWatchlist = async (show) => {
+    const isWatchlisted = await isInAnyUsersWatchlist(show.id);
+
+    if (isWatchlisted) {
+      await convertToWatchlist(show);
+      resetWatchlistShow(show);
+      updateWatchlist(show);
+    } else {
+      await removeShow(show);
+    }
+  };
+
+  /**
+   * Removes a show that is no longer rated or watchlisted.
+   *
+   * @param {Object} show - the show to remove
+   * @param {number} showIdx - the index of the show
+   */
+  const removeUntrackedShow = async (show, showIdx) => {
+    try {
+      await removeShowOrConvertToWatchlist(show);
+    } catch (err) {
+      console.error(`Failed to remove untracked show "${show.id}": `, err);
+      return;
+    }
+
+    maybeUpdateTrending(show);
+    searchClient.removeShowFromCache(show.tmdbId);
+
+    if (view === View.SCHEDULE) { return; }
+
+    if (showIdx !== null) {
+      updateShowCardGrid(showIdx);
+    }
+
+    if (selectedShow) {
+      unselectShow();
+    }
+  };
+
+  /**
+   * Removes the logged in user's review of a show and the
+   * show itself if sole reviewer and not watchlisted.
    *
    * @param {Object} show - the show to remove review from
    * @param {number} showIdx - the index of the show
@@ -440,15 +491,15 @@ const Index = ({ authedUser }) => {
         userId: user.id
       };
 
-      await API.graphql(graphqlOperation(deleteReview, { input }));
+      const { data: { deleteReview: resp } } = await API.graphql(graphqlOperation(deleteReview, { input }));
 
-      if (show.reviews.items.length === 1) {
-        removeShow(show, showIdx);
+      if (resp.show.reviews.items.length === 0) {
+        removeUntrackedShow(show, showIdx);
       } else {
-        updateShows(show, showIdx !== -1);
+        updateShows(show, showIdx !== null);
       }
 
-      if (view === View.SCHEDULE && watchlistIdx === -1) {
+      if (view === View.SCHEDULE && watchlistIdx === -1 && show.type === ShowType.TV) {
         removeFromSchedule(showIdx);
       }
     } catch (err) {
@@ -496,7 +547,7 @@ const Index = ({ authedUser }) => {
       createShowReview(show, currUserRating, !prevUserRating, user.id);
       updateShows(show, isShowInGrid, currUserRating);
 
-      if (view === View.SCHEDULE && !prevUserRating && watchlistIdx === -1) {
+      if (view === View.SCHEDULE && !prevUserRating && watchlistIdx === -1 && show.type === ShowType.TV) {
         addToSchedule(show);
       }
     }
@@ -630,6 +681,10 @@ const Index = ({ authedUser }) => {
     setUser({ ...user, name, color });
   };
 
+  const handleSettingsSave = (plexSearchEnabled) => {
+    setUser({ ...user, plexSearchEnabled });
+  };
+
   const handleEndOfPageReached = () => {
     if (!nextToken) { return; }
 
@@ -707,7 +762,11 @@ const Index = ({ authedUser }) => {
         )}
 
         {openedModal === ModalType.SETTINGS && (
-          <SettingsModal onClose={closeModal} />
+          <SettingsModal
+            user={user}
+            onClose={closeModal}
+            onSave={handleSettingsSave}
+          />
         )}
 
         {view === View.SCHEDULE && !loading && dateToEpisodes ? (
