@@ -331,8 +331,8 @@ const ShowDetailsModal = ({
               className={classes.thirdPartyRatingsContainer}
               direction="row"
             >
-              {show.imdbRating && <LabelledIcon Icon={ImdbIcon} label={`${show.imdbRating}/10`} />}
-              {show.rtRating && <LabelledIcon Icon={show.rtRating >= 60 ? RtFreshIcon : RtRottenIcon} label={`${show.rtRating}%`} />}
+              {show.imdbRating !== null && <LabelledIcon Icon={ImdbIcon} label={`${show.imdbRating}/10`} />}
+              {show.rtRating !== null && <LabelledIcon Icon={show.rtRating >= 60 ? RtFreshIcon : RtRottenIcon} label={`${show.rtRating}%`} />}
             </Grid>
 
             <Grid
