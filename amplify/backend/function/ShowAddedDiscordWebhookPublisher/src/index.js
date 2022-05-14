@@ -10,11 +10,11 @@ const ratedShowSource = 'UR';
 function buildRatingDesc(imdbRating, rtRating) {
   let ratingsLabel = '';
 
-  if (rtRating) {
+  if (rtRating >= 0) {
     ratingsLabel += `🍅⠀**${rtRating}**⠀⠀⠀⠀⠀`;
   }
 
-  if (imdbRating) {
+  if (imdbRating >= 0) {
     ratingsLabel += `**\`IMDB\`⠀${imdbRating}**`;
   }
 
