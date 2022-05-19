@@ -35,7 +35,7 @@ import ImdbIcon from '../resources/images/imdb.svg';
 import RtFreshIcon from '../resources/images/rt.svg';
 import RtRottenIcon from '../resources/images/rt-rotten.svg';
 import PlexIcon from '../resources/images/plex.svg';
-import providerIdToInfo from '../resources/data/providers';
+import { renderProviderLogo } from '../resources/data/providers';
 
 const avatarSize = 33;
 
@@ -96,7 +96,7 @@ const useStyles = makeStyles((theme) => ({
   streamingSitesContainer: {
     alignItems: 'center',
     marginTop: 0,
-    maxWidth: '90%'
+    maxWidth: 328
   },
   streamingSitesLabel: {
     fontSize: '0.9rem',
@@ -223,12 +223,6 @@ const ShowDetailsModal = ({
     } catch (err) {
       console.error('GraphQL toggle favorite failed. ', err);
     }
-  };
-
-  const renderProviderLogo = (providerId) => {
-    const { logo: ProviderLogo } = providerIdToInfo[providerId];
-
-    return <ProviderLogo key={providerId} />;
   };
 
   return (

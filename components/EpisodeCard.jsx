@@ -7,7 +7,7 @@ import {
   Chip,
   Typography,
 } from '@material-ui/core';
-import providerIdToInfo, { disneyProviderId } from '../resources/data/providers';
+import { renderProviderLogo } from '../resources/data/providers';
 import { EventBusy as FinaleIcon } from '@material-ui/icons';
 import ShowImage from './ShowImage';
 
@@ -32,6 +32,7 @@ const useStyles = makeStyles({
     alignItems: 'center',
     gridGap: 8,
     paddingTop: '12px',
+    fontSize: '0.8em',
   },
   episodeChip: {
     borderColor: 'rgba(255, 180, 0, 0.6)',
@@ -41,13 +42,6 @@ const useStyles = makeStyles({
     }
   }
 });
-
-const renderProviderLogo = (providerId) => {
-  const { logo: ProviderLogo } = providerIdToInfo[providerId];
-  const height = providerId === disneyProviderId ? 24 : '0.8rem';
-
-  return <ProviderLogo key={providerId} style={{ height }} />;
-};
 
 const EpisodeCard = ({ show, elevation = 1, onClick }) => {
   const classes = useStyles();
@@ -71,7 +65,7 @@ const EpisodeCard = ({ show, elevation = 1, onClick }) => {
               color="primary"
               size="small"
             />
-            {show.providerIds?.map(renderProviderLogo)}
+            {show.providerIds?.slice(0, 2).map(renderProviderLogo)}
           </div>
         </CardContent>
       </CardActionArea>
