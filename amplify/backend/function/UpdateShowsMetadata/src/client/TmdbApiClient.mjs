@@ -4,31 +4,39 @@ import axios from 'axios';
 const providerIdToInfo = {
   8: {
     name: 'netflix',
-    networkId: 213,
+    networkId: 213
   },
   15: {
     name: 'hulu',
-    networkId: 453,
+    networkId: 453
   },
   9: {
     name: 'amazon',
-    networkId: 1024,
+    networkId: 1024
   },
   384: {
     name: 'hbo',
-    networkId: 3186,
+    networkId: 3186
+  },
+  37: {
+    name: 'showtime',
+    networkId: 67
   },
   337: {
     name: 'disney',
-    networkId: 2739,
+    networkId: 2739
   },
   350: {
     name: 'apple',
-    networkId: 2552,
+    networkId: 2552
   },
   386: {
     name: 'peacock',
-    networkId: 3353,
+    networkId: 3353
+  },
+  207: {
+    name: 'roku',
+    networkId: 4692
   }
 };
 
