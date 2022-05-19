@@ -8,6 +8,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - RT/IMDB rating of 0 shown
 
+## [1.19.1] - 2022-05-18
+### Added
+- showtime & roku watch providers
+
+### Changed
+- svg heights using em instead of px
+
 ## [1.19.0] - 2022-05-10
 ### Added
 - plex show search button
