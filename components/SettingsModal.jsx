@@ -41,9 +41,9 @@ const useStyles = makeStyles((theme) => ({
     alignSelf: 'end'
   },
   plexSearchLabel: {
-    fontSize: 22,
+    fontSize: 19,
     lineHeight: 1,
-    margin: '0px 12px 0px 6px'
+    margin: '2px 26px 0px 6px'
   }
 }));
 
@@ -110,7 +110,7 @@ const SettingsModal = ({ user, onClose, onSave }) => {
         </Box>
 
         <Box display="flex" alignItems="center">
-          <PlexIcon />
+          <PlexIcon style={{ height: '1em', width: 'auto' }} />
           <Typography variant="subtitle2" className={classes.plexSearchLabel}>
             Search
           </Typography>
