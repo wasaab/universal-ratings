@@ -6,6 +6,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [UNRELEASED] - 2022-##-##
 
+## [1.19.2] - 2022-06-04
+### Changed
+- show modal restyled for mobile
+- plex icon sizing
+
+### Fixed
+- RT/IMDB rating of 0 shown
+
 ## [1.19.1] - 2022-05-18
 ### Added
 - showtime & roku watch providers

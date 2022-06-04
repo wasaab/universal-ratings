@@ -13,7 +13,8 @@ import {
   Link,
   makeStyles,
   Tooltip,
-  Typography
+  Typography,
+  useMediaQuery
 } from '@material-ui/core';
 import {
   Favorite as FavoriteIcon,
@@ -172,6 +173,18 @@ const useStyles = makeStyles((theme) => ({
     '&:hover': {
       color: alpha(theme.palette.text.primary, 0.6)
     }
+  },
+  title: {
+    WebkitLineClamp: 4,
+    textOverflow: 'ellipsis',
+    display: '-webkit-box',
+    WebkitBoxOrient: 'vertical',
+    overflowY: 'hidden',
+    [theme.breakpoints.down(550)]: {
+      WebkitLineClamp: 3,
+      fontSize: '1.5rem',
+      fontWeight: 500
+    }
   }
 }));
 
@@ -190,6 +203,7 @@ const ShowDetailsModal = ({
   onClose
 }) => {
   const classes = useStyles(show);
+  const isMobile = useMediaQuery('(max-width:390px)');
   const [currUserRating, setCurrUserRating] = useState(userReview?.rating);
   const [isTooltipOpen, setIsTooltipOpen] = useState(false);
   const TypeIcon = ShowType.toTwoToneIcon(show.type);
@@ -225,6 +239,9 @@ const ShowDetailsModal = ({
     }
   };
 
+  const getImgContainerXs = () => (show.img ? 5 : 3);
+
+  console.log('matches:', isMobile);
   return (
     <Dialog
       open={show !== null}
@@ -239,8 +256,14 @@ const ShowDetailsModal = ({
     >
       <DialogContent className={classes.content}>
         <Grid container spacing={2} direction="row">
-          <Grid item container xs={show.img ? 5 : 3} direction="column" justifyContent="center">
-            {show.img && (
+          <Grid
+            item
+            container
+            xs={isMobile ? true : getImgContainerXs()}
+            direction="column"
+            justifyContent="center"
+          >
+            {show.img && !isMobile && (
               <Image
                 src={show.img}
                 alt={show.title}
@@ -267,7 +290,7 @@ const ShowDetailsModal = ({
                   {show.releaseDate.slice(0, 4)}
                 </Typography>
               </Box>
-              <Typography variant="h4" gutterBottom>
+              <Typography variant="h4" gutterBottom className={classes.title}>
                 {show.title}
               </Typography>
               {show.type === ShowType.TV && (
@@ -325,8 +348,12 @@ const ShowDetailsModal = ({
               className={classes.thirdPartyRatingsContainer}
               direction="row"
             >
-              {show.imdbRating && <LabelledIcon Icon={ImdbIcon} label={`${show.imdbRating}/10`} />}
-              {show.rtRating && <LabelledIcon Icon={show.rtRating >= 60 ? RtFreshIcon : RtRottenIcon} label={`${show.rtRating}%`} />}
+              {show.imdbRating !== null && (
+                <LabelledIcon Icon={ImdbIcon} label={`${show.imdbRating}/10`} />
+              )}
+              {show.rtRating !== null && (
+                <LabelledIcon Icon={show.rtRating >= 60 ? RtFreshIcon : RtRottenIcon} label={`${show.rtRating}%`} />
+              )}
             </Grid>
 
             <Grid
