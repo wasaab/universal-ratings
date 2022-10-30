@@ -74,6 +74,7 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: 3
   },
   badge: {
+    userSelect: 'none',
     border: '2px solid transparent'
   },
   avatarGroup: {
@@ -241,7 +242,6 @@ const ShowDetailsModal = ({
 
   const getImgContainerXs = () => (show.img ? 5 : 3);
 
-  console.log('matches:', isMobile);
   return (
     <Dialog
       open={show !== null}

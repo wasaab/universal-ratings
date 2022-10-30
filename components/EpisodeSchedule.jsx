@@ -68,7 +68,7 @@ const useStyles = makeStyles({
 });
 
 function renderTimeIcon(today, airDate) {
-  if (today.isBefore(airDate, 'day')) { return <FutureIcon />; }
+  if (!airDate || today.isBefore(airDate, 'day')) { return <FutureIcon />; }
 
   return today.isAfter(airDate, 'day') ? <PastIcon /> : <PresentIcon />;
 }
@@ -112,7 +112,7 @@ const EpisodeSchedule = ({ shows, dateToEpisodes, onShowSelected }) => {
       <Grid key={`${showIdx}-${show.episodeNum}`} item>
         <EpisodeCard
           show={show}
-          onClick={() => onShowSelected(show, showIdx)}
+          onClick={() => onShowSelected({ ...show, isFinale: null }, showIdx)}
           elevation={theme.elevation.card}
         />
       </Grid>
@@ -143,7 +143,7 @@ const EpisodeSchedule = ({ shows, dateToEpisodes, onShowSelected }) => {
               variant="h5"
               style={{ fontWeight: 'inherit' }}
             >
-              {moment(day).calendar()}
+              {day ? moment(day).calendar() : 'TBA'}
             </Typography>
           </Box>
           <Grid container spacing={2} wrap="wrap">
