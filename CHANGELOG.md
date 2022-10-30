@@ -6,6 +6,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [UNRELEASED] - 2022-##-##
 
+## [1.19.3] - 2022-10-29
+### Changed
+- disabled ratings text selection
+- fetch limit for schedule view increased (100 -> 1000)
+
+### Fixed
+- unknown air dates handled for schedule
+- finale flag cleared upon selection
+
 ## [1.19.2] - 2022-06-04
 ### Changed
 - show modal restyled for mobile

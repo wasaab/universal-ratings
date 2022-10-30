@@ -128,7 +128,6 @@ export async function fetchShowSchedule(show) {
   return updatedShow;
 }
 
-
 /**
  * Fetches the TV shows reviewed by the user and combines
  * them with the TV shows the user has added to their watchlist.
@@ -143,9 +142,9 @@ async function buildReviewedAndWatchlistedTvShows(watchlist, userId) {
   let reviewedShows = [];
 
   try {
-    const { data: { reviewsByUser: { items } } } = await API.graphql(graphqlOperation(reviewsByUser, { userId }));
+    const { data } = await API.graphql(graphqlOperation(reviewsByUser, { userId, limit: 1000 }));
 
-    reviewedShows = unwrapShowsAndUpdateAvgRatings(items)
+    reviewedShows = unwrapShowsAndUpdateAvgRatings(data.reviewsByUser.items)
       .filter((show) => !isWatchlisted(show));
   } catch (err) {
     console.error('Failed to get shows reviewed by user:', err);
