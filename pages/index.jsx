@@ -713,7 +713,6 @@ const Index = ({ authedUser }) => {
   useEffect(() => {
     setTheme(dispatch, authedUser.themePref, true);
     handleDrawerSelection(view, true);
-
     router.beforePopState(({ as: path }) => {
       handleDrawerSelection(View.fromPath(path));
     });
