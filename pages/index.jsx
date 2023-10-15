@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
+import { useRouter } from 'next/router';
 import moment from 'moment';
 import { makeStyles } from '@material-ui/core/styles';
 import API, { graphqlOperation } from '@aws-amplify/api';
@@ -77,7 +78,8 @@ const Index = ({ authedUser }) => {
   const [trending, setTrending] = useState(null);
   const [dateToEpisodes, setDateToEpisodes] = useState();
   const [nextToken, setNextToken] = useState();
-  const [view, setView] = useState(View.HOME);
+  const router = useRouter();
+  const [view, setView] = useState(View.fromPath(router.asPath) ?? View.HOME);
   const [loading, setLoading] = useState(null);
   const [watchlist, setWatchlist] = useState(() => buildWatchlist(authedUser.watchlist.items));
   const findWatchlistIdx = (showId = selectedShow?.id) => watchlist.findIndex(({ id }) => id === showId);
@@ -185,7 +187,7 @@ const Index = ({ authedUser }) => {
       setShows(watchlist);
     } else if (selectedView === View.SCHEDULE) {
       fetchSchedule();
-    } else if (selectedView === View.HOME && moment().isAfter(trending.expirationTime)) {
+    } else if (selectedView === View.HOME && (!trending || moment().isAfter(trending.expirationTime))) {
       setLoading(Loading.VIEW);
       fetchTrendingShows();
     } else {
@@ -194,6 +196,7 @@ const Index = ({ authedUser }) => {
 
     setView(selectedView);
     scrollToTop();
+    router.push(selectedView.path);
   };
 
   /**
@@ -708,8 +711,12 @@ const Index = ({ authedUser }) => {
   };
 
   useEffect(() => {
-    fetchTrendingShows();
     setTheme(dispatch, authedUser.themePref, true);
+    handleDrawerSelection(view, true);
+
+    router.beforePopState(({ as: path }) => {
+      handleDrawerSelection(View.fromPath(path));
+    });
   }, []);
 
   useEffect(() => {
