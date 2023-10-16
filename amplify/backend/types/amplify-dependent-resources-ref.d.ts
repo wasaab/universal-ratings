@@ -7,7 +7,8 @@ export type AmplifyDependentResourcesAttributes = {
             "UserPoolArn": "string",
             "UserPoolName": "string",
             "AppClientIDWeb": "string",
-            "AppClientID": "string"
+            "AppClientID": "string",
+            "CreatedSNSRole": "string"
         },
         "userPoolGroups": {
             "AdminGroupRole": "string"
@@ -24,20 +25,23 @@ export type AmplifyDependentResourcesAttributes = {
             "Name": "string",
             "Arn": "string",
             "LambdaExecutionRole": "string",
-            "Region": "string"
+            "Region": "string",
+            "LambdaExecutionRoleArn": "string"
         },
         "ShowAddedDiscordWebhookPublisher": {
             "Name": "string",
             "Arn": "string",
             "Region": "string",
-            "LambdaExecutionRole": "string"
+            "LambdaExecutionRole": "string",
+            "LambdaExecutionRoleArn": "string"
         },
         "UpdateShowsMetadata": {
             "Name": "string",
             "Arn": "string",
             "Region": "string",
             "LambdaExecutionRole": "string",
-            "CloudWatchEventRule": "string"
+            "CloudWatchEventRule": "string",
+            "LambdaExecutionRoleArn": "string"
         }
     }
 }

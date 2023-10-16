@@ -1,87 +1,161 @@
 {
-  "auth": {
-    "universalratings5a980c73": {
-      "service": "Cognito",
-      "providerPlugin": "awscloudformation",
-      "dependsOn": [
-        {
-          "category": "function",
-          "resourceName": "universalratings5a980c73PostConfirmation",
-          "triggerProvider": "Cognito",
-          "attributes": [
-            "Arn",
-            "Name"
-          ]
-        }
-      ],
-      "customAuth": false
-    },
-    "userPoolGroups": {
-      "service": "Cognito-UserPool-Groups",
-      "providerPlugin": "awscloudformation",
-      "dependsOn": [
-        {
-          "category": "auth",
-          "resourceName": "universalratings5a980c73",
-          "attributes": [
-            "UserPoolId",
-            "AppClientIDWeb",
-            "AppClientID",
-            "IdentityPoolId"
-          ]
-        }
-      ]
-    }
-  },
   "api": {
     "universalratings": {
-      "service": "AppSync",
-      "providerPlugin": "awscloudformation",
       "output": {
         "authConfig": {
+          "additionalAuthenticationProviders": [],
           "defaultAuthentication": {
             "authenticationType": "AMAZON_COGNITO_USER_POOLS",
             "userPoolConfig": {
               "userPoolId": "authuniversalratings5a980c73"
             }
-          },
-          "additionalAuthenticationProviders": []
+          }
         }
-      }
+      },
+      "providerPlugin": "awscloudformation",
+      "service": "AppSync"
+    }
+  },
+  "auth": {
+    "universalratings5a980c73": {
+      "customAuth": false,
+      "dependsOn": [
+        {
+          "attributes": [
+            "Arn",
+            "Name"
+          ],
+          "category": "function",
+          "resourceName": "universalratings5a980c73PostConfirmation",
+          "triggerProvider": "Cognito"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Cognito"
+    },
+    "userPoolGroups": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "UserPoolId",
+            "AppClientIDWeb",
+            "AppClientID",
+            "IdentityPoolId"
+          ],
+          "category": "auth",
+          "resourceName": "universalratings5a980c73"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Cognito-UserPool-Groups"
     }
   },
   "function": {
+    "ShowAddedDiscordWebhookPublisher": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "GraphQLAPIIdOutput",
+            "GraphQLAPIEndpointOutput"
+          ],
+          "category": "api",
+          "resourceName": "universalratings"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "UpdateShowsMetadata": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "GraphQLAPIIdOutput"
+          ],
+          "category": "api",
+          "resourceName": "universalratings"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
     "universalratings5a980c73PostConfirmation": {
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
-    },
-    "ShowAddedDiscordWebhookPublisher": {
-      "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda",
-      "dependsOn": [
+    }
+  },
+  "parameters": {
+    "AMPLIFY_function_ShowAddedDiscordWebhookPublisher_deploymentBucketName": {
+      "usedBy": [
         {
-          "category": "api",
-          "resourceName": "universalratings",
-          "attributes": [
-            "GraphQLAPIIdOutput",
-            "GraphQLAPIEndpointOutput"
-          ]
+          "category": "function",
+          "resourceName": "ShowAddedDiscordWebhookPublisher"
         }
       ]
     },
-    "UpdateShowsMetadata": {
-      "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda",
-      "dependsOn": [
+    "AMPLIFY_function_ShowAddedDiscordWebhookPublisher_s3Key": {
+      "usedBy": [
         {
-          "category": "api",
-          "resourceName": "universalratings",
-          "attributes": [
-            "GraphQLAPIIdOutput"
-          ]
+          "category": "function",
+          "resourceName": "ShowAddedDiscordWebhookPublisher"
+        }
+      ]
+    },
+    "AMPLIFY_function_ShowAddedDiscordWebhookPublisher_webhookUrl": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "ShowAddedDiscordWebhookPublisher"
+        }
+      ]
+    },
+    "AMPLIFY_function_UpdateShowsMetadata_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "UpdateShowsMetadata"
+        }
+      ]
+    },
+    "AMPLIFY_function_UpdateShowsMetadata_omdbApiKey": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "UpdateShowsMetadata"
+        }
+      ]
+    },
+    "AMPLIFY_function_UpdateShowsMetadata_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "UpdateShowsMetadata"
+        }
+      ]
+    },
+    "AMPLIFY_function_UpdateShowsMetadata_tmdbApiKey": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "UpdateShowsMetadata"
+        }
+      ]
+    },
+    "AMPLIFY_function_universalratings5a980c73PostConfirmation_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "universalratings5a980c73PostConfirmation"
+        }
+      ]
+    },
+    "AMPLIFY_function_universalratings5a980c73PostConfirmation_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "universalratings5a980c73PostConfirmation"
         }
       ]
     }
