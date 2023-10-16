@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [UNRELEASED] - 2023-##-##
 
-## [1.20.1] - 2023-10-16
+## [1.20.1] - 2023-10-15
 ### Fixed
 - upgraded amplify auth to be compatible with latest AWS CLI build
 
