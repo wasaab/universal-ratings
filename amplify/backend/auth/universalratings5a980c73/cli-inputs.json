@@ -1,0 +1,58 @@
+{
+  "version": "1",
+  "cognitoConfig": {
+    "authSelections": "identityPoolAndUserPool",
+    "requiredAttributes": [
+      "email"
+    ],
+    "resourceName": "universalratings5a980c73",
+    "serviceName": "Cognito",
+    "useDefault": "manual",
+    "userpoolClientReadAttributes": [
+      "email"
+    ],
+    "userpoolClientWriteAttributes": [
+      "email"
+    ],
+    "aliasAttributes": [
+      "email",
+      "preferred_username"
+    ],
+    "resourceNameTruncated": "univer5a980c73",
+    "sharedId": "5a980c73",
+    "userPoolGroupList": [
+      "Admin"
+    ],
+    "userPoolGroups": true,
+    "userPoolName": "universalratings5a980c73_userpool_5a980c73",
+    "usernameCaseSensitive": false,
+    "userpoolClientRefreshTokenValidity": 30,
+    "userpoolClientSetAttributes": false,
+    "userpoolClientGenerateSecret": false,
+    "userpoolClientLambdaRole": "univer5a980c73_userpoolclient_lambda_role",
+    "passwordPolicyCharacters": [],
+    "passwordPolicyMinLength": 8,
+    "adminQueries": false,
+    "mfaConfiguration": "OFF",
+    "mfaTypes": [
+      "SMS Text Message"
+    ],
+    "smsAuthenticationMessage": "Your authentication code is {####}",
+    "emailVerificationMessage": "Your verification code is {####}",
+    "emailVerificationSubject": "Universal Ratings Verification Code",
+    "smsVerificationMessage": "Your verification code is {####}",
+    "autoVerifiedAttributes": [
+      "email"
+    ],
+    "hostedUI": false,
+    "thirdPartyAuth": false,
+    "identityPoolName": "universalratings5a980c73_identitypool_5a980c73",
+    "allowUnauthenticatedIdentities": false,
+    "authProviders": [],
+    "triggers": {
+      "PostConfirmation": [
+        "addUser"
+      ]
+    }
+  }
+}  
