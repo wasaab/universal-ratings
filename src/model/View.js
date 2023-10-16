@@ -17,7 +17,7 @@ function buildRecentlyReleasedQueryParams() {
 }
 
 export default class View {
-  static HOME = new View('Home', ...recentlyRatedArgs);
+  static HOME = new View('Home', ...recentlyRatedArgs, '');
   static TV = new View('TV Shows', 'showsByType', { type: ShowType.TV, filter: { source: { eq: source } } });
   static MOVIES = new View('Movies', 'showsByType', { type: ShowType.MOVIE, filter: { source: { eq: source } } });
   static FAVORITES = new View('Favorites', 'reviewsByUser', { filter: { isFavorite: { eq: true } } });
@@ -27,7 +27,8 @@ export default class View {
   static RECENTLY_RELEASED = new View('Recently Released', recentlyRatedArgs[0], buildRecentlyReleasedQueryParams());
   static SCHEDULE = new View('Schedule', null, null, true);
 
-  constructor(label, queryName, queryParams = {}, includeAdded) {
+  constructor(label, queryName, queryParams = {}, includeAdded, path = label.toLowerCase()) {
+    this.path = `/${encodeURIComponent(path)}`;
     this.label = label;
     this.query = {
       name: queryName,
@@ -38,5 +39,9 @@ export default class View {
 
   static fromShowType(showType) {
     return showType === ShowType.TV ? this.TV : this.MOVIES;
+  }
+
+  static fromPath(targetPath) {
+    return Object.values(View).find(({ path }) => path === targetPath);
   }
 }
