@@ -6,7 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [UNRELEASED] - 2023-##-##
 
+## [1.21.1] - 2023-10-17
+### Fixed
+- dense schedule view card width reduced for small mobile devices
+
 ## [1.21.0] - 2023-10-16
+### Added
 - dense schedule view for mobile
 
 ## [1.20.1] - 2023-10-15
