@@ -5,6 +5,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [UNRELEASED] - 2023-##-##
+- dense schedule view for mobile
+
+## [1.20.1] - 2023-10-15
+### Fixed
+- upgraded amplify auth to be compatible with latest AWS CLI build
+
+## [1.20.0] - 2023-10-15
 ### Added
 - route to view via path in url
 - page forward & backward support

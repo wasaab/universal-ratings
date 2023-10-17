@@ -1,6 +1,6 @@
 {
   "name": "universal-ratings",
-  "version": "1.19.3",
+  "version": "1.20.1",
   "description": "A site for rating TV shows and movies",
   "repository": {
     "type": "git",
@@ -32,7 +32,7 @@
     "aws-amplify": "^4.2.10",
     "axios": "^0.21.4",
     "clsx": "^1.1.1",
-    "graphql-algolia-transformer": "^1.1.0",
+    "graphql-algolia-transformer": "^2.0.0",
     "lodash.debounce": "^4.0.8",
     "lru-cache": "^6.0.0",
     "moment": "^2.29.2",

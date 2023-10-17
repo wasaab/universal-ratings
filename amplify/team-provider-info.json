@@ -9,7 +9,8 @@
       "UnauthRoleName": "amplify-amplify6604b332b57b4-staging-21636-unauthRole",
       "StackName": "amplify-amplify6604b332b57b4-staging-21636",
       "StackId": "arn:aws:cloudformation:us-east-1:388281974625:stack/amplify-amplify6604b332b57b4-staging-21636/7fd76900-f26e-11eb-bff9-0e79f25862f3",
-      "AmplifyAppId": "d9ooeidl73fpk"
+      "AmplifyAppId": "d9ooeidl73fpk",
+      "AuthTriggerTemplateURL": "https://s3.amazonaws.com/amplify-amplify6604b332b57b4-staging-21636-deployment/amplify-cfn-templates/auth/auth-trigger-cloudformation-template.json"
     },
     "categories": {
       "auth": {
@@ -19,18 +20,18 @@
       "function": {
         "universalratings5a980c73PostConfirmation": {
           "deploymentBucketName": "amplify-amplify6604b332b57b4-staging-21636-deployment",
-          "s3Key": "amplify-builds/universalratings5a980c73PostConfirmation-7a74726d305859496c53-build.zip"
+          "s3Key": "amplify-builds/universalratings5a980c73PostConfirmation-2b433431435a466d3062-build.zip"
         },
         "ShowAddedDiscordWebhookPublisher": {
           "webhookUrl": "WEBHOOK_URL_VALUE",
           "deploymentBucketName": "amplify-amplify6604b332b57b4-staging-21636-deployment",
-          "s3Key": "amplify-builds/ShowAddedDiscordWebhookPublisher-474e2f47487474595844-build.zip"
+          "s3Key": "amplify-builds/ShowAddedDiscordWebhookPublisher-6644444d326144376c6a-build.zip"
         },
         "UpdateShowsMetadata": {
           "tmdbApiKey": "TMDB_API_KEY_VALUE",
           "omdbApiKey": "OMDB_API_KEY_VALUE",
           "deploymentBucketName": "amplify-amplify6604b332b57b4-staging-21636-deployment",
-          "s3Key": "amplify-builds/UpdateShowsMetadata-6b44394449534c4c6e6b-build.zip"
+          "s3Key": "amplify-builds/UpdateShowsMetadata-376e52585a7a2f353170-build.zip"
         }
       }
     }
