@@ -13,7 +13,10 @@ import ShowImage from './ShowImage';
 
 const useStyles = makeStyles({
   fixedWidthRoot: {
-    width: 154
+    width: 156
+  },
+  denseFixedWidthRoot: {
+    width: 152
   },
   content: {
     padding: 8
@@ -47,7 +50,7 @@ const EpisodeCard = ({ show, elevation = 1, dense, onClick }) => {
   const classes = useStyles();
 
   return (
-    <Card className={classes.fixedWidthRoot} elevation={elevation}>
+    <Card className={dense ? classes.denseFixedWidthRoot : classes.fixedWidthRoot} elevation={elevation}>
       <CardActionArea onClick={onClick}>
         <ShowImage show={show} tall={!dense} />
         <CardContent className={classes.content}>
