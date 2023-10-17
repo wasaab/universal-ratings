@@ -13,7 +13,7 @@ import ShowImage from './ShowImage';
 
 const useStyles = makeStyles({
   fixedWidthRoot: {
-    width: 158
+    width: 154
   },
   content: {
     padding: 8
@@ -24,14 +24,14 @@ const useStyles = makeStyles({
     overflow: 'hidden',
     lineClamp: 2,
     boxOrient: 'vertical',
-    position: 'relative'
+    position: 'relative',
+    marginBottom: '12px',
   },
   tags: {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
     gridGap: 8,
-    paddingTop: '12px',
     fontSize: '0.8em',
   },
   episodeChip: {
@@ -43,17 +43,19 @@ const useStyles = makeStyles({
   }
 });
 
-const EpisodeCard = ({ show, elevation = 1, onClick }) => {
+const EpisodeCard = ({ show, elevation = 1, dense, onClick }) => {
   const classes = useStyles();
 
   return (
     <Card className={classes.fixedWidthRoot} elevation={elevation}>
       <CardActionArea onClick={onClick}>
-        <ShowImage show={show} tall />
+        <ShowImage show={show} tall={!dense} />
         <CardContent className={classes.content}>
-          <Typography className={classes.title} variant="subtitle2">
-            {show.title}
-          </Typography>
+          {!dense && (
+            <Typography className={classes.title} variant="subtitle2">
+              {show.title}
+            </Typography>
+          )}
 
           <div className={classes.tags}>
             <Chip

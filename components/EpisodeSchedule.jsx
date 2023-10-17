@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, Fragment } from 'react';
 import moment from 'moment';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-import { Box, Fab, Grid, Typography, Zoom } from '@material-ui/core';
+import { Box, Fab, Grid, Typography, Zoom, useMediaQuery } from '@material-ui/core';
 import {
   History as PastIcon,
   DoubleArrow as PresentIcon,
@@ -88,6 +88,7 @@ const NoEpsAlert = ({ title }) => (
 );
 
 const EpisodeSchedule = ({ shows, dateToEpisodes, onShowSelected }) => {
+  const isMobile = useMediaQuery('(max-width:600px)');
   const classes = useStyles();
   const theme = useTheme();
   const nearestDayRef = useRef();
@@ -111,6 +112,7 @@ const EpisodeSchedule = ({ shows, dateToEpisodes, onShowSelected }) => {
     return (
       <Grid key={`${showIdx}-${show.episodeNum}`} item>
         <EpisodeCard
+          dense={isMobile}
           show={show}
           onClick={() => onShowSelected({ ...show, isFinale: null }, showIdx)}
           elevation={theme.elevation.card}
@@ -167,11 +169,11 @@ const EpisodeSchedule = ({ shows, dateToEpisodes, onShowSelected }) => {
         <Zoom in={!isNearestDayVisible} timeout={300}>
           <Fab
             className={classes.navFab}
-            size="medium"
+            size="large"
             color="secondary"
             onClick={scrollToNearestDay}
           >
-            {nearestDayPosition === 'above' ? <UpIcon /> : <DownIcon />}
+            {nearestDayPosition === 'above' ? <UpIcon fontSize="large" /> : <DownIcon fontSize="large" />}
           </Fab>
         </Zoom>
       )}
