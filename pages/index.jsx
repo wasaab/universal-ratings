@@ -610,6 +610,19 @@ const Index = ({ authedUser }) => {
   };
 
   /**
+   * Converts a watchlisted show to a rated show, by updating the source and rating.
+   *
+   * @param {Object} watchlistedShow - watchlisted show to convert to rated show
+   * @param {string} showId - ID of the show to update
+   */
+  const convertToRatedShow = (watchlistedShow, showId) => {
+    API.graphql(graphqlOperation(updateShow, { input: { ...watchlistedShow, id: showId } }))
+      .catch((err) => {
+        console.error('Failed to convert watchlisted show to rated show. ', err);
+      })
+  };
+
+  /**
    * Creates a rated show.
    *
    * @param {Object} show - show to create
@@ -627,13 +640,14 @@ const Index = ({ authedUser }) => {
 
     await maybeAddShowMetadata(show);
 
+    const isWatchlisted = show.rating === 0 || watchlistIdx !== -1 || await isInAnyUsersWatchlist(show.id);
     const ratedShow = {
       rating,
       source: rating ? 'UR' : 'WL'
     };
 
-    if (rating && show.rating === 0) { // unrated WL item
-      API.graphql(graphqlOperation(updateShow, { input: { ...ratedShow, id: show.id } }));
+    if (rating && isWatchlisted) { // unrated WL item
+      convertToRatedShow(ratedShow, show.id);
     } else { // unrated show
       API.graphql(graphqlOperation(createShow, { input: { ...show, ...ratedShow } }))
         .catch((err) => {

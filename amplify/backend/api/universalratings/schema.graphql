@@ -25,7 +25,7 @@ type User @model
   color: String!
   themePref: String
   plexSearchEnabled: Boolean
-  watchlist: [WatchlistItem] @connection(fields: ["id"])
+  watchlist: [WatchlistItem] @connection(fields: ["id"], limit: 1000)
 }
 
 type Review @model

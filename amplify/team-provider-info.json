@@ -33,6 +33,9 @@
           "deploymentBucketName": "amplify-amplify6604b332b57b4-staging-21636-deployment",
           "s3Key": "amplify-builds/UpdateShowsMetadata-376e52585a7a2f353170-build.zip"
         }
+      },
+      "api": {
+        "universalratings": {}
       }
     }
   }

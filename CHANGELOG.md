@@ -6,6 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [UNRELEASED] - 2023-##-##
 
+## [1.21.2] - 2024-01-28
+### Changed
+- graphql getUser query watchlist items limit increased (100 --> 1000).
+
+### Fixed
+- deprecated default import of aws-amplify replaced with named import.
+
 ## [1.21.1] - 2023-10-17
 ### Fixed
 - dense schedule view card width reduced for small mobile devices
