@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [UNRELEASED] - 2023-##-##
 
+## [1.21.3] - 2024-01-28
+### Fixed
+- plex svg width attribute using valid syntax (auto --> 100%).
+
 ## [1.21.2] - 2024-01-28
 ### Changed
 - graphql getUser query watchlist items limit increased (100 --> 1000).

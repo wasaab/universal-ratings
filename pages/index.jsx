@@ -619,7 +619,7 @@ const Index = ({ authedUser }) => {
     API.graphql(graphqlOperation(updateShow, { input: { ...watchlistedShow, id: showId } }))
       .catch((err) => {
         console.error('Failed to convert watchlisted show to rated show. ', err);
-      })
+      });
   };
 
   /**
