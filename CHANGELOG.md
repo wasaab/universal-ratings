@@ -4,7 +4,30 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [UNRELEASED] - 2023-##-##
+## [UNRELEASED] - 2025-##-##
+
+## [1.21.4] - 2025-03-28
+### Fixed
+- algolia updated upon show changes
+- show metadata updater adheres to AWS network request concurrency limit
+- OMDB API client handles invalid IMDB ratings
+
+### Changed
+- lambda func node versions upgraded (v14 --> v18)
+
+### Removed
+- obsolete algolia graphql transformer
+
+## [1.21.3] - 2024-01-28
+### Fixed
+- plex svg width attribute using valid syntax (auto --> 100%)
+
+## [1.21.2] - 2024-01-28
+### Changed
+- graphql getUser query watchlist items limit increased (100 --> 1000)
+
+### Fixed
+- deprecated default import of aws-amplify replaced with named import
 
 ## [1.21.1] - 2023-10-17
 ### Fixed

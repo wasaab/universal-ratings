@@ -4,7 +4,7 @@ import API, { graphqlOperation } from '@aws-amplify/api';
 import { getUser } from '../src/graphql/custom-queries.js';
 import { AmplifyAuthContainer, AmplifyAuthenticator } from '@aws-amplify/ui-react';
 import { AuthState } from '@aws-amplify/ui-components';
-import amplify from 'aws-amplify';
+import { Amplify as amplify } from 'aws-amplify';
 import amplifyConfig from '../src/aws-exports';
 import { ThemeProvider } from '../components/ThemeProvider.jsx';
 import '../resources/styles/global.css';

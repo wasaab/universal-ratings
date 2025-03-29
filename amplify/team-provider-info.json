@@ -28,11 +28,22 @@
           "s3Key": "amplify-builds/ShowAddedDiscordWebhookPublisher-6644444d326144376c6a-build.zip"
         },
         "UpdateShowsMetadata": {
+          "deploymentBucketName": "amplify-amplify6604b332b57b4-staging-21636-deployment",
+          "s3Key": "amplify-builds/UpdateShowsMetadata-45493251566163333034-build.zip",
           "tmdbApiKey": "TMDB_API_KEY_VALUE",
           "omdbApiKey": "OMDB_API_KEY_VALUE",
+          "awsNodejsConnectionReuseEnabled": "1"
+        },
+        "ShowChangedAlgoliaUpdater": {
+          "algoliaAppId": "ALGOLIA_APP_ID_VALUE",
+          "algoliaApiKey": "ALGOLIA_API_KEY_VALUE",
+          "secretsPathAmplifyAppId": "d9ooeidl73fpk",
           "deploymentBucketName": "amplify-amplify6604b332b57b4-staging-21636-deployment",
-          "s3Key": "amplify-builds/UpdateShowsMetadata-376e52585a7a2f353170-build.zip"
+          "s3Key": "amplify-builds/ShowChangedAlgoliaUpdater-6447384974344a7a6c77-build.zip"
         }
+      },
+      "api": {
+        "universalratings": {}
       }
     }
   }
