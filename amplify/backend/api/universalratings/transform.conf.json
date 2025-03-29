@@ -1,7 +1,5 @@
 {
     "Version": 5,
     "ElasticsearchWarning": true,
-    "transformers": [
-        "graphql-algolia-transformer"
-    ]
+    "transformers": []
 }
