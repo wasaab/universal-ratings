@@ -66,6 +66,20 @@
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     },
+    "ShowChangedAlgoliaUpdater": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "GraphQLAPIIdOutput"
+          ],
+          "category": "api",
+          "resourceName": "universalratings"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
     "UpdateShowsMetadata": {
       "build": true,
       "dependsOn": [
@@ -108,6 +122,54 @@
         {
           "category": "function",
           "resourceName": "ShowAddedDiscordWebhookPublisher"
+        }
+      ]
+    },
+    "AMPLIFY_function_ShowChangedAlgoliaUpdater_algoliaApiKey": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "ShowChangedAlgoliaUpdater"
+        }
+      ]
+    },
+    "AMPLIFY_function_ShowChangedAlgoliaUpdater_algoliaAppId": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "ShowChangedAlgoliaUpdater"
+        }
+      ]
+    },
+    "AMPLIFY_function_ShowChangedAlgoliaUpdater_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "ShowChangedAlgoliaUpdater"
+        }
+      ]
+    },
+    "AMPLIFY_function_ShowChangedAlgoliaUpdater_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "ShowChangedAlgoliaUpdater"
+        }
+      ]
+    },
+    "AMPLIFY_function_ShowChangedAlgoliaUpdater_secretsPathAmplifyAppId": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "ShowChangedAlgoliaUpdater"
+        }
+      ]
+    },
+    "AMPLIFY_function_UpdateShowsMetadata_awsNodejsConnectionReuseEnabled": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "UpdateShowsMetadata"
         }
       ]
     },

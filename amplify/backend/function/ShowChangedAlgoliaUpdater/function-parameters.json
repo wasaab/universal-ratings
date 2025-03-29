@@ -1,0 +1,24 @@
+{
+  "permissions": {
+    "storage": {
+      "Show:@model(appsync)": [
+        "read"
+      ]
+    }
+  },
+  "lambdaLayers": [],
+  "environmentVariableList": [
+    {
+      "cloudFormationParameterName": "algoliaAppId",
+      "environmentVariableName": "ALGOLIA_APP_ID"
+    },
+    {
+      "cloudFormationParameterName": "algoliaApiKey",
+      "environmentVariableName": "ALGOLIA_API_KEY"
+    }
+  ],
+  "secretNames": [
+    "ALGOLIA_API_KEY",
+    "ALGOLIA_APP_ID"
+  ]
+}

@@ -10,7 +10,9 @@ Amplify Params - DO NOT EDIT */
 
 import aws from 'aws-sdk';
 import { OmdbApiClient, TmdbApiClient, AlgoliaApiClient } from './client/index.mjs';
+import pLimit from 'p-limit';
 
+const awsConcurrentRequestLimit = 1024;
 const dynamoDb = new aws.DynamoDB.DocumentClient({ convertEmptyValues: true });
 const algoliaApi = new AlgoliaApiClient('QVUO52LVSK', 'ae8c0c082adf1cd9dace13ea68322713');
 const omdbApi = new OmdbApiClient(process.env.OMDB_API_KEY);
@@ -50,15 +52,19 @@ function buildExpression({ ExpressionAttributeNames }, isConditionExp) {
     }, '');
 }
 
-function buildMetadataUpdateParams(providerResp, ratingResp) {
+function buildMetadataUpdateParams(showId, providerResp, ratingResp) {
   const params = {};
 
   if (providerResp.status === 'fulfilled') {
     populateProviderParams(providerResp, params);
+  } else {
+    console.error(`Failed to get providers of show "${showId}":`, providerResp?.reason?.message);
   }
 
   if (ratingResp.status === 'fulfilled') {
     populateRatingParams(ratingResp, params);
+  } else {
+    console.error(`Failed to get ratings of show "${showId}":`, ratingResp?.reason?.message);
   }
 
   if (!params.ExpressionAttributeNames) { return; }
@@ -70,7 +76,7 @@ function buildMetadataUpdateParams(providerResp, ratingResp) {
 }
 
 async function updateShow({ showId, providerResp, ratingResp }) {
-  const metadataUpdateParams = buildMetadataUpdateParams(providerResp, ratingResp);
+  const metadataUpdateParams = buildMetadataUpdateParams(showId, providerResp, ratingResp);
 
   if (!metadataUpdateParams) {
     console.error(`Unable to update show "${showId}". Metadata requests failed.`);
@@ -89,8 +95,9 @@ async function updateShow({ showId, providerResp, ratingResp }) {
 
   try {
     await dynamoDb.update(params).promise();
+    console.log('Succesfully updated show:', showId);
   } catch (err) {
-    console.error(`Failed to update show "${showId}": `, err);
+    console.error(`Failed to update show "${showId}": ${err.statusCode} - ${err.code}: ${err.message}`);
   }
 }
 
@@ -123,8 +130,10 @@ async function fetchShows() {
  */
 export const handler = async () => {
   const shows = await fetchShows();
-  const metadataResponses = await Promise.all(shows.map(fetchShowMetadata));
+   // use half of overall limit as requests are made to both omdb and tmdb concurrently
+  const limitConcurrencyToHalfOfMax = pLimit(Math.floor((awsConcurrentRequestLimit / 2) - 10));
+  const metadataResponses = await Promise.all(shows.map((show) => limitConcurrencyToHalfOfMax(() => fetchShowMetadata(show))));
+  const limitConcurrencyToMax = pLimit(awsConcurrentRequestLimit - 5);
 
-  await Promise.all(metadataResponses.map(updateShow)); // todo: batch update
-  console.log('All shows updated');
+  await Promise.all(metadataResponses.map((response) => limitConcurrencyToMax(() => updateShow(response)))); // todo: batch update
 };

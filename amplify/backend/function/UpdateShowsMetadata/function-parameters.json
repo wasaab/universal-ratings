@@ -16,6 +16,10 @@
     {
       "cloudFormationParameterName": "omdbApiKey",
       "environmentVariableName": "OMDB_API_KEY"
+    },
+    {
+      "cloudFormationParameterName": "awsNodejsConnectionReuseEnabled",
+      "environmentVariableName": "AWS_NODEJS_CONNECTION_REUSE_ENABLED"
     }
   ]
 }

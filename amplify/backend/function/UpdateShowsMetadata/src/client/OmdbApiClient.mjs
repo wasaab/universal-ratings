@@ -13,9 +13,10 @@ export default class OmdbApiClient {
 
   async fetchExternalRatings(imdbId) {
     const { data: { imdbRating, Ratings } } = await axios.get(`${this.baseUrl}&i=${imdbId}`);
+    const parsedImdbRating = Number(imdbRating);
 
     return {
-      imdbRating: imdbRating === 'N/A' ? null : Number(imdbRating),
+      imdbRating: Number.isNaN(parsedImdbRating) ? null : parsedImdbRating,
       rtRating: this.findRtRating(Ratings),
     };
   }
